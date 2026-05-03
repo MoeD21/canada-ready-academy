@@ -539,6 +539,18 @@ export default function Home() {
               <div className="testi-quote-ar">"ذكر مديري تحسّني في الإنجليزية في تقييم أدائي وأوصى بترقيتي. دروس النطق أحدثت الفرق الأكبر."</div>
               <div className="testi-author"><div className="testi-avatar">👩</div><div><div className="testi-name">Rania T. — Ottawa, ON</div><div className="testi-from">From Jordan 🇯🇴</div><div className="testi-plan">Premium</div></div></div>
             </div>
+            <div className="testi">
+              <div className="stars">★★★★★</div>
+              <div className="testi-quote">"I was scared to speak English at work. After just 2 months in the conversation classes, I started leading team meetings. My supervisor was shocked at how fast I improved."</div>
+              <div className="testi-quote-ar">"كنت خائفاً من التحدث بالإنجليزية في العمل. بعد شهرين فقط في صفوف المحادثة، بدأت أقود اجتماعات الفريق. مشرفي لم يصدق سرعة تطوري."</div>
+              <div className="testi-author"><div className="testi-avatar">👨</div><div><div className="testi-name">Khalid N. — Winnipeg, MB</div><div className="testi-from">From Sudan 🇸🇩</div><div className="testi-plan">Starter</div></div></div>
+            </div>
+            <div className="testi">
+              <div className="stars">★★★★★</div>
+              <div className="testi-quote">"The settlement support alone was worth every penny. They walked me through getting my driver's licence, understanding my lease, and filing taxes — all explained in Arabic, step by step."</div>
+              <div className="testi-quote-ar">"دعم التوطين وحده كان يستحق كل شيء. شرحوا لي كيف أحصل على رخصة القيادة، أفهم عقد الإيجار، وأقدم الضرائب — كل شيء بالعربي خطوة بخطوة."</div>
+              <div className="testi-author"><div className="testi-avatar">👩</div><div><div className="testi-name">Nour A. — Hamilton, ON</div><div className="testi-from">From Palestine 🇵🇸</div><div className="testi-plan">Career Boost</div></div></div>
+            </div>
           </div>
           {/* Stats bar */}
           <div className="hero-stats reveal" style={{maxWidth:"680px",margin:"48px auto 0",borderRadius:"16px",overflow:"hidden",background:"#0E1E33"}}>
