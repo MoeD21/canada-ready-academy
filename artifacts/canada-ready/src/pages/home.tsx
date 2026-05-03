@@ -106,7 +106,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="price-row"><span className="price-big">$79</span><div><div className="price-sub">/month CAD — Starting price</div><div className="price-ar">/ شهر — السعر الابتدائي</div></div></div>
-            <div className="free-badge">🎁 First Week FREE — No credit card needed<br /><span className="free-badge-ar">الأسبوع الأول مجاني — بدون بطاقة ائتمان</span></div>
+            <div className="free-badge">🎁 First Week FREE<br /><span className="free-badge-ar">الأسبوع الأول مجاني</span></div>
           </div>
         </div>
       </section>
