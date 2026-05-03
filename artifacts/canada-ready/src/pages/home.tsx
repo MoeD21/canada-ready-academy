@@ -69,7 +69,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <Link href="/assessment" style={{ marginTop: "18px", background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, borderRadius: "12px", padding: "12px 16px", textAlign: "center", fontWeight: 900, color: TDK, boxShadow: "0 10px 24px rgba(201,144,58,0.22)", textDecoration: "none", display: "block" }}>{isAr ? "احجز موعداً" : "Book Appointment"}</Link>
+            <Link href="/assessment" style={{ marginTop: "18px", background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, borderRadius: "12px", padding: "12px 16px", textAlign: "center", fontWeight: 900, color: TDK, boxShadow: "0 10px 24px rgba(201,144,58,0.22)", textDecoration: "none", display: "block" }}>{isAr ? "الأسبوع الأول مجاني" : "First Week FREE"}</Link>
           </div>
         </div>
       </section>
