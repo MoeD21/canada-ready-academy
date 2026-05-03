@@ -107,7 +107,8 @@
 }
 .hp .hero::after{
   content:'🍁';position:absolute;bottom:-30px;left:40px;
-  font-size:300px;opacity:.04;line-height:1;pointer-events:none;
+  font-size:340px;opacity:.08;line-height:1;pointer-events:none;
+  filter:blur(.2px) saturate(1.05);
 }
 .hp .hero-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
 @media(max-width:900px){.hp .hero-inner{grid-template-columns:1fr;}.hp .hero{padding:80px 24px 60px;}}
