@@ -105,7 +105,6 @@ export default function Home() {
                 <li>📝 <div className="item-bi"><span>Weekly Quizzes &amp; Progress</span><span className="item-ar">اختبارات أسبوعية ومتابعة</span></div></li>
               </ul>
             </div>
-            <div className="price-row"><span className="price-big">$79</span><div><div className="price-sub">/month CAD — Starting price</div><div className="price-ar">/ شهر — السعر الابتدائي</div></div></div>
             <div className="free-badge">🎁 First Week FREE<br /><span className="free-badge-ar">الأسبوع الأول مجاني</span></div>
           </div>
         </div>
