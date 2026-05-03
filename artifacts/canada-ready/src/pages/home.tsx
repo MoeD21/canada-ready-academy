@@ -1,498 +1,736 @@
-import { Link } from "wouter";
-import appointmentImage from "@assets/image_1777807681347.png";
+import React, { useState, useEffect } from "react";
+import "../home-page.css";
 
-const T = "#0ABAB5";
-const TD = "#089994";
-const TL = "#E0F8F7";
-const GOLD = "#C9903A";
-const GOLD_L = "#F0C96A";
-const NAVY = "#0E1E33";
-const NAVY2 = "#1A2F4A";
-const OFF = "#F7FAFA";
-const GRAY = "#64748B";
-const BORDER = "#D1ECE9";
+function useReveal() {
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add("visible");
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+}
 
 export default function Home() {
+  useReveal();
+
+  const [navOpen, setNavOpen] = useState(false);
+  const [contactSent, setContactSent] = useState(false);
+  const [assessSent, setAssessSent] = useState(false);
+
+  function scrollTo(id: string) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+    setNavOpen(false);
+  }
+
+  function handleContactSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setContactSent(true);
+  }
+
+  function handleAssessSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setAssessSent(true);
+  }
+
   return (
-    <div style={{ width: "100%", overflowX: "hidden", background: "#fff", color: NAVY }}>
-      <div style={{ background: `linear-gradient(90deg, ${TD}, ${T}, ${TD})`, color: "#fff", textAlign: "center", padding: "11px 20px", fontSize: "14px", fontWeight: 600 }}>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
-          <span>🍁 Canada&apos;s #1 Newcomer Support System</span>
-          <span style={{ fontFamily: "'Tajawal', sans-serif" }}>نظام دعم الوافدين الجدد رقم 1 في كندا</span>
+    <div className="home-page hp">
+      {/* WHATSAPP FLOAT */}
+      <a href="https://wa.me/15870000000" className="wa-float" target="_blank" rel="noopener noreferrer">💬</a>
+
+      {/* ════════════════ STRIP ════════════════ */}
+      <div className="strip">
+        <div className="bi-txt">
+          <span>🍁 Limited spots — First week is completely FREE</span>
+          <span>•</span>
+          <span className="strip-ar">🍁 أماكن محدودة — الأسبوع الأول مجاني تماماً</span>
         </div>
       </div>
-      <section style={{ background: `linear-gradient(145deg, ${NAVY} 0%, ${NAVY2} 60%, #0a2940 100%)`, padding: "90px 32px 80px", position: "relative", overflow: "hidden" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", alignItems: "center" }} className="max-lg:grid-cols-1">
+
+      {/* ════════════════ NAV ════════════════ */}
+      <nav className="hp-nav">
+        <div className="nav-inner">
+          <a href="#home" className="logo" onClick={(e) => { e.preventDefault(); scrollTo("home"); }}>
+            <div className="logo-icon">🍁</div>
+            <div className="logo-name">CanadaReady <span>Academy</span></div>
+          </a>
+          <button className="hamburger" onClick={() => setNavOpen(!navOpen)}>☰</button>
+          <div className={`nav-links${navOpen ? " open" : ""}`}>
+            <a href="#about" onClick={(e) => { e.preventDefault(); scrollTo("about"); }}>About / عن الأكاديمية</a>
+            <a href="#services" onClick={(e) => { e.preventDefault(); scrollTo("services"); }}>Services / الخدمات</a>
+            <a href="#programs" onClick={(e) => { e.preventDefault(); scrollTo("programs"); }}>Programs / البرامج</a>
+            <a href="#how" onClick={(e) => { e.preventDefault(); scrollTo("how"); }}>How It Works / كيف يعمل</a>
+            <a href="#testimonials" onClick={(e) => { e.preventDefault(); scrollTo("testimonials"); }}>Testimonials / آراء</a>
+            <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}>Contact / تواصل</a>
+            <a href="#assessment" className="nav-cta" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Book Free Assessment</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* ════════════════ HERO ════════════════ */}
+      <section className="hero" id="home">
+        <div className="hero-inner">
           <div>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(10,186,181,.15)", border: "1px solid rgba(10,186,181,.3)", color: "#5EEAE5", padding: "7px 18px", borderRadius: "30px", fontSize: "12px", fontWeight: 700, letterSpacing: "1px", marginBottom: "24px" }}>English & Career Support</div>
-            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(34px,5vw,58px)", fontWeight: 900, color: "#fff", lineHeight: 1.15, marginBottom: "20px" }}>
-              English, Career &amp; Life Support for Newcomers in <span style={{ color: T }}>Canada</span>
-            </h1>
-            <h2 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "clamp(24px,4vw,42px)", fontWeight: 900, color: "rgba(255,255,255,.55)", direction: "rtl", lineHeight: 1.3, marginBottom: "28px" }}>
-              دعم الإنجليزية والمهنة والحياة للوافدين الجدد في <span style={{ color: T }}>كندا</span>
-            </h2>
-            <p style={{ fontSize: "17px", color: "rgba(255,255,255,.7)", marginBottom: "12px", maxWidth: "520px", lineHeight: 1.8 }}>Live online classes, job preparation, and settlement support — designed for Arabic-speaking immigrants in Canada.</p>
-            <p style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "16px", color: "rgba(255,255,255,.5)", direction: "rtl", marginBottom: "32px", maxWidth: "520px", lineHeight: 1.8 }}>دروس مباشرة عبر الإنترنت، تحضير للعمل، ودعم التوطين — مصمم للمهاجرين الناطقين بالعربية في كندا.</p>
-            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginBottom: "48px" }}>
-              <Link href="/assessment" style={{ background: `linear-gradient(135deg, ${T}, ${TD})`, color: "#fff", padding: "15px 32px", borderRadius: "40px", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "10px", boxShadow: "0 6px 24px rgba(10,186,181,.35)", fontSize: "16px", fontWeight: 700 }}>Book Appointment</Link>
-              <Link href="/services" style={{ background: "transparent", color: "#fff", padding: "14px 28px", borderRadius: "40px", border: "1.5px solid rgba(255,255,255,.3)", fontSize: "15px", fontWeight: 600, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "8px" }}>View Services</Link>
+            <div className="hero-badge">🍁 Canada's #1 Newcomer Support System</div>
+            <h1>English, Career &amp;<br /><span className="accent">Life Support</span> for<br />Newcomers in Canada</h1>
+            <div className="hero-ar-h1">دعم الإنجليزية والمهنة والحياة<br />للوافدين الجدد في <span style={{color:"#0ABAB5"}}>كندا</span></div>
+            <p className="hero-desc">Live online classes, job preparation, and full settlement support — designed for Arabic-speaking immigrants.</p>
+            <p className="hero-desc-ar">دروس مباشرة، تحضير للعمل، ودعم توطين متكامل — مصمم خصيصاً للمهاجرين الناطقين بالعربية.</p>
+            <div className="hero-btns">
+              <a href="#assessment" className="btn-tiff" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Book Free Assessment | احجز تقييماً مجانياً</a>
+              <a href="#programs" className="btn-ghost" onClick={(e) => { e.preventDefault(); scrollTo("programs"); }}>View Programs | شاهد البرامج</a>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "1px", background: "rgba(255,255,255,.08)", borderRadius: "16px", overflow: "hidden" }} className="max-sm:grid-cols-2">
-              {[["500+","Newcomers Helped","وافد استفاد"],["4","Programs Available","برامج متاحة"],["3×","Weekly Live Classes","صفوف أسبوعياً"],["2","Languages","لغتان — عربي وإنجليزي"]].map(([n,en,ar]) => (
-                <div key={n} style={{ background: "rgba(255,255,255,.04)", padding: "20px 12px", textAlign: "center" }}>
-                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "36px", fontWeight: 800, color: T, lineHeight: 1 }}>{n}</div>
-                  <div style={{ fontSize: "11px", color: "rgba(255,255,255,.45)", marginTop: "5px", lineHeight: 1.4 }}>{en}</div>
-                  <div style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "11px", color: "rgba(255,255,255,.3)", direction: "rtl" }}>{ar}</div>
-                </div>
-              ))}
+            <div className="hero-stats reveal">
+              <div className="hero-stat"><div className="n">500+</div><div className="l">Students Helped<br /><span className="l-ar">طالب استفاد</span></div></div>
+              <div className="hero-stat"><div className="n">4</div><div className="l">Programs<br /><span className="l-ar">برامج متاحة</span></div></div>
+              <div className="hero-stat"><div className="n">3×</div><div className="l">Live Classes/Week<br /><span className="l-ar">صفوف أسبوعياً</span></div></div>
+              <div className="hero-stat"><div className="n">150+</div><div className="l">Services<br /><span className="l-ar">خدمة متاحة</span></div></div>
             </div>
           </div>
-          <div style={{ background: "#fff", borderRadius: "24px", padding: "36px", boxShadow: "0 24px 80px rgba(0,0,0,.3)" }}>
-            <div style={{ background: `linear-gradient(135deg, ${NAVY}, ${NAVY2})`, borderRadius: "16px", padding: "24px", marginBottom: "20px", color: "#fff" }}>
-              <div style={{ fontSize: "10px", color: "rgba(255,255,255,.4)", letterSpacing: "2px", fontWeight: 700, marginBottom: "16px" }}>WHAT YOU GET / ما ستحصل عليه</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["English classes for all levels / حصص لجميع المستويات","Resume and job preparation / تحضير للوظائف والسيرة الذاتية","Settlement and daily life support / دعم الحياة اليومية في كندا","Arabic community and WhatsApp support / مجتمع عربي ودعم واتساب","1-on-1 coaching calls / مكالمات توجيه فردية"].map((t) => (
-                  <div key={t} style={{ display: "flex", gap: "12px", padding: "10px 0", borderBottom: "1px solid rgba(255,255,255,.08)", fontSize: "14px", color: "rgba(255,255,255,.85)" }}>
-                    <span>✓</span><span>{t}</span>
-                  </div>
-                ))}
-              </div>
+          <div className="hero-card reveal">
+            <div className="hero-card-top">
+              <div className="label">WHAT YOU GET | ما ستحصل عليه</div>
+              <ul className="hero-card-items">
+                <li>🗣️ <div className="item-bi"><span>English Classes — All Levels</span><span className="item-ar">دروس إنجليزية — جميع المستويات</span></div></li>
+                <li>💼 <div className="item-bi"><span>Resume &amp; Job Preparation</span><span className="item-ar">سيرة ذاتية وتحضير للوظائف</span></div></li>
+                <li>🏠 <div className="item-bi"><span>Settlement &amp; Life Guidance</span><span className="item-ar">إرشادات التوطين والحياة</span></div></li>
+                <li>🤝 <div className="item-bi"><span>Arabic Community &amp; WhatsApp</span><span className="item-ar">مجتمع عربي ودعم واتساب</span></div></li>
+                <li>📞 <div className="item-bi"><span>1-on-1 Coaching Calls</span><span className="item-ar">مكالمات تدريب فردية</span></div></li>
+                <li>📝 <div className="item-bi"><span>Weekly Quizzes &amp; Progress</span><span className="item-ar">اختبارات أسبوعية ومتابعة</span></div></li>
+              </ul>
             </div>
-            <Link href="/assessment" style={{ background: `linear-gradient(135deg, ${GOLD}, ${GOLD_L})`, color: NAVY, textAlign: "center", padding: "13px", borderRadius: "12px", fontWeight: 800, fontSize: "14px", textDecoration: "none", display: "block" }}>Book Your Free Assessment / احجز تقييمك المجاني</Link>
+            <div className="price-row"><span className="price-big">$79</span><div><div className="price-sub">/month CAD — Starting price</div><div className="price-ar">/ شهر — السعر الابتدائي</div></div></div>
+            <div className="free-badge">🎁 First Week FREE — No credit card needed<br /><span className="free-badge-ar">الأسبوع الأول مجاني — بدون بطاقة ائتمان</span></div>
           </div>
         </div>
       </section>
 
-      <section style={{ padding: "80px 32px", background: OFF }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: "20px", marginTop: "48px" }}>
-            {[
-              ["🎯","English Classes","حصص الإنجليزية","Speaking, listening, reading, writing, pronunciation, workplace communication, IELTS/CELPIP prep.","التحدث، الاستماع، القراءة، الكتابة، النطق، التواصل في العمل، التحضير لـ IELTS/CELPIP."],
-              ["💼","Career Support","دعم المهنة","Resume writing, interviews, LinkedIn, cover letters, job search, Canadian workplace culture.","كتابة السيرة الذاتية، المقابلات، لينكدإن، خطابات التغطية، البحث عن عمل."],
-              ["🏠","Canada Life","الحياة في كندا","Banking, credit, CRA taxes, housing, healthcare, government services, daily life.","البنوك، الائتمان، ضرائب CRA، السكن، الرعاية الصحية، الخدمات الحكومية."],
-              ["🤝","Community Support","الدعم المجتمعي","WhatsApp support, accountability, coaching, and Arabic-speaking guidance.","دعم واتساب، متابعة، توجيه، وإرشاد باللغة العربية."],
-            ].map(([icon,en,ar,descEn,descAr]) => (
-              <div key={en} style={{ background: "#fff", borderRadius: "20px", padding: "28px 24px", border: `1.5px solid ${BORDER}`, boxShadow: "0 4px 20px rgba(10,186,181,.06)" }}>
-                <div style={{ fontSize: "36px", marginBottom: "16px" }}>{icon}</div>
-                <h3 style={{ fontSize: "18px", fontWeight: 700, color: NAVY, marginBottom: "6px" }}>{en}</h3>
-                <h3 style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", textAlign: "right", fontSize: "18px", fontWeight: 700, color: NAVY, marginBottom: "6px" }}>{ar}</h3>
-                <p style={{ fontSize: "14px", color: GRAY, lineHeight: 1.7 }}>{descEn}</p>
-                <p style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "13px", color: GRAY, direction: "rtl", textAlign: "right", lineHeight: 1.7 }}>{descAr}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section style={{ padding: "72px 5%", background: "#fff" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px" }} className="max-lg:grid-cols-1">
-          <div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,36px)", fontWeight: 800, color: NAVY, marginBottom: "20px" }}>Who We Help / من نساعد</h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              {[
-                ["✈️","New immigrants arriving in Canada","المهاجرون الجدد القادمون إلى كندا"],
-                ["🗣️","Arabic-speaking newcomers across all provinces","القادمون الجدد الناطقون بالعربية في جميع المقاطعات"],
-                ["💼","Job seekers looking for their first Canadian job","الباحثون عن عمل الذين يبحثون عن أول وظيفة كندية"],
-                ["👨‍👩‍👧","Families settling into Canadian life","الأسر التي تستقر في الحياة الكندية"],
-                ["📚","Students wanting to improve English and career skills","الطلاب الراغبون في تحسين الإنجليزية والمهارات المهنية"],
-                ["🏢","Workers wanting to move up in their Canadian careers","العمال الذين يريدون التقدم في مسيرتهم المهنية الكندية"],
-              ].map(([icon,en,ar]) => (
-                <div key={en} style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "15px", color: GRAY }}>
-                  <div style={{ width: "8px", height: "8px", background: GOLD, borderRadius: "50%", flexShrink: 0 }} />
-                  <span style={{ fontSize: "18px", flexShrink: 0 }}>{icon}</span>
-                  <span>{en} / {ar}</span>
-                </div>
-              ))}
+      {/* ════════════════ ABOUT / 4 PILLARS ════════════════ */}
+      <div className="sec-divider"><div className="sd-line"></div>ABOUT | عن الأكاديمية<div className="sd-line"></div></div>
+      <section className="sec pillars-bg" id="about">
+        <div className="wrap">
+          <div className="sec-tag">✅ WE HELP YOU WITH | نساعدك في</div>
+          <div className="bi reveal">
+            <div className="bi-en">
+              <h2 className="sec-title">Everything a Newcomer<br />Needs to Succeed</h2>
+              <p className="sec-lead">We don't just teach English. We help you build confidence, income, and a real life in Canada. 500+ newcomers helped. Built by immigrants, for immigrants.</p>
+              <p className="sec-lead" style={{fontSize:"14px",color:"#089994",fontWeight:600}}>🌍 Online — Serving all of Canada: Alberta · Ontario · BC · and more</p>
+            </div>
+            <div className="bi-ar">
+              <h2 className="sec-title-ar">كل ما يحتاجه الوافد الجديد<br />للنجاح في كندا</h2>
+              <p className="sec-lead-ar">لا نعلّم الإنجليزية فحسب. نساعدك في بناء الثقة والدخل والحياة الحقيقية في كندا. أكثر من 500 وافد استفادوا. بُني من مهاجرين، للمهاجرين.</p>
+              <p style={{fontFamily:"'Tajawal',sans-serif",fontSize:"14px",color:"#089994",fontWeight:700,direction:"rtl"}}>🌍 عبر الإنترنت — نخدم كل كندا: ألبرتا · أونتاريو · كولومبيا البريطانية</p>
             </div>
           </div>
-          <div>
-            <div style={{ background: NAVY, borderRadius: "22px", padding: "38px", color: "#fff", marginBottom: "22px" }}>
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 700, color: GOLD_L, marginBottom: "12px" }}>Our Mission / مهمتنا</div>
-              <p style={{ fontSize: "15px", color: "rgba(255,255,255,.85)", lineHeight: 1.75 }}>To empower Arabic-speaking newcomers with the language, skills, and knowledge needed to thrive in Canada. We believe every newcomer deserves a clear path forward — not just language lessons, but real support for building a better life.<br />تمكين القادمين الجدد الناطقين بالعربية باللغة والمهارات والمعرفة اللازمة للنجاح في كندا.</p>
+          <div className="pillars-grid reveal">
+            <div className="pillar">
+              <div className="pillar-icon">🗣️</div>
+              <h3>Improve English</h3>
+              <p>Conversation, pronunciation, writing, and test prep for all levels.</p>
+              <div style={{height:"8px"}}></div>
+              <div style={{fontFamily:"'Tajawal',sans-serif",fontWeight:700,fontSize:"15px",color:"#0E1E33",direction:"rtl",textAlign:"right",marginBottom:"4px"}}>تطوير الإنجليزية</div>
+              <div style={{fontFamily:"'Tajawal',sans-serif",direction:"rtl",textAlign:"right",fontSize:"13px",color:"#64748B"}}>محادثة، نطق، كتابة، وتحضير الاختبارات لجميع المستويات.</div>
             </div>
-            <div style={{ background: OFF, border: `1px solid rgba(10,186,181,.15)`, borderRadius: "18px", padding: "28px" }}>
-              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: 700, color: NAVY, marginBottom: "10px" }}>What Makes Us Different / ما الذي يميزنا</h3>
-              <p style={{ fontSize: "14px", color: GRAY, lineHeight: 1.72 }}>We are not a generic language school. We are a community built by immigrants, for immigrants. We understand the real challenges — not just language, but jobs, taxes, housing, healthcare, and belonging.<br />نحن لسنا مدرسة لغة عامة. نحن مجتمع بناه مهاجرون للمهاجرين.</p>
+            <div className="pillar">
+              <div className="pillar-icon">💼</div>
+              <h3>Jobs &amp; Career</h3>
+              <p>Resume, LinkedIn, interviews, job applications, and career planning.</p>
+              <div style={{height:"8px"}}></div>
+              <div style={{fontFamily:"'Tajawal',sans-serif",fontWeight:700,fontSize:"15px",color:"#0E1E33",direction:"rtl",textAlign:"right",marginBottom:"4px"}}>الوظائف والمهنة</div>
+              <div style={{fontFamily:"'Tajawal',sans-serif",direction:"rtl",textAlign:"right",fontSize:"13px",color:"#64748B"}}>سيرة ذاتية، لينكدإن، مقابلات، تقديم على الوظائف، وتخطيط مهني.</div>
+            </div>
+            <div className="pillar">
+              <div className="pillar-icon">🏠</div>
+              <h3>Life in Canada</h3>
+              <p>Banking, rent, healthcare, taxes, government documents, and daily life.</p>
+              <div style={{height:"8px"}}></div>
+              <div style={{fontFamily:"'Tajawal',sans-serif",fontWeight:700,fontSize:"15px",color:"#0E1E33",direction:"rtl",textAlign:"right",marginBottom:"4px"}}>الحياة في كندا</div>
+              <div style={{fontFamily:"'Tajawal',sans-serif",direction:"rtl",textAlign:"right",fontSize:"13px",color:"#64748B"}}>بنوك، إيجار، رعاية صحية، ضرائب، وثائق حكومية، وحياة يومية.</div>
+            </div>
+            <div className="pillar">
+              <div className="pillar-icon">🤝</div>
+              <h3>Community &amp; Support</h3>
+              <p>WhatsApp group, accountability, 1-on-1 coaching, and safe newcomer community.</p>
+              <div style={{height:"8px"}}></div>
+              <div style={{fontFamily:"'Tajawal',sans-serif",fontWeight:700,fontSize:"15px",color:"#0E1E33",direction:"rtl",textAlign:"right",marginBottom:"4px"}}>المجتمع والدعم</div>
+              <div style={{fontFamily:"'Tajawal',sans-serif",direction:"rtl",textAlign:"right",fontSize:"13px",color:"#64748B"}}>مجموعة واتساب، متابعة، جلسات تدريب فردية، ومجتمع وافدين آمن.</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section style={{ padding: "0 5% 40px", background: NAVY, textAlign: "center" }}>
-        <div style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))" }}>
-          {[
-            ["500+","Newcomers Helped","وافد استفاد"],
-            ["4","Programs Available","برامج متاحة"],
-            ["3×","Weekly Live Classes","صفوف أسبوعياً"],
-            ["2","Languages","لغتان — عربي وإنجليزي"],
-          ].map(([n,en,ar]) => (
-            <div key={n} style={{ padding: "28px 20px" }}>
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(54px, 7vw, 82px)", fontWeight: 800, color: GOLD_L, lineHeight: 1 }}>{n}</div>
-              <div style={{ fontSize: "12px", color: "rgba(255,255,255,.65)", marginTop: "5px" }}>{en} / {ar}</div>
+      {/* ════════════════ FREE TRIAL ════════════════ */}
+      <div className="sec-divider"><div className="sd-line"></div>FREE TRIAL | حصة مجانية<div className="sd-line"></div></div>
+      <section className="trial-sec">
+        <div className="trial-inner wrap">
+          <div className="trial-left reveal">
+            <h2>Your First Week is<br /><span style={{textDecoration:"underline",textDecorationColor:"rgba(255,255,255,.3)"}}>Completely Free</span></h2>
+            <div className="h2-ar">أسبوعك الأول مجاني<br />تماماً بدون أي شرط</div>
+            <p>Try the program with zero commitment. Attend all 3 classes, get the materials, join the WhatsApp group — and decide after.</p>
+            <div className="p-ar">جرّب البرنامج بدون أي التزام. احضر الصفوف الثلاثة، استلم المواد، انضم لمجموعة الواتساب — ثم قرّر بعدها.</div>
+            <div className="trial-chips">
+              <div className="chip">✓ No credit card</div>
+              <div className="chip chip-ar">✓ بدون بطاقة ائتمان</div>
+              <div className="chip">✓ No commitment</div>
+              <div className="chip chip-ar">✓ بدون التزام</div>
+              <div className="chip">✓ Full week access</div>
+              <div className="chip chip-ar">✓ أسبوع كامل مجاناً</div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section style={{ padding: "72px 5%", background: OFF }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "50px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, border: `1px solid ${BORDER}`, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "20px" }}>📖 WHAT WE TEACH / ماذا ندرّس</div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(26px,3vw,42px)", fontWeight: 800, color: NAVY }}>4 Areas Covering Everything You Need / 4 مجالات تغطي كل ما تحتاجه</h2>
+            <a href="#assessment" className="btn-white" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Book My Free Week | احجز أسبوعي المجاني</a>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "22px" }}>
-            {[
-              ["📚","English","الإنجليزية","Speaking, listening, reading, writing, pronunciation, workplace communication, IELTS/CELPIP prep.","التحدث، الاستماع، القراءة، الكتابة، النطق، التواصل في العمل، التحضير لـ IELTS/CELPIP."],
-              ["💼","Careers","المهن","Resume writing, interviews, LinkedIn, cover letters, job search, Canadian workplace culture, networking.","كتابة السيرة الذاتية، المقابلات، لينكدإن، خطابات التغطية، البحث عن عمل."],
-              ["🏠","Canada Life","الحياة في كندا","Banking, credit, CRA taxes, housing, healthcare, government services, daily life.","البنوك، الائتمان، ضرائب CRA، السكن، الرعاية الصحية، الخدمات الحكومية."],
-              ["💻","Business & Digital","الأعمال والرقمية","Start a business, freelancing, self-employment, invoicing, digital tools, side hustles.","بدء عمل تجاري، العمل الحر، المستقل، الفواتير، الأدوات الرقمية، الدخل الجانبي."],
-            ].map(([icon,en,ar,descEn,descAr], i) => (
-              <div key={en} style={{ background: "#fff", borderRadius: "18px", padding: "26px", border: `1px solid rgba(10,186,181,.15)`, borderTop: `4px solid ${i===0?T:i===1?GOLD:i===2?"#25A465":"#8B5CF6"}` }}>
-                <div style={{ width: "50px", height: "50px", background: "rgba(102,230,222,0.12)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", marginBottom: "14px" }}>{icon}</div>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: NAVY, marginBottom: "8px" }}>{en} / {ar}</h3>
-                <p style={{ fontSize: "13.5px", color: GRAY, lineHeight: 1.65 }}>{descEn}<br />{descAr}</p>
-              </div>
-            ))}
+          <div className="trial-card reveal">
+            <h3>What's included in the free week:</h3>
+            <div className="h3-ar">ما يشمله الأسبوع المجاني:</div>
+            <div className="trial-feature"><div className="tf-icon">📖</div><div><div className="tf-en">Monday — English Foundations class</div><div className="tf-ar">الاثنين — صف أسس الإنجليزية</div></div></div>
+            <div className="trial-feature"><div className="tf-icon">🗣️</div><div><div className="tf-en">Wednesday — Conversation &amp; Pronunciation</div><div className="tf-ar">الأربعاء — صف المحادثة والنطق</div></div></div>
+            <div className="trial-feature"><div className="tf-icon">💼</div><div><div className="tf-en">Friday — Career &amp; Canada Life Workshop</div><div className="tf-ar">الجمعة — ورشة المهنة والحياة</div></div></div>
+            <div className="trial-feature"><div className="tf-icon">💬</div><div><div className="tf-en">WhatsApp group access</div><div className="tf-ar">الوصول لمجموعة الواتساب</div></div></div>
+            <div className="trial-feature"><div className="tf-icon">📚</div><div><div className="tf-en">Homework &amp; study materials</div><div className="tf-ar">واجبات ومواد الدراسة</div></div></div>
+            <div className="trial-feature"><div className="tf-icon">📝</div><div><div className="tf-en">Weekly quiz + progress tracking</div><div className="tf-ar">اختبار أسبوعي ومتابعة التقدم</div></div></div>
           </div>
         </div>
       </section>
 
-      <section style={{ padding: "72px 5%", background: "#fff" }}>
-        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-          <div style={{ background: `linear-gradient(135deg, rgba(10,186,181,0.08), rgba(10,186,181,0.03))`, border: "1px solid rgba(10,186,181,0.2)", borderRadius: "28px", padding: "52px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, border: `1px solid ${BORDER}`, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "20px" }}>💡 WHAT WE REALLY SELL / ما الذي نبيعه حقاً</div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,40px)", fontWeight: 800, color: NAVY, marginBottom: "10px" }}>We Are Not Just a Language School / لسنا مجرد مدرسة لغة</h2>
-            <p style={{ fontSize: "16px", color: GRAY, marginBottom: "32px", lineHeight: 1.7 }}>We sell confidence, direction, support, opportunity, and a better life in Canada. English is the tool — the goal is to change your life.<br />نحن نبيع الثقة والتوجيه والدعم والفرصة وحياة أفضل في كندا.</p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "14px" }}>
-              {[
-                ["💪","Confidence to speak, work, and communicate in Canada","الثقة في التحدث والعمل والتواصل في كندا"],
-                ["🧭","Direction for your career and life in Canada","التوجيه لمسيرتك المهنية وحياتك في كندا"],
-                ["🤝","Support from a community that understands you","الدعم من مجتمع يفهمك"],
-                ["💰","Opportunity to find better jobs and higher income","الفرصة لإيجاد وظائف أفضل ودخل أعلى"],
-                ["🍁","A better life in Canada for you and your family","حياة أفضل في كندا لك ولعائلتك"],
-              ].map(([icon,en,ar]) => (
-                <div key={en} style={{ background: "#fff", borderRadius: "14px", padding: "16px 18px", display: "flex", alignItems: "flex-start", gap: "12px", border: "1px solid rgba(10,186,181,0.12)" }}>
-                  <span style={{ fontSize: "22px", flexShrink: 0 }}>{icon}</span>
-                  <span style={{ fontSize: "14px", color: GRAY, fontWeight: 500, lineHeight: 1.5 }}>{en} / {ar}</span>
-                </div>
-              ))}
+      {/* ════════════════ ALL SERVICES ════════════════ */}
+      <div className="sec-divider"><div className="sd-line"></div>150+ SERVICES | ١٥٠+ خدمة<div className="sd-line"></div></div>
+      <section className="sec services-bg" id="services">
+        <div className="wrap">
+          <div className="sec-tag" style={{borderColor:"rgba(10,186,181,.25)",color:"#0ABAB5"}}>COMPLETE SUPPORT SYSTEM | نظام دعم متكامل</div>
+          <div className="bi reveal" style={{marginBottom:"48px"}}>
+            <div className="bi-en" style={{borderRightColor:"rgba(255,255,255,.08)"}}>
+              <h2 className="sec-title" style={{color:"white"}}>All the Support You Need<br />to Succeed in Canada</h2>
+              <p className="sec-lead" style={{color:"rgba(255,255,255,.55)"}}>150+ services across 8 categories — all available in Arabic and English. Everything in one place.</p>
+            </div>
+            <div className="bi-ar">
+              <h2 className="sec-title-ar" style={{color:"white"}}>كل الدعم الذي تحتاجه<br />للنجاح في كندا</h2>
+              <p style={{fontFamily:"'Tajawal',sans-serif",fontSize:"16px",color:"rgba(255,255,255,.45)",direction:"rtl",lineHeight:1.8}}>١٥٠+ خدمة في ٨ فئات — جميعها متوفرة بالعربية والإنجليزية. كل شيء في مكان واحد.</p>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section style={{ padding: "72px 5%", background: OFF }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "30px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, border: `1px solid ${BORDER}`, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "20px" }}>📚 OUR PROGRAMS / برامجنا</div>
-            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 800, color: NAVY, lineHeight: 1.15 }}>Choose Your Plan / اختر خطتك</div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "18px" }}>
-            {[
-              ["Starter","البداية","$79"],
-              ["Premium","المميز","$129"],
-              ["Career Boost","الانطلاقة المهنية","$179"],
-              ["Canada Ready","جاهز لكندا","$249"],
-            ].map(([en,ar,price], idx) => (
-              <div key={en} style={{ background: idx===1?NAVY:"#fff", border: idx===1?`2px solid ${GOLD}`:"1px solid rgba(129,216,208,0.18)", borderRadius: "18px", padding: "28px 22px", position: "relative", display: "flex", flexDirection: "column" }}>
-                {idx===1 && <div style={{ position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)", background: GOLD, color: NAVY, fontSize: "10px", fontWeight: 800, padding: "4px 13px", borderRadius: "11px", letterSpacing: "0.8px", textTransform: "uppercase" }}>⭐ MOST POPULAR / الأكثر شعبية</div>}
-                <div style={{ fontSize: "10px", fontWeight: 800, letterSpacing: "1.8px", textTransform: "uppercase", color: idx===1?"rgba(255,255,255,0.5)":"#8896AB", marginBottom: "9px" }}>{en} / {ar}</div>
-                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "44px", fontWeight: 700, color: idx===1?"#fff":NAVY, lineHeight: 1 }}>{price}</div>
-                <div style={{ background: idx===1?"rgba(201,144,58,0.18)":"rgba(129,216,208,0.08)", borderRadius: "10px", padding: "9px 12px", fontSize: "12px", color: idx===1?GOLD_L:NAVY, fontWeight: 600, margin: "13px 0", lineHeight: 1.5 }}>Free assessment included / يتضمن تقييماً مجانياً</div>
-                <div style={{ flex: 1 }} />
-                <Link href="/assessment" style={{ display: "block", width: "100%", padding: "13px", borderRadius: "24px", border: idx===1?`1.5px solid ${GOLD}`:"1.5px solid rgba(129,216,208,0.3)", background: idx===1?GOLD:"transparent", color: NAVY, fontSize: "13.5px", fontWeight: 700, textDecoration: "none", textAlign: "center" }}>📋 Book Free Assessment / احجز تقييماً مجانياً</Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section style={{ padding: "72px 5%", background: "#fff" }}>
-        <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, border: `1px solid ${BORDER}`, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "20px" }}>FREE APPOINTMENT / الموعد المجاني</div>
-          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 800, color: NAVY, lineHeight: 1.15, marginBottom: "12px" }}>Book Your Free Assessment / احجز تقييمك المجاني</div>
-          <p style={{ fontSize: "16px", color: GRAY, maxWidth: "560px", lineHeight: 1.72, margin: "0 auto 24px" }}>Fill out a short form and schedule a 15–20 minute call with our team. It is completely free and commits you to nothing.<br />املأ استمارة قصيرة وحدد مكالمة 15–20 دقيقة مع فريقنا. مجانية تماماً ولا تُلزمك بشيء.</p>
-          <Link href="/assessment" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: GOLD, color: NAVY, padding: "16px 38px", borderRadius: "32px", fontSize: "16px", fontWeight: 900, textDecoration: "none" }}>Book Your Free Assessment / احجز تقييمك المجاني</Link>
-        </div>
-      </section>
-      <section style={{ background: `linear-gradient(135deg, ${T}, ${TD})`, padding: "80px 32px", position: "relative", overflow: "hidden" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "56px", alignItems: "center" }} className="max-lg:grid-cols-1">
-          <div style={{ color: "#fff" }}>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,4vw,46px)", fontWeight: 900, lineHeight: 1.2, marginBottom: "12px" }}>Your First Week is<br /><span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,.3)" }}>Completely Free</span></h2>
-            <h2 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "clamp(22px,3vw,36px)", fontWeight: 900, color: "rgba(255,255,255,.6)", direction: "rtl", display: "block", marginBottom: "24px" }}>أسبوعك الأول مجاني<br />تماماً بدون أي شرط</h2>
-            <p style={{ fontSize: "17px", color: "rgba(255,255,255,.8)", marginBottom: "8px", maxWidth: "480px", lineHeight: 1.8 }}>Try the program with zero commitment. Attend all 3 classes, get the materials, join the WhatsApp group — and decide after.</p>
-            <p style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "15px", color: "rgba(255,255,255,.55)", direction: "rtl", maxWidth: "480px", lineHeight: 1.8, marginBottom: "32px" }}>جرّب البرنامج بدون أي التزام. احضر الصفوف الثلاثة، استلم المواد، انضم لمجموعة الواتساب — ثم قرّر بعدها.</p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "32px" }}>
-              {["✓ No credit card","✓ No commitment","✓ Full week access"].map((chip) => <div key={chip} style={{ background: "rgba(255,255,255,.18)", color: "#fff", padding: "9px 18px", borderRadius: "30px", fontSize: "13px", fontWeight: 600 }}>{chip}</div>)}
-              {["✓ بدون بطاقة ائتمان","✓ بدون التزام","✓ أسبوع كامل مجاناً"].map((chip) => <div key={chip} style={{ background: "rgba(255,255,255,.18)", color: "#fff", padding: "9px 18px", borderRadius: "30px", fontSize: "13px", fontWeight: 600, fontFamily: "'Tajawal', sans-serif" }}>{chip}</div>)}
+          {/* CAT 1 */}
+          <div className="cat-block reveal">
+            <div className="cat-header"><div style={{fontSize:"32px"}}>📚</div><div><div className="cat-en">English Support</div><div className="cat-ar">دعم الإنجليزية</div></div></div>
+            <div className="tags-wrap">
+              {["Beginner English","Intermediate English","Conversation practice","Pronunciation training","Speaking confidence","Listening practice","Reading practice","Writing correction","Grammar lessons","Vocabulary lessons","Customer service English","Healthcare English","Workplace English","Office English","Phone conversation English","Email writing","Weekly quizzes","Daily vocabulary","English speaking clubs","Public speaking practice","Accent improvement","Real-life conversation simulation","Roleplay interviews","Beginner survival English","English for parents/schools","Canadian slang lessons","Construction English","Warehouse English","Group speaking practice","IELTS / CELPIP prep"].map(t => <div key={t} className="stag">{t}</div>)}
             </div>
-            <a href="#assessment" style={{ background: "#fff", color: TD, padding: "16px 36px", borderRadius: "40px", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "10px", boxShadow: "0 8px 28px rgba(0,0,0,.15)", fontSize: "16px", fontWeight: 800 }}>📋 Book My Free Week | احجز أسبوعي المجاني</a>
           </div>
-          <div style={{ background: "#fff", borderRadius: "24px", padding: "36px", boxShadow: "0 20px 60px rgba(0,0,0,.2)" }}>
-            <h3 style={{ fontSize: "20px", fontWeight: 700, color: NAVY, marginBottom: "4px" }}>What&apos;s included in the free week:</h3>
-            <h3 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "17px", color: GRAY, direction: "rtl", display: "block", marginBottom: "20px" }}>ما يشمله الأسبوع المجاني:</h3>
-            {[["🗣️","3 live classes","3 حصص مباشرة"],["📘","Class materials and homework","المواد والواجبات"],["💬","WhatsApp group access","دخول مجموعة الواتساب"],["🤝","Meet our team","التعرف على الفريق"],["✅","No payment required","لا يوجد أي دفع"]].map(([icon,en,ar]) => (
-              <div key={en} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px 0", borderBottom: `1px solid ${OFF}` }}>
-                <div style={{ width: "36px", height: "36px", background: TL, borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", flexShrink: 0 }}>{icon}</div>
-                <div>
-                  <div style={{ fontWeight: 500, color: NAVY, fontSize: "14px" }}>{en}</div>
-                  <div style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "12px", color: GRAY, direction: "rtl" }}>{ar}</div>
-                </div>
-              </div>
-            ))}
+          {/* CAT 2 */}
+          <div className="cat-block reveal">
+            <div className="cat-header"><div style={{fontSize:"32px"}}>💼</div><div><div className="cat-en">Job &amp; Career Support</div><div className="cat-ar">الدعم المهني والوظيفي</div></div></div>
+            <div className="tags-wrap">
+              {["Canadian resume","Cover letter writing","LinkedIn setup","Job search strategy","Application review","Mock interviews","Interview feedback","Career planning","Promotion readiness","Workplace culture","Professional communication","Job application support","Career coaching","Industry-specific coaching","Networking strategies"].map(t => <div key={t} className="stag">{t}</div>)}
+            </div>
           </div>
-        </div>
-      </section>
-      <section style={{ background: NAVY, padding: "80px 32px" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>🕒 HOW IT WORKS / كيف يعمل</div>
+          {/* CAT 3 */}
+          <div className="cat-block reveal">
+            <div className="cat-header"><div style={{fontSize:"32px"}}>🏠</div><div><div className="cat-en">Newcomer Life Support</div><div className="cat-ar">دعم حياة الوافدين</div></div></div>
+            <div className="tags-wrap">
+              {["Banking and credit scores","Renting and housing","Taxes and CRA basics","Healthcare navigation","Government documents","Driver's licence guidance","Transit and local systems","School and family help","Settlement guidance","Daily life in Canada","Important landmarks","Support programs guide"].map(t => <div key={t} className="stag">{t}</div>)}
+            </div>
           </div>
-          <div style={{ display: "grid", gap: "20px", marginTop: "48px" }}>
-            {[
-              ["1","Book Your Free Assessment","احجز تقييمك المجاني","Fill out a short form and schedule a 15–20 minute call.","املأ الاستمارة واحجز مكالمة قصيرة."],
-              ["2","Meet Our Team","التق بفريقنا","We check your English level and goals.","نحدد مستواك وأهدافك."],
-              ["3","Choose Your Program","اختر برنامجك","We recommend the best plan for your needs.","نقترح أفضل خطة لك."],
-              ["4","Join Classes & Community","انضم للحصص والمجتمع","Receive WhatsApp access, Zoom links, and materials.","تحصل على واتساب وروابط الزوم والمواد."],
-              ["5","Receive Weekly Support","احصل على الدعم الأسبوعي","Attend classes and build your future step by step.","احضر الحصص وابنِ مستقبلك خطوة بخطوة."],
-            ].map(([n,en,ar,descEn,descAr]) => (
-              <div key={n} style={{ background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.08)", borderRadius: "20px", padding: "32px", display: "grid", gridTemplateColumns: "56px 1fr 1fr", gap: "24px", alignItems: "start" }} className="max-md:grid-cols-1">
-                <div style={{ width: "52px", height: "52px", background: `linear-gradient(135deg, ${T}, ${TD})`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: "#fff" }}>{n}</div>
-                <div>
-                  <h4 style={{ fontSize: "17px", fontWeight: 700, color: "#fff", marginBottom: "10px" }}>{en}</h4>
-                  <p style={{ fontSize: "13px", color: "rgba(255,255,255,.6)" }}>{descEn}</p>
-                </div>
-                <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", textAlign: "right" }}>
-                  <h4 style={{ fontSize: "16px", fontWeight: 700, color: "rgba(255,255,255,.55)", marginBottom: "10px" }}>{ar}</h4>
-                  <p style={{ fontSize: "12px", color: "rgba(255,255,255,.35)" }}>{descAr}</p>
-                </div>
-              </div>
-            ))}
+          {/* CAT 4 */}
+          <div className="cat-block reveal">
+            <div className="cat-header"><div style={{fontSize:"32px"}}>📄</div><div><div className="cat-en">Safe Immigration Support</div><div className="cat-ar">دعم الهجرة الآمن</div></div></div>
+            <div className="tags-wrap">
+              {["Document organization","IRCC portal help","PR preparation English","Citizenship English prep","Form reading support","Letter understanding","Appointment preparation","File checklist help","Status tracking guidance","Safe non-legal guidance"].map(t => <div key={t} className="stag">{t}</div>)}
+            </div>
           </div>
-        </div>
-      </section>
-      <section style={{ padding: "80px 32px", background: "#fff" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>💬 TESTIMONIALS / آراء الطلاب</div>
+          {/* CAT 5 */}
+          <div className="cat-block reveal">
+            <div className="cat-header"><div style={{fontSize:"32px"}}>💻</div><div><div className="cat-en">Digital &amp; Tech Support</div><div className="cat-ar">الدعم الرقمي والتقني</div></div></div>
+            <div className="tags-wrap">
+              {["Computer basics","Email setup","Zoom training","Microsoft Office help","Phone and app skills","Online forms","Digital literacy","Freelancing basics","Side hustle tools","Online safety"].map(t => <div key={t} className="stag">{t}</div>)}
+            </div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: "24px" }}>
-            {[["👨","Ahmed M.","From Egypt — Now in Calgary, Alberta","من مصر — الآن في كالغاري، ألبرتا","Career Boost Plan","باقة الانطلاقة المهنية"],["👩","Fatima S.","From Syria — Now in Edmonton, Alberta","من سوريا — الآن في إدمونتون، ألبرتا","Canada Ready Plan","باقة جاهز لكندا"],["👨‍💻","Omar K.","From Iraq — Now in Toronto, Ontario","من العراق — الآن في تورونتو، أونتاريو","Starter → Career Boost","البداية ← الانطلاقة المهنية"]].map(([emoji,name,enFrom,arFrom,planEn,planAr]) => (
-              <div key={name} style={{ background: "#fff", borderRadius: "24px", padding: "32px", border: `1.5px solid ${BORDER}` }}>
-                <div style={{ color: GOLD, fontSize: "18px", letterSpacing: "2px", marginBottom: "16px" }}>★★★★★</div>
-                <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "15px", color: NAVY, lineHeight: 1.8, marginBottom: "10px" }}>I arrived in Canada without knowing how interviews work. After joining, I got support, confidence, and real results.</p>
-                <p style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "14px", color: GRAY, direction: "rtl", lineHeight: 1.8, marginBottom: "20px" }}>وصلت إلى كندا دون معرفة كيفية العمل أو المقابلات. بعد الانضمام حصلت على دعم وثقة ونتائج حقيقية.</p>
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: TL, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px" }}>{emoji}</div>
-                  <div>
-                    <div style={{ fontWeight: 700, fontSize: "14px", color: NAVY }}>{name}</div>
-                    <div style={{ fontSize: "12px", color: GRAY }}>{enFrom}</div>
-                    <div style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "12px", color: GRAY, direction: "rtl" }}>{arFrom}</div>
-                    <div style={{ display: "inline-block", background: TL, color: TD, fontSize: "10px", fontWeight: 700, padding: "3px 10px", borderRadius: "20px", marginTop: "4px" }}>{planEn}</div>
-                    <div style={{ display: "block", fontFamily: "'Tajawal', sans-serif", fontSize: "11px", color: GRAY, direction: "rtl", marginTop: "2px" }}>{planAr}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* CAT 6 */}
+          <div className="cat-block reveal">
+            <div className="cat-header"><div style={{fontSize:"32px"}}>🤝</div><div><div className="cat-en">Community &amp; Accountability</div><div className="cat-ar">المجتمع والمساءلة</div></div></div>
+            <div className="tags-wrap">
+              {["WhatsApp group support","Weekly live classes","1-on-1 coaching calls","Goal tracking","Accountability check-ins","Motivation support","Class recordings","Homework support","Arabic-speaking team","Safe newcomer community"].map(t => <div key={t} className="stag">{t}</div>)}
+            </div>
+          </div>
+          {/* CAT 7 */}
+          <div className="cat-block reveal">
+            <div className="cat-header"><div style={{fontSize:"32px"}}>💰</div><div><div className="cat-en">Money &amp; Business Help</div><div className="cat-ar">المساعدة المالية والتجارية</div></div></div>
+            <div className="tags-wrap">
+              {["Budgeting","Saving money","Credit building","Side hustle planning","Small business basics","Freelancing support","Marketplace selling","Invoicing basics","Contracts basics","Income strategy"].map(t => <div key={t} className="stag">{t}</div>)}
+            </div>
+          </div>
+          {/* CAT 8 */}
+          <div className="cat-block reveal">
+            <div className="cat-header"><div style={{fontSize:"32px"}}>🎓</div><div><div className="cat-en">Advanced &amp; Future Services</div><div className="cat-ar">خدمات متقدمة ومستقبلية</div></div></div>
+            <div className="tags-wrap">
+              {["Mentorship","Industry coaching","Interview bootcamps","Leadership English","Advanced confidence practice","Business growth support","Community events","Networking sessions","Family support programs","Custom 90-day success roadmap"].map(t => <div key={t} className="stag">{t}</div>)}
+            </div>
+          </div>
+
+          <div style={{textAlign:"center",marginTop:"56px"}}>
+            <a href="#assessment" className="btn-tiff" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Book Free Assessment | احجز تقييماً مجانياً</a>
           </div>
         </div>
       </section>
-      <section style={{ padding: "80px 32px", background: OFF }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>📞 CONTACT / تواصل معنا</div>
+
+      {/* ════════════════ PROGRAMS ════════════════ */}
+      <div className="sec-divider"><div className="sd-line"></div>PROGRAMS &amp; PRICING | البرامج والأسعار<div className="sd-line"></div></div>
+      <section className="sec pricing-bg" id="programs">
+        <div className="wrap">
+          <div className="sec-tag">OUR PROGRAMS | برامجنا</div>
+          <div className="bi reveal" style={{marginBottom:0}}>
+            <div className="bi-en">
+              <h2 className="sec-title">Choose Your Plan</h2>
+              <p className="sec-lead">Simple, clear pricing. Cancel anytime. Always start with a free assessment and a free first week.</p>
+            </div>
+            <div className="bi-ar">
+              <h2 className="sec-title-ar">اختر خطتك</h2>
+              <p className="sec-lead-ar">أسعار واضحة وبسيطة. إلغاء في أي وقت. ابدأ دائماً بتقييم مجاني وأسبوع أول مجاني.</p>
+            </div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px" }} className="max-lg:grid-cols-1">
+          <div className="plans-grid reveal">
+            {/* STARTER */}
+            <div className="plan">
+              <div className="plan-head">
+                <div className="plan-type">STARTER</div>
+                <div className="plan-type-ar">المبتدئ</div>
+                <div className="plan-name">Starter</div>
+                <div className="plan-price"><sup>$</sup>79</div>
+                <div className="plan-mo">/month CAD</div>
+                <div className="plan-mo-ar">/ شهر كندي</div>
+                <div className="plan-desc">Best for beginners building English confidence.</div>
+                <div className="plan-desc-ar">الأفضل للمبتدئين الذين يبنون ثقتهم.</div>
+                <a href="#assessment" className="plan-cta outline" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Free Assessment | تقييم مجاني</a>
+              </div>
+              <div className="plan-body">
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>3 live weekly classes</span><span className="feat-ar">٣ صفوف مباشرة أسبوعياً</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Speaking &amp; conversation practice</span><span className="feat-ar">تمارين محادثة وكلام</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Weekly quizzes &amp; homework</span><span className="feat-ar">اختبارات أسبوعية وواجبات</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>WhatsApp group support</span><span className="feat-ar">دعم مجموعة الواتساب</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Vocabulary &amp; grammar lessons</span><span className="feat-ar">دروس مفردات وقواعد</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Class recordings access</span><span className="feat-ar">تسجيلات الصفوف</span></div></div>
+              </div>
+            </div>
+            {/* PREMIUM */}
+            <div className="plan pop">
+              <div className="pop-banner">⭐ MOST POPULAR — <span className="pop-banner-ar">الأكثر شيوعاً</span></div>
+              <div className="plan-head" style={{paddingTop:"20px"}}>
+                <div className="plan-type">PREMIUM</div>
+                <div className="plan-type-ar">المميز</div>
+                <div className="plan-name">Premium</div>
+                <div className="plan-price"><sup>$</sup>129</div>
+                <div className="plan-mo">/month CAD</div>
+                <div className="plan-mo-ar">/ شهر كندي</div>
+                <div className="plan-desc">Best for students preparing for their first Canadian job.</div>
+                <div className="plan-desc-ar">الأفضل للراغبين في أول وظيفة كندية.</div>
+                <a href="#assessment" className="plan-cta solid" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Free Assessment | تقييم مجاني</a>
+              </div>
+              <div className="plan-body">
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Everything in Starter</span><span className="feat-ar">كل شيء في المبتدئ</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>1 monthly 1-on-1 coaching call</span><span className="feat-ar">مكالمة تدريب فردية شهرياً</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Canadian resume building</span><span className="feat-ar">بناء السيرة الذاتية الكندية</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Cover letter writing</span><span className="feat-ar">كتابة خطاب التقديم</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>LinkedIn profile setup</span><span className="feat-ar">إعداد ملف لينكدإن</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Mock interview practice</span><span className="feat-ar">تمرين مقابلات وهمية</span></div></div>
+              </div>
+            </div>
+            {/* CAREER BOOST */}
+            <div className="plan">
+              <div className="plan-head">
+                <div className="plan-type">CAREER BOOST</div>
+                <div className="plan-type-ar">دفعة المهنة</div>
+                <div className="plan-name">Career Boost</div>
+                <div className="plan-price"><sup>$</sup>179</div>
+                <div className="plan-mo">/month CAD</div>
+                <div className="plan-mo-ar">/ شهر كندي</div>
+                <div className="plan-desc">Best for students needing career + Canadian life support.</div>
+                <div className="plan-desc-ar">الأفضل لمن يحتاج دعم المهنة والحياة معاً.</div>
+                <a href="#assessment" className="plan-cta outline" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Free Assessment | تقييم مجاني</a>
+              </div>
+              <div className="plan-body">
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Everything in Premium</span><span className="feat-ar">كل شيء في المميز</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>2 monthly coaching calls</span><span className="feat-ar">مكالمتان تدريبيتان شهرياً</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Banking &amp; credit guidance</span><span className="feat-ar">إرشادات البنوك والائتمان</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>CRA taxes basics</span><span className="feat-ar">أساسيات ضرائب CRA</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Renting &amp; housing guidance</span><span className="feat-ar">إرشادات الإيجار والسكن</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Healthcare navigation support</span><span className="feat-ar">دعم التعامل مع الرعاية الصحية</span></div></div>
+              </div>
+            </div>
+            {/* CANADA READY */}
+            <div className="plan">
+              <div className="plan-head">
+                <div className="plan-type">CANADA READY</div>
+                <div className="plan-type-ar">كندا ريدي</div>
+                <div className="plan-name">Canada Ready</div>
+                <div className="plan-price"><sup>$</sup>249</div>
+                <div className="plan-mo">/month CAD</div>
+                <div className="plan-mo-ar">/ شهر كندي</div>
+                <div className="plan-desc">Complete newcomer support — the full experience.</div>
+                <div className="plan-desc-ar">الدعم الكامل للوافد الجديد — التجربة الكاملة.</div>
+                <a href="#assessment" className="plan-cta outline" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Apply VIP | قدّم VIP</a>
+              </div>
+              <div className="plan-body">
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Everything in Career Boost</span><span className="feat-ar">كل شيء في دفعة المهنة</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>3 monthly coaching calls</span><span className="feat-ar">٣ مكالمات تدريب شهرياً</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Business startup guidance</span><span className="feat-ar">إرشادات إطلاق الأعمال</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Freelancing &amp; side income basics</span><span className="feat-ar">أساسيات العمل الحر والدخل الإضافي</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Immigration document help</span><span className="feat-ar">مساعدة في وثائق الهجرة</span></div></div>
+                <div className="plan-feat"><span className="chk">✓</span><div className="feat-bi"><span>Custom 90-day success roadmap</span><span className="feat-ar">خارطة طريق نجاح مخصصة 90 يوماً</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          {/* WEEKLY SCHEDULE */}
+          <div style={{marginTop:"64px"}}>
+            <div className="bi reveal" style={{marginBottom:"32px"}}>
+              <div className="bi-en">
+                <h3 style={{fontSize:"24px",fontWeight:700,color:"#0E1E33"}}>How the Week Works</h3>
+                <p style={{color:"#64748B",fontSize:"15px"}}>3 live classes every week, WhatsApp support 7 days, and coaching calls based on your plan.</p>
+              </div>
+              <div className="bi-ar">
+                <h3 style={{fontFamily:"'Tajawal',sans-serif",fontSize:"22px",fontWeight:700,color:"#0E1E33",direction:"rtl"}}>كيف يعمل الأسبوع</h3>
+                <p style={{fontFamily:"'Tajawal',sans-serif",fontSize:"14px",color:"#64748B",direction:"rtl"}}>٣ صفوف مباشرة كل أسبوع، دعم واتساب ٧ أيام، ومكالمات تدريب حسب خطتك.</p>
+              </div>
+            </div>
+            <div className="schedule-grid reveal">
+              <div className="sched-card">
+                <div className="sched-day">MONDAY</div>
+                <div className="sched-day-ar">الاثنين</div>
+                <div style={{fontSize:"28px",marginBottom:"10px"}}>📖</div>
+                <div className="sched-title">English Foundations</div>
+                <div className="sched-title-ar">أسس الإنجليزية</div>
+                <div className="sched-desc">Grammar, vocabulary, reading &amp; writing skills</div>
+                <div className="sched-desc-ar">قواعد، مفردات، قراءة وكتابة</div>
+              </div>
+              <div className="sched-card" style={{borderColor:"#0ABAB5"}}>
+                <div className="sched-day">WEDNESDAY</div>
+                <div className="sched-day-ar">الأربعاء</div>
+                <div style={{fontSize:"28px",marginBottom:"10px"}}>🗣️</div>
+                <div className="sched-title">Conversation &amp; Pronunciation</div>
+                <div className="sched-title-ar">المحادثة والنطق</div>
+                <div className="sched-desc">Speaking confidence &amp; pronunciation drills</div>
+                <div className="sched-desc-ar">ثقة التحدث وتدريبات النطق</div>
+              </div>
+              <div className="sched-card">
+                <div className="sched-day">FRIDAY</div>
+                <div className="sched-day-ar">الجمعة</div>
+                <div style={{fontSize:"28px",marginBottom:"10px"}}>💼</div>
+                <div className="sched-title">Career &amp; Canada Life Workshop</div>
+                <div className="sched-title-ar">ورشة المهنة والحياة</div>
+                <div className="sched-desc">Jobs, interviews, Canadian life topics</div>
+                <div className="sched-desc-ar">وظائف، مقابلات، مواضيع الحياة الكندية</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════ HOW IT WORKS ════════════════ */}
+      <div className="sec-divider"><div className="sd-line"></div>HOW IT WORKS | كيف يعمل<div className="sd-line"></div></div>
+      <section className="sec how-bg" id="how">
+        <div className="wrap">
+          <div className="sec-tag" style={{borderColor:"rgba(10,186,181,.25)",color:"#0ABAB5"}}>THE FULL PROCESS | العملية الكاملة</div>
+          <div className="bi reveal" style={{marginBottom:"48px"}}>
+            <div className="bi-en" style={{borderRightColor:"rgba(255,255,255,.08)"}}>
+              <h2 className="sec-title" style={{color:"white"}}>Your Path: Newcomer<br />→ Confident Canadian</h2>
+              <p className="sec-lead" style={{color:"rgba(255,255,255,.55)"}}>5 simple steps, starting with a free 15-minute call in Arabic. No English required to begin.</p>
+            </div>
+            <div className="bi-ar">
+              <h2 className="sec-title-ar" style={{color:"white"}}>طريقك: وافد جديد<br />→ كندي واثق</h2>
+              <p style={{fontFamily:"'Tajawal',sans-serif",fontSize:"16px",color:"rgba(255,255,255,.45)",direction:"rtl",lineHeight:1.8}}>٥ خطوات بسيطة، تبدأ بمكالمة مجانية 15 دقيقة بالعربي. لا إنجليزية مطلوبة للبداية.</p>
+            </div>
+          </div>
+          <div className="steps-grid reveal">
+            <div className="step-card">
+              <div className="step-num-circle">1</div>
+              <div className="step-en">
+                <h4>📋 Book Your Free Assessment</h4>
+                <ul><li>Fill out the short online form</li><li>Takes only 3 minutes to complete</li><li>Completely free — no credit card</li><li>Call is fully in Arabic</li></ul>
+              </div>
+              <div className="step-ar step-ar-col">
+                <h4>📋 احجز تقييمك المجاني</h4>
+                <ul><li>امل الاستمارة القصيرة أون لاين</li><li>تستغرق 3 دقائق فقط</li><li>مجاناً تماماً — بدون بطاقة</li><li>المكالمة بالعربي بالكامل</li></ul>
+              </div>
+            </div>
+            <div className="step-card">
+              <div className="step-num-circle">2</div>
+              <div className="step-en">
+                <h4>🤝 Meet Our Team — Free 15-min Call</h4>
+                <ul><li>English level assessment</li><li>Discuss career goals &amp; struggles</li><li>We explain 150+ services</li><li>Zero pressure — just guidance</li></ul>
+              </div>
+              <div className="step-ar step-ar-col">
+                <h4>🤝 لقاء الفريق — مكالمة 15 دقيقة</h4>
+                <ul><li>تقييم مستوى الإنجليزية</li><li>نناقش أهدافك وتحدياتك</li><li>نشرح الخدمات ١٥٠+</li><li>لا ضغط — إرشاد فقط</li></ul>
+              </div>
+            </div>
+            <div className="step-card">
+              <div className="step-num-circle">3</div>
+              <div className="step-en">
+                <h4>📚 Choose Your Program</h4>
+                <ul><li>Starter $79 — English basics</li><li>Premium $129 — Career prep added</li><li>Career Boost $179 — Life support</li><li>Canada Ready $249 — Full support</li></ul>
+              </div>
+              <div className="step-ar step-ar-col">
+                <h4>📚 اختر برنامجك</h4>
+                <ul><li>المبتدئ $79 — إنجليزية أساسية</li><li>المميز $129 — تحضير للوظيفة</li><li>دفعة المهنة $179 — دعم الحياة</li><li>كندا ريدي $249 — دعم كامل</li></ul>
+              </div>
+            </div>
+            <div className="step-card">
+              <div className="step-num-circle">4</div>
+              <div className="step-en">
+                <h4>💬 Join Classes &amp; Community</h4>
+                <ul><li>WhatsApp group invitation</li><li>Zoom links for all 3 classes</li><li>Welcome booklet in Arabic+English</li><li>First week is completely FREE</li></ul>
+              </div>
+              <div className="step-ar step-ar-col">
+                <h4>💬 انضم للصفوف والمجتمع</h4>
+                <ul><li>دعوة مجموعة الواتساب</li><li>روابط Zoom للصفوف الثلاثة</li><li>كتيب ترحيب عربي وإنجليزي</li><li>الأسبوع الأول مجاني تماماً</li></ul>
+              </div>
+            </div>
+            <div className="step-card">
+              <div className="step-num-circle">5</div>
+              <div className="step-en">
+                <h4>🚀 Build Your Future in Canada</h4>
+                <ul><li>Mon/Wed/Fri — 3 live classes</li><li>Monthly 1-on-1 coaching calls</li><li>WhatsApp support every day</li><li>Step-by-step progress tracking</li></ul>
+              </div>
+              <div className="step-ar step-ar-col">
+                <h4>🚀 ابنِ مستقبلك في كندا</h4>
+                <ul><li>اثنين/أربعاء/جمعة — ٣ صفوف</li><li>مكالمات تدريب فردية شهرياً</li><li>دعم واتساب كل يوم</li><li>متابعة التقدم خطوة بخطوة</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════ TESTIMONIALS ════════════════ */}
+      <div className="sec-divider"><div className="sd-line"></div>SUCCESS STORIES | قصص النجاح<div className="sd-line"></div></div>
+      <section className="sec" id="testimonials" style={{background:"#F7FAFA"}}>
+        <div className="wrap">
+          <div className="sec-tag">⭐ REAL RESULTS | نتائج حقيقية</div>
+          <div className="bi reveal" style={{marginBottom:0}}>
+            <div className="bi-en"><h2 className="sec-title">What Our Students Say</h2><p className="sec-lead">Real people, real results — once in the same situation as you.</p></div>
+            <div className="bi-ar"><h2 className="sec-title-ar">ماذا يقول طلابنا</h2><p className="sec-lead-ar">أشخاص حقيقيون، نتائج حقيقية — كانوا في نفس وضعك تماماً.</p></div>
+          </div>
+          <div className="testi-grid reveal">
+            <div className="testi">
+              <div className="stars">★★★★★</div>
+              <div className="testi-quote">"After mock interviews with the coach, I got my first IT job within 3 months. The program didn't just improve my English — it taught me how to present myself like a Canadian professional."</div>
+              <div className="testi-quote-ar">"بعد المقابلات التجريبية مع المدرب، حصلت على أول وظيفة تقنية خلال 3 أشهر. البرنامج لم يحسّن إنجليزيتي فحسب — علّمني كيف أقدم نفسي كمحترف كندي."</div>
+              <div className="testi-author"><div className="testi-avatar">👨</div><div><div className="testi-name">Ahmed M. — Calgary, AB</div><div className="testi-from">From Egypt 🇪🇬</div><div className="testi-plan">Career Boost</div></div></div>
+            </div>
+            <div className="testi">
+              <div className="stars">★★★★★</div>
+              <div className="testi-quote">"My coach helped me understand CRA, open a proper bank account, and find a great apartment. I now file my own taxes and my credit score is 720. I feel like a real Canadian."</div>
+              <div className="testi-quote-ar">"ساعدني مدربي على فهم CRA، فتح حساب بنكي، وإيجاد شقة رائعة. الآن أملأ ضرائبي بنفسي وعلامتي الائتمانية 720. أشعر أنني كندي حقيقي."</div>
+              <div className="testi-author"><div className="testi-avatar">👩</div><div><div className="testi-name">Fatima S. — Edmonton, AB</div><div className="testi-from">From Syria 🇸🇾</div><div className="testi-plan">Canada Ready</div></div></div>
+            </div>
+            <div className="testi">
+              <div className="stars">★★★★★</div>
+              <div className="testi-quote">"I started with very basic English. After 6 months I started my own delivery business and now earn extra income. The WhatsApp support is available 24/7."</div>
+              <div className="testi-quote-ar">"بدأت بإنجليزية أساسية جداً. بعد 6 أشهر بدأت عملي الخاص في التوصيل وأكسب دخلاً إضافياً. دعم الواتساب متوفر 24/7."</div>
+              <div className="testi-author"><div className="testi-avatar">👨</div><div><div className="testi-name">Omar K. — Toronto, ON</div><div className="testi-from">From Iraq 🇮🇶</div><div className="testi-plan">Starter → Career Boost</div></div></div>
+            </div>
+            <div className="testi">
+              <div className="stars">★★★★★</div>
+              <div className="testi-quote">"The WhatsApp community is like having 200 helpful friends who understand newcomer life. The pronunciation classes changed how my colleagues respond to me at work."</div>
+              <div className="testi-quote-ar">"مجتمع الواتساب كأن لديك 200 صديق مفيد يفهمون حياة الوافد الجديد. دروس النطق غيّرت تجاوب زملائي معي في العمل."</div>
+              <div className="testi-author"><div className="testi-avatar">👩</div><div><div className="testi-name">Layla H. — Vancouver, BC</div><div className="testi-from">From Lebanon 🇱🇧</div><div className="testi-plan">Premium</div></div></div>
+            </div>
+            <div className="testi">
+              <div className="stars">★★★★★</div>
+              <div className="testi-quote">"My coach helped me register my catering business, create my first invoice, and earn $800–$1200 extra per month within 4 months. I wish I found this program the day I arrived."</div>
+              <div className="testi-quote-ar">"ساعدني مدربي في تسجيل أعمالي، وأنشأت فاتورتي الأولى، وأكسب 800-1200 دولار إضافياً شهرياً. أتمنى لو وجدت هذا البرنامج يوم وصولي."</div>
+              <div className="testi-author"><div className="testi-avatar">👨</div><div><div className="testi-name">Youssef A. — Mississauga, ON</div><div className="testi-from">From Morocco 🇲🇦</div><div className="testi-plan">Canada Ready</div></div></div>
+            </div>
+            <div className="testi">
+              <div className="stars">★★★★★</div>
+              <div className="testi-quote">"My manager mentioned my English improvement in my performance review and recommended me for a promotion. The pronunciation classes made the biggest difference."</div>
+              <div className="testi-quote-ar">"ذكر مديري تحسّني في الإنجليزية في تقييم أدائي وأوصى بترقيتي. دروس النطق أحدثت الفرق الأكبر."</div>
+              <div className="testi-author"><div className="testi-avatar">👩</div><div><div className="testi-name">Rania T. — Ottawa, ON</div><div className="testi-from">From Jordan 🇯🇴</div><div className="testi-plan">Premium</div></div></div>
+            </div>
+          </div>
+          {/* Stats bar */}
+          <div className="hero-stats reveal" style={{maxWidth:"680px",margin:"48px auto 0",borderRadius:"16px",overflow:"hidden",background:"#0E1E33"}}>
+            <div className="hero-stat"><div className="n">500+</div><div className="l">Students Helped<br /><span className="l-ar">طالب استفاد</span></div></div>
+            <div className="hero-stat"><div className="n">4</div><div className="l">Programs<br /><span className="l-ar">برامج</span></div></div>
+            <div className="hero-stat"><div className="n">3×</div><div className="l">Classes/Week<br /><span className="l-ar">صفوف أسبوعياً</span></div></div>
+            <div className="hero-stat"><div className="n">100%</div><div className="l">Arabic Support<br /><span className="l-ar">دعم بالعربية</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════ CONTACT ════════════════ */}
+      <div className="sec-divider"><div className="sd-line"></div>CONTACT | تواصل<div className="sd-line"></div></div>
+      <section className="sec" id="contact" style={{background:"white"}}>
+        <div className="wrap">
+          <div className="sec-tag">GET IN TOUCH | تواصل معنا</div>
+          <div className="bi reveal" style={{marginBottom:0}}>
+            <div className="bi-en"><h2 className="sec-title">We Are Here to Help</h2><p className="sec-lead">Reach out through any channel. We respond within 24 hours — often within a few hours on WhatsApp.</p></div>
+            <div className="bi-ar"><h2 className="sec-title-ar">نحن هنا للمساعدة</h2><p className="sec-lead-ar">تواصل عبر أي قناة. نرد خلال 24 ساعة — وغالباً خلال ساعات على الواتساب.</p></div>
+          </div>
+          <div className="contact-grid reveal">
             <div>
-              {[["📱","WhatsApp","واتساب","+1 587 000 0000"],["📧","Email","البريد الإلكتروني","hello@canadareadyacademy.com"],["📍","Location","الموقع","Canada — Online Support"],["🕒","Hours","ساعات العمل","Mon–Fri • 9am–6pm"]].map(([icon,en,ar,detail]) => (
-                <div key={en} style={{ display: "flex", alignItems: "center", gap: "16px", background: OFF, border: `1.5px solid ${BORDER}`, borderRadius: "16px", padding: "20px", marginBottom: "14px", textDecoration: "none", color: NAVY }}>
-                  <div style={{ width: "48px", height: "48px", borderRadius: "14px", background: TL, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px" }}>{icon}</div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "14px", color: NAVY }}>{en}</div>
-                    <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", fontSize: "12px", color: GRAY }}>{ar}</div>
-                    <div style={{ fontSize: "13px", color: GRAY }}>{detail}</div>
-                  </div>
+              <div className="wa-box">
+                <h4>💡 Need Help Choosing a Program?</h4>
+                <div className="h4-ar">تحتاج مساعدة في اختيار البرنامج؟</div>
+                <p>Message us on WhatsApp — we answer any question within a few hours.</p>
+                <div className="p-ar">راسلنا على واتساب — نجيب على أي سؤال خلال ساعات.</div>
+                <a href="https://wa.me/15870000000" className="btn-wa" target="_blank" rel="noopener noreferrer">💬 Message Us on WhatsApp | راسلنا على الواتساب</a>
+              </div>
+              <a href="https://wa.me/15870000000" className="contact-method" target="_blank" rel="noopener noreferrer">
+                <div className="cm-icon">💬</div>
+                <div><div className="cm-en">WhatsApp</div><div className="cm-ar">واتساب</div><div className="cm-detail">+1 (587) 000-0000 — Chat within hours</div></div>
+              </a>
+              <a href="mailto:hello@canadareadyacademy.com" className="contact-method">
+                <div className="cm-icon">✉️</div>
+                <div><div className="cm-en">Email</div><div className="cm-ar">البريد الإلكتروني</div><div className="cm-detail">hello@canadareadyacademy.com</div></div>
+              </a>
+              <a href="https://facebook.com/canadareadyacademy" className="contact-method" target="_blank" rel="noopener noreferrer">
+                <div className="cm-icon">📘</div>
+                <div><div className="cm-en">Facebook</div><div className="cm-ar">فيسبوك</div><div className="cm-detail">@CanadaReadyAcademy</div></div>
+              </a>
+              <a href="https://instagram.com/canadareadyacademy" className="contact-method" target="_blank" rel="noopener noreferrer">
+                <div className="cm-icon">📸</div>
+                <div><div className="cm-en">Instagram</div><div className="cm-ar">إنستغرام</div><div className="cm-detail">@canadareadyacademy — Daily tips for newcomers</div></div>
+              </a>
+              <div className="contact-method" style={{cursor:"default"}}>
+                <div className="cm-icon">🌍</div>
+                <div><div className="cm-en">Location</div><div className="cm-ar">الموقع</div><div className="cm-detail">Online — Serving all of Canada: AB · ON · BC · and more</div></div>
+              </div>
+            </div>
+            <div className="form-card">
+              <h3>Send Us a Message</h3>
+              <div className="h3-ar">أرسل لنا رسالة</div>
+              <form onSubmit={handleContactSubmit}>
+                <div className="inp-row">
+                  <input className="inp" type="text" placeholder="Your name / اسمك" required />
+                  <input className="inp" type="tel" placeholder="WhatsApp / رقم الواتساب" required />
                 </div>
-              ))}
+                <input className="inp" type="email" placeholder="Email (optional / اختياري)" />
+                <textarea className="inp" placeholder="Your message / رسالتك..." required></textarea>
+                <button className="btn-submit" type="submit" disabled={contactSent}>✉️ Send Message | أرسل الرسالة</button>
+                {contactSent && <div className="success-msg show">✅ Message sent! We'll reply within 24 hours. | تم الإرسال! سنرد خلال 24 ساعة.</div>}
+              </form>
             </div>
-            <div style={{ background: "#fff", borderRadius: "24px", padding: "36px", border: `1.5px solid ${BORDER}` }}>
-              <h3 style={{ fontSize: "22px", fontWeight: 700, color: NAVY, marginBottom: "4px" }}>Send us a message</h3>
-              <h3 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "18px", color: GRAY, direction: "rtl", display: "block", marginBottom: "20px" }}>أرسل لنا رسالة</h3>
-              <div style={{ display: "grid", gap: "12px" }}>
-                <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Your name / اسمك" />
-                <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Email / البريد الإلكتروني" />
-                <textarea style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px", minHeight: "100px" }} placeholder="Message / الرسالة" />
-                <button style={{ width: "100%", padding: "15px", background: `linear-gradient(135deg, ${T}, ${TD})`, color: "#fff", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: 700 }}>Send</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section style={{ background: `linear-gradient(135deg, ${NAVY} 0%, #0a2940 100%)`, padding: "80px 32px" }} id="assessment">
-        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "56px", alignItems: "start" }} className="max-lg:grid-cols-1">
-          <div style={{ color: "#fff" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "20px" }}>BOOK ASSESSMENT / احجز التقييم</div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,4vw,46px)", fontWeight: 900, lineHeight: 1.2, marginBottom: "12px" }}>Start With a Free Assessment</h2>
-            <h2 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "clamp(22px,3vw,36px)", fontWeight: 900, color: "rgba(255,255,255,.6)", direction: "rtl", display: "block", marginBottom: "24px" }}>ابدأ بتقييم مجاني</h2>
-            <p style={{ fontSize: "17px", color: "rgba(255,255,255,.8)", marginBottom: "32px", maxWidth: "480px", lineHeight: 1.8 }}>Tell us your goals, your level, and your needs. We&apos;ll recommend the best path for you.</p>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              {["No pressure","No obligation","Clear next steps"].map((x) => <li key={x} style={{ padding: "10px 0", color: "rgba(255,255,255,.75)" }}>✓ {x}</li>)}
-            </ul>
-          </div>
-          <div style={{ background: "#fff", borderRadius: "24px", padding: "36px", boxShadow: "0 24px 80px rgba(0,0,0,.3)" }}>
-            <h3 style={{ fontSize: "20px", fontWeight: 700, color: NAVY, marginBottom: "4px" }}>Assessment Request</h3>
-            <h3 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "16px", color: GRAY, direction: "rtl", display: "block", marginBottom: "20px" }}>طلب التقييم</h3>
-            <div style={{ display: "grid", gap: "12px" }}>
-              <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Full name / الاسم الكامل" />
-              <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Phone / الهاتف" />
-              <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Email / البريد الإلكتروني" />
-              <textarea style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px", minHeight: "100px" }} placeholder="Tell us about your goals / أخبرنا عن أهدافك" />
-              <button style={{ width: "100%", padding: "15px", background: `linear-gradient(135deg, ${T}, ${TD})`, color: "#fff", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: 700 }}>Submit</button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section style={{ background: `linear-gradient(135deg, rgba(10,186,181,0.08), rgba(10,186,181,0.02))`, padding: "80px 32px" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>📅 SCHEDULE / الجدول</div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }} className="max-lg:grid-cols-1">
-            {[
-              ["Monday", "الاثنين", "English Foundations", "أساسيات الإنجليزية", "7:00 PM", "مباشر عبر Zoom"],
-              ["Wednesday", "الأربعاء", "Career Skills", "مهارات المهنة", "7:00 PM", "مباشر عبر Zoom"],
-              ["Friday", "الجمعة", "Canada Life", "الحياة في كندا", "7:00 PM", "مباشر عبر Zoom"],
-              ["Sunday", "الأحد", "Community Q&A", "أسئلة وأجوبة", "6:00 PM", "مباشر عبر Zoom"],
-            ].map(([dayEn, dayAr, titleEn, titleAr, time, note]) => (
-              <div key={dayEn} style={{ background: "#fff", borderRadius: "20px", padding: "24px", border: `1.5px solid ${BORDER}` }}>
-                <div style={{ display: "flex", justifyContent: "space-between", gap: "16px", marginBottom: "8px" }}>
-                  <div>
-                    <div style={{ fontSize: "18px", fontWeight: 800, color: NAVY }}>{dayEn}</div>
-                    <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", color: GRAY }}>{dayAr}</div>
-                  </div>
-                  <div style={{ color: GOLD, fontWeight: 800 }}>{time}</div>
-                </div>
-                <div style={{ fontWeight: 700, marginBottom: "4px" }}>{titleEn}</div>
-                <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", color: GRAY, marginBottom: "4px" }}>{titleAr}</div>
-                <div style={{ fontSize: "12px", color: GRAY }}>{note}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section style={{ background: "#fff", padding: "80px 32px" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>💬 TESTIMONIALS / آراء الطلاب</div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "20px" }}>
-            {[
-              ["Ahmed", "أحمد", "The support was real and practical.", "الدعم كان حقيقياً وعملياً."],
-              ["Fatima", "فاطمة", "I finally understood how Canada works.", "أخيراً فهمت كيف تعمل الحياة في كندا."],
-              ["Omar", "عمر", "My confidence improved fast.", "ثقتي بنفسي تحسنت بسرعة."],
-            ].map(([enName, arName, en, ar]) => (
-              <div key={enName} style={{ background: "#fff", borderRadius: "20px", padding: "24px", border: `1.5px solid ${BORDER}` }}>
-                <div style={{ color: GOLD, marginBottom: "10px" }}>★★★★★</div>
-                <p style={{ marginBottom: "8px", color: NAVY }}>{en}</p>
-                <p style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", marginBottom: "14px", color: GRAY }}>{ar}</p>
-                <div style={{ fontWeight: 800 }}>{enName}</div>
-                <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", color: GRAY }}>{arName}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
-      <section id="assessment" style={{ background: "#F6FBFB", padding: "72px 24px 84px" }}>
-        <div style={{ maxWidth: "1180px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "44px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "8px 16px", borderRadius: "999px", background: "rgba(10,186,181,.08)", color: TD, fontSize: "11px", fontWeight: 800, letterSpacing: "1.6px", textTransform: "uppercase", marginBottom: "16px" }}>📋 Free Appointment</div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(34px,4vw,58px)", fontWeight: 900, color: NAVY, lineHeight: 1.1, marginBottom: "14px" }}>Book Your Free English &amp; Career Appointment</h2>
-            <p style={{ fontSize: "17px", color: GRAY, maxWidth: "760px", margin: "0 auto", lineHeight: 1.8 }}>15–20 minutes with our team. Completely free. We&apos;ll check your level, understand your goals, and recommend the best plan for you.</p>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "360px 1fr", gap: "48px", alignItems: "stretch" }} className="max-lg:grid-cols-1">
-            <div style={{ background: "#4F8582", borderRadius: "24px", padding: "34px 30px", color: "#fff", boxShadow: "0 20px 40px rgba(13,62,61,.12)" }}>
-              <h3 style={{ fontFamily: "'Playfair Display', serif", color: GOLD_L, fontSize: "26px", lineHeight: 1.25, marginBottom: "22px" }}>What Happens During the Appointment?</h3>
-              <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "16px" }}>
-                {["We check your English level (Beginner or Intermediate)","We ask about your career goals and work history","We understand your newcomer challenges","We explain how our program works","We recommend the best plan for you","You get your WhatsApp group & Zoom links"].map((item, index) => (
-                  <li key={item} style={{ display: "flex", gap: "12px", alignItems: "flex-start", color: "rgba(255,255,255,.9)", fontSize: "14px", lineHeight: 1.6 }}>
-                    <span style={{ width: "22px", height: "22px", borderRadius: "50%", background: "rgba(240,201,106,.18)", color: GOLD_L, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "12px", fontWeight: 800, flexShrink: 0 }}>{index + 1}</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ol>
-              <div style={{ background: "rgba(255,255,255,.12)", borderRadius: "18px", padding: "18px 18px 16px", marginTop: "26px" }}>
-                <div style={{ fontWeight: 800, color: GOLD_L, marginBottom: "12px" }}>🎁 100% Free</div>
-                <div style={{ display: "grid", gap: "8px", fontSize: "14px", color: "rgba(255,255,255,.9)" }}>
-                  <div>✓ No credit card required</div>
-                  <div>✓ No commitment or obligation</div>
-                  <div>✓ Call is in Arabic — no pressure</div>
-                  <div>✓ First week is FREE when you join</div>
-                </div>
-              </div>
+      {/* ════════════════ ASSESSMENT BOOKING ════════════════ */}
+      <div className="sec-divider"><div className="sd-line"></div>BOOK FREE ASSESSMENT | احجز تقييماً مجانياً<div className="sd-line"></div></div>
+      <section className="sec assessment-bg" id="assessment">
+        <div className="wrap">
+          <div className="sec-tag" style={{borderColor:"rgba(10,186,181,.3)",color:"#0ABAB5"}}>FREE — NO COMMITMENT | مجاني — بدون التزام</div>
+          <div className="bi" style={{marginBottom:0}}>
+            <div className="bi-en" style={{borderRightColor:"rgba(255,255,255,.08)"}}>
+              <h2 className="sec-title" style={{color:"white"}}>Book Your Free English<br />&amp; Career Assessment</h2>
+              <p className="sec-lead" style={{color:"rgba(255,255,255,.65)"}}>15–20 minute Zoom call in Arabic. We'll check your level, understand your goals, and recommend the perfect plan. First week FREE.</p>
+              <ul className="assess-points">
+                <li>Determine your English level (Beginner or Intermediate)<span className="ar">تحديد مستواك في الإنجليزية</span></li>
+                <li>Discuss your career goals &amp; challenges<span className="ar">نناقش أهدافك المهنية وتحدياتك</span></li>
+                <li>Explain our 150+ services — in Arabic<span className="ar">شرح خدماتنا ١٥٠+ بالعربي</span></li>
+                <li>Recommend the best plan — no pressure<span className="ar">نوصي بأفضل خطة — بدون ضغط</span></li>
+                <li>First week is completely FREE<span className="ar">الأسبوع الأول مجاني تماماً</span></li>
+              </ul>
             </div>
-            <div style={{ background: "#fff", borderRadius: "28px", padding: "34px", boxShadow: "0 20px 60px rgba(10,186,181,.10)", border: "1px solid rgba(10,186,181,.08)" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }} className="max-md:grid-cols-1">
-                <div>
-                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>Full Name</div>
-                  <input style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px" }} placeholder="" />
-                </div>
-                <div>
-                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>WhatsApp Number</div>
-                  <input style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px" }} placeholder="+1 587 000 0000" />
-                </div>
-                <div>
-                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>English Level</div>
-                  <select style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px", color: GRAY }}>
-                    <option>Select level</option>
-                    <option>Beginner</option>
-                    <option>Intermediate</option>
-                  </select>
-                </div>
-                <div>
-                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>Country of Origin</div>
-                  <input style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px" }} placeholder="Egypt, Syria, Iraq..." />
-                </div>
-                <div style={{ gridColumn: "1 / -1" }}>
-                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>How Long in Canada?</div>
-                  <select style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px", color: GRAY }}>
-                    <option>Select time</option>
-                    <option>Less than 1 year</option>
-                    <option>1–3 years</option>
-                    <option>3+ years</option>
-                  </select>
-                </div>
-                <div style={{ gridColumn: "1 / -1" }}>
-                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>Career Goals</div>
-                  <textarea style={{ width: "100%", minHeight: "58px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "12px 14px", fontSize: "14px", resize: "vertical" }} placeholder="What kind of work are you looking for? What are your goals in Canada?" />
-                </div>
-                <div style={{ gridColumn: "1 / -1" }}>
-                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>Biggest Challenge Right Now</div>
-                  <textarea style={{ width: "100%", minHeight: "58px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "12px 14px", fontSize: "14px", resize: "vertical" }} placeholder="Tell us your main difficulty — language, jobs, understanding Canadian life..." />
-                </div>
-              </div>
-              <button style={{ marginTop: "18px", width: "100%", height: "52px", borderRadius: "999px", border: "none", background: "#4F8582", color: "#fff", fontSize: "16px", fontWeight: 800, boxShadow: "0 12px 24px rgba(79,133,130,.18)" }}>📋 Book My Free Appointment</button>
+            <div className="bi-ar">
+              <h2 className="sec-title-ar" style={{color:"white"}}>احجز تقييمك المجاني<br />للإنجليزية والمهنة</h2>
+              <p style={{fontFamily:"'Tajawal',sans-serif",fontSize:"16px",color:"rgba(255,255,255,.5)",direction:"rtl",marginBottom:"20px",lineHeight:1.8}}>مكالمة Zoom مجانية 15-20 دقيقة بالعربي. نحدد مستواك، نفهم أهدافك، ونوصي بأفضل خطة. الأسبوع الأول مجاني.</p>
             </div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px", marginTop: "22px" }} className="max-lg:grid-cols-1">
-            <img src={appointmentImage} alt="Free appointment form" style={{ width: "100%", borderRadius: "24px", boxShadow: "0 20px 50px rgba(10,186,181,.08)" }} />
-            <div />
+          <div className="assess-grid reveal">
+            <div></div>
+            <div className="assess-form-card">
+              <h3>Book My Free Assessment</h3>
+              <div className="h3-ar">احجز تقييمي المجاني</div>
+              <form onSubmit={handleAssessSubmit}>
+                <div className="inp-row">
+                  <input className="inp" type="text" placeholder="Full Name / الاسم الكامل" required />
+                  <input className="inp" type="tel" placeholder="WhatsApp Number / رقم واتساب" required />
+                </div>
+                <input className="inp" type="email" placeholder="Email (optional)" />
+                <select className="inp">
+                  <option value="">English Level | مستوى الإنجليزية</option>
+                  <option>Beginner | مبتدئ</option>
+                  <option>Elementary | أساسي</option>
+                  <option>Intermediate | متوسط</option>
+                </select>
+                <select className="inp">
+                  <option value="">Preferred Plan | الباقة المفضلة</option>
+                  <option>Starter — $79</option>
+                  <option>Premium — $129</option>
+                  <option>Career Boost — $179</option>
+                  <option>Canada Ready — $249</option>
+                  <option>Not sure yet | لست متأكداً</option>
+                </select>
+                <textarea className="inp" placeholder="Career goals &amp; biggest challenge | أهدافك المهنية وأكبر تحدٍ" rows={3}></textarea>
+                <button className="btn-submit" type="submit" disabled={assessSent}>📋 Book My Free Assessment | احجز تقييمي المجاني</button>
+                {assessSent && <div className="success-msg show">🎉 Request sent! We'll contact you on WhatsApp within 24 hours. | تم الإرسال! سنتواصل معك على واتساب خلال 24 ساعة.</div>}
+              </form>
+            </div>
           </div>
         </div>
       </section>
-      <footer style={{ background: "#060F1C", padding: "56px 32px 28px" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "40px", marginBottom: "48px" }} className="max-md:grid-cols-1">
-            <div>
-              <div style={{ fontWeight: 800, fontSize: "22px", color: "#fff", marginBottom: "12px" }}>Canada Ready Academy</div>
-              <p style={{ fontSize: "13px", color: "rgba(255,255,255,.4)", lineHeight: 1.7 }}>English & career support for newcomers in Canada.</p>
-              <p style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "13px", color: "rgba(255,255,255,.3)", direction: "rtl", lineHeight: 1.7 }}>دعم الإنجليزية والمهنة للوافدين الجدد في كندا.</p>
+
+      {/* ════════════════ FOOTER ════════════════ */}
+      <footer className="hp-footer">
+        <div className="footer-inner">
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"10px"}}>
+                <div style={{width:36,height:36,borderRadius:10,background:"linear-gradient(135deg,#0ABAB5,#089994)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18}}>🍁</div>
+              </div>
+              <span className="logo-name">CanadaReady Academy</span>
+              <p>150+ services for newcomers.<br />English, Career &amp; Life Support.</p>
+              <p className="p-ar">١٥٠+ خدمة للوافدين الجدد. إنجليزية، مهنة، وحياة.</p>
+              <p style={{fontSize:"12px",color:"rgba(255,255,255,.3)",marginTop:"6px"}}>Built by immigrants — for immigrants. 🍁</p>
+              <div className="footer-socials">
+                <a href="https://wa.me/15870000000" className="social-btn" target="_blank" rel="noopener noreferrer">💬</a>
+                <a href="https://facebook.com/canadareadyacademy" className="social-btn" target="_blank" rel="noopener noreferrer">📘</a>
+                <a href="https://instagram.com/canadareadyacademy" className="social-btn" target="_blank" rel="noopener noreferrer">📸</a>
+              </div>
+            </div>
+            <div className="footer-col">
+              <h5>Quick Links</h5>
+              <div className="h5-ar">روابط سريعة</div>
+              <a href="#about" onClick={(e) => { e.preventDefault(); scrollTo("about"); }}>About / عن الأكاديمية</a>
+              <a href="#services" onClick={(e) => { e.preventDefault(); scrollTo("services"); }}>All Services / الخدمات</a>
+              <a href="#programs" onClick={(e) => { e.preventDefault(); scrollTo("programs"); }}>Programs / البرامج</a>
+              <a href="#how" onClick={(e) => { e.preventDefault(); scrollTo("how"); }}>How It Works / كيف يعمل</a>
+              <a href="#testimonials" onClick={(e) => { e.preventDefault(); scrollTo("testimonials"); }}>Testimonials / آراء</a>
+              <a href="#assessment" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>Free Assessment / تقييم مجاني</a>
+            </div>
+            <div className="footer-col">
+              <h5>Programs</h5>
+              <div className="h5-ar">البرامج</div>
+              <span>Starter — $79/mo</span>
+              <span className="ar">المبتدئ — ٧٩ دولار</span>
+              <span>Premium — $129/mo</span>
+              <span className="ar">المميز — ١٢٩ دولار</span>
+              <span>Career Boost — $179/mo</span>
+              <span className="ar">دفعة المهنة — ١٧٩ دولار</span>
+              <span>Canada Ready — $249/mo</span>
+              <span className="ar">كندا ريدي — ٢٤٩ دولار</span>
+            </div>
+            <div className="footer-col">
+              <h5>Contact</h5>
+              <div className="h5-ar">تواصل</div>
+              <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer">💬 +1 (587) 000-0000</a>
+              <span className="ar">واتساب — رد خلال ساعات</span>
+              <a href="mailto:hello@canadareadyacademy.com">✉️ hello@canadareadyacademy.com</a>
+              <span className="ar">البريد — رد خلال 24 ساعة</span>
+              <span style={{marginTop:"8px"}}>🌍 Online — All of Canada</span>
+              <span className="ar">عبر الإنترنت — كل كندا</span>
+              <span>Alberta · Ontario · BC · and more</span>
             </div>
           </div>
-          <div style={{ borderTop: "1px solid rgba(255,255,255,.06)", paddingTop: "24px", fontSize: "12px", color: "rgba(255,255,255,.3)" }}>© 2026 Canada Ready Academy</div>
+          <div className="footer-bottom">
+            <span>© 2025 CanadaReady Academy. All rights reserved. 🍁 Your success starts here.</span>
+            <span style={{fontFamily:"'Tajawal',sans-serif",direction:"rtl"}}>نجاحك يبدأ من هنا.</span>
+          </div>
         </div>
       </footer>
-      <a href="https://wa.me/15870000000" style={{ position: "fixed", bottom: "24px", right: "24px", background: "#25D366", width: "58px", height: "58px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", color: "#fff", textDecoration: "none", boxShadow: "0 8px 24px rgba(37,211,102,.4)", zIndex: 999 }}>💬</a>
     </div>
   );
 }

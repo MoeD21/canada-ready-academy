@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,10 +17,19 @@ import Contact from "@/pages/contact";
 const queryClient = new QueryClient();
 
 function Router() {
+  const [location] = useLocation();
+
+  if (location === "/" || location === "") {
+    return (
+      <Switch>
+        <Route path="/" component={Home} />
+      </Switch>
+    );
+  }
+
   return (
     <Layout>
       <Switch>
-        <Route path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/programs" component={Programs} />
         <Route path="/services" component={Services} />
