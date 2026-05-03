@@ -47,10 +47,10 @@ export default function Assessment() {
       <div style={{ padding: "80px 5%", textAlign: "center", maxWidth: "600px", margin: "0 auto" }}>
         <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: `rgba(129,216,208,0.12)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "36px", margin: "0 auto 24px" }}>✅</div>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "32px", fontWeight: 800, color: TDK, marginBottom: "12px" }}>
-          {isAr ? "تم تقديم طلبك!" : "Assessment Submitted!"}
+          {isAr ? "تم حجز موعدك!" : "Appointment Submitted!"}
         </h2>
         <p style={{ fontSize: "17px", color: MID, lineHeight: 1.7, marginBottom: "28px" }}>
-          {isAr ? "سنتواصل معك على واتساب خلال 24 ساعة لتحديد موعد مكالمتك المجانية. ابق قريباً!" : "We will contact you on WhatsApp within 24 hours to schedule your free call. Stay close!"}
+          {isAr ? "سنتواصل معك على واتساب خلال 24 ساعة لتأكيد موعدك المجاني. ابق قريباً!" : "We will contact you on WhatsApp within 24 hours to confirm your free appointment. Stay close!"}
         </p>
         <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 36px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }} data-testid="success-whatsapp">
           💬 {isAr ? "تحدث معنا الآن على واتساب" : "Chat With Us Now on WhatsApp"}
@@ -76,10 +76,10 @@ export default function Assessment() {
       {/* Header */}
       <section style={{ padding: "60px 5% 50px", background: `linear-gradient(135deg,${BG},#e8fffe)`, textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" }}>
-          📋 {isAr ? "تقييم مجاني" : "FREE ASSESSMENT"}
+          📋 {isAr ? "موعد مجاني" : "FREE APPOINTMENT"}
         </div>
         <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 800, color: TDK, marginBottom: "12px" }}>
-          {isAr ? "احجز تقييمك المجاني للإنجليزية والمهنة" : "Book Your Free English & Career Assessment"}
+          {isAr ? "احجز موعدك المجاني للإنجليزية والمهنة" : "Book Your Free English & Career Appointment"}
         </h1>
         <p style={{ fontSize: "17px", color: MID, maxWidth: "600px", margin: "0 auto", lineHeight: 1.7 }}>
           {isAr ? "15–20 دقيقة مع فريقنا. مجانية تماماً. سنتحقق من مستواك، ونفهم أهدافك، ونوصيك بأفضل خطة لك." : "15–20 minutes with our team. Completely free. We'll check your level, understand your goals, and recommend the best plan for you."}
@@ -93,7 +93,7 @@ export default function Assessment() {
           <div>
             <div style={{ background: TDK, borderRadius: "22px", padding: "34px", color: "#fff", marginBottom: "20px" }}>
               <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: 700, color: GOLD_LT, marginBottom: "18px" }}>
-                {isAr ? "ماذا يحدث خلال التقييم؟" : "What Happens During the Assessment?"}
+                {isAr ? "ماذا يحدث خلال الموعد؟" : "What Happens During the Appointment?"}
               </div>
               {whatHappens.map((item, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "12px" }}>
@@ -122,7 +122,7 @@ export default function Assessment() {
           {/* Right: Form */}
           <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>
-              {isAr ? "أكمل استمارة التقييم" : "Complete the Assessment Form"}
+              {isAr ? "أكمل استمارة الموعد" : "Complete the Appointment Form"}
             </h3>
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>
               {isAr ? "سنتصل بك خلال 24 ساعة." : "We'll contact you within 24 hours."}
@@ -187,7 +187,7 @@ export default function Assessment() {
                 )} />
                 <button type="submit" disabled={createAssessment.isPending} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: createAssessment.isPending ? "not-allowed" : "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: createAssessment.isPending ? 0.65 : 1, marginTop: "6px" }} data-testid="submit-assessment">
                   {createAssessment.isPending && <Loader2 className="w-5 h-5 animate-spin" />}
-                  📋 {isAr ? "احجز تقييمي المجاني" : "Book My Free Assessment"}
+                  📋 {isAr ? "احجز موعدي المجاني" : "Book My Free Appointment"}
                 </button>
               </form>
             </Form>

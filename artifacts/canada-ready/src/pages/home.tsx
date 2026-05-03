@@ -26,13 +26,13 @@ export default function Home() {
             <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(36px,5.2vw,62px)", fontWeight: 800, color: TDK, lineHeight: 1.08, marginBottom: "16px" }}>{isAr ? <>دعم الإنجليزية والمهنة<br />والحياة للوافدين الجدد في <span style={{ color: GOLD }}>كندا</span></> : <>English, Career &amp;<br />Life Support for Newcomers in <span style={{ color: GOLD }}>Canada</span></>}</h1>
             <p style={{ fontSize: "17px", color: MID, maxWidth: "540px", lineHeight: 1.75, marginBottom: "30px" }}>{isAr ? "دروس مباشرة عبر الإنترنت، تحضير للعمل، ودعم التوطين — مصمم للمهاجرين الناطقين بالعربية في كندا." : "Live online classes, job preparation, and settlement support — designed for Arabic-speaking immigrants in Canada."}</p>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-              <Link href="/assessment" style={{ background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, color: TDK, padding: "15px 28px", borderRadius: "30px", fontSize: "15px", fontWeight: 900, textDecoration: "none", boxShadow: "0 10px 26px rgba(201,144,58,0.28)" }}>{isAr ? "احجز تقييماً مجانياً" : "Book Free Assessment"}</Link>
+              <Link href="/assessment" style={{ background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, color: TDK, padding: "15px 28px", borderRadius: "30px", fontSize: "15px", fontWeight: 900, textDecoration: "none", boxShadow: "0 10px 26px rgba(201,144,58,0.28)" }}>{isAr ? "احجز موعداً مجانياً" : "Book Free Appointment"}</Link>
               <Link href="/services" style={{ background: "#fff", color: TDK, border: "1px solid rgba(102,230,222,0.45)", padding: "15px 28px", borderRadius: "30px", fontSize: "15px", fontWeight: 800, textDecoration: "none", boxShadow: "0 8px 18px rgba(102,230,222,0.10)" }}>{isAr ? "عرض الخدمات" : "View Services"}</Link>
             </div>
           </div>
-          <div style={{ background: "#fff", border: "1px solid rgba(102,230,222,0.28)", borderRadius: "24px", padding: "28px", color: TDK, boxShadow: "0 18px 40px rgba(102,230,222,0.12)" }}>
+          <div style={{ background: "#fff", border: "1px solid rgba(102,230,222,0.28)", borderRadius: "24px", padding: "28px", color: TDK, boxShadow: "0 18px 40px rgba(102,230,222,0.12)", overflow: "hidden" }}>
             <div style={{ fontSize: "11px", color: TDK, fontWeight: 800, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "16px" }}>{isAr ? "ما ستحصل عليه" : "WHAT YOU GET"}</div>
-            <div style={{ display: "grid", gap: "10px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", minWidth: 0 }}>
               {[
                 { icon: "🗣️", text: isAr ? "حصص إنجليزية لجميع المستويات" : "English classes for all levels" },
                 { icon: "💼", text: isAr ? "تحضير للوظائف والسيرة الذاتية" : "Resume and job preparation" },
@@ -40,9 +40,9 @@ export default function Home() {
                 { icon: "🤝", text: isAr ? "مجتمع عربي ودعم واتساب" : "Arabic community and WhatsApp support" },
                 { icon: "📞", text: isAr ? "مكالمات توجيه فردية" : "1-on-1 coaching calls" },
               ].map((item) => (
-                <div key={item.text} style={{ background: BG, borderRadius: "14px", padding: "12px 14px", fontSize: "14px", display: "flex", alignItems: "center", gap: "10px", color: MID }}>
+                <div key={item.text} style={{ background: BG, borderRadius: "14px", padding: "12px 14px", fontSize: "14px", display: "flex", alignItems: "center", gap: "10px", color: MID, minWidth: 0 }}>
                   <span>{item.icon}</span>
-                  <span>{item.text}</span>
+                  <span style={{ lineHeight: 1.45, wordBreak: "break-word" }}>{item.text}</span>
                 </div>
               ))}
             </div>
