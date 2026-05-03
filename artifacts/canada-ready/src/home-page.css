@@ -520,7 +520,7 @@
   .hp .appt-grid > div{min-width:0;}
   .hp .assessment-bg .appt-grid > div:first-child > div:first-child{
     padding:16px 12px;border-radius:16px;margin-bottom:12px;
-    background:linear-gradient(145deg,#0ABAB5,#089994);
+    background:linear-gradient(135deg,#0ABAB5,#089994);
   }
   .hp .assessment-bg .appt-grid > div:first-child > div:first-child h3{font-size:15px;line-height:1.2;color:white;}
   .hp .assessment-bg .appt-grid > div:first-child > div:first-child > div{font-size:12px!important;margin-bottom:12px!important;color:rgba(255,255,255,.9)!important;}
