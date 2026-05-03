@@ -738,7 +738,7 @@ export default function Home() {
                 <textarea className="inp" placeholder="What kind of work are you looking for? What are your goals in Canada? / ما نوع العمل الذي تبحث عنه؟ ما أهدافك في كندا؟" rows={3} style={{marginBottom:0}}></textarea>
                 <label style={{fontSize:"12px",fontWeight:600,color:"#0E1E33",display:"block",marginBottom:"6px",marginTop:"14px"}}>Biggest Challenge Right Now <span style={{fontFamily:"'Tajawal',sans-serif",color:"#64748B",fontWeight:400}}>/ أكبر تحدٍ تواجهه الآن</span></label>
                 <textarea className="inp" placeholder="Tell us your main difficulty — language, jobs, understanding Canadian life... / أخبرنا عن صعوبتك الرئيسية — اللغة، الوظائف، الحياة الكندية..." rows={3}></textarea>
-                <button className="btn-submit" type="submit" disabled={assessSent} style={{marginTop:"8px",borderRadius:"40px",fontSize:"16px"}}>
+                <button className="btn-submit" type="submit" disabled={assessSent} style={{marginTop:"8px",borderRadius:"40px",fontSize:"16px",background:"linear-gradient(135deg,#0ABAB5,#089994)"}}>
                   📋 Book My Free Appointment | احجز موعدي المجاني
                 </button>
                 {assessSent && <div className="success-msg show">🎉 Request sent! We'll contact you on WhatsApp within 24 hours. | تم الإرسال! سنتواصل معك على واتساب خلال 24 ساعة.</div>}
