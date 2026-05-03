@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import appointmentImage from "@assets/image_1777807681347.png";
 
 const T = "#0ABAB5";
 const TD = "#089994";
@@ -421,25 +422,80 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section style={{ background: `linear-gradient(135deg, ${NAVY} 0%, #0a2940 100%)`, padding: "80px 32px" }} id="assessment">
-        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px" }} className="max-lg:grid-cols-1">
-          <div style={{ color: "#fff" }}>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,4vw,46px)", fontWeight: 900, marginBottom: "14px" }}>Book Your Free English &amp; Career Assessment</h2>
-            <h2 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "clamp(22px,3vw,36px)", fontWeight: 900, direction: "rtl", color: "rgba(255,255,255,.65)", marginBottom: "20px" }}>احجز تقييمك المجاني للإنجليزية والمهنة</h2>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, lineHeight: 2 }}>
-              <li>• Determine your level / تحديد مستواك</li>
-              <li>• Discuss your goals / مناقشة أهدافك</li>
-              <li>• Recommend your plan / ترشيح خطتك</li>
-              <li>• First week FREE / الأسبوع الأول مجاني</li>
-            </ul>
+      <section id="assessment" style={{ background: "#F6FBFB", padding: "72px 24px 84px" }}>
+        <div style={{ maxWidth: "1180px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "44px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "8px 16px", borderRadius: "999px", background: "rgba(10,186,181,.08)", color: TD, fontSize: "11px", fontWeight: 800, letterSpacing: "1.6px", textTransform: "uppercase", marginBottom: "16px" }}>📋 Free Appointment</div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(34px,4vw,58px)", fontWeight: 900, color: NAVY, lineHeight: 1.1, marginBottom: "14px" }}>Book Your Free English &amp; Career Appointment</h2>
+            <p style={{ fontSize: "17px", color: GRAY, maxWidth: "760px", margin: "0 auto", lineHeight: 1.8 }}>15–20 minutes with our team. Completely free. We&apos;ll check your level, understand your goals, and recommend the best plan for you.</p>
           </div>
-          <div style={{ background: "#fff", borderRadius: "20px", padding: "28px" }}>
-            <div style={{ display: "grid", gap: "12px" }}>
-              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Full name" />
-              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Phone" />
-              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Email" />
-              <button style={{ padding: "14px", border: "none", borderRadius: "12px", background: GOLD, color: NAVY, fontWeight: 800 }}>Submit</button>
+          <div style={{ display: "grid", gridTemplateColumns: "360px 1fr", gap: "48px", alignItems: "stretch" }} className="max-lg:grid-cols-1">
+            <div style={{ background: "#4F8582", borderRadius: "24px", padding: "34px 30px", color: "#fff", boxShadow: "0 20px 40px rgba(13,62,61,.12)" }}>
+              <h3 style={{ fontFamily: "'Playfair Display', serif", color: GOLD_L, fontSize: "26px", lineHeight: 1.25, marginBottom: "22px" }}>What Happens During the Appointment?</h3>
+              <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "16px" }}>
+                {["We check your English level (Beginner or Intermediate)","We ask about your career goals and work history","We understand your newcomer challenges","We explain how our program works","We recommend the best plan for you","You get your WhatsApp group & Zoom links"].map((item, index) => (
+                  <li key={item} style={{ display: "flex", gap: "12px", alignItems: "flex-start", color: "rgba(255,255,255,.9)", fontSize: "14px", lineHeight: 1.6 }}>
+                    <span style={{ width: "22px", height: "22px", borderRadius: "50%", background: "rgba(240,201,106,.18)", color: GOLD_L, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "12px", fontWeight: 800, flexShrink: 0 }}>{index + 1}</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ol>
+              <div style={{ background: "rgba(255,255,255,.12)", borderRadius: "18px", padding: "18px 18px 16px", marginTop: "26px" }}>
+                <div style={{ fontWeight: 800, color: GOLD_L, marginBottom: "12px" }}>🎁 100% Free</div>
+                <div style={{ display: "grid", gap: "8px", fontSize: "14px", color: "rgba(255,255,255,.9)" }}>
+                  <div>✓ No credit card required</div>
+                  <div>✓ No commitment or obligation</div>
+                  <div>✓ Call is in Arabic — no pressure</div>
+                  <div>✓ First week is FREE when you join</div>
+                </div>
+              </div>
             </div>
+            <div style={{ background: "#fff", borderRadius: "28px", padding: "34px", boxShadow: "0 20px 60px rgba(10,186,181,.10)", border: "1px solid rgba(10,186,181,.08)" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }} className="max-md:grid-cols-1">
+                <div>
+                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>Full Name</div>
+                  <input style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px" }} placeholder="" />
+                </div>
+                <div>
+                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>WhatsApp Number</div>
+                  <input style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px" }} placeholder="+1 587 000 0000" />
+                </div>
+                <div>
+                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>English Level</div>
+                  <select style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px", color: GRAY }}>
+                    <option>Select level</option>
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                  </select>
+                </div>
+                <div>
+                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>Country of Origin</div>
+                  <input style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px" }} placeholder="Egypt, Syria, Iraq..." />
+                </div>
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>How Long in Canada?</div>
+                  <select style={{ width: "100%", height: "44px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "0 14px", fontSize: "14px", color: GRAY }}>
+                    <option>Select time</option>
+                    <option>Less than 1 year</option>
+                    <option>1–3 years</option>
+                    <option>3+ years</option>
+                  </select>
+                </div>
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>Career Goals</div>
+                  <textarea style={{ width: "100%", minHeight: "58px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "12px 14px", fontSize: "14px", resize: "vertical" }} placeholder="What kind of work are you looking for? What are your goals in Canada?" />
+                </div>
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <div style={{ fontSize: "12px", fontWeight: 700, color: NAVY, marginBottom: "7px" }}>Biggest Challenge Right Now</div>
+                  <textarea style={{ width: "100%", minHeight: "58px", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "12px 14px", fontSize: "14px", resize: "vertical" }} placeholder="Tell us your main difficulty — language, jobs, understanding Canadian life..." />
+                </div>
+              </div>
+              <button style={{ marginTop: "18px", width: "100%", height: "52px", borderRadius: "999px", border: "none", background: "#4F8582", color: "#fff", fontSize: "16px", fontWeight: 800, boxShadow: "0 12px 24px rgba(79,133,130,.18)" }}>📋 Book My Free Appointment</button>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px", marginTop: "22px" }} className="max-lg:grid-cols-1">
+            <img src={appointmentImage} alt="Free appointment form" style={{ width: "100%", borderRadius: "24px", boxShadow: "0 20px 50px rgba(10,186,181,.08)" }} />
+            <div />
           </div>
         </div>
       </section>
