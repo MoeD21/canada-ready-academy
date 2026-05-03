@@ -632,7 +632,7 @@ export default function Home() {
 
             {/* LEFT: dark teal card + guarantees */}
             <div>
-              <div style={{background:"linear-gradient(145deg,#1A4A45,#0D3530)",borderRadius:"20px",padding:"36px",marginBottom:"24px"}}>
+              <div style={{background:"linear-gradient(145deg,#0ABAB5,#089994)",borderRadius:"20px",padding:"36px",marginBottom:"24px"}}>
                 <h3 style={{fontFamily:"'Playfair Display',serif",fontSize:"22px",fontWeight:800,color:"#C9903A",lineHeight:1.3,marginBottom:"6px"}}>
                   What Happens During the Appointment?
                 </h3>
