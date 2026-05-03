@@ -351,6 +351,98 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section style={{ background: `linear-gradient(135deg, rgba(10,186,181,0.08), rgba(10,186,181,0.02))`, padding: "80px 32px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "48px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>📅 SCHEDULE / الجدول</div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }} className="max-lg:grid-cols-1">
+            {[
+              ["Monday", "الاثنين", "English Foundations", "أساسيات الإنجليزية", "7:00 PM", "مباشر عبر Zoom"],
+              ["Wednesday", "الأربعاء", "Career Skills", "مهارات المهنة", "7:00 PM", "مباشر عبر Zoom"],
+              ["Friday", "الجمعة", "Canada Life", "الحياة في كندا", "7:00 PM", "مباشر عبر Zoom"],
+              ["Sunday", "الأحد", "Community Q&A", "أسئلة وأجوبة", "6:00 PM", "مباشر عبر Zoom"],
+            ].map(([dayEn, dayAr, titleEn, titleAr, time, note]) => (
+              <div key={dayEn} style={{ background: "#fff", borderRadius: "20px", padding: "24px", border: `1.5px solid ${BORDER}` }}>
+                <div style={{ display: "flex", justifyContent: "space-between", gap: "16px", marginBottom: "8px" }}>
+                  <div>
+                    <div style={{ fontSize: "18px", fontWeight: 800, color: NAVY }}>{dayEn}</div>
+                    <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", color: GRAY }}>{dayAr}</div>
+                  </div>
+                  <div style={{ color: GOLD, fontWeight: 800 }}>{time}</div>
+                </div>
+                <div style={{ fontWeight: 700, marginBottom: "4px" }}>{titleEn}</div>
+                <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", color: GRAY, marginBottom: "4px" }}>{titleAr}</div>
+                <div style={{ fontSize: "12px", color: GRAY }}>{note}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section style={{ background: "#fff", padding: "80px 32px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "48px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>💬 TESTIMONIALS / آراء الطلاب</div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "20px" }}>
+            {[
+              ["Ahmed", "أحمد", "The support was real and practical.", "الدعم كان حقيقياً وعملياً."],
+              ["Fatima", "فاطمة", "I finally understood how Canada works.", "أخيراً فهمت كيف تعمل الحياة في كندا."],
+              ["Omar", "عمر", "My confidence improved fast.", "ثقتي بنفسي تحسنت بسرعة."],
+            ].map(([enName, arName, en, ar]) => (
+              <div key={enName} style={{ background: "#fff", borderRadius: "20px", padding: "24px", border: `1.5px solid ${BORDER}` }}>
+                <div style={{ color: GOLD, marginBottom: "10px" }}>★★★★★</div>
+                <p style={{ marginBottom: "8px", color: NAVY }}>{en}</p>
+                <p style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", marginBottom: "14px", color: GRAY }}>{ar}</p>
+                <div style={{ fontWeight: 800 }}>{enName}</div>
+                <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", color: GRAY }}>{arName}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section style={{ background: OFF, padding: "80px 32px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }} className="max-lg:grid-cols-1">
+          <div style={{ background: "#fff", borderRadius: "20px", padding: "28px", border: `1.5px solid ${BORDER}` }}>
+            <h3 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>Contact / تواصل</h3>
+            <div style={{ display: "grid", gap: "12px" }}>
+              <div>WhatsApp: +1 587 000 0000</div>
+              <div>Email: hello@canadareadyacademy.com</div>
+              <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl" }}>دعم أونلاين داخل كندا</div>
+            </div>
+          </div>
+          <div style={{ background: "#fff", borderRadius: "20px", padding: "28px", border: `1.5px solid ${BORDER}` }}>
+            <h3 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>Message / رسالة</h3>
+            <div style={{ display: "grid", gap: "12px" }}>
+              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Name" />
+              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Email" />
+              <textarea style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px", minHeight: "90px" }} placeholder="Message" />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section style={{ background: `linear-gradient(135deg, ${NAVY} 0%, #0a2940 100%)`, padding: "80px 32px" }} id="assessment">
+        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px" }} className="max-lg:grid-cols-1">
+          <div style={{ color: "#fff" }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,4vw,46px)", fontWeight: 900, marginBottom: "14px" }}>Book Your Free English &amp; Career Assessment</h2>
+            <h2 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "clamp(22px,3vw,36px)", fontWeight: 900, direction: "rtl", color: "rgba(255,255,255,.65)", marginBottom: "20px" }}>احجز تقييمك المجاني للإنجليزية والمهنة</h2>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, lineHeight: 2 }}>
+              <li>• Determine your level / تحديد مستواك</li>
+              <li>• Discuss your goals / مناقشة أهدافك</li>
+              <li>• Recommend your plan / ترشيح خطتك</li>
+              <li>• First week FREE / الأسبوع الأول مجاني</li>
+            </ul>
+          </div>
+          <div style={{ background: "#fff", borderRadius: "20px", padding: "28px" }}>
+            <div style={{ display: "grid", gap: "12px" }}>
+              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Full name" />
+              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Phone" />
+              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Email" />
+              <button style={{ padding: "14px", border: "none", borderRadius: "12px", background: GOLD, color: NAVY, fontWeight: 800 }}>Submit</button>
+            </div>
+          </div>
+        </div>
+      </section>
       <footer style={{ background: "#060F1C", padding: "56px 32px 28px" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "40px", marginBottom: "48px" }} className="max-md:grid-cols-1">
