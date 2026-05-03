@@ -563,23 +563,27 @@ export default function Home() {
       <div className="sec-divider"><div className="sd-line"></div>CONTACT | تواصل<div className="sd-line"></div></div>
       <section className="sec" id="contact" style={{background:"white"}}>
         <div className="wrap">
-          <div className="sec-tag">GET IN TOUCH | تواصل معنا</div>
-          <div className="bi reveal" style={{marginBottom:0}}>
-            <div className="bi-en"><h2 className="sec-title">We Are Here to Help</h2><p className="sec-lead">Reach out through any channel. We respond within 24 hours — often within a few hours on WhatsApp.</p></div>
-            <div className="bi-ar"><h2 className="sec-title-ar">نحن هنا للمساعدة</h2><p className="sec-lead-ar">تواصل عبر أي قناة. نرد خلال 24 ساعة — وغالباً خلال ساعات على الواتساب.</p></div>
-          </div>
-          <div className="contact-grid reveal">
-            <div>
-              <div className="wa-box">
-                <h4>💡 Need Help Choosing a Program?</h4>
-                <div className="h4-ar">تحتاج مساعدة في اختيار البرنامج؟</div>
-                <p>Message us on WhatsApp — we answer any question within a few hours.</p>
-                <div className="p-ar">راسلنا على واتساب — نجيب على أي سؤال خلال ساعات.</div>
-                <a href="https://wa.me/15870000000" className="btn-wa" target="_blank" rel="noopener noreferrer">💬 Message Us on WhatsApp | راسلنا على الواتساب</a>
-              </div>
+          <div className="contact-centered">
+            <div className="sec-tag" style={{margin:"0 auto 20px"}}>GET IN TOUCH | تواصل معنا</div>
+            <h2 className="sec-title" style={{textAlign:"center"}}>We Are Here to Help</h2>
+            <div className="sec-title-ar" style={{textAlign:"center",marginBottom:"8px"}}>نحن هنا للمساعدة</div>
+            <p className="sec-lead" style={{textAlign:"center",maxWidth:"520px",margin:"0 auto 32px"}}>Reach out through any channel — we respond within 24 hours, often faster on WhatsApp.</p>
+
+            {/* WhatsApp CTA */}
+            <div className="wa-box reveal" style={{maxWidth:"580px",margin:"0 auto 48px",textAlign:"center"}}>
+              <div style={{fontSize:"32px",marginBottom:"10px"}}>💬</div>
+              <h4>Chat With Us on WhatsApp</h4>
+              <div className="h4-ar">راسلنا على واتساب</div>
+              <p>Questions about programs, pricing, or your English level? We reply within hours.</p>
+              <div className="p-ar">أسئلة عن البرامج أو مستواك؟ نرد خلال ساعات.</div>
+              <a href="https://wa.me/15870000000" className="btn-wa" target="_blank" rel="noopener noreferrer">💬 Message Us on WhatsApp | راسلنا على الواتساب</a>
+            </div>
+
+            {/* Contact methods grid */}
+            <div className="contact-methods-grid reveal">
               <a href="https://wa.me/15870000000" className="contact-method" target="_blank" rel="noopener noreferrer">
                 <div className="cm-icon">💬</div>
-                <div><div className="cm-en">WhatsApp</div><div className="cm-ar">واتساب</div><div className="cm-detail">+1 (587) 000-0000 — Chat within hours</div></div>
+                <div><div className="cm-en">WhatsApp</div><div className="cm-ar">واتساب</div><div className="cm-detail">+1 (587) 000-0000</div></div>
               </a>
               <a href="mailto:hello@canadareadyacademy.com" className="contact-method">
                 <div className="cm-icon">✉️</div>
@@ -591,11 +595,11 @@ export default function Home() {
               </a>
               <a href="https://instagram.com/canadareadyacademy" className="contact-method" target="_blank" rel="noopener noreferrer">
                 <div className="cm-icon">📸</div>
-                <div><div className="cm-en">Instagram</div><div className="cm-ar">إنستغرام</div><div className="cm-detail">@canadareadyacademy — Daily tips for newcomers</div></div>
+                <div><div className="cm-en">Instagram</div><div className="cm-ar">إنستغرام</div><div className="cm-detail">@canadareadyacademy</div></div>
               </a>
               <div className="contact-method" style={{cursor:"default"}}>
                 <div className="cm-icon">🌍</div>
-                <div><div className="cm-en">Location</div><div className="cm-ar">الموقع</div><div className="cm-detail">Online — Serving all of Canada: AB · ON · BC · and more</div></div>
+                <div><div className="cm-en">Location</div><div className="cm-ar">الموقع</div><div className="cm-detail">Online — All of Canada</div></div>
               </div>
             </div>
           </div>
