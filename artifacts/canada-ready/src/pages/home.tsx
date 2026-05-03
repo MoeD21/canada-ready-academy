@@ -97,22 +97,36 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <section style={{ padding: "72px 5%", background: BG }}>
+      <section style={{ padding: "72px 5%", background: "#fff" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "50px" }}>
-            <div style={stag}>📖 WHAT WE TEACH / ماذا ندرّس</div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(26px,3vw,42px)", fontWeight: 800, color: TDK }}>4 Areas Covering Everything You Need / 4 مجالات تغطي كل ما تحتاجه</h2>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "22px" }}>
-            <div style={{ background: "#fff", borderRadius: "18px", padding: "26px", border: "1px solid rgba(10,186,181,0.15)", borderTop: `4px solid ${T}` }}><div style={{ width: "50px", height: "50px", background: "rgba(102,230,222,0.12)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", marginBottom: "14px" }}>📚</div><h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: TDK, marginBottom: "8px" }}>English / الإنجليزية</h3><p style={{ fontSize: "13.5px", color: MID, lineHeight: 1.65 }}>Speaking, listening, reading, writing, pronunciation, workplace communication, IELTS/CELPIP prep.<br />التحدث، الاستماع، القراءة، الكتابة، النطق، التواصل في العمل، التحضير لـ IELTS/CELPIP.</p></div>
-            <div style={{ background: "#fff", borderRadius: "18px", padding: "26px", border: "1px solid rgba(10,186,181,0.15)", borderTop: `4px solid ${GOLD}` }}><div style={{ width: "50px", height: "50px", background: "rgba(102,230,222,0.12)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", marginBottom: "14px" }}>💼</div><h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: TDK, marginBottom: "8px" }}>Careers / المهن</h3><p style={{ fontSize: "13.5px", color: MID, lineHeight: 1.65 }}>Resume writing, interviews, LinkedIn, cover letters, job search, Canadian workplace culture, networking.<br />كتابة السيرة الذاتية، المقابلات، لينكدإن، خطابات التغطية، البحث عن عمل، ثقافة بيئة العمل الكندية.</p></div>
-            <div style={{ background: "#fff", borderRadius: "18px", padding: "26px", border: "1px solid rgba(10,186,181,0.15)", borderTop: `4px solid #25A465` }}><div style={{ width: "50px", height: "50px", background: "rgba(102,230,222,0.12)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", marginBottom: "14px" }}>🏠</div><h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: TDK, marginBottom: "8px" }}>Canada Life / الحياة في كندا</h3><p style={{ fontSize: "13.5px", color: MID, lineHeight: 1.65 }}>Banking, credit, CRA taxes, housing, healthcare, government services, driver&apos;s license, daily life.<br />البنوك، الائتمان، ضرائب CRA، السكن، الرعاية الصحية، الخدمات الحكومية، رخصة القيادة.</p></div>
-            <div style={{ background: "#fff", borderRadius: "18px", padding: "26px", border: "1px solid rgba(10,186,181,0.15)", borderTop: `4px solid #8B5CF6` }}><div style={{ width: "50px", height: "50px", background: "rgba(102,230,222,0.12)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", marginBottom: "14px" }}>💻</div><h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: TDK, marginBottom: "8px" }}>Business & Digital / الأعمال والرقمية</h3><p style={{ fontSize: "13.5px", color: MID, lineHeight: 1.65 }}>Start a business, freelancing, self-employment, invoicing, digital tools, side hustles, marketplace selling.<br />بدء عمل تجاري، العمل الحر، المستقل، الفواتير، الأدوات الرقمية، الدخل الجانبي، البيع الإلكتروني.</p></div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "start" }} className="max-lg:grid-cols-1">
+            <div>
+              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,36px)", fontWeight: 800, color: TDK, marginBottom: "20px" }}>Who We Help / من نساعد</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                {aboutHelp.map((item) => (
+                  <div key={item.icon} style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "15px", color: MID }}>
+                    <div style={{ width: "8px", height: "8px", background: GOLD, borderRadius: "50%", flexShrink: 0 }} />
+                    <span style={{ fontSize: "18px", flexShrink: 0 }}>{item.icon}</span>
+                    {item.en} / {item.ar}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div style={{ background: TDK, borderRadius: "22px", padding: "38px", color: "#fff", marginBottom: "22px" }}>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 700, color: GOLD_LT, marginBottom: "12px" }}>Our Mission / مهمتنا</div>
+                <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.85)", lineHeight: 1.75 }}>To empower Arabic-speaking newcomers with the language, skills, and knowledge needed to thrive in Canada. We believe every newcomer deserves a clear path forward — not just language lessons, but real support for building a better life.<br />تمكين القادمين الجدد الناطقين بالعربية باللغة والمهارات والمعرفة اللازمة للنجاح في كندا. نؤمن بأن كل قادم جديد يستحق مساراً واضحاً للأمام — ليس فقط دروساً في اللغة، بل دعماً حقيقياً لبناء حياة أفضل.</p>
+              </div>
+              <div style={{ background: BG, border: "1px solid rgba(10,186,181,0.15)", borderRadius: "18px", padding: "28px" }}>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: 700, color: TDK, marginBottom: "10px" }}>What Makes Us Different / ما الذي يميزنا</h3>
+                <p style={{ fontSize: "14px", color: MID, lineHeight: 1.72 }}>We are not a generic language school. We are a community built by immigrants, for immigrants. We understand the real challenges — not just language, but jobs, taxes, housing, healthcare, and belonging. Our program covers everything in one place, in the language you understand.<br />نحن لسنا مدرسة لغة عامة. نحن مجتمع بناه مهاجرون للمهاجرين. نفهم التحديات الحقيقية — ليس فقط اللغة، بل الوظائف والضرائب والسكن والرعاية الصحية والانتماء. برنامجنا يغطي كل شيء في مكان واحد، باللغة التي تفهمها.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      <section style={{ padding: "72px 5%", background: "#fff" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <section style={{ padding: "72px 5%", background: BG }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <div style={{ background: `linear-gradient(135deg, rgba(10,186,181,0.08), rgba(10,186,181,0.03))`, border: "1px solid rgba(10,186,181,0.2)", borderRadius: "28px", padding: "52px" }}>
             <div style={stag}>💡 WHAT WE REALLY SELL / ما الذي نبيعه حقاً</div>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,40px)", fontWeight: 800, color: TDK, marginBottom: "10px" }}>We Are Not Just a Language School / لسنا مجرد مدرسة لغة</h2>
@@ -128,7 +142,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section style={{ padding: "72px 5%", background: BG }}>
+      <section style={{ padding: "72px 5%", background: "#fff" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "30px" }}>
             <div style={stag}>📚 OUR PROGRAMS / برامجنا</div>
