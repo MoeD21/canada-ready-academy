@@ -175,7 +175,7 @@ export default function Home() {
         <div style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: "0" }}>
           {aboutStats.map((s) => (
             <div key={s.n} style={{ padding: "28px 20px" }}>
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "42px", fontWeight: 700, color: GOLD_LT, lineHeight: 1 }}>{s.n}</div>
+              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(54px, 7vw, 82px)", fontWeight: 800, color: GOLD_LT, lineHeight: 1 }}>{s.n}</div>
               <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.65)", marginTop: "5px" }}>{s.en} / {s.ar}</div>
             </div>
           ))}
