@@ -118,7 +118,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <Link href="/assessment" style={{ marginTop: "18px", background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, borderRadius: "12px", padding: "12px 16px", textAlign: "center", fontWeight: 900, color: TDK, boxShadow: "0 10px 24px rgba(201,144,58,0.22)", textDecoration: "none", display: "block" }}>First Week FREE / الأسبوع الأول مجاني</Link>
+            <Link href="/assessment" style={{ marginTop: "18px", background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, borderRadius: "12px", padding: "12px 16px", textAlign: "center", fontWeight: 900, color: TDK, boxShadow: "0 10px 24px rgba(201,144,58,0.22)", textDecoration: "none", display: "block" }}>Book Your Free Assessment / احجز تقييمك المجاني</Link>
           </div>
         </div>
       </section>
@@ -145,6 +145,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section style={{ padding: "0 5% 40px", background: TDK, textAlign: "center" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: "0" }}>
+          {aboutStats.map((s) => (
+            <div key={s.n} style={{ padding: "28px 20px" }}>
+              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(54px, 7vw, 82px)", fontWeight: 800, color: GOLD_LT, lineHeight: 1 }}>{s.n}</div>
+              <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.65)", marginTop: "5px" }}>{s.en} / {s.ar}</div>
+            </div>
+          ))}
+        </div>
+      </section>
       <section style={{ padding: "72px 5%", background: "#fff" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "start" }} className="max-lg:grid-cols-1">
           <div>
@@ -169,16 +179,6 @@ export default function Home() {
               <p style={{ fontSize: "14px", color: MID, lineHeight: 1.72 }}>We are not a generic language school. We are a community built by immigrants, for immigrants. We understand the real challenges — not just language, but jobs, taxes, housing, healthcare, and belonging. Our program covers everything in one place, in the language you understand.<br />نحن لسنا مدرسة لغة عامة. نحن مجتمع بناه مهاجرون للمهاجرين. نفهم التحديات الحقيقية — ليس فقط اللغة، بل الوظائف والضرائب والسكن والرعاية الصحية والانتماء. برنامجنا يغطي كل شيء في مكان واحد، باللغة التي تفهمها.</p>
             </div>
           </div>
-        </div>
-      </section>
-      <section style={{ padding: "0 5% 40px", background: TDK, textAlign: "center" }}>
-        <div style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: "0" }}>
-          {aboutStats.map((s) => (
-            <div key={s.n} style={{ padding: "28px 20px" }}>
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(54px, 7vw, 82px)", fontWeight: 800, color: GOLD_LT, lineHeight: 1 }}>{s.n}</div>
-              <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.65)", marginTop: "5px" }}>{s.en} / {s.ar}</div>
-            </div>
-          ))}
         </div>
       </section>
       <section style={{ padding: "72px 5%", background: BG }}>
