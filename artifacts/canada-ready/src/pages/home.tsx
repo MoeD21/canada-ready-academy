@@ -63,7 +63,7 @@ export default function Home() {
                 { icon: "🤝", text: isAr ? "مجتمع عربي ودعم واتساب" : "Arabic community and WhatsApp support" },
                 { icon: "📞", text: isAr ? "مكالمات توجيه فردية" : "1-on-1 coaching calls" },
               ].map((item) => (
-                <div key={item.text} style={{ background: "rgba(255,255,255,0.12)", borderRadius: "14px", padding: "12px 14px", fontSize: "14px", display: "flex", alignItems: "center", gap: "10px", color: "#fff", minWidth: 0 }}>
+                <div key={item.text} style={{ background: "#007a77", border: "1px solid rgba(255,255,255,0.18)", borderRadius: "14px", padding: "12px 14px", fontSize: "14px", display: "flex", alignItems: "center", gap: "10px", color: "#fff", minWidth: 0, boxShadow: "0 8px 18px rgba(0,0,0,0.08)" }}>
                   <span>{item.icon}</span>
                   <span style={{ lineHeight: 1.45, wordBreak: "break-word" }}>{item.text}</span>
                 </div>
