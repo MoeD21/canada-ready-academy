@@ -145,37 +145,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section style={{ padding: "72px 5%", background: BG }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "30px" }}>
-            <div style={stag}>FAST NAVIGATION / تنقل سريع</div>
-            <div style={sTitle}>Jump Straight to Important Pages / انتقل مباشرة إلى الصفحات المهمة</div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: "14px" }}>
-            {[
-              { href: "/services", icon: "🧾", en: "All Services", ar: "كل الخدمات" },
-              { href: "/programs", icon: "📚", en: "Programs", ar: "البرامج" },
-              { href: "/how-it-works", icon: "🔄", en: "How It Works", ar: "كيف يعمل" },
-              { href: "/testimonials", icon: "⭐", en: "Testimonials", ar: "آراء الطلاب" },
-              { href: "/contact", icon: "📞", en: "Contact", ar: "تواصل" },
-              { href: "/assessment", icon: "📋", en: "Free Assessment", ar: "تقييم مجاني" },
-            ].map((item) => (
-              <Link key={item.href} href={item.href} style={{ background: "#fff", border: "1px solid rgba(102,230,222,0.26)", borderRadius: "18px", padding: "18px 16px", textDecoration: "none", color: TDK, boxShadow: "0 8px 20px rgba(102,230,222,0.08)" }}>
-                <div style={{ fontSize: "24px", marginBottom: "8px" }}>{item.icon}</div>
-                <div style={{ fontWeight: 800, fontSize: "15px", marginBottom: "4px" }}>{item.en} / {item.ar}</div>
-                <div style={{ fontSize: "12px", color: MID }}>{item.ar} / {item.en}</div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section style={{ background: TDK, padding: "70px 5%", textAlign: "center" }}>
-        <div style={{ maxWidth: "700px", margin: "0 auto" }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,38px)", fontWeight: 800, color: "#fff", marginBottom: "14px" }}>Ready to Start? / جاهز لتبدأ؟</h2>
-          <p style={{ color: "rgba(255,255,255,0.82)", fontSize: "17px", marginBottom: "26px", lineHeight: 1.7 }}>Book your free assessment and we&apos;ll map the best path for you.<br />احجز تقييمك المجاني وسنحدد لك أفضل مسار.</p>
-          <Link href="/assessment" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, color: TDK, padding: "16px 38px", borderRadius: "32px", fontSize: "16px", fontWeight: 900, textDecoration: "none", boxShadow: "0 12px 28px rgba(201,144,58,0.28)" }}>Book Your Free Assessment / احجز تقييمك المجاني</Link>
-        </div>
-      </section>
       <section style={{ padding: "0 5% 40px", background: TDK, textAlign: "center" }}>
         <div style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: "0" }}>
           {aboutStats.map((s) => (
