@@ -69,7 +69,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: "18px", background: `linear-gradient(135deg, ${BRIGHT} 0%, #B8FFF9 100%)`, borderRadius: "12px", padding: "12px 16px", textAlign: "center", fontWeight: 900, color: TDK, boxShadow: "0 10px 24px rgba(102,230,222,0.22)" }}>{isAr ? "الأسبوع الأول مجاني" : "First week FREE"}</div>
+            <div style={{ marginTop: "18px", background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, borderRadius: "12px", padding: "12px 16px", textAlign: "center", fontWeight: 900, color: TDK, boxShadow: "0 10px 24px rgba(201,144,58,0.22)" }}>{isAr ? "الأسبوع الأول مجاني" : "First week FREE"}</div>
           </div>
         </div>
       </section>
