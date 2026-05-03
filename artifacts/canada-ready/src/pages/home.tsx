@@ -402,18 +402,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section style={{ background: OFF, padding: "80px 32px" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }} className="max-lg:grid-cols-1">
-          <div style={{ background: "#fff", borderRadius: "20px", padding: "28px", border: `1.5px solid ${BORDER}` }}>
-            <h3 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>Message / رسالة</h3>
-            <div style={{ display: "grid", gap: "12px" }}>
-              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Name" />
-              <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Email" />
-              <textarea style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px", minHeight: "90px" }} placeholder="Message" />
-            </div>
-          </div>
-        </div>
-      </section>
+
       <section id="assessment" style={{ background: "#F6FBFB", padding: "72px 24px 84px" }}>
         <div style={{ maxWidth: "1180px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "44px" }}>
