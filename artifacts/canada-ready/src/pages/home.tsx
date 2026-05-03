@@ -216,56 +216,56 @@ export default function Home() {
           <div className="cat-block reveal">
             <div className="cat-header"><div style={{fontSize:"32px"}}>📚</div><div><div className="cat-en">English Support</div><div className="cat-ar">دعم الإنجليزية</div></div></div>
             <div className="tags-wrap">
-              {["Beginner English","Intermediate English","Conversation practice","Pronunciation training","Speaking confidence","Listening practice","Reading practice","Writing correction","Grammar lessons","Vocabulary lessons","Customer service English","Healthcare English","Workplace English","Office English","Phone conversation English","Email writing","Weekly quizzes","Daily vocabulary","English speaking clubs","Public speaking practice","Accent improvement","Real-life conversation simulation","Roleplay interviews","Beginner survival English","English for parents/schools","Canadian slang lessons","Construction English","Warehouse English","Group speaking practice","IELTS / CELPIP prep"].map(t => <div key={t} className="stag">{t}</div>)}
+              {([["Beginner English","إنجليزية مبتدئ"],["Intermediate English","إنجليزية متوسط"],["Conversation practice","تمرين المحادثة"],["Pronunciation training","تدريب النطق"],["Speaking confidence","ثقة الكلام"],["Listening practice","تمرين الاستماع"],["Reading practice","تمرين القراءة"],["Writing correction","تصحيح الكتابة"],["Grammar lessons","دروس القواعد"],["Vocabulary lessons","دروس المفردات"],["Customer service English","إنجليزية خدمة العملاء"],["Healthcare English","إنجليزية الرعاية الصحية"],["Workplace English","إنجليزية بيئة العمل"],["Office English","إنجليزية المكتب"],["Phone conversation English","إنجليزية المكالمات"],["Email writing","كتابة الإيميل"],["Weekly quizzes","اختبارات أسبوعية"],["Daily vocabulary","مفردات يومية"],["English speaking clubs","نوادي المحادثة"],["Public speaking practice","تمرين الخطابة"],["Accent improvement","تحسين اللهجة"],["Real-life conversation simulation","محاكاة محادثة حقيقية"],["Roleplay interviews","مقابلات لعب الأدوار"],["Beginner survival English","إنجليزية النجاة للمبتدئين"],["English for parents/schools","إنجليزية للآباء والمدارس"],["Canadian slang lessons","التعابير الكندية"],["Construction English","إنجليزية البناء"],["Warehouse English","إنجليزية المستودع"],["Group speaking practice","تمرين الكلام الجماعي"],["IELTS / CELPIP prep","تحضير IELTS / CELPIP"]] as [string,string][]).map(([en,ar]) => <div key={en} className="stag"><span>{en}</span><span className="stag-ar">{ar}</span></div>)}
             </div>
           </div>
           {/* CAT 2 */}
           <div className="cat-block reveal">
             <div className="cat-header"><div style={{fontSize:"32px"}}>💼</div><div><div className="cat-en">Job &amp; Career Support</div><div className="cat-ar">الدعم المهني والوظيفي</div></div></div>
             <div className="tags-wrap">
-              {["Canadian resume","Cover letter writing","LinkedIn setup","Job search strategy","Application review","Mock interviews","Interview feedback","Career planning","Promotion readiness","Workplace culture","Professional communication","Job application support","Career coaching","Industry-specific coaching","Networking strategies"].map(t => <div key={t} className="stag">{t}</div>)}
+              {([["Canadian resume","السيرة الذاتية الكندية"],["Cover letter writing","كتابة خطاب التقديم"],["LinkedIn setup","إعداد لينكدإن"],["Job search strategy","استراتيجية البحث عن عمل"],["Application review","مراجعة الطلبات"],["Mock interviews","مقابلات تجريبية"],["Interview feedback","تقييم المقابلة"],["Career planning","التخطيط المهني"],["Promotion readiness","الاستعداد للترقية"],["Workplace culture","ثقافة بيئة العمل"],["Professional communication","التواصل المهني"],["Job application support","دعم تقديم الوظائف"],["Career coaching","تدريب مهني"],["Industry-specific coaching","تدريب متخصص بالقطاع"],["Networking strategies","استراتيجيات التواصل المهني"]] as [string,string][]).map(([en,ar]) => <div key={en} className="stag"><span>{en}</span><span className="stag-ar">{ar}</span></div>)}
             </div>
           </div>
           {/* CAT 3 */}
           <div className="cat-block reveal">
             <div className="cat-header"><div style={{fontSize:"32px"}}>🏠</div><div><div className="cat-en">Newcomer Life Support</div><div className="cat-ar">دعم حياة الوافدين</div></div></div>
             <div className="tags-wrap">
-              {["Banking and credit scores","Renting and housing","Taxes and CRA basics","Healthcare navigation","Government documents","Driver's licence guidance","Transit and local systems","School and family help","Settlement guidance","Daily life in Canada","Important landmarks","Support programs guide"].map(t => <div key={t} className="stag">{t}</div>)}
+              {([["Banking and credit scores","البنوك والتقييم الائتماني"],["Renting and housing","الإيجار والسكن"],["Taxes and CRA basics","الضرائب وأساسيات CRA"],["Healthcare navigation","التنقل في الرعاية الصحية"],["Government documents","الوثائق الحكومية"],["Driver's licence guidance","إرشادات رخصة القيادة"],["Transit and local systems","النقل والأنظمة المحلية"],["School and family help","مساعدة المدارس والعائلة"],["Settlement guidance","إرشادات التوطين"],["Daily life in Canada","الحياة اليومية في كندا"],["Important landmarks","المعالم المهمة"],["Support programs guide","دليل برامج الدعم"]] as [string,string][]).map(([en,ar]) => <div key={en} className="stag"><span>{en}</span><span className="stag-ar">{ar}</span></div>)}
             </div>
           </div>
           {/* CAT 4 */}
           <div className="cat-block reveal">
             <div className="cat-header"><div style={{fontSize:"32px"}}>📄</div><div><div className="cat-en">Safe Immigration Support</div><div className="cat-ar">دعم الهجرة الآمن</div></div></div>
             <div className="tags-wrap">
-              {["Document organization","IRCC portal help","PR preparation English","Citizenship English prep","Form reading support","Letter understanding","Appointment preparation","File checklist help","Status tracking guidance","Safe non-legal guidance"].map(t => <div key={t} className="stag">{t}</div>)}
+              {([["Document organization","تنظيم الوثائق"],["IRCC portal help","مساعدة بوابة IRCC"],["PR preparation English","إنجليزية تحضير الإقامة الدائمة"],["Citizenship English prep","تحضير إنجليزية الجنسية"],["Form reading support","دعم قراءة النماذج"],["Letter understanding","فهم الرسائل الرسمية"],["Appointment preparation","التحضير للمواعيد"],["File checklist help","مساعدة قوائم الملفات"],["Status tracking guidance","إرشادات تتبع الحالة"],["Safe non-legal guidance","إرشادات آمنة غير قانونية"]] as [string,string][]).map(([en,ar]) => <div key={en} className="stag"><span>{en}</span><span className="stag-ar">{ar}</span></div>)}
             </div>
           </div>
           {/* CAT 5 */}
           <div className="cat-block reveal">
             <div className="cat-header"><div style={{fontSize:"32px"}}>💻</div><div><div className="cat-en">Digital &amp; Tech Support</div><div className="cat-ar">الدعم الرقمي والتقني</div></div></div>
             <div className="tags-wrap">
-              {["Computer basics","Email setup","Zoom training","Microsoft Office help","Phone and app skills","Online forms","Digital literacy","Freelancing basics","Side hustle tools","Online safety"].map(t => <div key={t} className="stag">{t}</div>)}
+              {([["Computer basics","أساسيات الكمبيوتر"],["Email setup","إعداد البريد الإلكتروني"],["Zoom training","تدريب على Zoom"],["Microsoft Office help","مساعدة Microsoft Office"],["Phone and app skills","مهارات الهاتف والتطبيقات"],["Online forms","النماذج الإلكترونية"],["Digital literacy","الثقافة الرقمية"],["Freelancing basics","أساسيات العمل الحر"],["Side hustle tools","أدوات الدخل الإضافي"],["Online safety","الأمان الإلكتروني"]] as [string,string][]).map(([en,ar]) => <div key={en} className="stag"><span>{en}</span><span className="stag-ar">{ar}</span></div>)}
             </div>
           </div>
           {/* CAT 6 */}
           <div className="cat-block reveal">
             <div className="cat-header"><div style={{fontSize:"32px"}}>🤝</div><div><div className="cat-en">Community &amp; Accountability</div><div className="cat-ar">المجتمع والمساءلة</div></div></div>
             <div className="tags-wrap">
-              {["WhatsApp group support","Weekly live classes","1-on-1 coaching calls","Goal tracking","Accountability check-ins","Motivation support","Class recordings","Homework support","Arabic-speaking team","Safe newcomer community"].map(t => <div key={t} className="stag">{t}</div>)}
+              {([["WhatsApp group support","دعم مجموعة الواتساب"],["Weekly live classes","صفوف مباشرة أسبوعية"],["1-on-1 coaching calls","مكالمات تدريب فردية"],["Goal tracking","متابعة الأهداف"],["Accountability check-ins","متابعة المسؤولية"],["Motivation support","دعم التحفيز"],["Class recordings","تسجيلات الصفوف"],["Homework support","دعم الواجبات"],["Arabic-speaking team","فريق ناطق بالعربية"],["Safe newcomer community","مجتمع وافدين آمن"]] as [string,string][]).map(([en,ar]) => <div key={en} className="stag"><span>{en}</span><span className="stag-ar">{ar}</span></div>)}
             </div>
           </div>
           {/* CAT 7 */}
           <div className="cat-block reveal">
             <div className="cat-header"><div style={{fontSize:"32px"}}>💰</div><div><div className="cat-en">Money &amp; Business Help</div><div className="cat-ar">المساعدة المالية والتجارية</div></div></div>
             <div className="tags-wrap">
-              {["Budgeting","Saving money","Credit building","Side hustle planning","Small business basics","Freelancing support","Marketplace selling","Invoicing basics","Contracts basics","Income strategy"].map(t => <div key={t} className="stag">{t}</div>)}
+              {([["Budgeting","إدارة الميزانية"],["Saving money","ادخار المال"],["Credit building","بناء الائتمان"],["Side hustle planning","التخطيط للدخل الإضافي"],["Small business basics","أساسيات الأعمال الصغيرة"],["Freelancing support","دعم العمل الحر"],["Marketplace selling","البيع في الأسواق الإلكترونية"],["Invoicing basics","أساسيات الفواتير"],["Contracts basics","أساسيات العقود"],["Income strategy","استراتيجية الدخل"]] as [string,string][]).map(([en,ar]) => <div key={en} className="stag"><span>{en}</span><span className="stag-ar">{ar}</span></div>)}
             </div>
           </div>
           {/* CAT 8 */}
           <div className="cat-block reveal">
             <div className="cat-header"><div style={{fontSize:"32px"}}>🎓</div><div><div className="cat-en">Advanced &amp; Future Services</div><div className="cat-ar">خدمات متقدمة ومستقبلية</div></div></div>
             <div className="tags-wrap">
-              {["Mentorship","Industry coaching","Interview bootcamps","Leadership English","Advanced confidence practice","Business growth support","Community events","Networking sessions","Family support programs","Custom 90-day success roadmap"].map(t => <div key={t} className="stag">{t}</div>)}
+              {([["Mentorship","الإرشاد المهني"],["Industry coaching","تدريب قطاعي"],["Interview bootcamps","معسكرات تدريب المقابلات"],["Leadership English","إنجليزية القيادة"],["Advanced confidence practice","تدريب الثقة المتقدم"],["Business growth support","دعم نمو الأعمال"],["Community events","فعاليات مجتمعية"],["Networking sessions","جلسات التواصل المهني"],["Family support programs","برامج دعم الأسرة"],["Custom 90-day success roadmap","خارطة طريق نجاح 90 يوماً"]] as [string,string][]).map(([en,ar]) => <div key={en} className="stag"><span>{en}</span><span className="stag-ar">{ar}</span></div>)}
             </div>
           </div>
 
