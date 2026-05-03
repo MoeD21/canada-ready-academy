@@ -254,7 +254,7 @@ export default function Home() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "18px" }}>
             {programs.map((plan, idx) => (
-              <div key={plan.name_en} style={{ background: idx === 1 ? TDK : "#fff", border: idx === 1 ? `2px solid ${GOLD}` : "1px solid rgba(129,216,208,0.18)", borderRadius: "18px", padding: "28px 22px", position: "relative", display: "flex", flexDirection: "column", direction: isAr ? "rtl" : "ltr" }}>
+              <div key={plan.name_en} style={{ background: idx === 1 ? TDK : "#fff", border: idx === 1 ? `2px solid ${GOLD}` : "1px solid rgba(129,216,208,0.18)", borderRadius: "18px", padding: "28px 22px", position: "relative", display: "flex", flexDirection: "column" }}>
                 {idx === 1 && <div style={{ position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)", background: GOLD, color: TDK, fontSize: "10px", fontWeight: 800, padding: "4px 13px", borderRadius: "11px", letterSpacing: "0.8px", textTransform: "uppercase", whiteSpace: "nowrap" }}>⭐ MOST POPULAR / الأكثر شعبية</div>}
                 <div style={{ fontSize: "10px", fontWeight: 800, letterSpacing: "1.8px", textTransform: "uppercase", color: idx === 1 ? "rgba(255,255,255,0.5)" : "#8896AB", marginBottom: "9px" }}>{plan.name_en} / {plan.name_ar}</div>
                 <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "44px", fontWeight: 700, color: idx === 1 ? "#fff" : TDK, lineHeight: 1 }}>{plan.price}</div>
