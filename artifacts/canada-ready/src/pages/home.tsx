@@ -2,7 +2,7 @@ import { useLanguage } from "@/lib/language-context";
 import { Link } from "wouter";
 
 const T = "#66E6DE";
-const BRIGHT = "#66E6DE";
+const BRIGHT = "#B8FFF9";
 const TDK = "#007A77";
 const GOLD = "#C9903A";
 const GOLD_LT = "#E8B84B";

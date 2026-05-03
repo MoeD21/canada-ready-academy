@@ -30,8 +30,8 @@ export function Navbar() {
   ];
 
   return (
-    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, background: "rgba(245,254,253,0.97)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(10,186,181,0.15)", height: "68px" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 5%" }}>
+    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, background: "rgba(245,254,253,0.98)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(102,230,222,0.22)", height: "68px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", padding: "0 5%" }}>
         {/* Logo */}
         <Link href="/" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
           <div style={{ width: "42px", height: "42px", background: "var(--tiffany)", borderRadius: "11px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", flexShrink: 0 }}>🍁</div>
@@ -56,11 +56,11 @@ export function Navbar() {
 
         {/* Right: language switch + CTA + hamburger */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{ background: "var(--tiffany-dk)", borderRadius: "22px", padding: "3px", display: "flex" }}>
+          <div style={{ background: "var(--tiffany-dk)", borderRadius: "22px", padding: "3px", display: "flex", flexShrink: 0 }}>
             <button onClick={() => setLanguage("en")} style={{ border: "none", background: language === "en" ? "var(--gold)" : "transparent", color: language === "en" ? "var(--tiffany-dk)" : "rgba(255,255,255,0.5)", fontSize: "13px", fontWeight: 700, padding: "5px 13px", borderRadius: "18px", cursor: "pointer", transition: "0.22s", fontFamily: "inherit" }} data-testid="btn-en">EN</button>
             <button onClick={() => setLanguage("ar")} style={{ border: "none", background: language === "ar" ? "var(--gold)" : "transparent", color: language === "ar" ? "var(--tiffany-dk)" : "rgba(255,255,255,0.5)", fontSize: "13px", fontWeight: 700, padding: "5px 13px", borderRadius: "18px", cursor: "pointer", transition: "0.22s", fontFamily: "inherit" }} data-testid="btn-ar">عربي</button>
           </div>
-          <Link href="/assessment" className="hidden lg:flex" style={{ background: "var(--tiffany)", color: "#fff", border: "none", padding: "10px 18px", borderRadius: "22px", fontSize: "13px", fontWeight: 700, cursor: "pointer", textDecoration: "none", transition: "0.25s", whiteSpace: "nowrap", alignItems: "center", gap: "6px" }} data-testid="nav-cta">
+          <Link href="/assessment" className="hidden lg:flex" style={{ background: "var(--tiffany)", color: "#fff", border: "none", padding: "10px 18px", borderRadius: "22px", fontSize: "13px", fontWeight: 700, cursor: "pointer", textDecoration: "none", transition: "0.25s", whiteSpace: "nowrap", alignItems: "center", gap: "6px", flexShrink: 0 }} data-testid="nav-cta">
             📋 {language === "en" ? "Free Assessment" : "تقييم مجاني"}
           </Link>
           <button onClick={() => setMobileOpen(!mobileOpen)} className="flex lg:hidden" style={{ background: "none", border: `2px solid var(--tiffany)`, borderRadius: "8px", width: "38px", height: "38px", cursor: "pointer", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "5px", padding: 0 }} data-testid="hamburger">
