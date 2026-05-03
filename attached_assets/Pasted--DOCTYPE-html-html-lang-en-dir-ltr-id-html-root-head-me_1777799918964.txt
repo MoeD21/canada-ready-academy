@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CanadaReady Academy – English, Career & Life Support for Newcomers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--navy:#1B3A6B;--navy-dk:#0E2140;--gold:#C9903A;--gold-lt:#E8B84B;--gold-bg:rgba(201,144,58,.09);--bg:#F7F4ED;--white:#fff;--text:#1A1A2E;--mid:#4A5568;--lt:#8896AB;--bdr:rgba(27,58,107,.1);--bdr-g:rgba(201,144,58,.28);--wa:#25D366;--fb:#1877F2;--sh:0 8px 32px rgba(27,58,107,.11);--sh-lg:0 24px 60px rgba(27,58,107,.17);--r:18px;--rs:10px;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:"Outfit",sans-serif;overflow-x:hidden;line-height:1.7;}
+body.ar{font-family:"Tajawal",sans-serif;}
+.e{display:block;}.a{display:none;}.ar .e{display:none;}.ar .a{display:block;}
+span.e{display:inline;}span.a{display:none;}.ar span.e{display:none;}.ar span.a{display:inline;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(247,244,237,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);height:68px;}
+.nav-in{max-width:1200px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 5%;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;}
+.logo-m{width:42px;height:42px;background:var(--navy);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.logo-t .n{font-family:"Playfair Display",serif;font-size:20px;font-weight:800;color:var(--navy);line-height:1;}
+.logo-t .s{font-size:9px;color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+.nl{display:flex;align-items:center;gap:2px;}
+.nl a{text-decoration:none;color:var(--mid);font-size:13px;font-weight:600;padding:7px 11px;border-radius:8px;transition:.2s;cursor:pointer;}
+.nl a:hover,.nl a.on{color:var(--navy);background:rgba(27,58,107,.07);}
+.nav-r{display:flex;align-items:center;gap:10px;}
+.lsw{background:var(--navy);border-radius:22px;padding:3px;display:flex;}
+.lsw button{border:none;background:transparent;color:rgba(255,255,255,.5);font-size:13px;font-weight:700;padding:5px 13px;border-radius:18px;cursor:pointer;transition:.22s;font-family:inherit;}
+.lsw button.on{background:var(--gold);color:var(--navy);}
+.ncta{background:var(--navy);color:#fff;border:none;padding:10px 18px;border-radius:22px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;font-family:inherit;transition:.25s;white-space:nowrap;}
+.ncta:hover{background:var(--gold);color:var(--navy);}
+.ham{display:none;background:none;border:2px solid var(--navy);border-radius:8px;width:38px;height:38px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;}
+.ham span{display:block;width:18px;height:2px;background:var(--navy);border-radius:2px;}
+.mm{display:none;position:fixed;top:68px;left:0;right:0;background:#fff;z-index:999;border-bottom:1px solid var(--bdr);padding:16px 5%;flex-direction:column;gap:3px;}
+.mm.open{display:flex;}
+.mm a{text-decoration:none;color:var(--mid);font-size:15px;font-weight:600;padding:10px 14px;border-radius:10px;cursor:pointer;}
+.mm a:hover{background:var(--gold-bg);color:var(--navy);}
+.page{display:none;}.page.act{display:block;}
+.sec{padding:88px 5%;}.sec-in{max-width:1200px;margin:0 auto;}
+.stag{display:inline-flex;align-items:center;gap:6px;background:var(--gold-bg);border:1px solid var(--bdr-g);color:#7A5818;padding:6px 14px;border-radius:14px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px;}
+.st{font-family:"Playfair Display",serif;font-size:clamp(28px,4vw,48px);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:12px;}
+.ss{font-size:16px;color:var(--mid);max-width:560px;line-height:1.72;}
+.shd{margin-bottom:50px;}.shd.c{text-align:center;}.shd.c .ss{margin:0 auto;}
+.hero{min-height:100vh;padding:110px 5% 80px;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 85% 20%,rgba(201,144,58,.1),transparent 60%),radial-gradient(ellipse 55% 60% at 0% 85%,rgba(27,58,107,.06),transparent 55%);}
+.hg{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;width:100%;}
+.hbadge{display:inline-flex;align-items:center;gap:7px;background:var(--gold-bg);border:1px solid var(--bdr-g);color:#7A5818;padding:7px 16px;border-radius:22px;font-size:12px;font-weight:700;margin-bottom:18px;animation:up .5s ease both;}
+h1.hh{font-family:"Playfair Display",serif;font-size:clamp(36px,5.2vw,64px);font-weight:800;color:var(--navy);line-height:1.1;margin-bottom:16px;animation:up .5s .1s ease both;}
+h1.hh em{font-style:italic;color:var(--gold);}
+.hsub{font-size:17px;color:var(--mid);max-width:520px;line-height:1.72;margin-bottom:32px;animation:up .5s .2s ease both;}
+.hbtns{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:38px;animation:up .5s .3s ease both;}
+.bmain{background:var(--navy);color:#fff;padding:15px 32px;border-radius:30px;font-size:15px;font-weight:700;border:none;cursor:pointer;text-decoration:none;font-family:inherit;transition:.28s;display:inline-flex;align-items:center;gap:8px;}
+.bmain:hover{background:var(--gold);color:var(--navy);transform:translateY(-2px);box-shadow:var(--sh);}
+.bwa{background:var(--wa);color:#fff;padding:15px 26px;border-radius:30px;font-size:15px;font-weight:700;text-decoration:none;transition:.28s;display:inline-flex;align-items:center;gap:8px;}
+.bwa:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.35);}
+.hstats{display:flex;gap:28px;padding-top:30px;border-top:1px solid var(--bdr);animation:up .5s .4s ease both;}
+.hst .n{font-family:"Playfair Display",serif;font-size:34px;font-weight:700;color:var(--navy);line-height:1;}
+.hst .l{font-size:12px;color:var(--lt);margin-top:3px;}
+.hcard{background:var(--navy);border-radius:22px;padding:34px;color:#fff;position:relative;overflow:hidden;animation:up .5s .3s ease both;}
+.hcard::after{content:"🍁";position:absolute;font-size:120px;right:-15px;bottom:-18px;opacity:.04;}
+.hcl{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:22px;}
+.hcl li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;}
+.hci{width:33px;height:33px;background:rgba(201,144,58,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.hcp{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;}
+.hcpf{font-size:11px;color:rgba(255,255,255,.45);}
+.hcpa{font-family:"Playfair Display",serif;font-size:38px;font-weight:700;color:var(--gold-lt);}
+.hcfree{background:var(--gold);border-radius:9px;padding:11px 16px;text-align:center;margin-top:12px;font-weight:700;color:var(--navy);font-size:13.5px;}
+.ftag{position:absolute;background:#fff;border-radius:11px;padding:9px 13px;box-shadow:var(--sh);font-size:12px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:6px;}
+.ftag.tl{top:-14px;left:-14px;}.ftag.br{bottom:-14px;right:-14px;}
+.hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.hcard2{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);padding:26px;display:flex;align-items:flex-start;gap:13px;transition:.3s;}
+.hcard2:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:var(--bdr-g);}
+.hic{width:45px;height:45px;background:var(--navy);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.hct{font-family:"Playfair Display",serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.hcd{font-size:13.5px;color:var(--mid);line-height:1.62;}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.pc{border-radius:var(--r);padding:34px 26px;text-align:center;border:1px solid var(--bdr);transition:.3s;position:relative;overflow:hidden;}
+.pc:hover{transform:translateY(-4px);box-shadow:var(--sh);}
+.pc.p1{background:linear-gradient(145deg,#1B3A6B,#2A5298);}
+.pc.p2{background:linear-gradient(145deg,#C9903A,#E8B84B);}
+.pc.p3{background:linear-gradient(145deg,#0E2140,#1B3A6B);}
+.pc.p4{background:linear-gradient(145deg,#3D7A5C,#25A465);}
+.pc .pio{font-size:42px;margin-bottom:14px;display:block;}
+.pc h3{font-family:"Playfair Display",serif;font-size:21px;font-weight:700;color:#fff;margin-bottom:9px;}
+.pc p{font-size:13px;color:rgba(255,255,255,.77);line-height:1.65;}
+.ptags{margin-top:14px;display:flex;flex-wrap:wrap;gap:5px;justify-content:center;}
+.ptag{background:rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:600;padding:4px 9px;border-radius:8px;}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+.sgrid::after{content:"";position:absolute;top:32px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--gold),var(--navy));opacity:.18;z-index:0;}
+.step{text-align:center;padding:6px 10px;position:relative;z-index:1;}
+.snum{width:64px;height:64px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:"Playfair Display",serif;font-size:26px;font-weight:700;color:var(--gold-lt);border:4px solid var(--bg);}
+.step h3{font-family:"Playfair Display",serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.step p{font-size:13px;color:var(--mid);line-height:1.6;}
+.scgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.scc{background:#fff;border-radius:var(--r);padding:26px;border-top:4px solid var(--navy);border:1px solid var(--bdr);border-top:4px solid var(--navy);}
+.scd{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.sct{font-family:"Playfair Display",serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:7px;}
+.prgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.prcard{background:#fff;border:1px solid var(--bdr);border-radius:var(--r);padding:28px 22px;position:relative;transition:.3s;display:flex;flex-direction:column;}
+.prcard:hover{transform:translateY(-4px);box-shadow:var(--sh);}
+.prcard.ft{border:2px solid var(--gold);background:var(--navy);}
+.poplbl{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;padding:4px 13px;border-radius:11px;letter-spacing:.8px;white-space:nowrap;}
+.prn{font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--lt);margin-bottom:9px;}
+.prcard.ft .prn{color:rgba(255,255,255,.5);}
+.pra{font-family:"Playfair Display",serif;font-size:44px;font-weight:700;color:var(--navy);line-height:1;}
+.prcard.ft .pra{color:#fff;}
+.prp{font-size:12.5px;color:var(--lt);}
+.prcard.ft .prp{color:rgba(255,255,255,.5);}
+.prfor{background:var(--gold-bg);border:1px solid var(--bdr-g);border-radius:var(--rs);padding:9px 12px;font-size:12px;color:#7A5818;font-weight:600;margin:13px 0;line-height:1.5;}
+.prcard.ft .prfor{background:rgba(201,144,58,.18);color:var(--gold-lt);border-color:transparent;}
+.prdiv{height:1px;background:var(--bdr);margin:12px 0;}
+.prcard.ft .prdiv{background:rgba(255,255,255,.12);}
+.prfl{list-style:none;display:flex;flex-direction:column;gap:8px;flex:1;}
+.prfi{font-size:13px;color:var(--mid);display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
+.prfi::before{content:"\\2713";color:var(--gold);font-weight:800;flex-shrink:0;margin-top:1px;}
+.prcard.ft .prfi{color:rgba(255,255,255,.82);}
+.prcard.ft .prfi::before{color:var(--gold);}
+.prbtn{margin-top:20px;width:100%;padding:13px;border-radius:24px;border:1.5px solid var(--bdr);background:transparent;color:var(--navy);font-size:13.5px;font-weight:700;cursor:pointer;transition:.25s;font-family:inherit;}
+.prbtn:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.prcard.ft .prbtn{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.prcard.ft .prbtn:hover{background:var(--gold-lt);}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.tc{background:#fff;border-radius:var(--r);padding:26px;border:1px solid var(--bdr);transition:.3s;}
+.tc:hover{box-shadow:var(--sh);}
+.tcs{color:var(--gold);font-size:16px;margin-bottom:11px;}
+.tct{font-size:14px;color:var(--mid);line-height:1.7;margin-bottom:16px;font-style:italic;}
+.tca{display:flex;align-items:center;gap:10px;}
+.tcav{width:40px;height:40px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.tcn{font-weight:700;font-size:14px;color:var(--navy);}
+.tci{font-size:12px;color:var(--lt);}
+.wcsec{background:var(--navy);padding:80px 5%;text-align:center;}
+.wcin{max-width:640px;margin:0 auto;}
+.wcnum{font-family:"Playfair Display",serif;font-size:30px;font-weight:700;color:var(--gold-lt);margin-bottom:24px;letter-spacing:1px;}
+.bwal{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:#fff;padding:16px 40px;border-radius:32px;font-size:16px;font-weight:700;text-decoration:none;transition:.3s;}
+.bwal:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(37,211,102,.4);}
+.bfb{display:inline-flex;align-items:center;gap:9px;background:var(--fb);color:#fff;padding:16px 34px;border-radius:32px;font-size:15px;font-weight:700;text-decoration:none;transition:.3s;margin-left:10px;}
+.bfb:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(24,119,242,.35);}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.acard{background:var(--navy);border-radius:22px;padding:38px;color:#fff;}
+.ast{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.12);}
+.ast:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.asn{font-family:"Playfair Display",serif;font-size:40px;font-weight:700;color:var(--gold-lt);}
+.asl{font-size:13px;color:rgba(255,255,255,.58);}
+.mpl{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:18px;}
+.mpl li{display:flex;align-items:flex-start;gap:10px;font-size:15px;color:var(--mid);}
+.mpd{width:8px;height:8px;background:var(--gold);border-radius:50%;flex-shrink:0;margin-top:8px;}
+.hstep{display:grid;grid-template-columns:80px 1fr;gap:22px;align-items:start;background:var(--bg);border-radius:var(--r);padding:26px;border:1px solid var(--bdr);margin-bottom:22px;}
+.hstep.last{background:linear-gradient(135deg,var(--navy),#2A5298);}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+.cchans{display:flex;flex-direction:column;gap:14px;margin-top:22px;}
+.chan{display:flex;align-items:center;gap:13px;background:#fff;border-radius:var(--r);padding:17px 20px;border:1px solid var(--bdr);text-decoration:none;transition:.3s;}
+.chan:hover{border-color:var(--bdr-g);box-shadow:var(--sh);transform:translateX(4px);}
+.chico{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.chlbl{font-weight:700;font-size:15px;color:var(--navy);}
+.chval{font-size:13px;color:var(--lt);}
+.fbox{background:var(--bg);border-radius:22px;padding:38px;box-shadow:var(--sh-lg);border:1px solid var(--bdr);}
+.fh{font-family:"Playfair Display",serif;font-size:24px;font-weight:800;color:var(--navy);margin-bottom:4px;}
+.fh2{font-size:13px;color:var(--lt);margin-bottom:24px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 14px;border:1.5px solid var(--bdr);border-radius:var(--rs);font-size:14px;font-family:inherit;color:var(--text);background:#fff;outline:none;transition:border .2s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--navy);}
+.fg textarea{resize:vertical;min-height:78px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.fsub{width:100%;padding:15px;background:var(--navy);color:#fff;border:none;border-radius:26px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:.28s;margin-top:5px;}
+.fsub:hover{background:var(--gold);color:var(--navy);transform:translateY(-2px);box-shadow:var(--sh);}
+.fsub:disabled{opacity:.6;cursor:not-allowed;}
+.fok{display:none;text-align:center;padding:26px 12px;}
+.fok .okico{font-size:50px;margin-bottom:12px;}
+.fok h3{font-family:"Playfair Display",serif;font-size:24px;color:var(--navy);margin-bottom:8px;}
+.fok p{color:var(--mid);font-size:14px;margin-bottom:20px;}
+.wbene{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+.wbene li{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;color:var(--mid);}
+.wbic{width:21px;height:21px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-lt);font-size:11px;flex-shrink:0;margin-top:2px;font-weight:700;}
+footer{background:#0E2140;color:rgba(255,255,255,.55);padding:54px 5% 0;}
+.fin{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:38px;padding-bottom:42px;}
+.ftn{color:#fff;font-family:"Playfair Display",serif;font-size:19px;font-weight:700;}
+.ftd{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;max-width:255px;margin-top:10px;}
+.ftsoc{display:flex;gap:8px;margin-top:14px;}
+.ftsoc a{width:33px;height:33px;border-radius:8px;border:1px solid rgba(255,255,255,.13);display:flex;align-items:center;justify-content:center;font-size:14px;transition:.2s;text-decoration:none;}
+.ftsoc a:hover{background:var(--gold);border-color:var(--gold);}
+.fcol h4{color:#fff;font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:13px;}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.fcol ul a{color:rgba(255,255,255,.46);text-decoration:none;font-size:13px;transition:.2s;}
+.fcol ul a:hover{color:var(--gold-lt);}
+.fwab{display:flex;align-items:center;gap:8px;background:var(--wa);color:#fff;text-decoration:none;padding:11px 15px;border-radius:11px;font-weight:700;font-size:14px;transition:.25s;margin-top:4px;}
+.ffbb{display:flex;align-items:center;gap:8px;background:var(--fb);color:#fff;text-decoration:none;padding:11px 15px;border-radius:11px;font-weight:700;font-size:14px;transition:.25s;margin-top:7px;}
+.fbot{border-top:1px solid rgba(255,255,255,.07);padding:17px 0;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.27);}
+.waf{position:fixed;bottom:26px;right:26px;z-index:950;width:56px;height:56px;background:var(--wa);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:25px;box-shadow:0 6px 24px rgba(37,211,102,.5);text-decoration:none;animation:pulse 3s infinite;}
+.waf:hover{animation:none;transform:scale(1.12);}
+@keyframes pulse{0%,100%{box-shadow:0 6px 24px rgba(37,211,102,.5);}50%{box-shadow:0 6px 36px rgba(37,211,102,.8);}}
+@keyframes up{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}
+}
+@media(max-width:1024px){.pgrid,.prgrid{grid-template-columns:1fr 1fr;}.sgrid{grid-template-columns:1fr 1fr;}.sgrid::after{display:none;}.fin{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.hg,.agrid,.cgrid{grid-template-columns:1fr;}.hcard{display:none;}.hgrid,.tgrid{grid-template-columns:1fr 1fr;}.nl,.ncta{display:none;}.ham{display:flex;}.scgrid{grid-template-columns:1fr;}.bfb{margin-left:0;margin-top:10px;}}
+@media(max-width:580px){.pgrid,.prgrid,.hgrid,.tgrid{grid-template-columns:1fr;}.frow{grid-template-columns:1fr;}.sec{padding:62px 5%;}.hstats{gap:16px;}.fin{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<a href="#" id="whatsappFloatingBtn" class="waf" target="_blank">💬</a>
+
+<nav>
+ <div class="nav-in">
+  <div class="logo" onclick="sp('home')">
+   <div class="logo-m">🍁</div>
+   <div class="logo-t"><div class="n">CanadaReady</div><div class="s"><span class="e">Academy</span><span class="a">أكاديمية</span></div></div>
+  </div>
+  <div class="nl">
+   <a onclick="sp('home')" id="nl-home"><span class="e">Home</span><span class="a">الرئيسية</span></a>
+   <a onclick="sp('about')" id="nl-about"><span class="e">About</span><span class="a">عنّا</span></a>
+   <a onclick="sp('programs')" id="nl-programs"><span class="e">Programs</span><span class="a">البرامج</span></a>
+   <a onclick="sp('howitworks')" id="nl-hiw"><span class="e">How It Works</span><span class="a">كيف يعمل</span></a>
+   <a onclick="sp('assessment')" id="nl-assess"><span class="e">Free Assessment</span><span class="a">تقييم مجاني</span></a>
+   <a onclick="sp('testimonials')" id="nl-testi"><span class="e">Testimonials</span><span class="a">آراء الطلاب</span></a>
+   <a onclick="sp('contact')" id="nl-contact"><span class="e">Contact</span><span class="a">تواصل</span></a>
+  </div>
+  <div class="nav-r">
+   <div class="lsw">
+    <button class="on" id="btn-en" onclick="sl('en')">EN</button>
+    <button id="btn-ar" onclick="sl('ar')">عربي</button>
+   </div>
+   <a onclick="sp('assessment')" class="ncta">📋 <span class="e">Free Assessment</span><span class="a">تقييم مجاني</span></a>
+   <button class="ham" onclick="toggleMob()" id="hbtn"><span></span><span></span><span></span></button>
+  </div>
+ </div>
+</nav>
+
+<div class="mm" id="mm">
+ <a onclick="sp('home');cm()"><span class="e">🏠 Home</span><span class="a">🏠 الرئيسية</span></a>
+ <a onclick="sp('about');cm()"><span class="e">ℹ️ About</span><span class="a">ℹ️ عنّا</span></a>
+ <a onclick="sp('programs');cm()"><span class="e">📚 Programs</span><span class="a">📚 البرامج</span></a>
+ <a onclick="sp('howitworks');cm()"><span class="e">🔄 How It Works</span><span class="a">🔄 كيف يعمل</span></a>
+ <a onclick="sp('assessment');cm()" style="color:var(--navy);font-weight:800;">📋 <span class="e">Book Free Assessment</span><span class="a">احجز تقييماً مجانياً</span></a>
+ <a onclick="sp('testimonials');cm()"><span class="e">⭐ Testimonials</span><span class="a">⭐ آراء الطلاب</span></a>
+ <a onclick="sp('contact');cm()"><span class="e">📞 Contact</span><span class="a">📞 تواصل</span></a>
+</div>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div class="page act" id="p-home">
+<section class="hero" style="padding-top:110px;">
+ <div class="hg">
+  <div>
+   <div class="hbadge">🍁 <span class="e">Canada's Newcomer Support System</span><span class="a">نظام دعم الوافدين الجدد في كندا</span></div>
+   <h1 class="hh"><span class="e">English, Career &amp;<br>Life Support for<br>Newcomers in <em>Canada</em></span><span class="a">دعم الإنجليزية والمهنة<br>والحياة للوافدين<br>الجدد في <em>كندا</em></span></h1>
+   <p class="hsub"><span class="e">Live online classes, job preparation, and settlement support — designed for Arabic-speaking immigrants in Canada. Start with a FREE 15-minute assessment call.</span><span class="a">دروس مباشرة عبر الإنترنت، تحضير للعمل، ودعم التوطين — مصمم للمهاجرين الناطقين بالعربية في كندا. ابدأ بمكالمة تقييم مجانية لمدة 15 دقيقة.</span></p>
+   <div class="hbtns">
+    <a onclick="sp('assessment')" class="bmain" style="cursor:pointer;">📋 <span class="e">Book Free Assessment</span><span class="a">احجز تقييماً مجانياً</span></a>
+    <a href="#" id="heroWhatsAppBtn" class="bwa">💬 <span class="e">Join Free Class</span><span class="a">انضم لصف مجاني</span></a>
+   </div>
+   <div class="hstats">
+    <div class="hst"><div class="n">500+</div><div class="l"><span class="e">Newcomers Helped</span><span class="a">وافد استفاد</span></div></div>
+    <div class="hst"><div class="n">3x</div><div class="l"><span class="e">Weekly Live Classes</span><span class="a">صفوف مباشرة أسبوعياً</span></div></div>
+    <div class="hst"><div class="n">100%</div><div class="l"><span class="e">Arabic + English</span><span class="a">عربي + إنجليزي</span></div></div>
+   </div>
+  </div>
+  <div style="position:relative;">
+   <div class="ftag tl">🇨🇦 <span class="e">Alberta, Canada</span><span class="a">ألبرتا، كندا</span></div>
+   <div class="hcard">
+    <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;"><span class="e">WHAT YOU GET</span><span class="a">ما ستحصل عليه</span></div>
+    <ul class="hcl">
+     <li><div class="hci">📚</div><span class="e">English Classes — All Levels</span><span class="a">دروس إنجليزية — جميع المستويات</span></li>
+     <li><div class="hci">💼</div><span class="e">Resume + Job Preparation</span><span class="a">سيرة ذاتية + تحضير للعمل</span></li>
+     <li><div class="hci">🏠</div><span class="e">Settlement &amp; Life Guidance</span><span class="a">إرشادات التوطين والحياة</span></li>
+     <li><div class="hci">🤝</div><span class="e">Arabic Community Support</span><span class="a">مجتمع دعم عربي</span></li>
+     <li><div class="hci">📋</div><span class="e">1-on-1 Coaching Calls</span><span class="a">جلسات تدريب فردية</span></li>
+    </ul>
+    <div class="hcp"><div><div class="hcpf"><span class="e">Starting from</span><span class="a">يبدأ من</span></div><div class="hcpa">$79</div></div><div style="color:rgba(255,255,255,.4);font-size:12px;"><span class="e">/ month CAD</span><span class="a">/ شهر كندي</span></div></div>
+    <div class="hcfree">🎁 <span class="e">First week FREE — No credit card needed</span><span class="a">الأسبوع الأول مجاني — لا بطاقة ائتمان</span></div>
+   </div>
+   <div class="ftag br">⭐ <span class="e">Taught in Arabic &amp; English</span><span class="a">يُدرَّس بالعربي والإنجليزي</span></div>
+  </div>
+ </div>
+</section>
+
+<!-- WHAT WE HELP WITH -->
+<section class="sec" style="background:#fff;">
+ <div class="sec-in"><div class="shd c"><div class="stag"><span class="e">WE HELP YOU WITH</span><span class="a">نساعدك في</span></div><div class="st"><span class="e">Everything a Newcomer Needs to Succeed</span><span class="a">كل ما يحتاجه الوافد الجديد للنجاح</span></div><p class="ss"><span class="e">We don't just teach English. We help you build confidence, income, and a real life in Canada.</span><span class="a">لا نعلمك الإنجليزي فقط. نساعدك على بناء الثقة والدخل والحياة الحقيقية في كندا.</span></p></div>
+  <div class="hgrid">
+   <div class="hcard2"><div class="hic">🗣️</div><div><div class="hct"><span class="e">Improve English</span><span class="a">تطوير الإنجليزية</span></div><p class="hcd"><span class="e">Beginner survival English to workplace fluency. 3 live classes every week in Arabic and English.</span><span class="a">من الإنجليزية الأساسية إلى الطلاقة في العمل. 3 صفوف مباشرة أسبوعياً.</span></p></div></div>
+   <div class="hcard2"><div class="hic">💪</div><div><div class="hct"><span class="e">Build Confidence</span><span class="a">بناء الثقة</span></div><p class="hcd"><span class="e">Speaking practice, mock interviews, and a safe community to grow — in Arabic and English.</span><span class="a">تدريب المحادثة ومقابلات تجريبية ومجتمع آمن للنمو.</span></p></div></div>
+   <div class="hcard2"><div class="hic">💼</div><div><div class="hct"><span class="e">Find Better Jobs</span><span class="a">إيجاد وظيفة أفضل</span></div><p class="hcd"><span class="e">Canadian resume, cover letters, LinkedIn setup, job search strategy and interview prep.</span><span class="a">سيرة ذاتية كندية، خطاب تغطية، لينكدإن، واستراتيجية البحث عن عمل.</span></p></div></div>
+   <div class="hcard2"><div class="hic">🏠</div><div><div class="hct"><span class="e">Understand Life in Canada</span><span class="a">فهم الحياة في كندا</span></div><p class="hcd"><span class="e">Banking, taxes, renting, healthcare, driver's license — how everything works here, step by step.</span><span class="a">البنوك، الضرائب، الإيجار، الصحة — كيف يعمل كل شيء هنا خطوة بخطوة.</span></p></div></div>
+   <div class="hcard2"><div class="hic">🤝</div><div><div class="hct"><span class="e">Workplace Communication</span><span class="a">التواصل في مكان العمل</span></div><p class="hcd"><span class="e">Professional emails, phone calls, Canadian workplace culture and communication etiquette.</span><span class="a">البريد الإلكتروني المهني، المكالمات، ثقافة العمل الكندية، وآداب التواصل.</span></p></div></div>
+   <div class="hcard2"><div class="hic">🎯</div><div><div class="hct"><span class="e">Personalized Support</span><span class="a">دعم شخصي</span></div><p class="hcd"><span class="e">1-on-1 coaching calls, WhatsApp access, and a custom success roadmap — built for you.</span><span class="a">جلسات تدريب فردية، دعم واتساب، وخارطة طريق نجاح مخصصة لك.</span></p></div></div>
+  </div></div>
+</section>
+
+<!-- 4 CORE PILLARS -->
+<section class="sec" style="background:var(--bg);">
+ <div class="sec-in"><div class="shd c"><div class="stag"><span class="e">4 CORE PILLARS</span><span class="a">4 ركائز أساسية</span></div><div class="st"><span class="e">Our Complete Support System</span><span class="a">نظامنا المتكامل</span></div></div>
+  <div class="pgrid">
+   <div class="pc p1"><span class="pio">📚</span><h3><span class="e">English Training</span><span class="a">تدريب الإنجليزية</span></h3><p><span class="e">Beginner to advanced, workplace English, pronunciation, speaking clubs, IELTS/CELPIP prep.</span><span class="a">من المبتدئ للمتقدم، إنجليزي العمل، النطق، أندية المحادثة، IELTS/CELPIP.</span></p><div class="ptags"><span class="ptag"><span class="e">Speaking</span><span class="a">محادثة</span></span><span class="ptag"><span class="e">Grammar</span><span class="a">قواعد</span></span><span class="ptag">IELTS</span></div></div>
+   <div class="pc p2"><span class="pio">💼</span><h3 style="color:var(--navy)"><span class="e">Career Support</span><span class="a">الدعم المهني</span></h3><p style="color:rgba(27,58,107,.8)"><span class="e">Resume, cover letter, LinkedIn, mock interviews, job search, and Canadian workplace culture.</span><span class="a">السيرة الذاتية، لينكدإن، المقابلات، والبحث عن عمل.</span></p><div class="ptags"><span class="ptag" style="background:rgba(27,58,107,.13);color:var(--navy)"><span class="e">Resume</span><span class="a">السيرة</span></span><span class="ptag" style="background:rgba(27,58,107,.13);color:var(--navy)">LinkedIn</span><span class="ptag" style="background:rgba(27,58,107,.13);color:var(--navy)"><span class="e">Interviews</span><span class="a">مقابلات</span></span></div></div>
+   <div class="pc p3"><span class="pio">🏠</span><h3><span class="e">Canada Life Support</span><span class="a">دعم الحياة في كندا</span></h3><p><span class="e">Banking, taxes, renting, healthcare, immigration document guidance and settlement help.</span><span class="a">البنوك، الضرائب، الإيجار، الصحة، وثائق الهجرة ومساعدة التوطين.</span></p><div class="ptags"><span class="ptag"><span class="e">Banking</span><span class="a">بنوك</span></span><span class="ptag">CRA</span><span class="ptag"><span class="e">Healthcare</span><span class="a">صحة</span></span></div></div>
+   <div class="pc p4"><span class="pio">💻</span><h3><span class="e">Business &amp; Digital</span><span class="a">الأعمال والرقمية</span></h3><p><span class="e">Side hustles, small business basics, tech skills, freelancing, and digital literacy for Canada.</span><span class="a">العمل الجانبي، أساسيات الأعمال، مهارات التقنية، العمل الحر والثقافة الرقمية.</span></p><div class="ptags"><span class="ptag"><span class="e">Side Hustle</span><span class="a">عمل جانبي</span></span><span class="ptag"><span class="e">Tech</span><span class="a">تقنية</span></span></div></div>
+  </div></div>
+</section>
+
+<!-- HOW IT WORKS (simplified 4 steps) -->
+<section class="sec" style="background:#fff;">
+ <div class="sec-in"><div class="shd c"><div class="stag"><span class="e">HOW IT WORKS</span><span class="a">كيف يعمل</span></div><div class="st"><span class="e">Start in 4 Simple Steps</span><span class="a">ابدأ في 4 خطوات بسيطة</span></div></div>
+  <div class="sgrid"><div class="step"><div class="snum">1</div><h3><span class="e">Book Free Assessment</span><span class="a">احجز تقييماً مجانياً</span></h3><p><span class="e">Fill out our short form and schedule a 15-minute Arabic call with our team.</span><span class="a">امل الاستمارة القصيرة وحدد موعد مكالمة عربية لمدة 15 دقيقة مع فريقنا.</span></p></div>
+   <div class="step"><div class="snum">2</div><h3><span class="e">Meet Our Team</span><span class="a">التق بفريقنا</span></h3><p><span class="e">We check your English level, understand your goals and recommend your perfect plan.</span><span class="a">نقيّم مستواك وأهدافك ونوصي بالخطة المثالية لك.</span></p></div>
+   <div class="step"><div class="snum">3</div><h3><span class="e">Join Your Group</span><span class="a">انضم لمجموعتك</span></h3><p><span class="e">Receive Zoom links, WhatsApp invite, schedule and welcome booklet. First week is FREE.</span><span class="a">استلم روابط Zoom ودعوة واتساب وجدولك. الأسبوع الأول مجاني.</span></p></div>
+   <div class="step"><div class="snum">4</div><h3><span class="e">Build Your Future</span><span class="a">ابنِ مستقبلك</span></h3><p><span class="e">3 live weekly classes, coaching calls, and ongoing support to build your Canadian life.</span><span class="a">3 صفوف مباشرة أسبوعياً وجلسات تدريب ودعم مستمر لبناء حياتك الكندية.</span></p></div>
+  </div>
+  <div style="text-align:center;margin-top:44px;"><a onclick="sp('assessment')" class="bmain" style="cursor:pointer;font-size:16px;padding:17px 44px;">📋 <span class="e">Book Your Free Assessment Now</span><span class="a">احجز تقييمك المجاني الآن</span></a></div>
+ </div>
+</section>
+
+<!-- WEEKLY SCHEDULE -->
+<section class="sec" style="background:var(--bg);">
+ <div class="sec-in"><div class="shd c"><div class="stag"><span class="e">WEEKLY SCHEDULE</span><span class="a">الجدول الأسبوعي</span></div><div class="st"><span class="e">3 Live Classes Every Week</span><span class="a">3 صفوف مباشرة كل أسبوع</span></div><p class="ss"><span class="e">All plans include the same 3 live classes. Your plan level determines the extra coaching and support.</span><span class="a">جميع الخطط تشمل نفس الصفوف الثلاثة. مستوى خطتك يحدد التدريب والدعم الإضافي.</span></p></div>
+  <div class="scgrid"><div class="scc"><div class="scd"><span class="e">Monday</span><span class="a">الاثنين</span></div><div class="sct"><span class="e">English Foundations</span><span class="a">أسس الإنجليزية</span></div><p style="font-size:13.5px;color:var(--mid)"><span class="e">Grammar, vocabulary, reading, writing and structured language building for all levels.</span><span class="a">القواعد، المفردات، القراءة، الكتابة وبناء اللغة لجميع المستويات.</span></p></div>
+   <div class="scc" style="border-top:4px solid var(--gold);"><div class="scd" style="color:var(--navy)"><span class="e">Wednesday</span><span class="a">الأربعاء</span></div><div class="sct"><span class="e">Conversation &amp; Pronunciation</span><span class="a">المحادثة والنطق</span></div><p style="font-size:13.5px;color:var(--mid)"><span class="e">Speaking confidence, pronunciation drills, roleplay and real-life conversation practice.</span><span class="a">ثقة الكلام، تدريبات النطق، لعب الأدوار وممارسة المحادثة الواقعية.</span></p></div>
+   <div class="scc" style="border-top:4px solid #25A465;"><div class="scd" style="color:#25A465"><span class="e">Friday</span><span class="a">الجمعة</span></div><div class="sct"><span class="e">Career &amp; Canada Life Workshop</span><span class="a">ورشة المهنة والحياة الكندية</span></div><p style="font-size:13.5px;color:var(--mid)"><span class="e">Job skills, Canadian life lessons, interviews, workplace culture and settlement topics.</span><span class="a">مهارات العمل، دروس الحياة الكندية، المقابلات، ثقافة العمل ومواضيع التوطين.</span></p></div>
+  </div></div>
+</section>
+
+<!-- TESTIMONIALS PREVIEW -->
+<section class="sec" style="background:#fff;">
+ <div class="sec-in"><div class="shd c"><div class="stag"><span class="e">SUCCESS STORIES</span><span class="a">قصص النجاح</span></div><div class="st"><span class="e">What Our Students Say</span><span class="a">ماذا يقول طلابنا</span></div></div>
+  <div class="tgrid"><div class="tc"><div class="tcs">★★★★★</div><p class="tct"><span class="e">"Before CanadaReady I was afraid to speak English at work. After 2 months I got promoted to team lead."</span><span class="a">"قبل كندا ريدي كنت خائفاً من الكلام بالإنجليزي. بعد شهرين حصلت على ترقية."</span></p><div class="tca"><div class="tcav">👨</div><div><div class="tcn">Ahmed K.</div><div class="tci"><span class="e">Edmonton — 8 months in Canada</span><span class="a">إدمونتون</span></div></div></div></div>
+   <div class="tc"><div class="tcs">★★★★★</div><p class="tct"><span class="e">"They built my Canadian resume and I got my first job offer in 3 weeks. Accountant in Calgary."</span><span class="a">"بنوا سيرتي الذاتية الكندية وحصلت على عرض عمل في 3 أسابيع."</span></p><div class="tca"><div class="tcav">👩</div><div><div class="tcn">Sara M.</div><div class="tci"><span class="e">Calgary — Accountant</span><span class="a">كالغاري — محاسبة</span></div></div></div></div>
+   <div class="tc"><div class="tcs">★★★★★</div><p class="tct"><span class="e">"The banking and tax workshop alone was worth the whole membership. I finally feel prepared."</span><span class="a">"ورشة البنوك والضرائب وحدها استحقت العضوية. أشعر أخيراً أنني مستعد."</span></p><div class="tca"><div class="tcav">👨</div><div><div class="tcn">Omar T.</div><div class="tci"><span class="e">Calgary — 1 year in Canada</span><span class="a">كالغاري</span></div></div></div></div>
+  </div>
+  <div style="text-align:center;margin-top:34px;"><a onclick="sp('testimonials')" class="bmain" style="cursor:pointer;"><span class="e">Read More Stories</span><span class="a">اقرأ المزيد</span></a></div>
+ </div>
+</section>
+
+<!-- WhatsApp CTA block -->
+<div class="wcsec"><div class="wcin"><div class="stag" style="margin:0 auto 12px;background:rgba(201,144,58,.15);border-color:rgba(201,144,58,.3);color:var(--gold-lt);"><span class="e">NEED HELP CHOOSING?</span><span class="a">تحتاج مساعدة؟</span></div><div class="st" style="color:#fff;"><span class="e">Message Us — We Answer in Arabic!</span><span class="a">راسلنا — نرد بالعربي!</span></div><p class="ss" style="color:rgba(255,255,255,.65);margin:0 auto 26px;"><span class="e">Not sure which program is right for you? Chat with us on WhatsApp or Facebook — we guide you in Arabic.</span><span class="a">لست متأكداً من أي برنامج مناسب لك؟ تحدث معنا على واتساب أو فيسبوك بالعربي.</span></p><div class="wcnum" id="ownerWhatsAppDisplay">+1 (587) 000-0000</div><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;"><a href="#" id="whatsAppCTA" class="bwal">💬 <span class="e">WhatsApp Us Now</span><span class="a">راسلنا على واتساب</span></a><a href="#" id="facebookCTA" class="bfb">📘 <span class="e">Find Us on Facebook</span><span class="a">تواصل عبر فيسبوك</span></a></div></div></div>
+</div><!-- end home -->
+
+<!-- ABOUT PAGE -->
+<div class="page" id="p-about"><div style="padding-top:68px;"><section class="sec" style="background:#fff;"><div class="sec-in"><div class="agrid"><div><div class="stag"><span class="e">ABOUT US</span><span class="a">عنّا</span></div><div class="st"><span class="e">We Are More Than an English School</span><span class="a">نحن أكثر من مدرسة إنجليزية</span></div><p class="ss" style="margin-bottom:20px;"><span class="e">CanadaReady Academy was built by immigrants, for immigrants. We understand the real challenges — language barriers, job confusion, not knowing how the system works.</span><span class="a">أكاديمية كندا ريدي بُنيت من قِبَل مهاجرين، للمهاجرين. نفهم التحديات الحقيقية — حواجز اللغة والارتباك في العمل وعدم معرفة النظام.</span></p><p style="font-size:15.5px;color:var(--mid);margin-bottom:22px;line-height:1.75;"><span class="e">We don't just teach grammar. We sell <strong style="color:var(--navy)">confidence, direction, support, and opportunity</strong> — because that's what actually changes lives in Canada.</span><span class="a">نحن لا نعلم القواعد فقط. نقدم <strong style="color:var(--navy)">الثقة، التوجيه، الدعم، والفرصة</strong> — لأن هذا ما يغير الحياة فعلاً.</span></p><ul class="mpl"><li><div class="mpd"></div><span class="e">100% bilingual instruction — Arabic AND English in every class</span><span class="a">تدريس ثنائي اللغة 100% في كل صف</span></li><li><div class="mpd"></div><span class="e">3 live Zoom classes every week with real instructors</span><span class="a">3 صفوف مباشرة أسبوعياً عبر Zoom مع مدربين حقيقيين</span></li><li><div class="mpd"></div><span class="e">Personal 1-on-1 coaching included in Premium plans and above</span><span class="a">تدريب فردي شخصي مضمّن في الخطط المميزة وما فوق</span></li><li><div class="mpd"></div><span class="e">WhatsApp community and direct support access</span><span class="a">مجتمع واتساب ودعم مباشر</span></li><li><div class="mpd"></div><span class="e">No long-term contracts — cancel anytime</span><span class="a">لا عقود طويلة — إلغاء في أي وقت</span></li></ul><div style="margin-top:28px;"><a onclick="sp('assessment')" class="bmain" style="cursor:pointer;">📋 <span class="e">Book Free Assessment</span><span class="a">احجز تقييماً مجانياً</span></a></div></div><div><div class="acard"><div class="ast"><div class="asn">500+</div><div class="asl"><span class="e">Newcomers helped since launch</span><span class="a">وافد استفاد منذ الانطلاق</span></div></div><div class="ast"><div class="asn">3x</div><div class="asl"><span class="e">Live classes every single week</span><span class="a">صفوف مباشرة كل أسبوع</span></div></div><div class="ast"><div class="asn">4</div><div class="asl"><span class="e">Programs for every newcomer need</span><span class="a">برامج لكل احتياج للوافدين</span></div></div><div class="ast"><div class="asn">100%</div><div class="asl"><span class="e">Arabic-speaking instructor support</span><span class="a">دعم مدرب ناطق بالعربية</span></div></div></div></div></div></div></section></div></div>
+
+<!-- PROGRAMS PAGE (full detailed plans) -->
+<div class="page" id="p-programs"><div style="padding-top:68px;"><section class="sec" style="background:var(--bg);"><div class="sec-in"><div class="shd c"><div class="stag"><span class="e">OUR PROGRAMS</span><span class="a">برامجنا</span></div><div class="st"><span class="e">Choose Your Path to Success</span><span class="a">اختر طريقك للنجاح</span></div><p class="ss"><span class="e">All plans include 3 live weekly classes. Your plan level adds coaching, resources and personal support.</span><span class="a">جميع الخطط تشمل 3 صفوف مباشرة أسبوعياً. مستواك يضيف التدريب والموارد والدعم الشخصي.</span></p></div><div class="prgrid">
+<!-- Starter -->
+<div class="prcard"><div style="display:inline-flex;align-items:center;gap:5px;background:rgba(37,212,102,.1);border:1px solid rgba(37,212,102,.25);color:#0A6B3B;padding:5px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:7px;">🌱 <span class="e">Best for Beginners</span><span class="a">الأفضل للمبتدئين</span></div><div class="prn">STARTER | <span style="font-family:Tajawal,sans-serif;">المبتدئ</span></div><div><span class="pra">$79</span><span class="prp"> <span class="e">/month CAD</span><span class="a">/شهر</span></span></div><div class="prfor"><span class="e">Best for newcomers just building confidence and English basics.</span><span class="a">الأفضل للوافدين الجدد الذين يبنون الثقة وأساسيات الإنجليزية.</span></div><div class="prdiv"></div><ul class="prfl"><li class="prfi">3 live weekly classes (Mon, Wed, Fri)</li><li class="prfi">English speaking practice</li><li class="prfi">Vocabulary & grammar lessons</li><li class="prfi">Homework & weekly quizzes</li><li class="prfi">WhatsApp support group</li><li class="prfi">Daily English practice tips</li><li class="prfi">Canadian Survival Guide (PDF)</li></ul><button class="prbtn" onclick="sp('assessment')"><span class="e">Start Free Week →</span><span class="a">ابدأ الأسبوع المجاني ←</span></button></div>
+<!-- Premium -->
+<div class="prcard"><div style="display:inline-flex;align-items:center;gap:5px;background:var(--gold-bg);border:1px solid var(--bdr-g);color:#7A5818;padding:5px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:7px;">🏆 <span class="e">Best for Job Seekers</span><span class="a">الأفضل لطالبي العمل</span></div><div class="prn">PREMIUM | <span style="font-family:Tajawal,sans-serif;">المميز</span></div><div><span class="pra">$129</span><span class="prp"> <span class="e">/month CAD</span><span class="a">/شهر</span></span></div><div class="prfor"><span class="e">Best for students preparing to enter the Canadian job market.</span><span class="a">الأفضل للطلاب المستعدين لدخول سوق العمل الكندي.</span></div><div class="prdiv"></div><ul class="prfl"><li class="prfi">Everything in Starter, PLUS:</li><li class="prfi">1 monthly 1-on-1 coaching call</li><li class="prfi">Canadian resume building & review</li><li class="prfi">Cover letter writing help</li><li class="prfi">LinkedIn profile setup & optimization</li><li class="prfi">Interview preparation & mock interviews</li><li class="prfi">Workplace English sessions</li></ul><button class="prbtn" onclick="sp('assessment')"><span class="e">Start Free Week →</span><span class="a">ابدأ الأسبوع المجاني ←</span></button></div>
+<!-- Career Boost -->
+<div class="prcard ft"><div class="poplbl">⭐ <span class="e">MOST POPULAR</span><span class="a">الأكثر شيوعاً</span></div><div class="prn">CAREER BOOST | <span style="font-family:Tajawal,sans-serif;">دفعة المهنة</span></div><div><span class="pra">$179</span><span class="prp"> <span class="e">/month CAD</span><span class="a">/شهر</span></span></div><div class="prfor"><span class="e">Best for students needing career AND complete Canada life support.</span><span class="a">الأفضل لمن يحتاج دعم المهنة والحياة الكاملة في كندا.</span></div><div class="prdiv"></div><ul class="prfl"><li class="prfi">Everything in Premium, PLUS:</li><li class="prfi">2 monthly 1-on-1 coaching calls</li><li class="prfi">Banking & credit score guidance</li><li class="prfi">CRA / Tax basics workshop</li><li class="prfi">Renting & housing support</li><li class="prfi">Healthcare & Alberta ID guidance</li><li class="prfi">Side hustle & gig work guidance</li></ul><button class="prbtn" onclick="sp('assessment')"><span class="e">Join Now — Best Value →</span><span class="a">انضم الآن — أفضل قيمة ←</span></button></div>
+<!-- Canada Ready VIP -->
+<div class="prcard"><div style="display:inline-flex;align-items:center;gap:5px;background:rgba(27,58,107,.08);border:1px solid rgba(27,58,107,.18);color:var(--navy);padding:5px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:7px;">👑 VIP</div><div class="prn">CANADA READY | <span style="font-family:Tajawal,sans-serif;">كندا ريدي</span></div><div><span class="pra">$249</span><span class="prp"> <span class="e">/month CAD</span><span class="a">/شهر</span></span></div><div class="prfor"><span class="e">Best for complete newcomer support — including business startup & immigration guidance.</span><span class="a">الأفضل للدعم الكامل مع إرشادات الأعمال والهجرة.</span></div><div class="prdiv"></div><ul class="prfl"><li class="prfi">Everything in Career Boost, PLUS:</li><li class="prfi">3 monthly 1-on-1 coaching calls</li><li class="prfi">Business startup & self-employment basics</li><li class="prfi">Canadian invoicing & freelancing guidance</li><li class="prfi">Immigration document organization help</li><li class="prfi">IRCC navigation & PR/citizenship prep</li><li class="prfi">Personalized success roadmap</li><li class="prfi">VIP priority WhatsApp support</li></ul><button class="prbtn" onclick="sp('assessment')"><span class="e">Apply for VIP →</span><span class="a">قدّم للـ VIP ←</span></button></div>
+</div><div style="background:var(--navy);border-radius:var(--r);padding:30px 34px;margin-top:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;"><div><div style="font-family:Playfair Display,serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;"><span class="e">Not sure which plan fits you?</span><span class="a">لست متأكداً من الخطة المناسبة لك؟</span></div><p style="color:rgba(255,255,255,.6);font-size:14px;"><span class="e">Book a FREE assessment call — we'll recommend the exact plan for your goals and English level.</span><span class="a">احجز مكالمة تقييم مجانية — سنوصي بالخطة المثالية لأهدافك ومستواك.</span></p></div><a onclick="sp('assessment')" class="bmain" style="cursor:pointer;white-space:nowrap;flex-shrink:0;">📋 <span class="e">Book Free Assessment</span><span class="a">احجز تقييماً مجانياً</span></a></div></div></section></div></div>
+
+<!-- HOW IT WORKS PAGE (5 steps) -->
+<div class="page" id="p-howitworks"><div style="padding-top:68px;"><section class="sec" style="background:#fff;"><div class="sec-in"><div class="shd c"><div class="stag"><span class="e">THE FULL PROCESS</span><span class="a">العملية الكاملة</span></div><div class="st"><span class="e">How CanadaReady Works</span><span class="a">كيف تعمل كندا ريدي</span></div><p class="ss"><span class="e">From your first contact to building a successful life in Canada — exactly what happens, step by step.</span><span class="a">من أول تواصل معنا حتى بناء حياة ناجحة في كندا — هذا بالضبط ما سيحدث خطوة بخطوة.</span></p></div><div style="max-width:850px;margin:0 auto;"><div class="hstep"><div style="text-align:center;"><div class="snum" style="margin:0 auto 8px;">1</div><div style="font-size:11px;color:var(--lt);font-weight:600;"><span class="e">STEP</span><span class="a">خطوة</span></div></div><div><h3 style="font-family:Playfair Display,serif;font-size:23px;color:var(--navy);margin-bottom:7px;"><span class="e">Book Your Free Assessment</span><span class="a">احجز تقييمك المجاني</span></h3><p style="color:var(--mid);font-size:14.5px;margin-bottom:12px;"><span class="e">Click "Book Free Assessment" and fill out a short form. Choose a time — we send you a Zoom link within 24 hours.</span><span class="a">اضغط "احجز تقييماً مجانياً" وامل استمارة قصيرة. اختر الوقت — نرسل رابط Zoom خلال 24 ساعة.</span></p><a onclick="sp('assessment')" class="bmain" style="cursor:pointer;padding:11px 22px;font-size:14px;">📋 <span class="e">Book Now</span><span class="a">احجز الآن</span></a></div></div><div class="hstep"><div style="text-align:center;"><div class="snum" style="margin:0 auto 8px;">2</div><div style="font-size:11px;color:var(--lt);font-weight:600;"><span class="e">STEP</span><span class="a">خطوة</span></div></div><div><h3 style="font-family:Playfair Display,serif;font-size:23px;color:var(--navy);margin-bottom:7px;"><span class="e">Complete Your Assessment Call</span><span class="a">أكمل مكالمة التقييم</span></h3><p style="color:var(--mid);font-size:14.5px;"><span class="e">A 15–20 minute Zoom call in Arabic. We check your English level, understand your goals, explain our program, and recommend the best plan. <strong>Friendly conversation — no pressure.</strong></span><span class="a">مكالمة Zoom لمدة 15-20 دقيقة بالعربي. نقيّم مستواك وأهدافك ونشرح البرنامج ونوصي بأفضل خطة. <strong>محادثة ودية — لا ضغط.</strong></span></p></div></div><div class="hstep"><div style="text-align:center;"><div class="snum" style="margin:0 auto 8px;">3</div><div style="font-size:11px;color:var(--lt);font-weight:600;"><span class="e">STEP</span><span class="a">خطوة</span></div></div><div><h3 style="font-family:Playfair Display,serif;font-size:23px;color:var(--navy);margin-bottom:7px;"><span class="e">Choose Your Program</span><span class="a">اختر برنامجك</span></h3><p style="color:var(--mid);font-size:14.5px;"><span class="e">We place you into Beginner or Intermediate group and recommend Starter, Premium, Career Boost or Canada Ready based on your goals. <strong>First week is completely FREE — no credit card needed.</strong></span><span class="a">ندرجك في مجموعة المبتدئين أو المتوسطين ونوصي بالخطة المناسبة. <strong>أسبوعك الأول مجاني تماماً — لا بطاقة ائتمان.</strong></span></p></div></div><div class="hstep"><div style="text-align:center;"><div class="snum" style="margin:0 auto 8px;">4</div><div style="font-size:11px;color:var(--lt);font-weight:600;"><span class="e">STEP</span><span class="a">خطوة</span></div></div><div><h3 style="font-family:Playfair Display,serif;font-size:23px;color:var(--navy);margin-bottom:7px;"><span class="e">Join Classes & Community</span><span class="a">انضم للصفوف والمجتمع</span></h3><p style="color:var(--mid);font-size:14.5px;"><span class="e">You receive: WhatsApp community invite, Zoom class links, welcome booklet, class schedule and homework access.</span><span class="a">ستستلم: دعوة مجتمع واتساب، روابط Zoom، دفتر الترحيب، جدول الدراسة، ووصول للواجبات.</span></p></div></div><div class="hstep last"><div style="text-align:center;"><div class="snum" style="margin:0 auto 8px;border-color:var(--navy);">5</div><div style="font-size:11px;color:rgba(255,255,255,.5);font-weight:600;"><span class="e">STEP</span><span class="a">خطوة</span></div></div><div><h3 style="font-family:Playfair Display,serif;font-size:23px;color:#fff;margin-bottom:7px;"><span class="e">Receive Weekly Support & Coaching</span><span class="a">استلم الدعم والتدريب الأسبوعي</span></h3><p style="color:rgba(255,255,255,.72);font-size:14.5px;"><span class="e">3 live classes every week, monthly coaching calls based on your plan, ongoing WhatsApp support, and your personalized success roadmap. <strong style="color:var(--gold-lt);">Your Canadian journey officially begins!</strong></span><span class="a">3 صفوف مباشرة أسبوعياً، جلسات تدريب شهرية، دعم واتساب مستمر، وخارطة طريق مخصصة. <strong style="color:var(--gold-lt);">رحلتك الكندية تبدأ رسمياً!</strong></span></p></div></div></div><div style="text-align:center;margin-top:44px;"><a onclick="sp('assessment')" class="bmain" style="cursor:pointer;font-size:16px;padding:17px 44px;">📋 <span class="e">Book Your Free Assessment Now</span><span class="a">احجز تقييمك المجاني الآن</span></a></div></div></section></div></div>
+
+<!-- ===== ASSESSMENT PAGE with EmailJS ===== -->
+<div class="page" id="p-assessment"><div style="padding-top:68px;"><section class="sec" style="background:var(--bg);"><div class="sec-in"><div style="display:grid;grid-template-columns:1fr 1.05fr;gap:62px;align-items:start;"><div><div class="stag"><span class="e">FREE — NO COMMITMENT</span><span class="a">مجاني — بدون التزام</span></div><div class="st"><span class="e">Book Your Free English & Career Assessment</span><span class="a">احجز تقييمك المجاني للإنجليزية والمهنة</span></div><p class="ss" style="margin-bottom:20px;"><span class="e">A 15–20 minute Zoom call with our team — completely in Arabic. We check your level, understand your goals, and recommend the exact plan that is right for you. Your first week is FREE.</span><span class="a">مكالمة Zoom لمدة 15-20 دقيقة بالعربي الكامل. نحدد مستواك وأهدافك ونوصي بالخطة الأنسب لك. أسبوعك الأول مجاني.</span></p><ul class="wbene"><li><div class="wbic">✓</div><span class="e">We check your English level — Beginner or Intermediate</span><span class="a">نحدد مستواك — مبتدئ أو متوسط</span></li><li><div class="wbic">✓</div><span class="e">We understand your career goals and challenges in Canada</span><span class="a">نفهم أهدافك وتحدياتك في كندا</span></li><li><div class="wbic">✓</div><span class="e">We explain our full program clearly in Arabic</span><span class="a">نشرح برنامجنا كاملاً بوضوح بالعربي</span></li><li><div class="wbic">✓</div><span class="e">We recommend your best plan — no pressure</span><span class="a">نوصي بأفضل خطة لك — لا ضغط</span></li><li><div class="wbic">✓</div><span class="e">Your first week is completely FREE after joining</span><span class="a">أسبوعك الأول مجاني تماماً بعد الانضمام</span></li></ul><div style="background:var(--navy);border-radius:13px;padding:20px 22px;margin-top:26px;display:flex;align-items:center;gap:14px;"><div style="font-size:30px;">💬</div><div><div style="color:#fff;font-weight:700;font-size:15px;margin-bottom:4px;"><span class="e">Prefer WhatsApp? Message Us!</span><span class="a">تفضل واتساب؟ راسلنا!</span></div><a href="#" id="assessmentWhatsAppLink" style="color:var(--gold-lt);font-size:13.5px;font-weight:600;text-decoration:none;">+1 (587) 123-4567 →</a></div></div></div><div><div class="fbox"><div id="af-content"><div class="fh"><span class="e">Book Your Free Assessment</span><span class="a">احجز تقييمك المجاني</span></div><p class="fh2"><span class="e">We contact you within 24 hours on WhatsApp — in Arabic</span><span class="a">نتواصل معك خلال 24 ساعة على واتساب بالعربي</span></p><form id="assessmentForm"><div class="fg"><label><span class="e">Full Name *</span><span class="a">الاسم الكامل *</span></label><input type="text" id="an" required placeholder="Your name / اسمك"></div><div class="frow"><div class="fg"><label><span class="e">WhatsApp Number *</span><span class="a">رقم واتساب *</span></label><input type="tel" id="aph" required placeholder="+1 (780) 000-0000"></div><div class="fg"><label><span class="e">Email</span><span class="a">البريد الإلكتروني</span></label><input type="email" id="aem" placeholder="your@email.com"></div></div><div class="frow"><div class="fg"><label><span class="e">English Level *</span><span class="a">مستوى الإنجليزية *</span></label><select id="alv" required><option value="">Select / اختر</option><option>Beginner / مبتدئ</option><option>Elementary / أساسي</option><option>Intermediate / متوسط</option><option>Upper Intermediate</option></select></div><div class="fg"><label><span class="e">City in Canada</span><span class="a">مدينتك في كندا</span></label><input type="text" id="aci" placeholder="Calgary, Edmonton..."></div></div><div class="frow"><div class="fg"><label><span class="e">Country of Origin</span><span class="a">بلدك الأصلي</span></label><input type="text" id="aco" placeholder="Syria, Iraq, Jordan..."></div><div class="fg"><label><span class="e">Time in Canada</span><span class="a">مدة إقامتك</span></label><select id="ati"><option value="">Select / اختر</option><option>Less than 3 months</option><option>3–6 months</option><option>6–12 months</option><option>1–2 years</option><option>Over 2 years</option></select></div></div><div class="fg"><label><span class="e">Career Goals *</span><span class="a">أهدافك المهنية *</span></label><input type="text" id="ago" required placeholder="e.g. Find a job, improve English, start business..."></div><div class="fg"><label><span class="e">Biggest Challenge in Canada</span><span class="a">أكبر تحدياتك في كندا</span></label><textarea id="ach" placeholder="What is your #1 challenge right now? / ما أكبر تحدياتك الآن؟"></textarea></div><button type="submit" class="fsub" id="abtn">📋 <span class="e">Book My Free Assessment Call</span><span class="a">احجز مكالمة التقييم المجانية</span></button></form></div><div class="fok" id="af-ok"><div class="okico">🎉</div><h3><span class="e">Assessment Booked!</span><span class="a">تم حجز التقييم!</span></h3><p><span class="e">We received your request! Our team will contact you on WhatsApp within 24 hours to schedule your assessment call — in Arabic. Your Canadian journey starts now! 🍁</span><span class="a">استلمنا طلبك! فريقنا سيتواصل معك على واتساب خلال 24 ساعة لجدولة مكالمة التقييم بالعربي. رحلتك الكندية تبدأ الآن! 🍁</span></p><a href="#" id="okWhatsAppLink" class="bwal" style="display:inline-flex;margin-top:6px;">💬 <span class="e">Chat on WhatsApp Now</span><span class="a">تحدث على واتساب الآن</span></a></div></div></div></div></div></section></div></div>
+
+<!-- ===== TESTIMONIALS PAGE ===== -->
+<div class="page" id="p-testimonials"><div style="padding-top:68px;"><section class="sec" style="background:var(--bg);"><div class="sec-in"><div class="shd c"><div class="stag"><span class="e">STUDENT STORIES</span><span class="a">قصص الطلاب</span></div><div class="st"><span class="e">Real Newcomers, Real Results</span><span class="a">وافدون حقيقيون، نتائج حقيقية</span></div><p class="ss"><span class="e">Here is what Arabic-speaking newcomers across Canada are saying about CanadaReady Academy.</span><span class="a">هذا ما يقوله الوافدون الناطقون بالعربية في كندا عن أكاديمية كندا ريدي.</span></p></div><div class="tgrid"><div class="tc"><div class="tcs">★★★★★</div><p class="tct"><span class="e">"Before CanadaReady I was too afraid to speak English at work. After 2 months I got promoted to team lead."</span><span class="a">"قبل كندا ريدي كنت خائفاً جداً من التحدث بالإنجليزي. بعد شهرين حصلت على ترقية."</span></p><div class="tca"><div class="tcav">👨</div><div><div class="tcn">Ahmed K.</div><div class="tci"><span class="e">Edmonton — Promoted</span><span class="a">إدمونتون — ترقية</span></div></div></div></div><div class="tc"><div class="tcs">★★★★★</div><p class="tct"><span class="e">"They built my Canadian resume and I got my first job offer in 3 weeks. Now working at an accounting firm."</span><span class="a">"بنوا سيرتي الذاتية وحصلت على عرض عمل في 3 أسابيع. الآن أعمل في شركة محاسبة."</span></p><div class="tca"><div class="tcav">👩</div><div><div class="tcn">Sara M.</div><div class="tci"><span class="e">Calgary — Accountant</span><span class="a">كالغاري — محاسبة</span></div></div></div></div><div class="tc"><div class="tcs">★★★★★</div><p class="tct"><span class="e">"The banking and tax workshop alone was worth the whole membership. I finally feel prepared for Canada."</span><span class="a">"ورشة البنوك والضرائب وحدها استحقت العضوية. أشعر أخيراً أنني مستعد."</span></p><div class="tca"><div class="tcav">👨</div><div><div class="tcn">Omar T.</div><div class="tci"><span class="e">Calgary — 1 Year in Canada</span><span class="a">كالغاري — سنة</span></div></div></div></div><div class="tc"><div class="tcs">★★★★★</div><p class="tct"><span class="e">"I was so lost when I arrived. The community made me feel I was not alone. Now I have a job and friends."</span><span class="a">"كنت ضائعاً تماماً عندما وصلت. المجتمع جعلني أشعر أنني لست وحيداً. الآن لدي وظيفة وأصدقاء."</span></p><div class="tca"><div class="tcav">👨</div><div><div class="tcn">Khaled R.</div><div class="tci"><span class="e">Edmonton — 6 months</span><span class="a">إدمونتون — 6 أشهر</span></div></div></div></div><div class="tc"><div class="tcs">★★★★★</div><p class="tct"><span class="e">"As a mom, the school system guidance was incredible. I now speak confidently with my children's teachers."</span><span class="a">"كأم، كانت إرشادات النظام المدرسي رائعة. الآن أتحدث بثقة مع معلمي أطفالي."</span></p><div class="tca"><div class="tcav">👩</div><div><div class="tcn">Nadia H.</div><div class="tci"><span class="e">Calgary — Mother of 3</span><span class="a">كالغاري — أم</span></div></div></div></div><div class="tc"><div class="tcs">★★★★★</div><p class="tct"><span class="e">"I joined VIP and within 2 months I registered my own cleaning business. Step-by-step guidance in Arabic."</span><span class="a">"انضممت VIP وخلال شهرين سجّلت شركة تنظيف. التوجيه بالعربي خطوة بخطوة."</span></p><div class="tca"><div class="tcav">👨</div><div><div class="tcn">Mahmoud A.</div><div class="tci"><span class="e">Edmonton — Business Owner</span><span class="a">إدمونتون — صاحب عمل</span></div></div></div></div></div><div style="text-align:center;margin-top:42px;"><a onclick="sp('assessment')" class="bmain" style="cursor:pointer;font-size:16px;padding:17px 44px;">🍁 <span class="e">Start Your Success Story Today</span><span class="a">ابدأ قصة نجاحك اليوم</span></a></div></div></section></div></div>
+
+<!-- ===== CONTACT PAGE with EmailJS ===== -->
+<div class="page" id="p-contact"><div style="padding-top:68px;"><section class="sec" style="background:#fff;"><div class="sec-in"><div class="cgrid"><div><div class="stag"><span class="e">GET IN TOUCH</span><span class="a">تواصل معنا</span></div><div class="st"><span class="e">We Are Here to Help — In Arabic!</span><span class="a">نحن هنا للمساعدة — بالعربي!</span></div><p class="ss"><span class="e">Reach us on any platform. We respond within 24 hours and always in Arabic if you prefer.</span><span class="a">تواصل معنا عبر أي منصة. نرد خلال 24 ساعة وبالعربي دائماً.</span></p><div class="cchans"><a href="#" id="contactWhatsAppLink" class="chan"><div class="chico" style="background:rgba(37,211,102,.13);">💬</div><div><div class="chlbl">WhatsApp</div><div class="chval" id="contactWhatsAppNumber">+1 (587) 000-0000</div></div><div style="margin-left:auto;color:var(--gold);font-weight:700;font-size:11px;"><span class="e">OPEN</span><span class="a">متاح</span></div></a><a href="#" id="contactFacebookLink" class="chan"><div class="chico" style="background:rgba(24,119,242,.12);">📘</div><div><div class="chlbl">Facebook</div><div class="chval">facebook.com/CanadaReadyAcademy</div></div></a><a href="mailto:info@canadaready.ca" class="chan"><div class="chico" style="background:rgba(27,58,107,.09);">✉️</div><div><div class="chlbl">Email</div><div class="chval">info@canadaready.ca</div></div></a><a href="#" id="contactInstagramLink" class="chan"><div class="chico" style="background:rgba(193,53,132,.11);">📸</div><div><div class="chlbl">Instagram</div><div class="chval">@CanadaReadyAcademy</div></div></a></div></div><div><div class="fbox"><div id="cf-content"><div class="fh"><span class="e">Send Us a Message</span><span class="a">أرسل لنا رسالة</span></div><p class="fh2"><span class="e">We reply within 24 hours in Arabic or English</span><span class="a">نرد خلال 24 ساعة بالعربي أو الإنجليزي</span></p><form id="contactForm"><div class="fg"><label><span class="e">Your Name *</span><span class="a">اسمك *</span></label><input type="text" id="cn" required placeholder="Your name / اسمك"></div><div class="fg"><label><span class="e">WhatsApp / Phone *</span><span class="a">واتساب / هاتف *</span></label><input type="tel" id="cph" required placeholder="+1 (780) 000-0000"></div><div class="fg"><label><span class="e">Email</span><span class="a">البريد الإلكتروني</span></label><input type="email" id="cem" placeholder="your@email.com"></div><div class="fg"><label><span class="e">Your Message *</span><span class="a">رسالتك *</span></label><textarea id="cmsg" required placeholder="How can we help? / كيف يمكننا المساعدة?" style="min-height:100px;"></textarea></div><button type="submit" class="fsub" id="cbtn">✉️ <span class="e">Send Message</span><span class="a">أرسل الرسالة</span></button></form></div><div class="fok" id="cf-ok"><div class="okico">✅</div><h3><span class="e">Message Sent!</span><span class="a">تم إرسال الرسالة!</span></h3><p><span class="e">We will be in touch within 24 hours. For faster replies, message us directly on WhatsApp!</span><span class="a">سنتواصل معك خلال 24 ساعة. للرد الأسرع، راسلنا مباشرة على واتساب!</span></p><a href="#" id="contactOkWhatsApp" class="bwal" style="display:inline-flex;margin-top:6px;">💬 <span class="e">WhatsApp Us Now</span><span class="a">راسلنا على واتساب</span></a></div></div></div></div></div></section></div></div>
+
+<footer><div class="fin"><div><div style="display:flex;align-items:center;gap:10px;margin-bottom:11px;"><div class="logo-m">🍁</div><span class="ftn">CanadaReady Academy</span></div><p class="ftd"><span class="e">Helping Arabic-speaking newcomers build successful lives in Canada through English, career and settlement support.</span><span class="a">نساعد الوافدين الناطقين بالعربية على بناء حياة ناجحة في كندا.</span></p><div class="ftsoc"><a href="#" id="footerWhatsApp" style="color:white;">💬</a><a href="#" id="footerFacebook" style="color:white;">📘</a><a href="#" id="footerInstagram" style="color:white;">📸</a></div></div><div class="fcol"><h4><span class="e">Quick Links</span><span class="a">روابط سريعة</span></h4><ul><li><a onclick="sp('home')"><span class="e">Home</span><span class="a">الرئيسية</span></a></li><li><a onclick="sp('about')"><span class="e">About</span><span class="a">عنّا</span></a></li><li><a onclick="sp('programs')"><span class="e">Programs</span><span class="a">البرامج</span></a></li><li><a onclick="sp('howitworks')"><span class="e">How It Works</span><span class="a">كيف يعمل</span></a></li></ul></div><div class="fcol"><h4><span class="e">Support</span><span class="a">الدعم</span></h4><ul><li><a onclick="sp('assessment')"><span class="e">Free Assessment</span><span class="a">تقييم مجاني</span></a></li><li><a onclick="sp('testimonials')"><span class="e">Testimonials</span><span class="a">آراء الطلاب</span></a></li><li><a onclick="sp('contact')"><span class="e">Contact</span><span class="a">تواصل</span></a></li></ul></div><div class="fcol"><h4><span class="e">Contact Info</span><span class="a">معلومات التواصل</span></h4><ul><li><span>💬 <span id="footerWhatsAppNumber">+1 (587) 123-4567</span></span></li><li><span>✉️ info@canadaready.ca</span></li><li><span>📍 Alberta, Canada</span></li></ul><a href="#" id="footerWhatsAppBtn" class="fwab">💬 <span class="e">WhatsApp Us</span><span class="a">واتساب</span></a><a href="#" id="footerFacebookBtn" class="ffbb">📘 <span class="e">Facebook</span><span class="a">فيسبوك</span></a></div></div><div class="fbot"><div>© 2025 CanadaReady Academy</div><div><span class="e">Built for newcomers, by newcomers 🇨🇦</span><span class="a">بُني للمهاجرين، من مهاجرين 🍁</span></div></div></footer>
+
+<script>
+// ================= CONFIGURATION =================
+// 👇 REPLACE WITH YOUR REAL WHATSAPP NUMBER (include country code, e.g., +15871234567)
+const OWNER_WHATSAPP = "+15871234567";   // CHANGE THIS
+
+// 👇 EmailJS configuration (FREE at emailjs.com)
+// If you don't want to use EmailJS, leave these as empty strings and the form will only show success message without sending email.
+const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";    // replace with your public key
+const EMAILJS_SERVICE_ID = "service_xxxx";              // replace with your service ID
+const EMAILJS_TEMPLATE_ID_ASSESSMENT = "template_xxx";  // for assessment form
+const EMAILJS_TEMPLATE_ID_CONTACT = "template_yyy";     // for contact form
+
+// Initialize EmailJS if keys provided
+let emailjsReady = false;
+if (EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== "YOUR_EMAILJS_PUBLIC_KEY") {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    emailjsReady = true;
+}
+
+// Update all WhatsApp links with the owner's number
+function updateWhatsAppLinks() {
+    const encodedNumber = encodeURIComponent(OWNER_WHATSAPP);
+    const msg = encodeURIComponent("Hello CanadaReady! I need help with starting my journey in Canada.");
+    const links = document.querySelectorAll('a[href*="whatsapp.com"], .waf, #heroWhatsAppBtn, #whatsAppCTA, #assessmentWhatsAppLink, #okWhatsAppLink, #contactWhatsAppLink, #contactOkWhatsApp, #footerWhatsApp, #footerWhatsAppBtn, #footerWhatsAppBtn, .fwab, .bwa');
+    links.forEach(link => {
+        if (link.tagName === 'A') {
+            link.href = `https://wa.me/${OWNER_WHATSAPP.replace(/[^0-9]/g, '')}?text=${msg}`;
+        }
+    });
+    // Replace displayed numbers
+    const numberSpans = document.querySelectorAll('#ownerWhatsAppDisplay, #footerWhatsAppNumber, #contactWhatsAppNumber');
+    numberSpans.forEach(span => span.innerText = OWNER_WHATSAPP);
+}
+updateWhatsAppLinks();
+
+// Page switching and language
+let curLang = 'en';
+function sl(lang) {
+    curLang = lang;
+    document.body.classList.remove('ar');
+    if(lang === 'ar') document.body.classList.add('ar');
+    localStorage.setItem('lang', lang);
+    document.getElementById('btn-en').classList.toggle('on', lang==='en');
+    document.getElementById('btn-ar').classList.toggle('on', lang==='ar');
+}
+function sp(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('act'));
+    document.getElementById(`p-${pageId}`).classList.add('act');
+    window.scrollTo({top:0});
+    cm();
+}
+function cm() { document.getElementById('mm').classList.remove('open'); }
+function toggleMob() { document.getElementById('mm').classList.toggle('open'); }
+const savedLang = localStorage.getItem('lang');
+if(savedLang) sl(savedLang);
+document.querySelectorAll('.nl a, .mm a').forEach(a => a.addEventListener('click', (e) => { e.preventDefault(); const text = a.innerText.toLowerCase(); if(text.includes('home')) sp('home'); else if(text.includes('about')) sp('about'); else if(text.includes('program')) sp('programs'); else if(text.includes('how')) sp('howitworks'); else if(text.includes('assessment')) sp('assessment'); else if(text.includes('testimonial')) sp('testimonials'); else if(text.includes('contact')) sp('contact'); }));
+
+// Assessment form submission with EmailJS notification
+document.getElementById('assessmentForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('abtn');
+    btn.disabled = true;
+    btn.innerText = btn.innerText.includes('Book') ? 'Sending...' : 'جاري الإرسال...';
+    
+    const formData = {
+        name: document.getElementById('an').value,
+        whatsapp: document.getElementById('aph').value,
+        email: document.getElementById('aem').value,
+        level: document.getElementById('alv').value,
+        city: document.getElementById('aci').value,
+        country: document.getElementById('aco').value,
+        timeInCanada: document.getElementById('ati').value,
+        careerGoals: document.getElementById('ago').value,
+        challenge: document.getElementById('ach').value
+    };
+    
+    let emailSent = false;
+    if(emailjsReady && EMAILJS_TEMPLATE_ID_ASSESSMENT && EMAILJS_SERVICE_ID) {
+        try {
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_ASSESSMENT, formData);
+            emailSent = true;
+        } catch(err) { console.warn("EmailJS error:", err); }
+    }
+    
+    // Show success message regardless
+    document.getElementById('af-content').style.display = 'none';
+    document.getElementById('af-ok').style.display = 'block';
+    
+    // Optionally also send WhatsApp message to owner? (manual trigger only)
+    btn.disabled = false;
+});
+
+// Contact form submission
+document.getElementById('contactForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cbtn');
+    btn.disabled = true;
+    btn.innerText = btn.innerText.includes('Send') ? 'Sending...' : 'جاري الإرسال...';
+    
+    const formData = {
+        name: document.getElementById('cn').value,
+        phone: document.getElementById('cph').value,
+        email: document.getElementById('cem').value,
+        message: document.getElementById('cmsg').value
+    };
+    
+    if(emailjsReady && EMAILJS_TEMPLATE_ID_CONTACT && EMAILJS_SERVICE_ID) {
+        try {
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_CONTACT, formData);
+        } catch(err) { console.warn("EmailJS error:", err); }
+    }
+    
+    document.getElementById('cf-content').style.display = 'none';
+    document.getElementById('cf-ok').style.display = 'block';
+    btn.disabled = false;
+});
+
+// Social links placeholders (update with your real pages)
+document.querySelectorAll('#facebookCTA, #contactFacebookLink, #footerFacebook, #footerFacebookBtn').forEach(link => link.href = 'https://facebook.com/yourpage');
+document.querySelectorAll('#contactInstagramLink, #footerInstagram').forEach(link => link.href = 'https://instagram.com/yourhandle');
+</script>
+</body>
+</html>

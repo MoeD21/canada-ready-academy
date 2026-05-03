@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -61,61 +61,67 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* LIGHT MODE */
+/* TIFFANY BLUE LIGHT MODE */
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
+  --tiffany: #0ABAB5;
+  --tiffany-dk: #007A77;
+  --tiffany-lt: #81D8D0;
+  --gold: #C9903A;
+  --gold-lt: #E8B84B;
+  --wa: #25D366;
+  --fb: #1877F2;
 
+  --button-outline: rgba(10,186,181,.15);
+  --badge-outline: rgba(10,186,181,.08);
   --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(10,186,181,.04);
+  --elevate-2: rgba(10,186,181,.09);
 
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
+  /* Tiffany Blue theme */
+  --background: 178 60% 98%;
+  --foreground: 178 40% 10%;
 
-  /* Maple Red/Orange & Clear Blue Sky */
-  --background: 35 30% 98%;
-  --foreground: 20 50% 10%;
-
-  --border: 35 20% 90%;
+  --border: 178 25% 88%;
 
   --card: 0 0% 100%;
-  --card-foreground: 20 50% 10%;
-  --card-border: 35 20% 90%;
+  --card-foreground: 178 40% 10%;
+  --card-border: 178 25% 88%;
 
-  --sidebar: 35 30% 98%;
-  --sidebar-foreground: 20 50% 10%;
-  --sidebar-border: 35 20% 90%;
-  --sidebar-primary: 11 80% 50%;
+  --sidebar: 178 60% 98%;
+  --sidebar-foreground: 178 40% 10%;
+  --sidebar-border: 178 25% 88%;
+  --sidebar-primary: 178 91% 38%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 35 20% 90%;
-  --sidebar-accent-foreground: 20 50% 10%;
-  --sidebar-ring: 11 80% 50%;
+  --sidebar-accent: 178 25% 88%;
+  --sidebar-accent-foreground: 178 40% 10%;
+  --sidebar-ring: 178 91% 38%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 20 50% 10%;
-  --popover-border: 35 20% 90%;
+  --popover-foreground: 178 40% 10%;
+  --popover-border: 178 25% 88%;
 
-  --primary: 11 80% 50%; /* Maple Warmth */
+  --primary: 178 91% 38%;   /* Tiffany Blue */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 200 80% 45%; /* Clear Blue Sky */
+  --secondary: 33 56% 50%;  /* Gold accent */
   --secondary-foreground: 0 0% 100%;
 
-  --muted: 35 20% 94%;
-  --muted-foreground: 20 20% 40%;
+  --muted: 178 30% 93%;
+  --muted-foreground: 178 20% 42%;
 
-  --accent: 35 20% 90%;
-  --accent-foreground: 20 50% 10%;
+  --accent: 178 30% 93%;
+  --accent-foreground: 178 40% 10%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 35 20% 85%;
-  --ring: 11 80% 50%;
+  --input: 178 25% 85%;
+  --ring: 178 91% 38%;
 
-  --app-font-sans: 'Inter', sans-serif;
-  --app-font-serif: Georgia, serif;
+  --app-font-sans: 'Outfit', sans-serif;
+  --app-font-serif: 'Playfair Display', Georgia, serif;
   --app-font-mono: Menlo, monospace;
-  --radius: 0.5rem; 
+  --radius: 0.75rem;
 
   --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
   --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
@@ -126,64 +132,52 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
-.dark {
-  --button-outline: rgba(255,255,255, .10);
-  --badge-outline: rgba(255,255,255, .05);
-  --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
-
-  --background: 20 50% 5%;
-  --foreground: 35 30% 98%;
-
-  --border: 20 20% 20%;
-
-  --card: 20 50% 8%;
-  --card-foreground: 35 30% 98%;
-  --card-border: 20 20% 20%;
-
-  --sidebar: 20 50% 5%;
-  --sidebar-foreground: 35 30% 98%;
-  --sidebar-border: 20 20% 20%;
-  --sidebar-primary: 11 80% 50%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 20 20% 20%;
-  --sidebar-accent-foreground: 35 30% 98%;
-  --sidebar-ring: 11 80% 50%;
-
-  --popover: 20 50% 8%;
-  --popover-foreground: 35 30% 98%;
-  --popover-border: 20 20% 20%;
-
-  --primary: 11 80% 50%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 200 80% 45%;
-  --secondary-foreground: 0 0% 100%;
-
-  --muted: 20 20% 15%;
-  --muted-foreground: 35 10% 70%;
-
-  --accent: 20 20% 20%;
-  --accent-foreground: 35 30% 98%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-
-  --input: 20 20% 25%;
-  --ring: 11 80% 50%;
-}
-
 @layer base {
   * {
     @apply border-border;
   }
   
   html[dir="rtl"] {
-    --app-font-sans: 'Noto Sans Arabic', sans-serif;
+    --app-font-sans: 'Tajawal', sans-serif;
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground transition-colors duration-300;
+    @apply font-sans antialiased bg-background text-foreground;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Playfair Display', Georgia, serif;
+    line-height: 1.15;
+  }
+
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4 {
+    font-family: 'Tajawal', sans-serif;
   }
 }
+
+/* Custom utility classes */
+.font-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+html[dir="rtl"] .font-display {
+  font-family: 'Tajawal', sans-serif;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-wa {
+  0%,100% { box-shadow: 0 6px 24px rgba(37,211,102,.45); }
+  50%      { box-shadow: 0 6px 36px rgba(37,211,102,.8); }
+}
+
+.animate-fade-up { animation: fadeUp 0.5s ease both; }
+.animate-pulse-wa { animation: pulse-wa 3s infinite; }

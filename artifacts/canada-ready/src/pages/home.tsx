@@ -1,368 +1,286 @@
 import { useLanguage } from "@/lib/language-context";
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Briefcase, Home as HomeIcon, MonitorPlay, CheckCircle2, Star, Calendar, Phone } from "lucide-react";
-import { motion } from "framer-motion";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.5 } }),
-};
+const T = "#0ABAB5";
+const TDK = "#007A77";
+const GOLD = "#C9903A";
+const GOLD_LT = "#E8B84B";
+const BG = "#F5FFFE";
+const MID = "#4A6B69";
 
 export default function Home() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const isAr = language === "ar";
 
-  const pillars = [
-    { id: "english", icon: BookOpen, color: "bg-blue-100 text-blue-700" },
-    { id: "career", icon: Briefcase, color: "bg-emerald-100 text-emerald-700" },
-    { id: "life", icon: HomeIcon, color: "bg-orange-100 text-orange-700" },
-    { id: "business", icon: MonitorPlay, color: "bg-purple-100 text-purple-700" },
+  const whatWeHelp = [
+    { icon: "🗣️", en: "Improve English", ar: "تطوير الإنجليزية", desc_en: "Beginner survival English to workplace fluency. 3 live classes every week in Arabic and English.", desc_ar: "من الإنجليزية الأساسية إلى الطلاقة في العمل. 3 صفوف مباشرة أسبوعياً." },
+    { icon: "💪", en: "Build Confidence", ar: "بناء الثقة", desc_en: "Speaking practice, mock interviews, and a safe Arabic community to grow your confidence.", desc_ar: "تدريب المحادثة ومقابلات تجريبية ومجتمع عربي آمن للنمو." },
+    { icon: "💼", en: "Find Better Jobs", ar: "إيجاد وظيفة أفضل", desc_en: "Canadian resume, cover letters, LinkedIn setup, job search strategy and interview prep.", desc_ar: "سيرة ذاتية كندية، خطاب تغطية، لينكدإن، واستراتيجية البحث عن عمل." },
+    { icon: "🏠", en: "Understand Life in Canada", ar: "فهم الحياة في كندا", desc_en: "Banking, taxes, renting, healthcare, driver's license — how everything works here, step by step.", desc_ar: "البنوك، الضرائب، الإيجار، الصحة — كيف يعمل كل شيء هنا خطوة بخطوة." },
+    { icon: "🤝", en: "Workplace Communication", ar: "التواصل في مكان العمل", desc_en: "Professional emails, phone calls, Canadian workplace culture and communication etiquette.", desc_ar: "البريد الإلكتروني المهني، المكالمات، ثقافة العمل الكندية، وآداب التواصل." },
+    { icon: "🎯", en: "Personalized Support", ar: "دعم شخصي", desc_en: "1-on-1 coaching calls, WhatsApp access, and a custom success roadmap — built for you.", desc_ar: "جلسات تدريب فردية، دعم واتساب، وخارطة طريق نجاح مخصصة لك." },
   ];
 
-  const pricingPlans = ["starter", "premium", "careerBoost", "canadaReady"];
-  const prices = ["$79", "$129", "$179", "$249"];
+  const pillars = [
+    { bg: `linear-gradient(145deg,${T},#0d9e99)`, icon: "📚", en: "English Training", ar: "تدريب الإنجليزية", desc_en: "Beginner to advanced, workplace English, pronunciation, speaking clubs, IELTS/CELPIP prep.", desc_ar: "من المبتدئ للمتقدم، إنجليزي العمل، النطق، أندية المحادثة.", tags_en: ["Speaking","Grammar","IELTS"], tags_ar: ["محادثة","قواعد","IELTS"] },
+    { bg: `linear-gradient(145deg,${GOLD},${GOLD_LT})`, icon: "💼", en: "Career Support", ar: "الدعم المهني", desc_en: "Resume, cover letter, LinkedIn, mock interviews, job search, and Canadian workplace culture.", desc_ar: "السيرة الذاتية، لينكدإن، المقابلات، والبحث عن عمل.", tags_en: ["Resume","LinkedIn","Interviews"], tags_ar: ["السيرة","لينكدإن","مقابلات"], textDark: true },
+    { bg: `linear-gradient(145deg,${TDK},#005856)`, icon: "🏠", en: "Canada Life Support", ar: "دعم الحياة في كندا", desc_en: "Banking, taxes, renting, healthcare, immigration document guidance and settlement help.", desc_ar: "البنوك، الضرائب، الإيجار، الصحة، وثائق الهجرة.", tags_en: ["Banking","CRA","Healthcare"], tags_ar: ["بنوك","CRA","صحة"] },
+    { bg: "linear-gradient(145deg,#3D7A5C,#25A465)", icon: "💻", en: "Business & Digital", ar: "الأعمال والرقمية", desc_en: "Side hustles, small business basics, tech skills, freelancing, and digital literacy for Canada.", desc_ar: "العمل الجانبي، أساسيات الأعمال، مهارات التقنية، العمل الحر.", tags_en: ["Side Hustle","Tech","Business"], tags_ar: ["عمل جانبي","تقنية","أعمال"] },
+  ];
 
-  const whatWeHelpItems = t("whatWeHelp.items") as unknown as string[];
-  const weeklyDays = t("weeklySchedule.days") as unknown as { day: string; name: string; desc: string }[];
+  const steps = [
+    { num: "1", en: "Book Free Assessment", ar: "احجز تقييماً مجانياً", desc_en: "Fill out our short form and schedule a 15-minute Arabic call with our team — completely free.", desc_ar: "امل الاستمارة القصيرة وحدد موعد مكالمة عربية لمدة 15 دقيقة مع فريقنا — مجاناً." },
+    { num: "2", en: "Meet Our Team", ar: "التق بفريقنا", desc_en: "We check your English level, understand your goals and recommend your perfect plan.", desc_ar: "نقيّم مستواك وأهدافك ونوصي بالخطة المثالية لك." },
+    { num: "3", en: "Join Your Group", ar: "انضم لمجموعتك", desc_en: "Receive Zoom links, WhatsApp invite, schedule and welcome booklet. First week is FREE.", desc_ar: "استلم روابط Zoom ودعوة واتساب وجدولك. الأسبوع الأول مجاني." },
+    { num: "4", en: "Build Your Future", ar: "ابنِ مستقبلك", desc_en: "3 live weekly classes, coaching calls, and ongoing support to build your Canadian life.", desc_ar: "3 صفوف مباشرة أسبوعياً وجلسات تدريب ودعم مستمر لبناء حياتك الكندية." },
+  ];
+
+  const schedule = [
+    { color: T, day_en: "Monday", day_ar: "الاثنين", title_en: "English Foundations", title_ar: "أسس الإنجليزية", desc_en: "Grammar, vocabulary, reading, writing and structured language building for all levels.", desc_ar: "القواعد، المفردات، القراءة، الكتابة وبناء اللغة لجميع المستويات." },
+    { color: GOLD, day_en: "Wednesday", day_ar: "الأربعاء", title_en: "Conversation & Pronunciation", title_ar: "المحادثة والنطق", desc_en: "Speaking confidence, pronunciation drills, roleplay and real-life conversation practice.", desc_ar: "ثقة الكلام، تدريبات النطق، لعب الأدوار وممارسة المحادثة الواقعية." },
+    { color: "#25A465", day_en: "Friday", day_ar: "الجمعة", title_en: "Career & Canada Life Workshop", title_ar: "ورشة المهنة والحياة الكندية", desc_en: "Job skills, Canadian life lessons, interviews, workplace culture and settlement topics.", desc_ar: "مهارات العمل، دروس الحياة الكندية، المقابلات، ثقافة العمل ومواضيع التوطين." },
+  ];
+
+  const testimonials = [
+    { emoji: "👨", name: "Ahmed M.", origin_en: "From Egypt, now in Calgary", origin_ar: "من مصر، الآن في كالغاري", text_en: "After joining Canada Ready Academy, I went through 4 mock interviews with the coach. Within 3 months I got my first IT job at a local company. The program changed my life.", text_ar: "بعد الانضمام لأكاديمية كندا ريدي، خضت 4 مقابلات تجريبية. خلال 3 أشهر حصلت على أول وظيفة في مجال تكنولوجيا المعلومات. البرنامج غيّر حياتي." },
+    { emoji: "👩", name: "Fatima S.", origin_en: "From Syria, now in Edmonton", origin_ar: "من سوريا، الآن في إدمونتون", text_en: "The Canada Life Support pillar helped me understand taxes, open a proper bank account, and find a great apartment for my family. I feel like a real Canadian now.", text_ar: "ركيزة دعم الحياة ساعدتني على فهم الضرائب، وفتح حساب بنكي، وإيجاد شقة رائعة لعائلتي. أشعر الآن أنني كندية حقيقية." },
+    { emoji: "👨‍💻", name: "Omar K.", origin_en: "From Iraq, now in Toronto", origin_ar: "من العراق، الآن في تورونتو", text_en: "I started with very basic English. After 6 months I communicate comfortably at work, and I even started my own small delivery business.", text_ar: "بدأت بإنجليزية ضعيفة جداً. بعد 6 أشهر أتواصل براحة في العمل، وحتى بدأت مشروعي الصغير." },
+  ];
+
+  const sec = { padding: "80px 5%" };
+  const secIn = { maxWidth: "1200px", margin: "0 auto" };
+  const stag = { display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" };
+  const sTitle = { fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 800, color: TDK, lineHeight: 1.15, marginBottom: "12px" };
+  const sSub = { fontSize: "16px", color: MID, maxWidth: "560px", lineHeight: 1.72, margin: "0 auto" };
 
   return (
-    <div className="w-full">
+    <div style={{ width: "100%" }}>
 
-      {/* HERO */}
-      <section className="relative py-20 md:py-32 overflow-hidden bg-gradient-to-br from-primary/10 via-background to-secondary/5">
-        <div className="container mx-auto px-4 max-w-5xl text-center">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <span className="inline-block bg-primary/10 text-primary font-semibold text-sm px-4 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-              Canada Ready Academy
-            </span>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground mb-6 leading-tight">
-              {t("hero.title")}
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto">
-              {t("hero.subtitle")}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/assessment">
-                <Button size="lg" className="text-base md:text-lg px-8 h-14 rounded-full shadow-lg shadow-primary/25" data-testid="button-hero-assessment">
-                  {t("hero.cta")}
-                </Button>
-              </Link>
-              <Link href="/how-it-works">
-                <Button variant="outline" size="lg" className="text-base md:text-lg px-8 h-14 rounded-full" data-testid="button-hero-join">
-                  {t("hero.secondaryCta")}
-                </Button>
-              </Link>
+      {/* ===== HERO ===== */}
+      <section style={{ minHeight: "calc(100vh - 68px)", padding: "60px 5% 60px", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", background: BG }}>
+        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 70% 70% at 85% 20%, rgba(10,186,181,0.12), transparent 60%), radial-gradient(ellipse 55% 60% at 0% 85%, rgba(10,186,181,0.07), transparent 55%)`, pointerEvents: "none" }} />
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "60px", alignItems: "center", width: "100%", position: "relative" }}>
+          {/* Left */}
+          <div className="animate-fade-up">
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "7px", background: "rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.28)", color: "#5A3E0A", padding: "7px 16px", borderRadius: "22px", fontSize: "12px", fontWeight: 700, marginBottom: "18px" }}>
+              🍁 {isAr ? "نظام دعم الوافدين الجدد في كندا" : "Canada's Newcomer Support System"}
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* WHAT WE HELP WITH */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">
-              {t("whatWeHelp.title")}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {Array.isArray(whatWeHelpItems) && whatWeHelpItems.map((item, i) => (
-                <motion.div
-                  key={i}
-                  custom={i}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="flex items-center gap-3 bg-primary-foreground/10 rounded-xl px-5 py-4"
-                >
-                  <CheckCircle2 className="w-6 h-6 flex-shrink-0 text-primary-foreground/80" />
-                  <span className="font-semibold text-base">{item}</span>
-                </motion.div>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(36px,5.2vw,62px)", fontWeight: 800, color: TDK, lineHeight: 1.1, marginBottom: "16px" }}>
+              {isAr
+                ? <>دعم الإنجليزية والمهنة<br />والحياة للوافدين<br />الجدد في <em style={{ fontStyle: "italic", color: T }}>كندا</em></>
+                : <>English, Career &amp;<br />Life Support for<br />Newcomers in <em style={{ fontStyle: "italic", color: T }}>Canada</em></>}
+            </h1>
+            <p style={{ fontSize: "17px", color: MID, maxWidth: "520px", lineHeight: 1.72, marginBottom: "32px" }}>
+              {isAr ? "دروس مباشرة عبر الإنترنت، تحضير للعمل، ودعم التوطين — مصمم للمهاجرين الناطقين بالعربية في كندا. ابدأ بمكالمة تقييم مجانية لمدة 15 دقيقة." : "Live online classes, job preparation, and settlement support — designed for Arabic-speaking immigrants in Canada. Start with a FREE 15-minute assessment call."}
+            </p>
+            <div style={{ display: "flex", gap: "13px", flexWrap: "wrap", marginBottom: "38px" }}>
+              <Link href="/assessment" style={{ background: TDK, color: "#fff", padding: "15px 32px", borderRadius: "30px", fontSize: "15px", fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "8px", transition: "0.28s" }} data-testid="hero-cta">
+                📋 {isAr ? "احجز تقييماً مجانياً" : "Book Free Assessment"}
+              </Link>
+              <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ background: "#25D366", color: "#fff", padding: "15px 26px", borderRadius: "30px", fontSize: "15px", fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "8px" }}>
+                💬 {isAr ? "انضم لصف مجاني" : "Join Free Class"}
+              </a>
+            </div>
+            <div style={{ display: "flex", gap: "28px", paddingTop: "30px", borderTop: "1px solid rgba(10,186,181,0.2)" }}>
+              {[
+                { n: "500+", l_en: "Newcomers Helped", l_ar: "وافد استفاد" },
+                { n: "3×", l_en: "Weekly Live Classes", l_ar: "صفوف مباشرة أسبوعياً" },
+                { n: "100%", l_en: "Arabic + English", l_ar: "عربي + إنجليزي" },
+              ].map((s) => (
+                <div key={s.n}>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "34px", fontWeight: 700, color: TDK, lineHeight: 1 }}>{s.n}</div>
+                  <div style={{ fontSize: "12px", color: "#8896AB", marginTop: "3px" }}>{isAr ? s.l_ar : s.l_en}</div>
+                </div>
               ))}
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
 
-      {/* HOW IT WORKS — 4 Steps */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("howItWorks.title")}</h2>
-            <p className="text-muted-foreground text-lg">{t("howItWorks.subtitle")}</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {[0, 1, 2, 3].map((i) => {
-              const steps = t("howItWorks.steps") as unknown as { title: string; desc: string }[];
-              const step = Array.isArray(steps) ? steps[i] : null;
-              return (
-                <motion.div
-                  key={i}
-                  custom={i}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-extrabold mb-4 shadow-md shadow-primary/30">
-                    {i + 1}
-                  </div>
-                  <h3 className="font-bold text-lg mb-2">{step?.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{step?.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-          <div className="text-center mt-10">
-            <Link href="/how-it-works">
-              <Button variant="outline" className="rounded-full px-8" data-testid="link-how-it-works-full">
-                {t("common.learnMore")} →
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 4 CORE PILLARS */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("pillars.title")}</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{t("pillars.subtitle")}</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pillars.map((pillar, i) => {
-              const Icon = pillar.icon;
-              return (
-                <motion.div
-                  key={pillar.id}
-                  custom={i}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                >
-                  <Card className="h-full hover:shadow-md transition-shadow border-border/50">
-                    <CardHeader>
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 ${pillar.color}`}>
-                        <Icon size={22} />
-                      </div>
-                      <CardTitle className="text-xl">{t(`pillars.${pillar.id}.title`)}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground text-sm leading-relaxed">{t(`pillars.${pillar.id}.desc`)}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
+          {/* Right card */}
+          <div style={{ position: "relative" }} className="hidden md:block">
+            <div style={{ position: "absolute", background: "#fff", borderRadius: "11px", padding: "9px 13px", boxShadow: "0 8px 32px rgba(10,186,181,0.18)", fontSize: "12px", fontWeight: 700, color: TDK, display: "flex", alignItems: "center", gap: "6px", top: "-14px", left: "-14px", zIndex: 2 }}>
+              🇨🇦 {isAr ? "ألبرتا، كندا" : "Alberta, Canada"}
+            </div>
+            <div style={{ background: TDK, borderRadius: "22px", padding: "34px", color: "#fff", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", fontSize: "120px", right: "-15px", bottom: "-18px", opacity: 0.04 }}>🍁</div>
+              <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "16px" }}>{isAr ? "ما ستحصل عليه" : "WHAT YOU GET"}</div>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "22px" }}>
+                {[
+                  { icon: "📚", en: "English Classes — All Levels", ar: "دروس إنجليزية — جميع المستويات" },
+                  { icon: "💼", en: "Resume + Job Preparation", ar: "سيرة ذاتية + تحضير للعمل" },
+                  { icon: "🏠", en: "Settlement & Life Guidance", ar: "إرشادات التوطين والحياة" },
+                  { icon: "🤝", en: "Arabic Community Support", ar: "مجتمع دعم عربي" },
+                  { icon: "📋", en: "1-on-1 Coaching Calls", ar: "جلسات تدريب فردية" },
+                ].map((item) => (
+                  <li key={item.icon} style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "14px", fontWeight: 500 }}>
+                    <div style={{ width: "33px", height: "33px", background: "rgba(201,144,58,0.18)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "15px", flexShrink: 0 }}>{item.icon}</div>
+                    {isAr ? item.ar : item.en}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "12px", padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+                <div>
+                  <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.45)" }}>{isAr ? "يبدأ من" : "Starting from"}</div>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "38px", fontWeight: 700, color: GOLD_LT, lineHeight: 1 }}>$79</div>
+                </div>
+                <div style={{ color: "rgba(255,255,255,0.4)", fontSize: "12px" }}>{isAr ? "/ شهر كندي" : "/ month CAD"}</div>
+              </div>
+              <div style={{ background: GOLD, borderRadius: "9px", padding: "11px 16px", textAlign: "center", fontWeight: 700, color: TDK, fontSize: "13.5px" }}>
+                🎁 {isAr ? "الأسبوع الأول مجاني — لا بطاقة ائتمان" : "First week FREE — No credit card needed"}
+              </div>
+            </div>
+            <div style={{ position: "absolute", background: "#fff", borderRadius: "11px", padding: "9px 13px", boxShadow: "0 8px 32px rgba(10,186,181,0.18)", fontSize: "12px", fontWeight: 700, color: TDK, display: "flex", alignItems: "center", gap: "6px", bottom: "-14px", right: "-14px", zIndex: 2 }}>
+              ⭐ {isAr ? "يُدرَّس بالعربي والإنجليزي" : "Taught in Arabic & English"}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* WEEKLY SCHEDULE */}
-      <section className="py-16 bg-secondary/5">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-2">{t("weeklySchedule.title")}</h2>
-            <p className="text-muted-foreground">{t("weeklySchedule.subtitle")}</p>
+      {/* ===== WHAT WE HELP WITH ===== */}
+      <section style={{ ...sec, background: "#fff" }}>
+        <div style={secIn}>
+          <div style={{ textAlign: "center", marginBottom: "50px" }}>
+            <div style={stag}>✅ {isAr ? "نساعدك في" : "WE HELP YOU WITH"}</div>
+            <div style={sTitle}>{isAr ? "كل ما يحتاجه الوافد الجديد للنجاح" : "Everything a Newcomer Needs to Succeed"}</div>
+            <p style={sSub}>{isAr ? "لا نعلمك الإنجليزي فقط. نساعدك على بناء الثقة والدخل والحياة الحقيقية في كندا." : "We don't just teach English. We help you build confidence, income, and a real life in Canada."}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {Array.isArray(weeklyDays) && weeklyDays.map((day, i) => (
-              <motion.div
-                key={i}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "20px" }}>
+            {whatWeHelp.map((item) => (
+              <div key={item.icon} style={{ background: BG, border: "1px solid rgba(10,186,181,0.15)", borderRadius: "18px", padding: "26px", display: "flex", alignItems: "flex-start", gap: "13px", transition: "0.3s", cursor: "default" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 32px rgba(10,186,181,0.15)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = ""; (e.currentTarget as HTMLDivElement).style.boxShadow = ""; }}
               >
-                <Card className="text-center border-primary/20 bg-card">
-                  <CardContent className="pt-6 pb-6">
-                    <div className="bg-primary/10 text-primary font-bold text-sm uppercase tracking-wider rounded-full px-4 py-1 inline-block mb-4">
-                      {day.day}
-                    </div>
-                    <h3 className="font-bold text-lg mb-2">{day.name}</h3>
-                    <p className="text-muted-foreground text-sm">{day.desc}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                <div style={{ width: "45px", height: "45px", background: TDK, borderRadius: "11px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "19px", flexShrink: 0 }}>{item.icon}</div>
+                <div>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "18px", fontWeight: 700, color: TDK, marginBottom: "6px" }}>{isAr ? item.ar : item.en}</div>
+                  <p style={{ fontSize: "13.5px", color: MID, lineHeight: 1.62 }}>{isAr ? item.desc_ar : item.desc_en}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PLANS & PRICING PREVIEW */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("pricing.title")}</h2>
-            <p className="text-muted-foreground text-lg">{t("pricing.subtitle")}</p>
+      {/* ===== 4 CORE PILLARS ===== */}
+      <section style={{ ...sec, background: BG }}>
+        <div style={secIn}>
+          <div style={{ textAlign: "center", marginBottom: "50px" }}>
+            <div style={stag}>🏛️ {isAr ? "4 ركائز أساسية" : "4 CORE PILLARS"}</div>
+            <div style={sTitle}>{isAr ? "نظامنا المتكامل" : "Our Complete Support System"}</div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pricingPlans.map((plan, index) => {
-              const isPopular = index === 1;
-              const features = t(`pricing.${plan}.features`) as unknown as string[];
-              return (
-                <motion.div
-                  key={plan}
-                  custom={index}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className={`relative flex flex-col rounded-2xl border p-6 ${isPopular ? "border-primary shadow-lg ring-2 ring-primary/20 bg-primary/3" : "border-border bg-card"}`}
-                >
-                  {isPopular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap">
-                      {t("common.popular")}
-                    </div>
-                  )}
-                  <div className="text-center mb-6 mt-2">
-                    <h3 className="text-xl font-bold mb-1">{t(`pricing.${plan}.name`)}</h3>
-                    <p className="text-muted-foreground text-sm mb-3">{t(`pricing.${plan}.bestFor`)}</p>
-                    <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-4xl font-extrabold">{prices[index]}</span>
-                      <span className="text-muted-foreground text-sm">{t("common.monthly")}</span>
-                    </div>
-                  </div>
-                  <ul className="space-y-2 mb-6 flex-1">
-                    {Array.isArray(features) && features.slice(0, 6).map((feat, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground/80">{feat}</span>
-                      </li>
-                    ))}
-                    {Array.isArray(features) && features.length > 6 && (
-                      <li className="text-xs text-primary font-medium ps-6">+ {features.length - 6} more included</li>
-                    )}
-                  </ul>
-                  <Link href="/assessment">
-                    <Button
-                      className="w-full rounded-full"
-                      variant={isPopular ? "default" : "outline"}
-                      data-testid={`button-plan-${plan}`}
-                    >
-                      {t("common.bookAssessment")}
-                    </Button>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-          <div className="text-center mt-8">
-            <Link href="/programs">
-              <Button variant="ghost" className="text-primary font-semibold" data-testid="link-see-all-programs">
-                {t("common.seeAll")} →
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("testimonials.title")}</h2>
-            <p className="text-muted-foreground text-lg">{t("testimonials.subtitle")}</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[0, 1, 2, 3].map((i) => {
-              const stories = t("testimonials.stories") as unknown as { name: string; origin: string; text: string }[];
-              const story = Array.isArray(stories) ? stories[i] : null;
-              return (
-                <motion.div
-                  key={i}
-                  custom={i}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                >
-                  <Card className="h-full bg-card border-border/50">
-                    <CardContent className="p-6">
-                      <div className="flex gap-1 mb-4">
-                        {[0,1,2,3,4].map((s) => <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
-                      </div>
-                      <p className="text-foreground/85 italic mb-6 leading-relaxed">"{story?.text}"</p>
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-primary/15 text-primary font-bold flex items-center justify-center text-sm">
-                          {story?.name.charAt(0)}
-                        </div>
-                        <div>
-                          <p className="font-bold text-sm">{story?.name}</p>
-                          <p className="text-xs text-muted-foreground">{story?.origin}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-          <div className="text-center mt-8">
-            <Link href="/testimonials">
-              <Button variant="outline" className="rounded-full px-8" data-testid="link-all-testimonials">
-                {t("common.learnMore")} →
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* WHATSAPP CTA */}
-      <section className="py-16 bg-[#075E54] text-white">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg">
-                <Phone size={32} />
-              </div>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">{t("contact.whatsappSection.title")}</h2>
-            <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
-              {t("contact.whatsappSection.desc")}
-            </p>
-            <a
-              href="https://wa.me/15870000000"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid="button-whatsapp-cta"
-              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20b858] text-white font-bold text-lg px-8 py-4 rounded-full transition-colors shadow-lg"
-            >
-              <Phone size={22} />
-              {t("contact.whatsappSection.cta")}
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {language === "en" ? "Start Your Journey in Canada Today" : "ابدأ رحلتك في كندا اليوم"}
-            </h2>
-            <p className="text-primary-foreground/80 text-lg mb-8">
-              {language === "en"
-                ? "Book your free assessment and take the first step toward confidence, career, and a better life in Canada."
-                : "احجز تقييمك المجاني واتخذ أول خطوة نحو الثقة والمهنة وحياة أفضل في كندا."}
-            </p>
-            <Link href="/assessment">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="rounded-full px-10 h-14 text-lg font-bold"
-                data-testid="button-final-cta"
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: "22px" }}>
+            {pillars.map((p) => (
+              <div key={p.en} style={{ background: p.bg, borderRadius: "18px", padding: "34px 26px", textAlign: "center", border: "1px solid rgba(255,255,255,0.15)", transition: "0.3s", cursor: "default" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 16px 40px rgba(10,186,181,0.25)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = ""; (e.currentTarget as HTMLDivElement).style.boxShadow = ""; }}
               >
-                {t("hero.cta")}
-              </Button>
+                <span style={{ fontSize: "42px", marginBottom: "14px", display: "block" }}>{p.icon}</span>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "21px", fontWeight: 700, color: p.textDark ? TDK : "#fff", marginBottom: "9px" }}>{isAr ? p.ar : p.en}</h3>
+                <p style={{ fontSize: "13px", color: p.textDark ? "rgba(27,58,107,0.8)" : "rgba(255,255,255,0.8)", lineHeight: 1.65 }}>{isAr ? p.desc_ar : p.desc_en}</p>
+                <div style={{ marginTop: "14px", display: "flex", flexWrap: "wrap", gap: "5px", justifyContent: "center" }}>
+                  {(isAr ? p.tags_ar : p.tags_en).map((tag) => (
+                    <span key={tag} style={{ background: p.textDark ? "rgba(27,58,107,0.13)" : "rgba(255,255,255,0.15)", color: p.textDark ? TDK : "#fff", fontSize: "11px", fontWeight: 600, padding: "4px 9px", borderRadius: "8px" }}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== HOW IT WORKS ===== */}
+      <section style={{ ...sec, background: "#fff" }}>
+        <div style={secIn}>
+          <div style={{ textAlign: "center", marginBottom: "50px" }}>
+            <div style={stag}>🔄 {isAr ? "كيف يعمل" : "HOW IT WORKS"}</div>
+            <div style={sTitle}>{isAr ? "ابدأ في 4 خطوات بسيطة" : "Start in 4 Simple Steps"}</div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: "0", position: "relative" }}>
+            {steps.map((step, i) => (
+              <div key={step.num} style={{ textAlign: "center", padding: "6px 16px", position: "relative", zIndex: 1 }}>
+                <div style={{ width: "64px", height: "64px", background: TDK, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px", fontFamily: "'Playfair Display', serif", fontSize: "26px", fontWeight: 700, color: GOLD_LT, border: `4px solid ${BG}`, boxShadow: "0 4px 16px rgba(10,186,181,0.3)" }}>{step.num}</div>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "17px", fontWeight: 700, color: TDK, marginBottom: "6px" }}>{isAr ? step.ar : step.en}</h3>
+                <p style={{ fontSize: "13px", color: MID, lineHeight: 1.6 }}>{isAr ? step.desc_ar : step.desc_en}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: "44px" }}>
+            <Link href="/assessment" style={{ background: TDK, color: "#fff", padding: "17px 44px", borderRadius: "30px", fontSize: "16px", fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "8px" }}>
+              📋 {isAr ? "احجز تقييمك المجاني الآن" : "Book Your Free Assessment Now"}
             </Link>
-          </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== WEEKLY SCHEDULE ===== */}
+      <section style={{ ...sec, background: BG }}>
+        <div style={secIn}>
+          <div style={{ textAlign: "center", marginBottom: "50px" }}>
+            <div style={stag}>📅 {isAr ? "الجدول الأسبوعي" : "WEEKLY SCHEDULE"}</div>
+            <div style={sTitle}>{isAr ? "3 صفوف مباشرة كل أسبوع" : "3 Live Classes Every Week"}</div>
+            <p style={sSub}>{isAr ? "جميع الخطط تشمل نفس الصفوف الثلاثة. مستوى خطتك يحدد التدريب والدعم الإضافي." : "All plans include the same 3 live classes. Your plan level determines the extra coaching and support."}</p>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "22px" }}>
+            {schedule.map((day) => (
+              <div key={day.day_en} style={{ background: "#fff", borderRadius: "18px", padding: "26px", borderTop: `4px solid ${day.color}`, border: "1px solid rgba(10,186,181,0.12)", borderTopColor: day.color, borderTopWidth: "4px" }}>
+                <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: day.color, marginBottom: "7px" }}>{isAr ? day.day_ar : day.day_en}</div>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: TDK, marginBottom: "7px" }}>{isAr ? day.title_ar : day.title_en}</div>
+                <p style={{ fontSize: "13.5px", color: MID }}>{isAr ? day.desc_ar : day.desc_en}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== TESTIMONIALS PREVIEW ===== */}
+      <section style={{ ...sec, background: "#fff" }}>
+        <div style={secIn}>
+          <div style={{ textAlign: "center", marginBottom: "50px" }}>
+            <div style={stag}>⭐ {isAr ? "قصص النجاح" : "SUCCESS STORIES"}</div>
+            <div style={sTitle}>{isAr ? "ماذا يقول طلابنا" : "What Our Students Say"}</div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "20px" }}>
+            {testimonials.map((t) => (
+              <div key={t.name} style={{ background: "#fff", borderRadius: "18px", padding: "26px", border: "1px solid rgba(10,186,181,0.15)", transition: "0.3s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 32px rgba(10,186,181,0.15)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = ""; }}
+              >
+                <div style={{ color: GOLD, fontSize: "16px", marginBottom: "11px" }}>★★★★★</div>
+                <p style={{ fontSize: "14px", color: MID, lineHeight: 1.7, marginBottom: "16px", fontStyle: "italic" }}>"{isAr ? t.text_ar : t.text_en}"</p>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: TDK, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px" }}>{t.emoji}</div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: "14px", color: TDK }}>{t.name}</div>
+                    <div style={{ fontSize: "12px", color: "#8896AB" }}>{isAr ? t.origin_ar : t.origin_en}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: "32px" }}>
+            <Link href="/testimonials" style={{ color: TDK, textDecoration: "none", fontWeight: 700, fontSize: "15px", display: "inline-flex", alignItems: "center", gap: "6px" }}>
+              {isAr ? "عرض جميع القصص ←" : "See All Stories →"}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== WHATSAPP CTA ===== */}
+      <section style={{ background: TDK, padding: "80px 5%", textAlign: "center" }}>
+        <div style={{ maxWidth: "640px", margin: "0 auto" }}>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "30px", fontWeight: 700, color: GOLD_LT, marginBottom: "24px", letterSpacing: "1px" }}>
+            {isAr ? "💬 هل تريد أن تبدأ؟" : "💬 Ready to Start?"}
+          </div>
+          <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "18px", marginBottom: "28px" }}>
+            {isAr ? "تحدث معنا مباشرة على واتساب. سنجيب على أسئلتك خلال ساعات." : "Chat with us directly on WhatsApp. We'll answer your questions within hours."}
+          </p>
+          <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+            <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 40px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }}>
+              💬 {isAr ? "راسلنا على واتساب" : "Message Us on WhatsApp"}
+            </a>
+            <a href="https://facebook.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "9px", background: "#1877F2", color: "#fff", padding: "16px 34px", borderRadius: "32px", fontSize: "15px", fontWeight: 700, textDecoration: "none" }}>
+              📘 {isAr ? "فيسبوك" : "Facebook"}
+            </a>
+          </div>
         </div>
       </section>
 

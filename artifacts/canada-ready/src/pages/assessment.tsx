@@ -1,5 +1,4 @@
 import { useLanguage } from "@/lib/language-context";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,266 +7,190 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useCreateAssessment } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, CheckCircle2, Phone } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
-import { motion } from "framer-motion";
 
-const assessmentSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  whatsapp: z.string().min(5, "WhatsApp is required"),
-  englishLevel: z.string().min(1, "English level is required"),
-  country: z.string().min(2, "Country is required"),
-  careerGoals: z.string().min(5, "Career goals are required"),
-  timeInCanada: z.string().min(1, "Time in Canada is required"),
-  biggestChallenge: z.string().min(5, "Biggest challenge is required"),
+const T = "#0ABAB5"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+
+const schema = z.object({
+  name: z.string().min(2),
+  whatsapp: z.string().min(5),
+  englishLevel: z.string().min(1),
+  country: z.string().min(2),
+  careerGoals: z.string().min(5),
+  timeInCanada: z.string().min(1),
+  biggestChallenge: z.string().min(5),
 });
 
-type AssessmentFormValues = z.infer<typeof assessmentSchema>;
-
 export default function Assessment() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const isAr = language === "ar";
   const { toast } = useToast();
   const createAssessment = useCreateAssessment();
   const [submitted, setSubmitted] = useState(false);
 
-  const whatHappensItems = t("assessment.whatHappens.items") as unknown as string[];
-
-  const form = useForm<AssessmentFormValues>({
-    resolver: zodResolver(assessmentSchema),
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: { name: "", whatsapp: "", englishLevel: "", country: "", careerGoals: "", timeInCanada: "", biggestChallenge: "" },
   });
 
-  const onSubmit = (data: AssessmentFormValues) => {
-    createAssessment.mutate(
-      { data },
-      {
-        onSuccess: () => { setSubmitted(true); },
-        onError: () => {
-          toast({ variant: "destructive", title: t("common.error"), description: language === "en" ? "Something went wrong. Please try again." : "حدث خطأ. يرجى المحاولة مرة أخرى." });
-        },
-      }
-    );
+  const onSubmit = (data: z.infer<typeof schema>) => {
+    createAssessment.mutate({ data }, {
+      onSuccess: () => setSubmitted(true),
+      onError: () => toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "حاول مرة أخرى." : "Please try again." }),
+    });
   };
 
   if (submitted) {
     return (
-      <div className="container mx-auto px-4 py-24 max-w-2xl text-center">
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4 }}>
-          <div className="bg-primary/10 rounded-full w-24 h-24 mx-auto flex items-center justify-center mb-8">
-            <CheckCircle2 className="w-12 h-12 text-primary" />
-          </div>
-          <h2 className="text-3xl font-bold mb-4">{t("common.success")}</h2>
-          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">{t("assessment.form.success")}</p>
-          <a
-            href="https://wa.me/15870000000"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-testid="button-success-whatsapp"
-            className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-full font-bold text-lg transition-colors shadow-lg"
-          >
-            <Phone size={22} />
-            {t("assessment.form.successWhatsApp")}
-          </a>
-        </motion.div>
+      <div style={{ padding: "80px 5%", textAlign: "center", maxWidth: "600px", margin: "0 auto" }}>
+        <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: `rgba(10,186,181,0.12)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "36px", margin: "0 auto 24px" }}>✅</div>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "32px", fontWeight: 800, color: TDK, marginBottom: "12px" }}>
+          {isAr ? "تم تقديم طلبك!" : "Assessment Submitted!"}
+        </h2>
+        <p style={{ fontSize: "17px", color: MID, lineHeight: 1.7, marginBottom: "28px" }}>
+          {isAr ? "سنتواصل معك على واتساب خلال 24 ساعة لتحديد موعد مكالمتك المجانية. ابق قريباً!" : "We will contact you on WhatsApp within 24 hours to schedule your free call. Stay close!"}
+        </p>
+        <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 36px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }} data-testid="success-whatsapp">
+          💬 {isAr ? "تحدث معنا الآن على واتساب" : "Chat With Us Now on WhatsApp"}
+        </a>
       </div>
     );
   }
 
+  const whatHappens = [
+    { en: "We check your English level (Beginner or Intermediate)", ar: "نتحقق من مستوى إنجليزيتك (مبتدئ أو متوسط)" },
+    { en: "We ask about your career goals and work history", ar: "نسأل عن أهدافك المهنية وتاريخك الوظيفي" },
+    { en: "We understand your newcomer challenges", ar: "نفهم تحديات حياتك الجديدة" },
+    { en: "We explain how our program works", ar: "نشرح لك كيف يعمل برنامجنا" },
+    { en: "We recommend the best plan for you", ar: "نوصيك بأفضل خطة تناسبك" },
+    { en: "You get your WhatsApp group & Zoom links", ar: "تحصل على مجموعة واتساب وروابط زووم" },
+  ];
+
+  const inputStyle = { border: `1.5px solid rgba(10,186,181,0.25)`, borderRadius: "10px", padding: "12px 14px", fontSize: "14px", fontFamily: "inherit", color: "#1A2E2D", background: "#fff", outline: "none", width: "100%" };
+  const labelStyle = { display: "block" as const, fontSize: "12px", fontWeight: 700, color: TDK, marginBottom: "5px" };
+
   return (
-    <div className="w-full">
+    <div style={{ width: "100%" }}>
       {/* Header */}
-      <section className="py-16 bg-gradient-to-b from-primary/8 to-background">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">{t("assessment.title")}</h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">{t("assessment.subtitle")}</p>
+      <section style={{ padding: "60px 5% 50px", background: `linear-gradient(135deg,${BG},#e8fffe)`, textAlign: "center" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" }}>
+          📋 {isAr ? "تقييم مجاني" : "FREE ASSESSMENT"}
         </div>
+        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 800, color: TDK, marginBottom: "12px" }}>
+          {isAr ? "احجز تقييمك المجاني للإنجليزية والمهنة" : "Book Your Free English & Career Assessment"}
+        </h1>
+        <p style={{ fontSize: "17px", color: MID, maxWidth: "600px", margin: "0 auto", lineHeight: 1.7 }}>
+          {isAr ? "15–20 دقيقة مع فريقنا. مجانية تماماً. سنتحقق من مستواك، ونفهم أهدافك، ونوصيك بأفضل خطة لك." : "15–20 minutes with our team. Completely free. We'll check your level, understand your goals, and recommend the best plan for you."}
+        </p>
       </section>
 
-      <section className="py-12 bg-background">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="grid md:grid-cols-5 gap-10">
-            {/* Left: What happens */}
-            <div className="md:col-span-2">
-              <div className="sticky top-24">
-                <h2 className="text-xl font-bold mb-5">{t("assessment.whatHappens.title")}</h2>
-                <ul className="space-y-4">
-                  {Array.isArray(whatHappensItems) && whatHappensItems.map((item, i) => (
-                    <motion.li
-                      key={i}
-                      initial={{ opacity: 0, x: -15 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                      className="flex items-start gap-3"
-                    >
-                      <div className="w-6 h-6 rounded-full bg-primary/15 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                        {i + 1}
-                      </div>
-                      <span className="text-foreground/80">{item}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-                <div className="mt-8 p-5 bg-muted/40 rounded-2xl border border-border/50">
-                  <p className="font-bold mb-2 text-sm">
-                    {language === "en" ? "After the assessment:" : "بعد التقييم:"}
-                  </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />{language === "en" ? "Get placed in the right group" : "التوزيع في المجموعة المناسبة"}</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />{language === "en" ? "Receive WhatsApp group invite" : "استلام دعوة مجموعة واتساب"}</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />{language === "en" ? "Get Zoom links & class schedule" : "الحصول على روابط زووم وجدول الحصص"}</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />{language === "en" ? "Access homework & welcome booklet" : "الوصول للواجبات والكتيب الترحيبي"}</li>
-                  </ul>
+      <section style={{ padding: "60px 5% 80px", background: "#fff" }}>
+        <div style={{ maxWidth: "1060px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: "52px", alignItems: "start" }}>
+
+          {/* Left: What happens */}
+          <div>
+            <div style={{ background: TDK, borderRadius: "22px", padding: "34px", color: "#fff", marginBottom: "20px" }}>
+              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: 700, color: GOLD_LT, marginBottom: "18px" }}>
+                {isAr ? "ماذا يحدث خلال التقييم؟" : "What Happens During the Assessment?"}
+              </div>
+              {whatHappens.map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "12px" }}>
+                  <div style={{ width: "22px", height: "22px", background: "rgba(201,144,58,0.25)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: GOLD_LT, fontSize: "11px", flexShrink: 0, marginTop: "2px", fontWeight: 700 }}>{i + 1}</div>
+                  <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.85)", lineHeight: 1.55 }}>{isAr ? item.ar : item.en}</span>
                 </div>
-              </div>
+              ))}
             </div>
-
-            {/* Right: Form */}
-            <div className="md:col-span-3">
-              <div className="bg-card border rounded-2xl p-6 md:p-8 shadow-sm">
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-5">
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t("assessment.form.name")}</FormLabel>
-                            <FormControl>
-                              <Input {...field} data-testid="input-assessment-name" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="whatsapp"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t("assessment.form.whatsapp")}</FormLabel>
-                            <FormControl>
-                              <Input placeholder="+1 587 000 0000" {...field} data-testid="input-assessment-whatsapp" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-5">
-                      <FormField
-                        control={form.control}
-                        name="englishLevel"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t("assessment.form.englishLevel")}</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <FormControl>
-                                <SelectTrigger data-testid="select-assessment-english">
-                                  <SelectValue placeholder={language === "en" ? "Select level" : "اختر المستوى"} />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                <SelectItem value="beginner">{t("assessment.form.englishLevels.beginner")}</SelectItem>
-                                <SelectItem value="intermediate">{t("assessment.form.englishLevels.intermediate")}</SelectItem>
-                                <SelectItem value="advanced">{t("assessment.form.englishLevels.advanced")}</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="country"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t("assessment.form.country")}</FormLabel>
-                            <FormControl>
-                              <Input placeholder={language === "en" ? "e.g. Egypt, Syria, Iraq" : "مثل: مصر، سوريا، العراق"} {...field} data-testid="input-assessment-country" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <FormField
-                      control={form.control}
-                      name="timeInCanada"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("assessment.form.timeInCanada")}</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger data-testid="select-assessment-time">
-                                <SelectValue placeholder={language === "en" ? "Select time" : "اختر المدة"} />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="justArrived">{t("assessment.form.times.justArrived")}</SelectItem>
-                              <SelectItem value="lessThan1">{t("assessment.form.times.lessThan1")}</SelectItem>
-                              <SelectItem value="oneToTwo">{t("assessment.form.times.oneToTwo")}</SelectItem>
-                              <SelectItem value="moreThan2">{t("assessment.form.times.moreThan2")}</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="careerGoals"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("assessment.form.careerGoals")}</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder={t("assessment.form.careerGoalsPlaceholder")}
-                              className="min-h-[100px]"
-                              {...field}
-                              data-testid="input-assessment-goals"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="biggestChallenge"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("assessment.form.biggestChallenge")}</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder={t("assessment.form.biggestChallengePlaceholder")}
-                              className="min-h-[100px]"
-                              {...field}
-                              data-testid="input-assessment-challenge"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <Button
-                      type="submit"
-                      className="w-full h-14 text-lg rounded-full font-bold"
-                      disabled={createAssessment.isPending}
-                      data-testid="button-submit-assessment"
-                    >
-                      {createAssessment.isPending && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-                      {language === "en" ? "Book My Free Assessment" : "احجز تقييمي المجاني"}
-                    </Button>
-                  </form>
-                </Form>
-              </div>
+            <div style={{ background: BG, border: "1px solid rgba(10,186,181,0.15)", borderRadius: "16px", padding: "22px" }}>
+              <div style={{ fontWeight: 700, fontSize: "15px", color: TDK, marginBottom: "10px" }}>🎁 {isAr ? "مجاني تماماً" : "100% Free"}</div>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "7px" }}>
+                {[
+                  { en: "No credit card required", ar: "لا بطاقة ائتمان مطلوبة" },
+                  { en: "No commitment or obligation", ar: "لا التزام أو ضغط" },
+                  { en: "Call is in Arabic — no pressure", ar: "المكالمة بالعربية — لا ضغط" },
+                  { en: "First week is FREE when you join", ar: "الأسبوع الأول مجاني عند الانضمام" },
+                ].map((item, i) => (
+                  <li key={i} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13.5px", color: MID }}>
+                    <span style={{ color: GOLD, fontWeight: 800 }}>✓</span>{isAr ? item.ar : item.en}
+                  </li>
+                ))}
+              </ul>
             </div>
+          </div>
+
+          {/* Right: Form */}
+          <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.12)" }}>
+            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>
+              {isAr ? "أكمل استمارة التقييم" : "Complete the Assessment Form"}
+            </h3>
+            <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>
+              {isAr ? "سنتصل بك خلال 24 ساعة." : "We'll contact you within 24 hours."}
+            </p>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
+                  <FormField control={form.control} name="name" render={({ field }) => (
+                    <FormItem><FormLabel style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel><FormControl><Input {...field} style={inputStyle} data-testid="input-name" /></FormControl><FormMessage /></FormItem>
+                  )} />
+                  <FormField control={form.control} name="whatsapp" render={({ field }) => (
+                    <FormItem><FormLabel style={labelStyle}>{isAr ? "رقم الواتساب" : "WhatsApp Number"}</FormLabel><FormControl><Input placeholder="+1 587 000 0000" {...field} style={inputStyle} data-testid="input-whatsapp" /></FormControl><FormMessage /></FormItem>
+                  )} />
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
+                  <FormField control={form.control} name="englishLevel" render={({ field }) => (
+                    <FormItem>
+                      <FormLabel style={labelStyle}>{isAr ? "مستوى الإنجليزية" : "English Level"}</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl><SelectTrigger style={inputStyle} data-testid="sel-english"><SelectValue placeholder={isAr ? "اختر المستوى" : "Select level"} /></SelectTrigger></FormControl>
+                        <SelectContent>
+                          <SelectItem value="beginner">{isAr ? "مبتدئ" : "Beginner"}</SelectItem>
+                          <SelectItem value="intermediate">{isAr ? "متوسط" : "Intermediate"}</SelectItem>
+                          <SelectItem value="advanced">{isAr ? "متقدم" : "Advanced"}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )} />
+                  <FormField control={form.control} name="country" render={({ field }) => (
+                    <FormItem><FormLabel style={labelStyle}>{isAr ? "بلد الأصل" : "Country of Origin"}</FormLabel><FormControl><Input placeholder={isAr ? "مصر، سوريا، العراق..." : "Egypt, Syria, Iraq..."} {...field} style={inputStyle} data-testid="input-country" /></FormControl><FormMessage /></FormItem>
+                  )} />
+                </div>
+                <FormField control={form.control} name="timeInCanada" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel style={labelStyle}>{isAr ? "منذ متى وأنت في كندا؟" : "How Long in Canada?"}</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl><SelectTrigger style={inputStyle} data-testid="sel-time"><SelectValue placeholder={isAr ? "اختر المدة" : "Select time"} /></SelectTrigger></FormControl>
+                      <SelectContent>
+                        <SelectItem value="justArrived">{isAr ? "وصلت للتو (أقل من شهر)" : "Just arrived (less than 1 month)"}</SelectItem>
+                        <SelectItem value="lessThan1">{isAr ? "أقل من سنة" : "Less than 1 year"}</SelectItem>
+                        <SelectItem value="oneToTwo">{isAr ? "1–2 سنوات" : "1–2 years"}</SelectItem>
+                        <SelectItem value="moreThan2">{isAr ? "أكثر من سنتين" : "More than 2 years"}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="careerGoals" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel style={labelStyle}>{isAr ? "أهدافك المهنية" : "Career Goals"}</FormLabel>
+                    <FormControl><Textarea placeholder={isAr ? "ما نوع العمل الذي تبحث عنه؟ ما هي أهدافك في كندا؟" : "What kind of work are you looking for? What are your goals in Canada?"} {...field} style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }} data-testid="input-goals" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="biggestChallenge" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel style={labelStyle}>{isAr ? "أكبر تحدٍّ تواجهه الآن" : "Biggest Challenge Right Now"}</FormLabel>
+                    <FormControl><Textarea placeholder={isAr ? "أخبرنا عن أكبر صعوبة — اللغة، العمل، فهم الحياة الكندية..." : "Tell us your main difficulty — language, jobs, understanding Canadian life..."} {...field} style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }} data-testid="input-challenge" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <button type="submit" disabled={createAssessment.isPending} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: createAssessment.isPending ? "not-allowed" : "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: createAssessment.isPending ? 0.65 : 1, marginTop: "6px" }} data-testid="submit-assessment">
+                  {createAssessment.isPending && <Loader2 className="w-5 h-5 animate-spin" />}
+                  📋 {isAr ? "احجز تقييمي المجاني" : "Book My Free Assessment"}
+                </button>
+              </form>
+            </Form>
           </div>
         </div>
       </section>

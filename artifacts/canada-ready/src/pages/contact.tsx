@@ -7,230 +7,153 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useCreateContact } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Mail, MapPin, Phone, Facebook, Instagram } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { motion } from "framer-motion";
 
-const contactSchema = z.object({
+const T = "#0ABAB5"; const TDK = "#007A77"; const GOLD = "#C9903A"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+
+const schema = z.object({
   name: z.string().min(2, "Name is required"),
-  email: z.string().email("Invalid email address"),
+  email: z.string().email("Invalid email"),
   whatsapp: z.string().optional(),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+  message: z.string().min(10, "Message too short"),
 });
 
-type ContactFormValues = z.infer<typeof contactSchema>;
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.08 } }),
-};
-
 export default function Contact() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const isAr = language === "ar";
   const { toast } = useToast();
   const createContact = useCreateContact();
 
-  const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: { name: "", email: "", whatsapp: "", message: "" },
   });
 
-  const onSubmit = (data: ContactFormValues) => {
-    createContact.mutate(
-      { data },
-      {
-        onSuccess: () => {
-          toast({ title: t("common.success"), description: t("contact.form.success") });
-          form.reset();
-        },
-        onError: () => {
-          toast({ variant: "destructive", title: t("common.error"), description: language === "en" ? "Something went wrong. Please try again." : "حدث خطأ. يرجى المحاولة مرة أخرى." });
-        },
-      }
-    );
+  const onSubmit = (data: z.infer<typeof schema>) => {
+    createContact.mutate({ data }, {
+      onSuccess: () => {
+        toast({ title: isAr ? "تم الإرسال!" : "Message Sent!", description: isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours." });
+        form.reset();
+      },
+      onError: () => toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "حاول مرة أخرى." : "Please try again." }),
+    });
   };
 
+  const channels = [
+    { icon: "💬", color: "#25D366", label_en: "WhatsApp", label_ar: "واتساب", val_en: "+1 (587) 000-0000", val_ar: "+1 (587) 000-0000", href: "https://wa.me/15870000000", desc_en: "Chat with us — we reply within hours", desc_ar: "تحدث معنا — نرد خلال ساعات" },
+    { icon: "✉️", color: T, label_en: "Email", label_ar: "البريد الإلكتروني", val_en: "hello@canadareadyacademy.com", val_ar: "hello@canadareadyacademy.com", href: "mailto:hello@canadareadyacademy.com", desc_en: "We reply within 24 hours", desc_ar: "نرد خلال 24 ساعة" },
+    { icon: "📘", color: "#1877F2", label_en: "Facebook", label_ar: "فيسبوك", val_en: "@CanadaReadyAcademy", val_ar: "@CanadaReadyAcademy", href: "https://facebook.com/canadareadyacademy", desc_en: "Follow us & message us on Facebook", desc_ar: "تابعنا وراسلنا على فيسبوك" },
+    { icon: "📸", color: "#E1306C", label_en: "Instagram", label_ar: "إنستغرام", val_en: "@canadareadyacademy", val_ar: "@canadareadyacademy", href: "https://instagram.com/canadareadyacademy", desc_en: "Daily tips for newcomers", desc_ar: "نصائح يومية للوافدين الجدد" },
+  ];
+
+  const stag = { display: "inline-flex" as const, alignItems: "center", gap: "6px", background: "rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" };
+
   return (
-    <div className="w-full">
+    <div style={{ width: "100%" }}>
       {/* Header */}
-      <section className="py-16 bg-gradient-to-b from-primary/8 to-background">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">{t("contact.title")}</h1>
-          <p className="text-muted-foreground text-xl">{t("contact.subtitle")}</p>
-        </div>
+      <section style={{ padding: "60px 5% 50px", background: `linear-gradient(135deg,${BG},#e8fffe)`, textAlign: "center" }}>
+        <div style={stag}>📞 {isAr ? "تواصل" : "CONTACT US"}</div>
+        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px,4vw,52px)", fontWeight: 800, color: TDK, marginBottom: "12px" }}>
+          {isAr ? "نحن هنا للمساعدة" : "We Are Here to Help"}
+        </h1>
+        <p style={{ fontSize: "17px", color: MID, maxWidth: "560px", margin: "0 auto" }}>
+          {isAr ? "تواصل معنا عبر أي قناة تناسبك. سنرد في أقرب وقت." : "Reach out through any channel that works best for you. We'll respond quickly."}
+        </p>
       </section>
 
-      {/* WhatsApp CTA Banner */}
-      <section className="py-10 bg-[#075E54]">
-        <div className="container mx-auto px-4 max-w-3xl text-center text-white">
-          <h2 className="text-2xl font-bold mb-2">{t("contact.whatsappSection.title")}</h2>
-          <p className="text-white/80 mb-6">{t("contact.whatsappSection.desc")}</p>
-          <a
-            href="https://wa.me/15870000000"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-testid="button-contact-whatsapp"
-            className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20b858] text-white font-bold text-lg px-8 py-4 rounded-full transition-colors shadow-lg"
-          >
-            <Phone size={22} />
-            {t("contact.whatsappSection.cta")}
+      {/* WhatsApp Banner */}
+      <section style={{ background: "#075E54", padding: "50px 5%", textAlign: "center" }}>
+        <div style={{ maxWidth: "640px", margin: "0 auto" }}>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(22px,3vw,34px)", fontWeight: 800, color: "#fff", marginBottom: "10px" }}>
+            {isAr ? "هل تحتاج مساعدة في اختيار برنامج؟" : "Need Help Choosing a Program?"}
+          </h2>
+          <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "17px", marginBottom: "22px" }}>
+            {isAr ? "راسلنا مباشرة على واتساب وسنجيب على أي سؤال لديك خلال ساعات قليلة." : "Message us directly on WhatsApp and we will answer any question within a few hours."}
+          </p>
+          <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 40px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }} data-testid="contact-whatsapp">
+            💬 {isAr ? "راسلنا على واتساب" : "Message Us on WhatsApp"}
           </a>
         </div>
       </section>
 
-      {/* Contact Details + Form */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="grid md:grid-cols-5 gap-12">
-            {/* Left: Contact Info */}
-            <div className="md:col-span-2 space-y-8">
-              <div>
-                <h2 className="text-xl font-bold mb-6">
-                  {language === "en" ? "Our Contact Details" : "تفاصيل التواصل"}
-                </h2>
-                <div className="space-y-6">
-                  <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#25D366]/15 text-[#25D366] flex items-center justify-center flex-shrink-0">
-                      <Phone size={22} />
-                    </div>
-                    <div>
-                      <h3 className="font-bold mb-1">{t("contact.channels.whatsapp")}</h3>
-                      <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-whatsapp">
-                        +1 (587) 000-0000
-                      </a>
-                    </div>
-                  </motion.div>
+      {/* Channels + Form */}
+      <section style={{ padding: "72px 5%", background: "#fff" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "52px", alignItems: "start" }}>
+          {/* Channels */}
+          <div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(22px,2.5vw,32px)", fontWeight: 800, color: TDK, marginBottom: "8px" }}>
+              {isAr ? "تفاصيل التواصل" : "Our Contact Details"}
+            </h2>
+            <p style={{ fontSize: "15px", color: MID, marginBottom: "24px" }}>
+              {isAr ? "نحن متاحون عبر جميع القنوات التالية." : "We are available on all of the following channels."}
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              {channels.map((ch) => (
+                <a key={ch.label_en} href={ch.href} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "13px", background: "#fff", borderRadius: "18px", padding: "17px 20px", border: "1px solid rgba(10,186,181,0.15)", textDecoration: "none", transition: "0.3s" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = ch.color; (e.currentTarget as HTMLAnchorElement).style.boxShadow = `0 8px 32px ${ch.color}22`; (e.currentTarget as HTMLAnchorElement).style.transform = "translateX(4px)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(10,186,181,0.15)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = ""; (e.currentTarget as HTMLAnchorElement).style.transform = ""; }}
+                  data-testid={`ch-${ch.label_en}`}
+                >
+                  <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: `${ch.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", flexShrink: 0 }}>{ch.icon}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 700, fontSize: "15px", color: TDK }}>{isAr ? ch.label_ar : ch.label_en}</div>
+                    <div style={{ fontSize: "13px", color: "#8896AB" }}>{isAr ? ch.val_ar : ch.val_en}</div>
+                    <div style={{ fontSize: "12px", color: ch.color, fontWeight: 600, marginTop: "2px" }}>{isAr ? ch.desc_ar : ch.desc_en}</div>
+                  </div>
+                  <div style={{ fontSize: "18px", color: "#ccc" }}>→</div>
+                </a>
+              ))}
+            </div>
+            <div style={{ marginTop: "24px", background: BG, border: "1px solid rgba(10,186,181,0.15)", borderRadius: "16px", padding: "20px" }}>
+              <div style={{ fontWeight: 700, fontSize: "15px", color: TDK, marginBottom: "4px" }}>🌐 {isAr ? "الموقع" : "Location"}</div>
+              <div style={{ fontSize: "14px", color: MID }}>{isAr ? "عبر الإنترنت — نخدم جميع أنحاء كندا" : "Online — Serving all of Canada"}</div>
+              <div style={{ fontSize: "13px", color: "#8896AB", marginTop: "4px" }}>{isAr ? "ألبرتا · أونتاريو · كولومبيا البريطانية · وأكثر" : "Alberta · Ontario · British Columbia · and more"}</div>
+            </div>
+          </div>
 
-                  <motion.div custom={1} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                      <Mail size={22} />
-                    </div>
-                    <div>
-                      <h3 className="font-bold mb-1">{t("contact.channels.email")}</h3>
-                      <a href="mailto:hello@canadareadyacademy.com" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-email">
-                        hello@canadareadyacademy.com
-                      </a>
-                    </div>
-                  </motion.div>
-
-                  <motion.div custom={2} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0">
-                      <Facebook size={22} />
-                    </div>
-                    <div>
-                      <h3 className="font-bold mb-1">{t("contact.channels.facebook")}</h3>
-                      <a href="https://facebook.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-facebook">
-                        @CanadaReadyAcademy
-                      </a>
-                    </div>
-                  </motion.div>
-
-                  <motion.div custom={3} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center flex-shrink-0">
-                      <Instagram size={22} />
-                    </div>
-                    <div>
-                      <h3 className="font-bold mb-1">{t("contact.channels.instagram")}</h3>
-                      <a href="https://instagram.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-instagram">
-                        @canadareadyacademy
-                      </a>
-                    </div>
-                  </motion.div>
-
-                  <motion.div custom={4} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                      <MapPin size={22} className="text-muted-foreground" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold mb-1">{language === "en" ? "Location" : "الموقع"}</h3>
-                      <p className="text-muted-foreground">{language === "en" ? "Online — Serving all of Canada" : "عبر الإنترنت — نخدم جميع أنحاء كندا"}</p>
-                    </div>
-                  </motion.div>
+          {/* Form */}
+          <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.12)" }}>
+            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>{isAr ? "أرسل لنا رسالة" : "Send Us a Message"}</h3>
+            <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>{isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours."}</p>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
+                  <FormField control={form.control} name="name" render={({ field }) => (
+                    <FormItem>
+                      <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel>
+                      <FormControl><Input {...field} style={{ border: "1.5px solid rgba(10,186,181,0.25)", borderRadius: "10px" }} data-testid="input-name" /></FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )} />
+                  <FormField control={form.control} name="email" render={({ field }) => (
+                    <FormItem>
+                      <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel>
+                      <FormControl><Input type="email" {...field} style={{ border: "1.5px solid rgba(10,186,181,0.25)", borderRadius: "10px" }} data-testid="input-email" /></FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )} />
                 </div>
-              </div>
-            </div>
-
-            {/* Right: Form */}
-            <div className="md:col-span-3">
-              <div className="bg-card border rounded-2xl p-6 md:p-8 shadow-sm">
-                <h2 className="text-xl font-bold mb-6">{t("contact.form.title")}</h2>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-                    <div className="grid md:grid-cols-2 gap-5">
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t("contact.form.name")}</FormLabel>
-                            <FormControl>
-                              <Input {...field} data-testid="input-contact-name" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t("contact.form.email")}</FormLabel>
-                            <FormControl>
-                              <Input type="email" {...field} data-testid="input-contact-email" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <FormField
-                      control={form.control}
-                      name="whatsapp"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("contact.form.whatsapp")}</FormLabel>
-                          <FormControl>
-                            <Input {...field} data-testid="input-contact-whatsapp" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("contact.form.message")}</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder={t("contact.form.messagePlaceholder")}
-                              className="min-h-[140px]"
-                              {...field}
-                              data-testid="input-contact-message"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <Button
-                      type="submit"
-                      className="w-full h-12 rounded-full font-bold"
-                      disabled={createContact.isPending}
-                      data-testid="button-submit-contact"
-                    >
-                      {createContact.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      {t("contact.form.submit")}
-                    </Button>
-                  </form>
-                </Form>
-              </div>
-            </div>
+                <FormField control={form.control} name="whatsapp" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رقم الواتساب (اختياري)" : "WhatsApp Number (Optional)"}</FormLabel>
+                    <FormControl><Input placeholder="+1 587 000 0000" {...field} style={{ border: "1.5px solid rgba(10,186,181,0.25)", borderRadius: "10px" }} data-testid="input-whatsapp" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="message" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رسالتك" : "Your Message"}</FormLabel>
+                    <FormControl><Textarea placeholder={isAr ? "أخبرنا كيف يمكننا مساعدتك..." : "Tell us how we can help you..."} className="min-h-[100px]" {...field} style={{ border: "1.5px solid rgba(10,186,181,0.25)", borderRadius: "10px" }} data-testid="input-message" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <button type="submit" disabled={createContact.isPending} style={{ width: "100%", padding: "15px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "15px", fontWeight: 700, cursor: createContact.isPending ? "not-allowed" : "pointer", fontFamily: "inherit", transition: "0.28s", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: createContact.isPending ? 0.6 : 1 }} data-testid="submit-contact">
+                  {createContact.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {isAr ? "إرسال الرسالة" : "Send Message"}
+                </button>
+              </form>
+            </Form>
           </div>
         </div>
       </section>

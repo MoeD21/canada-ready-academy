@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/lib/language-context";
-import { Phone, Mail, Facebook, Instagram, Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const { language, setLanguage, t } = useLanguage();
@@ -10,87 +8,82 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = [
-    { href: "/", label: t("nav.home") },
-    { href: "/about", label: t("nav.about") },
-    { href: "/programs", label: t("nav.programs") },
-    { href: "/how-it-works", label: t("nav.howItWorks") },
-    { href: "/assessment", label: t("nav.assessment") },
-    { href: "/testimonials", label: t("nav.testimonials") },
-    { href: "/contact", label: t("nav.contact") },
+    { href: "/", label: language === "en" ? "Home" : "الرئيسية" },
+    { href: "/about", label: language === "en" ? "About" : "عنّا" },
+    { href: "/programs", label: language === "en" ? "Programs" : "البرامج" },
+    { href: "/how-it-works", label: language === "en" ? "How It Works" : "كيف يعمل" },
+    { href: "/assessment", label: language === "en" ? "Free Assessment" : "تقييم مجاني" },
+    { href: "/testimonials", label: language === "en" ? "Testimonials" : "آراء الطلاب" },
+    { href: "/contact", label: language === "en" ? "Contact" : "تواصل" },
+  ];
+
+  const mobileLinks = [
+    { href: "/", emoji: "🏠", en: "Home", ar: "الرئيسية" },
+    { href: "/about", emoji: "ℹ️", en: "About", ar: "عنّا" },
+    { href: "/programs", emoji: "📚", en: "Programs", ar: "البرامج" },
+    { href: "/how-it-works", emoji: "🔄", en: "How It Works", ar: "كيف يعمل" },
+    { href: "/assessment", emoji: "📋", en: "Book Free Assessment", ar: "احجز تقييماً مجانياً", highlight: true },
+    { href: "/testimonials", emoji: "⭐", en: "Testimonials", ar: "آراء الطلاب" },
+    { href: "/contact", emoji: "📞", en: "Contact", ar: "تواصل" },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, background: "rgba(245,254,253,0.97)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(10,186,181,0.15)", height: "68px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 5%" }}>
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 flex-shrink-0" onClick={() => setMobileOpen(false)}>
-          <span className="font-extrabold text-xl text-primary tracking-tight">Canada Ready Academy</span>
+        <Link href="/" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
+          <div style={{ width: "42px", height: "42px", background: "var(--tiffany)", borderRadius: "11px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", flexShrink: 0 }}>🍁</div>
+          <div>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "18px", fontWeight: 800, color: "var(--tiffany-dk)", lineHeight: 1 }}>CanadaReady</div>
+            <div style={{ fontSize: "9px", color: "var(--gold)", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase" }}>{language === "en" ? "Academy" : "أكاديمية"}</div>
+          </div>
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden lg:flex items-center gap-5">
+        <div className="hidden lg:flex" style={{ alignItems: "center", gap: "2px" }}>
           {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary whitespace-nowrap ${location === link.href ? "text-primary" : "text-muted-foreground"}`}
-            >
+            <Link key={link.href} href={link.href} style={{
+              textDecoration: "none", fontSize: "13px", fontWeight: 600, padding: "7px 11px", borderRadius: "8px", transition: "0.2s",
+              color: location === link.href ? "var(--tiffany-dk)" : "#4A6B69",
+              background: location === link.href ? "rgba(10,186,181,0.1)" : "transparent"
+            }}>
               {link.label}
             </Link>
           ))}
-          <button
-            onClick={() => setLanguage(language === "en" ? "ar" : "en")}
-            className="px-3 py-1 rounded-full border border-input text-sm font-semibold hover:bg-accent transition-colors ml-2"
-            data-testid="button-language-toggle"
-          >
-            {language === "en" ? "عربي" : "English"}
-          </button>
         </div>
 
-        {/* Mobile: language + hamburger */}
-        <div className="flex lg:hidden items-center gap-3">
-          <button
-            onClick={() => setLanguage(language === "en" ? "ar" : "en")}
-            className="px-3 py-1 rounded-full border border-input text-sm font-semibold hover:bg-accent transition-colors"
-            data-testid="button-language-toggle-mobile"
-          >
-            {language === "en" ? "عربي" : "English"}
-          </button>
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-2 rounded-lg hover:bg-accent transition-colors"
-            data-testid="button-mobile-menu"
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        {/* Right: language switch + CTA + hamburger */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div style={{ background: "var(--tiffany-dk)", borderRadius: "22px", padding: "3px", display: "flex" }}>
+            <button onClick={() => setLanguage("en")} style={{ border: "none", background: language === "en" ? "var(--gold)" : "transparent", color: language === "en" ? "var(--tiffany-dk)" : "rgba(255,255,255,0.5)", fontSize: "13px", fontWeight: 700, padding: "5px 13px", borderRadius: "18px", cursor: "pointer", transition: "0.22s", fontFamily: "inherit" }} data-testid="btn-en">EN</button>
+            <button onClick={() => setLanguage("ar")} style={{ border: "none", background: language === "ar" ? "var(--gold)" : "transparent", color: language === "ar" ? "var(--tiffany-dk)" : "rgba(255,255,255,0.5)", fontSize: "13px", fontWeight: 700, padding: "5px 13px", borderRadius: "18px", cursor: "pointer", transition: "0.22s", fontFamily: "inherit" }} data-testid="btn-ar">عربي</button>
+          </div>
+          <Link href="/assessment" className="hidden lg:flex" style={{ background: "var(--tiffany)", color: "#fff", border: "none", padding: "10px 18px", borderRadius: "22px", fontSize: "13px", fontWeight: 700, cursor: "pointer", textDecoration: "none", transition: "0.25s", whiteSpace: "nowrap", alignItems: "center", gap: "6px" }} data-testid="nav-cta">
+            📋 {language === "en" ? "Free Assessment" : "تقييم مجاني"}
+          </Link>
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="flex lg:hidden" style={{ background: "none", border: `2px solid var(--tiffany)`, borderRadius: "8px", width: "38px", height: "38px", cursor: "pointer", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "5px", padding: 0 }} data-testid="hamburger">
+            <span style={{ display: "block", width: "18px", height: "2px", background: "var(--tiffany)", borderRadius: "2px" }} />
+            <span style={{ display: "block", width: "18px", height: "2px", background: "var(--tiffany)", borderRadius: "2px" }} />
+            <span style={{ display: "block", width: "18px", height: "2px", background: "var(--tiffany)", borderRadius: "2px" }} />
           </button>
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-background border-t shadow-lg">
-          <div className="container mx-auto px-4 py-4 flex flex-col gap-1">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className={`py-3 px-4 rounded-lg text-base font-medium transition-colors hover:bg-accent ${location === link.href ? "text-primary bg-primary/5" : "text-foreground"}`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href="https://wa.me/15870000000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 flex items-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-xl font-bold justify-center"
-              onClick={() => setMobileOpen(false)}
-            >
-              <Phone size={18} />
-              {t("common.whatsappMsg")}
-            </a>
-          </div>
+        <div style={{ position: "fixed", top: "68px", left: 0, right: 0, background: "#fff", zIndex: 999, borderBottom: "1px solid rgba(10,186,181,0.15)", padding: "16px 5%", display: "flex", flexDirection: "column", gap: "3px" }}>
+          {mobileLinks.map((link) => (
+            <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} style={{
+              textDecoration: "none", fontSize: "15px", fontWeight: link.highlight ? 800 : 600, padding: "10px 14px", borderRadius: "10px",
+              color: link.highlight ? "var(--tiffany-dk)" : "#4A6B69",
+              background: link.highlight ? "rgba(10,186,181,0.1)" : "transparent"
+            }}>
+              {link.emoji} {language === "en" ? link.en : link.ar}
+            </Link>
+          ))}
+          <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", gap: "8px", background: "#25D366", color: "#fff", textDecoration: "none", padding: "11px 15px", borderRadius: "11px", fontWeight: 700, fontSize: "14px", marginTop: "6px" }}>
+            💬 {language === "en" ? "Chat on WhatsApp" : "تحدث على واتساب"}
+          </a>
         </div>
       )}
     </nav>
@@ -98,80 +91,62 @@ export function Navbar() {
 }
 
 export function Footer() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const isAr = language === "ar";
 
   const navLinks = [
-    { href: "/", label: t("nav.home") },
-    { href: "/about", label: t("nav.about") },
-    { href: "/programs", label: t("nav.programs") },
-    { href: "/how-it-works", label: t("nav.howItWorks") },
-    { href: "/assessment", label: t("nav.assessment") },
-    { href: "/testimonials", label: t("nav.testimonials") },
-    { href: "/contact", label: t("nav.contact") },
+    { href: "/", en: "Home", ar: "الرئيسية" },
+    { href: "/about", en: "About", ar: "عنّا" },
+    { href: "/programs", en: "Programs", ar: "البرامج" },
+    { href: "/how-it-works", en: "How It Works", ar: "كيف يعمل" },
+    { href: "/assessment", en: "Free Assessment", ar: "تقييم مجاني" },
+    { href: "/testimonials", en: "Testimonials", ar: "آراء الطلاب" },
+    { href: "/contact", en: "Contact", ar: "تواصل" },
   ];
 
   return (
-    <footer className="bg-foreground text-background/80 pt-12 pb-6 mt-auto">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-          {/* Brand */}
-          <div>
-            <p className="font-extrabold text-xl text-background mb-3">Canada Ready Academy</p>
-            <p className="text-sm leading-relaxed mb-4">{t("footer.desc")}</p>
-            <div className="flex gap-3">
-              <a href="https://facebook.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-background/10 hover:bg-background/20 rounded-full flex items-center justify-center transition-colors" aria-label="Facebook">
-                <Facebook size={16} />
-              </a>
-              <a href="https://instagram.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-background/10 hover:bg-background/20 rounded-full flex items-center justify-center transition-colors" aria-label="Instagram">
-                <Instagram size={16} />
-              </a>
-              <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-[#25D366] hover:bg-[#20b858] rounded-full flex items-center justify-center transition-colors" aria-label="WhatsApp">
-                <Phone size={16} />
-              </a>
-            </div>
+    <footer style={{ background: "#004D4B", color: "rgba(255,255,255,0.55)", paddingTop: "54px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "2fr 1fr 1.4fr", gap: "38px", paddingBottom: "42px", padding: "0 5% 42px" }}>
+        {/* Brand */}
+        <div>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "19px", fontWeight: 700, color: "#fff", marginBottom: "10px" }}>🍁 CanadaReady Academy</div>
+          <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: "255px", marginBottom: "16px" }}>
+            {isAr ? "دعم اللغة الإنجليزية والمهنة والحياة للقادمين الجدد في كندا." : "English, Career & Life Support for Newcomers in Canada."}
           </div>
-
-          {/* Quick links */}
-          <div>
-            <p className="font-bold text-background mb-4">{t("footer.quickLinks")}</p>
-            <ul className="space-y-2">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-background transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <p className="font-bold text-background mb-4">{language === "en" ? "Contact Us" : "اتصل بنا"}</p>
-            <div className="space-y-3 text-sm">
-              <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-background transition-colors">
-                <Phone size={16} className="flex-shrink-0" />
-                +1 (587) 000-0000
-              </a>
-              <a href="mailto:hello@canadareadyacademy.com" className="flex items-center gap-3 hover:text-background transition-colors">
-                <Mail size={16} className="flex-shrink-0" />
-                hello@canadareadyacademy.com
-              </a>
-              <a href="https://facebook.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-background transition-colors">
-                <Facebook size={16} className="flex-shrink-0" />
-                @CanadaReadyAcademy
-              </a>
-              <a href="https://instagram.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-background transition-colors">
-                <Instagram size={16} className="flex-shrink-0" />
-                @canadareadyacademy
-              </a>
-            </div>
+          <div style={{ display: "flex", gap: "8px" }}>
+            <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "7px", background: "#25D366", color: "#fff", textDecoration: "none", padding: "9px 13px", borderRadius: "9px", fontWeight: 700, fontSize: "13px" }}>💬 WhatsApp</a>
+            <a href="https://facebook.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "7px", background: "#1877F2", color: "#fff", textDecoration: "none", padding: "9px 13px", borderRadius: "9px", fontWeight: 700, fontSize: "13px" }}>📘 Facebook</a>
           </div>
         </div>
 
-        <div className="border-t border-background/10 pt-6 text-center text-xs text-background/50">
-          © {new Date().getFullYear()} {t("footer.copyright")}
+        {/* Quick links */}
+        <div>
+          <h4 style={{ color: "#fff", fontSize: "11.5px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", marginBottom: "13px", fontFamily: "'Outfit', sans-serif" }}>{isAr ? "روابط سريعة" : "Quick Links"}</h4>
+          <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} style={{ color: "rgba(255,255,255,0.46)", textDecoration: "none", fontSize: "13px", transition: "0.2s" }}>
+                  {isAr ? link.ar : link.en}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
+
+        {/* Contact */}
+        <div>
+          <h4 style={{ color: "#fff", fontSize: "11.5px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", marginBottom: "13px", fontFamily: "'Outfit', sans-serif" }}>{isAr ? "اتصل بنا" : "Contact Us"}</h4>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", fontSize: "13px" }}>
+            <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>💬 +1 (587) 000-0000</a>
+            <a href="mailto:hello@canadareadyacademy.com" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>✉️ hello@canadareadyacademy.com</a>
+            <a href="https://instagram.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>📸 @canadareadyacademy</a>
+            <span style={{ color: "rgba(255,255,255,0.45)" }}>🌐 {isAr ? "عبر الإنترنت — جميع أنحاء كندا" : "Online — All of Canada"}</span>
+          </div>
+        </div>
+      </div>
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "17px 5%", maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", fontSize: "12px", color: "rgba(255,255,255,0.27)" }}>
+        <span>© {new Date().getFullYear()} Canada Ready Academy. {isAr ? "جميع الحقوق محفوظة." : "All rights reserved."}</span>
+        <span>{isAr ? "مدعوم بالحب للمهاجرين 🍁" : "Made with ❤️ for newcomers 🍁"}</span>
       </div>
     </footer>
   );
@@ -179,26 +154,20 @@ export function Footer() {
 
 export function WhatsAppButton() {
   return (
-    <a
-      href="https://wa.me/15870000000"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center"
-      aria-label="Contact us on WhatsApp"
-      data-testid="button-whatsapp-float"
-    >
-      <Phone size={26} />
-    </a>
+    <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer"
+      style={{ position: "fixed", bottom: "26px", right: "26px", zIndex: 950, width: "56px", height: "56px", background: "#25D366", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "25px", textDecoration: "none" }}
+      className="animate-pulse-wa"
+      aria-label="WhatsApp"
+      data-testid="whatsapp-float"
+    >💬</a>
   );
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-[100dvh] flex flex-col font-sans">
+    <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", fontFamily: "'Outfit', sans-serif" }}>
       <Navbar />
-      <main className="flex-1">
-        {children}
-      </main>
+      <main style={{ flex: 1, paddingTop: "68px" }}>{children}</main>
       <Footer />
       <WhatsAppButton />
     </div>
