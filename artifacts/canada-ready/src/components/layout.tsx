@@ -13,7 +13,6 @@ export function Navbar() {
     { href: "/programs", label: language === "en" ? "Programs" : "البرامج" },
     { href: "/services", label: language === "en" ? "All Services" : "كل الخدمات" },
     { href: "/how-it-works", label: language === "en" ? "How It Works" : "كيف يعمل" },
-    { href: "/assessment", label: language === "en" ? "Free Appointment" : "موعد مجاني" },
     { href: "/testimonials", label: language === "en" ? "Testimonials" : "آراء الطلاب" },
     { href: "/contact", label: language === "en" ? "Contact" : "تواصل" },
   ];
@@ -24,7 +23,7 @@ export function Navbar() {
     { href: "/programs", emoji: "📚", en: "Programs", ar: "البرامج" },
     { href: "/services", emoji: "🧾", en: "All Services", ar: "كل الخدمات" },
     { href: "/how-it-works", emoji: "🔄", en: "How It Works", ar: "كيف يعمل" },
-    { href: "/assessment", emoji: "📋", en: "Book Free Appointment", ar: "احجز موعداً مجانياً", highlight: true },
+    { href: "/assessment", emoji: "📋", en: "Free Assessment", ar: "تقييم مجاني", highlight: true },
     { href: "/testimonials", emoji: "⭐", en: "Testimonials", ar: "آراء الطلاب" },
     { href: "/contact", emoji: "📞", en: "Contact", ar: "تواصل" },
   ];
