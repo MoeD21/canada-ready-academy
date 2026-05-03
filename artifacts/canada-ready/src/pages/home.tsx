@@ -598,20 +598,6 @@ export default function Home() {
                 <div><div className="cm-en">Location</div><div className="cm-ar">الموقع</div><div className="cm-detail">Online — Serving all of Canada: AB · ON · BC · and more</div></div>
               </div>
             </div>
-            <div className="form-card">
-              <h3>Send Us a Message</h3>
-              <div className="h3-ar">أرسل لنا رسالة</div>
-              <form onSubmit={handleContactSubmit}>
-                <div className="inp-row">
-                  <input className="inp" type="text" placeholder="Your name / اسمك" required />
-                  <input className="inp" type="tel" placeholder="WhatsApp / رقم الواتساب" required />
-                </div>
-                <input className="inp" type="email" placeholder="Email (optional / اختياري)" />
-                <textarea className="inp" placeholder="Your message / رسالتك..." required></textarea>
-                <button className="btn-submit" type="submit" disabled={contactSent}>✉️ Send Message | أرسل الرسالة</button>
-                {contactSent && <div className="success-msg show">✅ Message sent! We'll reply within 24 hours. | تم الإرسال! سنرد خلال 24 ساعة.</div>}
-              </form>
-            </div>
           </div>
         </div>
       </section>
