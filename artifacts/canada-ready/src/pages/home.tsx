@@ -214,6 +214,156 @@ export default function Home() {
           <Link href="/assessment" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: GOLD, color: NAVY, padding: "16px 38px", borderRadius: "32px", fontSize: "16px", fontWeight: 900, textDecoration: "none" }}>Book Your Free Assessment / احجز تقييمك المجاني</Link>
         </div>
       </section>
+      <section style={{ background: `linear-gradient(135deg, ${T}, ${TD})`, padding: "80px 32px", position: "relative", overflow: "hidden" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "56px", alignItems: "center" }} className="max-lg:grid-cols-1">
+          <div style={{ color: "#fff" }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,4vw,46px)", fontWeight: 900, lineHeight: 1.2, marginBottom: "12px" }}>Your First Week is<br /><span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,.3)" }}>Completely Free</span></h2>
+            <h2 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "clamp(22px,3vw,36px)", fontWeight: 900, color: "rgba(255,255,255,.6)", direction: "rtl", display: "block", marginBottom: "24px" }}>أسبوعك الأول مجاني<br />تماماً بدون أي شرط</h2>
+            <p style={{ fontSize: "17px", color: "rgba(255,255,255,.8)", marginBottom: "8px", maxWidth: "480px", lineHeight: 1.8 }}>Try the program with zero commitment. Attend all 3 classes, get the materials, join the WhatsApp group — and decide after.</p>
+            <p style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "15px", color: "rgba(255,255,255,.55)", direction: "rtl", maxWidth: "480px", lineHeight: 1.8, marginBottom: "32px" }}>جرّب البرنامج بدون أي التزام. احضر الصفوف الثلاثة، استلم المواد، انضم لمجموعة الواتساب — ثم قرّر بعدها.</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "32px" }}>
+              {["✓ No credit card","✓ No commitment","✓ Full week access"].map((chip) => <div key={chip} style={{ background: "rgba(255,255,255,.18)", color: "#fff", padding: "9px 18px", borderRadius: "30px", fontSize: "13px", fontWeight: 600 }}>{chip}</div>)}
+              {["✓ بدون بطاقة ائتمان","✓ بدون التزام","✓ أسبوع كامل مجاناً"].map((chip) => <div key={chip} style={{ background: "rgba(255,255,255,.18)", color: "#fff", padding: "9px 18px", borderRadius: "30px", fontSize: "13px", fontWeight: 600, fontFamily: "'Tajawal', sans-serif" }}>{chip}</div>)}
+            </div>
+            <a href="#assessment" style={{ background: "#fff", color: TD, padding: "16px 36px", borderRadius: "40px", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "10px", boxShadow: "0 8px 28px rgba(0,0,0,.15)", fontSize: "16px", fontWeight: 800 }}>📋 Book My Free Week | احجز أسبوعي المجاني</a>
+          </div>
+          <div style={{ background: "#fff", borderRadius: "24px", padding: "36px", boxShadow: "0 20px 60px rgba(0,0,0,.2)" }}>
+            <h3 style={{ fontSize: "20px", fontWeight: 700, color: NAVY, marginBottom: "4px" }}>What&apos;s included in the free week:</h3>
+            <h3 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "17px", color: GRAY, direction: "rtl", display: "block", marginBottom: "20px" }}>ما يشمله الأسبوع المجاني:</h3>
+            {[["🗣️","3 live classes","3 حصص مباشرة"],["📘","Class materials and homework","المواد والواجبات"],["💬","WhatsApp group access","دخول مجموعة الواتساب"],["🤝","Meet our team","التعرف على الفريق"],["✅","No payment required","لا يوجد أي دفع"]].map(([icon,en,ar]) => (
+              <div key={en} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px 0", borderBottom: `1px solid ${OFF}` }}>
+                <div style={{ width: "36px", height: "36px", background: TL, borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", flexShrink: 0 }}>{icon}</div>
+                <div>
+                  <div style={{ fontWeight: 500, color: NAVY, fontSize: "14px" }}>{en}</div>
+                  <div style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "12px", color: GRAY, direction: "rtl" }}>{ar}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section style={{ background: NAVY, padding: "80px 32px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "48px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>🕒 HOW IT WORKS / كيف يعمل</div>
+          </div>
+          <div style={{ display: "grid", gap: "20px", marginTop: "48px" }}>
+            {[
+              ["1","Book Your Free Assessment","احجز تقييمك المجاني","Fill out a short form and schedule a 15–20 minute call.","املأ الاستمارة واحجز مكالمة قصيرة."],
+              ["2","Meet Our Team","التق بفريقنا","We check your English level and goals.","نحدد مستواك وأهدافك."],
+              ["3","Choose Your Program","اختر برنامجك","We recommend the best plan for your needs.","نقترح أفضل خطة لك."],
+              ["4","Join Classes & Community","انضم للحصص والمجتمع","Receive WhatsApp access, Zoom links, and materials.","تحصل على واتساب وروابط الزوم والمواد."],
+              ["5","Receive Weekly Support","احصل على الدعم الأسبوعي","Attend classes and build your future step by step.","احضر الحصص وابنِ مستقبلك خطوة بخطوة."],
+            ].map(([n,en,ar,descEn,descAr]) => (
+              <div key={n} style={{ background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.08)", borderRadius: "20px", padding: "32px", display: "grid", gridTemplateColumns: "56px 1fr 1fr", gap: "24px", alignItems: "start" }} className="max-md:grid-cols-1">
+                <div style={{ width: "52px", height: "52px", background: `linear-gradient(135deg, ${T}, ${TD})`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: "#fff" }}>{n}</div>
+                <div>
+                  <h4 style={{ fontSize: "17px", fontWeight: 700, color: "#fff", marginBottom: "10px" }}>{en}</h4>
+                  <p style={{ fontSize: "13px", color: "rgba(255,255,255,.6)" }}>{descEn}</p>
+                </div>
+                <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", textAlign: "right" }}>
+                  <h4 style={{ fontSize: "16px", fontWeight: 700, color: "rgba(255,255,255,.55)", marginBottom: "10px" }}>{ar}</h4>
+                  <p style={{ fontSize: "12px", color: "rgba(255,255,255,.35)" }}>{descAr}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section style={{ padding: "80px 32px", background: "#fff" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "48px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>💬 TESTIMONIALS / آراء الطلاب</div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: "24px" }}>
+            {[["👨","Ahmed M.","From Egypt — Now in Calgary, Alberta","من مصر — الآن في كالغاري، ألبرتا","Career Boost Plan","باقة الانطلاقة المهنية"],["👩","Fatima S.","From Syria — Now in Edmonton, Alberta","من سوريا — الآن في إدمونتون، ألبرتا","Canada Ready Plan","باقة جاهز لكندا"],["👨‍💻","Omar K.","From Iraq — Now in Toronto, Ontario","من العراق — الآن في تورونتو، أونتاريو","Starter → Career Boost","البداية ← الانطلاقة المهنية"]].map(([emoji,name,enFrom,arFrom,planEn,planAr]) => (
+              <div key={name} style={{ background: "#fff", borderRadius: "24px", padding: "32px", border: `1.5px solid ${BORDER}` }}>
+                <div style={{ color: GOLD, fontSize: "18px", letterSpacing: "2px", marginBottom: "16px" }}>★★★★★</div>
+                <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "15px", color: NAVY, lineHeight: 1.8, marginBottom: "10px" }}>I arrived in Canada without knowing how interviews work. After joining, I got support, confidence, and real results.</p>
+                <p style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "14px", color: GRAY, direction: "rtl", lineHeight: 1.8, marginBottom: "20px" }}>وصلت إلى كندا دون معرفة كيفية العمل أو المقابلات. بعد الانضمام حصلت على دعم وثقة ونتائج حقيقية.</p>
+                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                  <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: TL, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px" }}>{emoji}</div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: "14px", color: NAVY }}>{name}</div>
+                    <div style={{ fontSize: "12px", color: GRAY }}>{enFrom}</div>
+                    <div style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "12px", color: GRAY, direction: "rtl" }}>{arFrom}</div>
+                    <div style={{ display: "inline-block", background: TL, color: TD, fontSize: "10px", fontWeight: 700, padding: "3px 10px", borderRadius: "20px", marginTop: "4px" }}>{planEn}</div>
+                    <div style={{ display: "block", fontFamily: "'Tajawal', sans-serif", fontSize: "11px", color: GRAY, direction: "rtl", marginTop: "2px" }}>{planAr}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section style={{ padding: "80px 32px", background: OFF }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "48px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase" }}>📞 CONTACT / تواصل معنا</div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px" }} className="max-lg:grid-cols-1">
+            <div>
+              {[["📱","WhatsApp","واتساب","+1 587 000 0000"],["📧","Email","البريد الإلكتروني","hello@canadareadyacademy.com"],["📍","Location","الموقع","Canada — Online Support"],["🕒","Hours","ساعات العمل","Mon–Fri • 9am–6pm"]].map(([icon,en,ar,detail]) => (
+                <div key={en} style={{ display: "flex", alignItems: "center", gap: "16px", background: OFF, border: `1.5px solid ${BORDER}`, borderRadius: "16px", padding: "20px", marginBottom: "14px", textDecoration: "none", color: NAVY }}>
+                  <div style={{ width: "48px", height: "48px", borderRadius: "14px", background: TL, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px" }}>{icon}</div>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: "14px", color: NAVY }}>{en}</div>
+                    <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl", fontSize: "12px", color: GRAY }}>{ar}</div>
+                    <div style={{ fontSize: "13px", color: GRAY }}>{detail}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ background: "#fff", borderRadius: "24px", padding: "36px", border: `1.5px solid ${BORDER}` }}>
+              <h3 style={{ fontSize: "22px", fontWeight: 700, color: NAVY, marginBottom: "4px" }}>Send us a message</h3>
+              <h3 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "18px", color: GRAY, direction: "rtl", display: "block", marginBottom: "20px" }}>أرسل لنا رسالة</h3>
+              <div style={{ display: "grid", gap: "12px" }}>
+                <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Your name / اسمك" />
+                <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Email / البريد الإلكتروني" />
+                <textarea style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px", minHeight: "100px" }} placeholder="Message / الرسالة" />
+                <button style={{ width: "100%", padding: "15px", background: `linear-gradient(135deg, ${T}, ${TD})`, color: "#fff", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: 700 }}>Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section style={{ background: `linear-gradient(135deg, ${NAVY} 0%, #0a2940 100%)`, padding: "80px 32px" }} id="assessment">
+        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "56px", alignItems: "start" }} className="max-lg:grid-cols-1">
+          <div style={{ color: "#fff" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: TL, color: TD, padding: "6px 16px", borderRadius: "30px", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "20px" }}>BOOK ASSESSMENT / احجز التقييم</div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,4vw,46px)", fontWeight: 900, lineHeight: 1.2, marginBottom: "12px" }}>Start With a Free Assessment</h2>
+            <h2 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "clamp(22px,3vw,36px)", fontWeight: 900, color: "rgba(255,255,255,.6)", direction: "rtl", display: "block", marginBottom: "24px" }}>ابدأ بتقييم مجاني</h2>
+            <p style={{ fontSize: "17px", color: "rgba(255,255,255,.8)", marginBottom: "32px", maxWidth: "480px", lineHeight: 1.8 }}>Tell us your goals, your level, and your needs. We&apos;ll recommend the best path for you.</p>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {["No pressure","No obligation","Clear next steps"].map((x) => <li key={x} style={{ padding: "10px 0", color: "rgba(255,255,255,.75)" }}>✓ {x}</li>)}
+            </ul>
+          </div>
+          <div style={{ background: "#fff", borderRadius: "24px", padding: "36px", boxShadow: "0 24px 80px rgba(0,0,0,.3)" }}>
+            <h3 style={{ fontSize: "20px", fontWeight: 700, color: NAVY, marginBottom: "4px" }}>Assessment Request</h3>
+            <h3 style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "16px", color: GRAY, direction: "rtl", display: "block", marginBottom: "20px" }}>طلب التقييم</h3>
+            <div style={{ display: "grid", gap: "12px" }}>
+              <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Full name / الاسم الكامل" />
+              <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Phone / الهاتف" />
+              <input style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px" }} placeholder="Email / البريد الإلكتروني" />
+              <textarea style={{ width: "100%", padding: "13px 16px", border: `1.5px solid ${BORDER}`, borderRadius: "12px", fontSize: "14px", minHeight: "100px" }} placeholder="Tell us about your goals / أخبرنا عن أهدافك" />
+              <button style={{ width: "100%", padding: "15px", background: `linear-gradient(135deg, ${T}, ${TD})`, color: "#fff", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: 700 }}>Submit</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer style={{ background: "#060F1C", padding: "56px 32px 28px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "40px", marginBottom: "48px" }} className="max-md:grid-cols-1">
+            <div>
+              <div style={{ fontWeight: 800, fontSize: "22px", color: "#fff", marginBottom: "12px" }}>Canada Ready Academy</div>
+              <p style={{ fontSize: "13px", color: "rgba(255,255,255,.4)", lineHeight: 1.7 }}>English & career support for newcomers in Canada.</p>
+              <p style={{ fontFamily: "'Tajawal', sans-serif", fontSize: "13px", color: "rgba(255,255,255,.3)", direction: "rtl", lineHeight: 1.7 }}>دعم الإنجليزية والمهنة للوافدين الجدد في كندا.</p>
+            </div>
+          </div>
+          <div style={{ borderTop: "1px solid rgba(255,255,255,.06)", paddingTop: "24px", fontSize: "12px", color: "rgba(255,255,255,.3)" }}>© 2026 Canada Ready Academy</div>
+        </div>
+      </footer>
+      <a href="https://wa.me/15870000000" style={{ position: "fixed", bottom: "24px", right: "24px", background: "#25D366", width: "58px", height: "58px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", color: "#fff", textDecoration: "none", boxShadow: "0 8px 24px rgba(37,211,102,.4)", zIndex: 999 }}>💬</a>
     </div>
   );
 }
