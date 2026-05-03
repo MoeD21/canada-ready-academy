@@ -49,7 +49,7 @@ export default function Home() {
             </h1>
             <p style={{ fontSize: "17px", color: MID, maxWidth: "540px", lineHeight: 1.75, marginBottom: "30px" }}>{isAr ? "دروس مباشرة عبر الإنترنت، تحضير للعمل، ودعم التوطين — مصمم للمهاجرين الناطقين بالعربية في كندا." : "Live online classes, job preparation, and settlement support — designed for Arabic-speaking immigrants in Canada."}</p>
             <div style={{ display: "flex", gap: "12px", flexWrap: "nowrap", alignItems: "center", overflowX: "auto", paddingBottom: "2px" }}>
-              <Link href="/assessment" style={heroButton}>{isAr ? "احجز تقييماً مجانياً" : "Free Assessment"}</Link>
+              <Link href="/assessment" style={heroButton}>{isAr ? "احجز موعداً مجانياً" : "Book Appointment"}</Link>
               <Link href="/services" style={{ background: "#fff", color: TDK, border: "1px solid rgba(102,230,222,0.45)", padding: "15px 24px", borderRadius: "30px", fontSize: "15px", fontWeight: 800, textDecoration: "none", boxShadow: "0 8px 18px rgba(102,230,222,0.10)", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", justifyContent: "center", lineHeight: 1, minWidth: "fit-content" }}>{isAr ? "عرض الخدمات" : "View Services"}</Link>
             </div>
           </div>
