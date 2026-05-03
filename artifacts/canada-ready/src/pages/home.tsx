@@ -83,7 +83,7 @@ export default function Home() {
             <p className="hero-desc">Live online classes, job preparation, and full settlement support — designed for Arabic-speaking immigrants.</p>
             <p className="hero-desc-ar">دروس مباشرة، تحضير للعمل، ودعم توطين متكامل — مصمم خصيصاً للمهاجرين الناطقين بالعربية.</p>
             <div className="hero-btns">
-              <a href="#assessment" className="btn-tiff" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Book Free Assessment | احجز تقييماً مجانياً</a>
+              <a href="#assessment" className="btn-tiff" onClick={(e) => { e.preventDefault(); scrollTo("assessment"); }}>📋 Book FREE Appointment | احجز موعداً مجانياً</a>
               <a href="#programs" className="btn-ghost" onClick={(e) => { e.preventDefault(); scrollTo("programs"); }}>View Programs | شاهد البرامج</a>
             </div>
             <div className="hero-stats reveal">
