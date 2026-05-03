@@ -618,54 +618,129 @@ export default function Home() {
       </section>
 
       {/* ════════════════ ASSESSMENT BOOKING ════════════════ */}
-      <div className="sec-divider"><div className="sd-line"></div>BOOK FREE ASSESSMENT | احجز تقييماً مجانياً<div className="sd-line"></div></div>
-      <section className="sec assessment-bg" id="assessment">
+      <div className="sec-divider"><div className="sd-line"></div>FREE APPOINTMENT | موعد مجاني<div className="sd-line"></div></div>
+      <section id="assessment" style={{background:"#F0FAFA",padding:"80px 32px"}}>
         <div className="wrap">
-          <div className="sec-tag" style={{borderColor:"rgba(10,186,181,.3)",color:"#0ABAB5"}}>FREE — NO COMMITMENT | مجاني — بدون التزام</div>
-          <div className="bi" style={{marginBottom:0}}>
-            <div className="bi-en" style={{borderRightColor:"rgba(255,255,255,.08)"}}>
-              <h2 className="sec-title" style={{color:"white"}}>Book Your Free English<br />&amp; Career Assessment</h2>
-              <p className="sec-lead" style={{color:"rgba(255,255,255,.65)"}}>15–20 minute Zoom call in Arabic. We'll check your level, understand your goals, and recommend the perfect plan. First week FREE.</p>
-              <ul className="assess-points">
-                <li>Determine your English level (Beginner or Intermediate)<span className="ar">تحديد مستواك في الإنجليزية</span></li>
-                <li>Discuss your career goals &amp; challenges<span className="ar">نناقش أهدافك المهنية وتحدياتك</span></li>
-                <li>Explain our 150+ services — in Arabic<span className="ar">شرح خدماتنا ١٥٠+ بالعربي</span></li>
-                <li>Recommend the best plan — no pressure<span className="ar">نوصي بأفضل خطة — بدون ضغط</span></li>
-                <li>First week is completely FREE<span className="ar">الأسبوع الأول مجاني تماماً</span></li>
-              </ul>
+          {/* Centered header */}
+          <div style={{textAlign:"center",marginBottom:"56px"}}>
+            <div className="sec-tag" style={{margin:"0 auto 20px"}}>📋 FREE APPOINTMENT | موعد مجاني</div>
+            <h2 style={{fontFamily:"'Playfair Display',serif",fontSize:"clamp(28px,4vw,48px)",fontWeight:900,color:"#0E1E33",lineHeight:1.15,marginBottom:"8px"}}>
+              Book Your Free English &amp; Career Appointment
+            </h2>
+            <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"clamp(22px,3vw,36px)",fontWeight:800,color:"#0E1E33",direction:"rtl",lineHeight:1.3,marginBottom:"16px"}}>
+              احجز موعدك المجاني للإنجليزية والمهنة
             </div>
-            <div className="bi-ar">
-              <h2 className="sec-title-ar" style={{color:"white"}}>احجز تقييمك المجاني<br />للإنجليزية والمهنة</h2>
-              <p style={{fontFamily:"'Tajawal',sans-serif",fontSize:"16px",color:"rgba(255,255,255,.5)",direction:"rtl",marginBottom:"20px",lineHeight:1.8}}>مكالمة Zoom مجانية 15-20 دقيقة بالعربي. نحدد مستواك، نفهم أهدافك، ونوصي بأفضل خطة. الأسبوع الأول مجاني.</p>
-            </div>
+            <p style={{fontSize:"17px",color:"#64748B",maxWidth:"580px",margin:"0 auto 6px",lineHeight:1.8}}>
+              15–20 minutes with our team. Completely free. We'll check your level, understand your goals, and recommend the best plan for you.
+            </p>
+            <p style={{fontFamily:"'Tajawal',sans-serif",fontSize:"15px",color:"#64748B",direction:"rtl",maxWidth:"560px",margin:"0 auto",lineHeight:1.8}}>
+              15-20 دقيقة مع فريقنا. مجاناً تماماً. سنحدد مستواك، نفهم أهدافك، ونوصي بأفضل خطة لك.
+            </p>
           </div>
-          <div className="assess-grid reveal">
-            <div></div>
-            <div className="assess-form-card">
-              <h3>Book My Free Assessment</h3>
-              <div className="h3-ar">احجز تقييمي المجاني</div>
+
+          {/* Two-column layout */}
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1.4fr",gap:"40px",alignItems:"start"}} className="appt-grid reveal">
+
+            {/* LEFT: dark teal card + guarantees */}
+            <div>
+              <div style={{background:"linear-gradient(145deg,#1A4A45,#0D3530)",borderRadius:"20px",padding:"36px",marginBottom:"24px"}}>
+                <h3 style={{fontFamily:"'Playfair Display',serif",fontSize:"22px",fontWeight:800,color:"#C9903A",lineHeight:1.3,marginBottom:"6px"}}>
+                  What Happens During the Appointment?
+                </h3>
+                <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"17px",fontWeight:700,color:"#F0C96A",direction:"rtl",marginBottom:"24px",lineHeight:1.4}}>
+                  ماذا يحدث خلال الموعد؟
+                </div>
+                <ol style={{listStyle:"none",display:"flex",flexDirection:"column",gap:"14px"}}>
+                  {[
+                    ["We check your English level (Beginner or Intermediate)","نتحقق من مستوى إنجليزيتك (مبتدئ أو متوسط)"],
+                    ["We ask about your career goals and work history","نسأل عن أهدافك المهنية وتاريخ عملك"],
+                    ["We understand your newcomer challenges","نفهم تحديات حياتك كوافد جديد"],
+                    ["We explain how our program works","نشرح كيف يعمل برنامجنا"],
+                    ["We recommend the best plan for you","نوصي بأفضل خطة مناسبة لك"],
+                    ["You get your WhatsApp group & Zoom links","تحصل على مجموعة الواتساب وروابط Zoom"],
+                  ].map(([en, ar], i) => (
+                    <li key={i} style={{display:"flex",gap:"14px",alignItems:"flex-start"}}>
+                      <span style={{minWidth:"28px",height:"28px",background:"#C9903A",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Playfair Display',serif",fontSize:"13px",fontWeight:800,color:"white",flexShrink:0,marginTop:"1px"}}>{i+1}</span>
+                      <div>
+                        <div style={{fontSize:"14px",color:"rgba(255,255,255,.85)",lineHeight:1.5}}>{en}</div>
+                        <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"12px",color:"rgba(255,255,255,.45)",direction:"rtl",marginTop:"2px"}}>{ar}</div>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              {/* Guarantee block */}
+              <div style={{background:"white",borderRadius:"16px",padding:"24px",border:"1.5px solid #D1ECE9"}}>
+                <div style={{fontSize:"16px",fontWeight:700,color:"#0E1E33",marginBottom:"4px"}}>🎁 100% Free</div>
+                <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"14px",color:"#64748B",direction:"rtl",marginBottom:"16px"}}>مجاني ١٠٠٪</div>
+                {[
+                  ["No credit card required","لا حاجة لبطاقة ائتمان"],
+                  ["No commitment or obligation","بدون التزام أو شرط"],
+                  ["Call is in Arabic — no pressure","المكالمة بالعربي — بدون ضغط"],
+                  ["First week is FREE when you join","الأسبوع الأول مجاني عند الانضمام"],
+                ].map(([en, ar]) => (
+                  <div key={en} style={{display:"flex",alignItems:"flex-start",gap:"10px",padding:"7px 0",borderBottom:"1px solid #F1F5F9"}}>
+                    <span style={{color:"#0ABAB5",fontWeight:700,flexShrink:0}}>✓</span>
+                    <div>
+                      <div style={{fontSize:"14px",color:"#0E1E33"}}>{en}</div>
+                      <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"12px",color:"#64748B",direction:"rtl"}}>{ar}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT: form card */}
+            <div style={{background:"white",borderRadius:"24px",padding:"40px",border:"1.5px solid #D1ECE9",boxShadow:"0 8px 40px rgba(10,186,181,.10)"}}>
+              <h3 style={{fontSize:"22px",fontWeight:700,color:"#0E1E33",marginBottom:"4px"}}>Complete the Appointment Form</h3>
+              <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"17px",fontWeight:700,color:"#0E1E33",direction:"rtl",marginBottom:"4px"}}>أكمل استمارة الحجز</div>
+              <p style={{fontSize:"13px",color:"#64748B",marginBottom:"4px"}}>We'll contact you within 24 hours.</p>
+              <p style={{fontFamily:"'Tajawal',sans-serif",fontSize:"12px",color:"#64748B",direction:"rtl",marginBottom:"24px"}}>سنتواصل معك خلال 24 ساعة.</p>
               <form onSubmit={handleAssessSubmit}>
                 <div className="inp-row">
-                  <input className="inp" type="text" placeholder="Full Name / الاسم الكامل" required />
-                  <input className="inp" type="tel" placeholder="WhatsApp Number / رقم واتساب" required />
+                  <div>
+                    <label style={{fontSize:"12px",fontWeight:600,color:"#0E1E33",display:"block",marginBottom:"6px"}}>Full Name <span style={{fontFamily:"'Tajawal',sans-serif",color:"#64748B",fontWeight:400}}>/ الاسم الكامل</span></label>
+                    <input className="inp" type="text" placeholder="Your full name / اسمك الكامل" required style={{marginBottom:0}} />
+                  </div>
+                  <div>
+                    <label style={{fontSize:"12px",fontWeight:600,color:"#0E1E33",display:"block",marginBottom:"6px"}}>WhatsApp Number <span style={{fontFamily:"'Tajawal',sans-serif",color:"#64748B",fontWeight:400}}>/ واتساب</span></label>
+                    <input className="inp" type="tel" placeholder="+1 587 000 0000" required style={{marginBottom:0}} />
+                  </div>
                 </div>
-                <input className="inp" type="email" placeholder="Email (optional)" />
+                <div style={{height:"14px"}}></div>
+                <div className="inp-row">
+                  <div>
+                    <label style={{fontSize:"12px",fontWeight:600,color:"#0E1E33",display:"block",marginBottom:"6px"}}>English Level <span style={{fontFamily:"'Tajawal',sans-serif",color:"#64748B",fontWeight:400}}>/ مستوى الإنجليزية</span></label>
+                    <select className="inp" style={{marginBottom:0}}>
+                      <option value="">Select level / اختر المستوى</option>
+                      <option>Beginner | مبتدئ</option>
+                      <option>Elementary | أساسي</option>
+                      <option>Intermediate | متوسط</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{fontSize:"12px",fontWeight:600,color:"#0E1E33",display:"block",marginBottom:"6px"}}>Country of Origin <span style={{fontFamily:"'Tajawal',sans-serif",color:"#64748B",fontWeight:400}}>/ بلد الأصل</span></label>
+                    <input className="inp" type="text" placeholder="Egypt, Syria, Iraq... / مصر، سوريا، العراق..." style={{marginBottom:0}} />
+                  </div>
+                </div>
+                <div style={{height:"14px"}}></div>
+                <label style={{fontSize:"12px",fontWeight:600,color:"#0E1E33",display:"block",marginBottom:"6px"}}>How Long in Canada? <span style={{fontFamily:"'Tajawal',sans-serif",color:"#64748B",fontWeight:400}}>/ منذ متى في كندا؟</span></label>
                 <select className="inp">
-                  <option value="">English Level | مستوى الإنجليزية</option>
-                  <option>Beginner | مبتدئ</option>
-                  <option>Elementary | أساسي</option>
-                  <option>Intermediate | متوسط</option>
+                  <option value="">Select time / اختر المدة</option>
+                  <option>Less than 3 months | أقل من 3 أشهر</option>
+                  <option>3–6 months | 3-6 أشهر</option>
+                  <option>6–12 months | 6-12 شهراً</option>
+                  <option>1–2 years | 1-2 سنة</option>
+                  <option>More than 2 years | أكثر من سنتين</option>
                 </select>
-                <select className="inp">
-                  <option value="">Preferred Plan | الباقة المفضلة</option>
-                  <option>Starter — $79</option>
-                  <option>Premium — $129</option>
-                  <option>Career Boost — $179</option>
-                  <option>Canada Ready — $249</option>
-                  <option>Not sure yet | لست متأكداً</option>
-                </select>
-                <textarea className="inp" placeholder="Career goals &amp; biggest challenge | أهدافك المهنية وأكبر تحدٍ" rows={3}></textarea>
-                <button className="btn-submit" type="submit" disabled={assessSent}>📋 Book My Free Assessment | احجز تقييمي المجاني</button>
+                <label style={{fontSize:"12px",fontWeight:600,color:"#0E1E33",display:"block",marginBottom:"6px",marginTop:"14px"}}>Career Goals <span style={{fontFamily:"'Tajawal',sans-serif",color:"#64748B",fontWeight:400}}>/ أهدافك المهنية</span></label>
+                <textarea className="inp" placeholder="What kind of work are you looking for? What are your goals in Canada? / ما نوع العمل الذي تبحث عنه؟ ما أهدافك في كندا؟" rows={3} style={{marginBottom:0}}></textarea>
+                <label style={{fontSize:"12px",fontWeight:600,color:"#0E1E33",display:"block",marginBottom:"6px",marginTop:"14px"}}>Biggest Challenge Right Now <span style={{fontFamily:"'Tajawal',sans-serif",color:"#64748B",fontWeight:400}}>/ أكبر تحدٍ تواجهه الآن</span></label>
+                <textarea className="inp" placeholder="Tell us your main difficulty — language, jobs, understanding Canadian life... / أخبرنا عن صعوبتك الرئيسية — اللغة، الوظائف، الحياة الكندية..." rows={3}></textarea>
+                <button className="btn-submit" type="submit" disabled={assessSent} style={{marginTop:"8px",borderRadius:"40px",fontSize:"16px"}}>
+                  📋 Book My Free Appointment | احجز موعدي المجاني
+                </button>
                 {assessSent && <div className="success-msg show">🎉 Request sent! We'll contact you on WhatsApp within 24 hours. | تم الإرسال! سنتواصل معك على واتساب خلال 24 ساعة.</div>}
               </form>
             </div>
