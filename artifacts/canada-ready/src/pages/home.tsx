@@ -622,10 +622,10 @@ export default function Home() {
             {/* LEFT: dark teal card + guarantees */}
             <div>
               <div style={{background:"linear-gradient(145deg,#0ABAB5,#089994)",borderRadius:"20px",padding:"36px",marginBottom:"24px"}}>
-                <h3 style={{fontFamily:"'Playfair Display',serif",fontSize:"22px",fontWeight:800,color:"#C9903A",lineHeight:1.3,marginBottom:"6px"}}>
+                <h3 style={{fontFamily:"'Playfair Display',serif",fontSize:"22px",fontWeight:800,color:"#0E1E33",lineHeight:1.3,marginBottom:"6px"}}>
                   What Happens During the Appointment?
                 </h3>
-                <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"17px",fontWeight:700,color:"#F0C96A",direction:"rtl",marginBottom:"24px",lineHeight:1.4}}>
+                <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"17px",fontWeight:700,color:"#0E1E33",direction:"rtl",marginBottom:"24px",lineHeight:1.4}}>
                   ماذا يحدث خلال الموعد؟
                 </div>
                 <ol style={{listStyle:"none",display:"flex",flexDirection:"column",gap:"14px"}}>
@@ -638,12 +638,10 @@ export default function Home() {
                     ["You get your WhatsApp group & Zoom links","تحصل على مجموعة الواتساب وروابط Zoom"],
                   ].map(([en, ar], i) => (
                     <li key={i} style={{display:"flex",gap:"14px",alignItems:"flex-start"}}>
-                      <span style={{minWidth:"28px",height:"28px",background:"#C9903A",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Playfair Display',serif",fontSize:"13px",fontWeight:800,color:"white",flexShrink:0,marginTop:"1px"}}>{i+1}</span>
+                      <span style={{minWidth:"28px",height:"28px",background:"white",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Playfair Display',serif",fontSize:"13px",fontWeight:800,color:"#089994",flexShrink:0,marginTop:"1px"}}>{i+1}</span>
                       <div>
-                        <div style={{fontSize:"14px",color:"rgba(255,255,255,.85)",lineHeight:1.5}}>{en}</div>
-                        <div
-                          style={{fontFamily:"'Tajawal',sans-serif",fontSize:"12px",color:"rgba(255,255,255,.45)",direction:"rtl",marginTop:"2px"}}
-                          className="text-[#05050573]">{ar}</div>
+                        <div style={{fontSize:"14px",color:"white",fontWeight:600,lineHeight:1.5}}>{en}</div>
+                        <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"12px",color:"rgba(255,255,255,.8)",direction:"rtl",marginTop:"2px"}}>{ar}</div>
                       </div>
                     </li>
                   ))}
