@@ -41,10 +41,10 @@ export function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden lg:flex" style={{ alignItems: "center", gap: "2px" }}>
+        <div className="hidden lg:flex" style={{ alignItems: "center", gap: "2px", whiteSpace: "nowrap" }}>
           {links.map((link) => (
             <Link key={link.href} href={link.href} style={{
-              textDecoration: "none", fontSize: "13px", fontWeight: 600, padding: "7px 11px", borderRadius: "8px", transition: "0.2s",
+              textDecoration: "none", fontSize: "13px", fontWeight: 600, padding: "7px 9px", borderRadius: "8px", transition: "0.2s", whiteSpace: "nowrap",
               color: location === link.href ? "var(--tiffany-dk)" : "#4A6B69",
               background: location === link.href ? "rgba(10,186,181,0.1)" : "transparent"
             }}>
