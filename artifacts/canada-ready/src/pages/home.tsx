@@ -118,7 +118,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <Link href="/assessment" style={{ marginTop: "18px", background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, borderRadius: "12px", padding: "12px 16px", textAlign: "center", fontWeight: 900, color: TDK, boxShadow: "0 10px 24px rgba(201,144,58,0.22)", textDecoration: "none", display: "block" }}>{isAr ? "الأسبوع الأول مجاني" : "First Week FREE"}</Link>
+            <Link href="/assessment" style={{ marginTop: "18px", background: `linear-gradient(135deg, ${GOLD} 0%, ${GOLD_LT} 100%)`, borderRadius: "12px", padding: "12px 16px", textAlign: "center", fontWeight: 900, color: TDK, boxShadow: "0 10px 24px rgba(201,144,58,0.22)", textDecoration: "none", display: "block" }}>First Week FREE / الأسبوع الأول مجاني</Link>
           </div>
         </div>
       </section>
@@ -181,7 +181,7 @@ export default function Home() {
           {aboutStats.map((s) => (
             <div key={s.n} style={{ padding: "28px 20px" }}>
               <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "42px", fontWeight: 700, color: GOLD_LT, lineHeight: 1 }}>{s.n}</div>
-              <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.65)", marginTop: "5px" }}>{isAr ? s.ar : s.en}</div>
+              <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.65)", marginTop: "5px" }}>{s.en} / {s.ar}</div>
             </div>
           ))}
         </div>
@@ -189,27 +189,25 @@ export default function Home() {
       <section style={{ padding: "72px 5%", background: "#fff" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "start" }} className="max-lg:grid-cols-1">
           <div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,36px)", fontWeight: 800, color: TDK, marginBottom: "20px" }}>{isAr ? "من نساعد" : "Who We Help"}</h2>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,36px)", fontWeight: 800, color: TDK, marginBottom: "20px" }}>Who We Help / من نساعد</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {aboutHelp.map((item) => (
                 <div key={item.icon} style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "15px", color: MID }}>
                   <div style={{ width: "8px", height: "8px", background: GOLD, borderRadius: "50%", flexShrink: 0 }} />
                   <span style={{ fontSize: "18px", flexShrink: 0 }}>{item.icon}</span>
-                  {isAr ? item.ar : item.en}
+                  {item.en} / {item.ar}
                 </div>
               ))}
             </div>
           </div>
           <div>
             <div style={{ background: TDK, borderRadius: "22px", padding: "38px", color: "#fff", marginBottom: "22px" }}>
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 700, color: GOLD_LT, marginBottom: "12px" }}>{isAr ? "مهمتنا" : "Our Mission"}</div>
-              <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.85)", lineHeight: 1.75 }}>
-                {isAr ? "تمكين القادمين الجدد الناطقين بالعربية باللغة والمهارات والمعرفة اللازمة للنجاح في كندا. نؤمن بأن كل قادم جديد يستحق مساراً واضحاً للأمام — ليس فقط دروساً في اللغة، بل دعماً حقيقياً لبناء حياة أفضل." : "To empower Arabic-speaking newcomers with the language, skills, and knowledge needed to thrive in Canada. We believe every newcomer deserves a clear path forward — not just language lessons, but real support for building a better life."}
-              </p>
+              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 700, color: GOLD_LT, marginBottom: "12px" }}>Our Mission / مهمتنا</div>
+              <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.85)", lineHeight: 1.75 }}>To empower Arabic-speaking newcomers with the language, skills, and knowledge needed to thrive in Canada. We believe every newcomer deserves a clear path forward — not just language lessons, but real support for building a better life.<br />تمكين القادمين الجدد الناطقين بالعربية باللغة والمهارات والمعرفة اللازمة للنجاح في كندا. نؤمن بأن كل قادم جديد يستحق مساراً واضحاً للأمام — ليس فقط دروساً في اللغة، بل دعماً حقيقياً لبناء حياة أفضل.</p>
             </div>
             <div style={{ background: BG, border: "1px solid rgba(10,186,181,0.15)", borderRadius: "18px", padding: "28px" }}>
-              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: 700, color: TDK, marginBottom: "10px" }}>{isAr ? "ما الذي يميزنا" : "What Makes Us Different"}</h3>
-              <p style={{ fontSize: "14px", color: MID, lineHeight: 1.72 }}>{isAr ? "نحن لسنا مدرسة لغة عامة. نحن مجتمع بناه مهاجرون للمهاجرين. نفهم التحديات الحقيقية — ليس فقط اللغة، بل الوظائف والضرائب والسكن والرعاية الصحية والانتماء. برنامجنا يغطي كل شيء في مكان واحد، باللغة التي تفهمها." : "We are not a generic language school. We are a community built by immigrants, for immigrants. We understand the real challenges — not just language, but jobs, taxes, housing, healthcare, and belonging. Our program covers everything in one place, in the language you understand."}</p>
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: 700, color: TDK, marginBottom: "10px" }}>What Makes Us Different / ما الذي يميزنا</h3>
+              <p style={{ fontSize: "14px", color: MID, lineHeight: 1.72 }}>We are not a generic language school. We are a community built by immigrants, for immigrants. We understand the real challenges — not just language, but jobs, taxes, housing, healthcare, and belonging. Our program covers everything in one place, in the language you understand.<br />نحن لسنا مدرسة لغة عامة. نحن مجتمع بناه مهاجرون للمهاجرين. نفهم التحديات الحقيقية — ليس فقط اللغة، بل الوظائف والضرائب والسكن والرعاية الصحية والانتماء. برنامجنا يغطي كل شيء في مكان واحد، باللغة التي تفهمها.</p>
             </div>
           </div>
         </div>
@@ -217,15 +215,15 @@ export default function Home() {
       <section style={{ padding: "72px 5%", background: BG }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "50px" }}>
-            <div style={stag}>📖 {isAr ? "ماذا ندرّس" : "WHAT WE TEACH"}</div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(26px,3vw,42px)", fontWeight: 800, color: TDK }}>{isAr ? "4 مجالات تغطي كل ما تحتاجه" : "4 Areas Covering Everything You Need"}</h2>
+            <div style={stag}>📖 WHAT WE TEACH / ماذا ندرّس</div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(26px,3vw,42px)", fontWeight: 800, color: TDK }}>4 Areas Covering Everything You Need / 4 مجالات تغطي كل ما تحتاجه</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "22px" }}>
             {whatWeTeach.map((item) => (
               <div key={item.title_en} style={{ background: "#fff", borderRadius: "18px", padding: "26px", border: "1px solid rgba(10,186,181,0.15)", borderTop: `4px solid ${item.title_en === "English" ? T : item.title_en === "Careers" ? GOLD : item.title_en === "Canada Life" ? "#25A465" : "#8B5CF6"}` }}>
                 <div style={{ width: "50px", height: "50px", background: "rgba(102,230,222,0.12)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", marginBottom: "14px" }}>{item.icon}</div>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: TDK, marginBottom: "8px" }}>{isAr ? item.title_ar : item.title_en}</h3>
-                <p style={{ fontSize: "13.5px", color: MID, lineHeight: 1.65 }}>{isAr ? item.desc_ar : item.desc_en}</p>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: TDK, marginBottom: "8px" }}>{item.title_en} / {item.title_ar}</h3>
+                <p style={{ fontSize: "13.5px", color: MID, lineHeight: 1.65 }}>{item.desc_en}<br />{item.desc_ar}</p>
               </div>
             ))}
           </div>
@@ -234,14 +232,14 @@ export default function Home() {
       <section style={{ padding: "72px 5%", background: "#fff" }}>
         <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <div style={{ background: `linear-gradient(135deg, rgba(10,186,181,0.08), rgba(10,186,181,0.03))`, border: "1px solid rgba(10,186,181,0.2)", borderRadius: "28px", padding: "52px" }}>
-            <div style={stag}>💡 {isAr ? "ما الذي نبيعه حقاً" : "WHAT WE REALLY SELL"}</div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,40px)", fontWeight: 800, color: TDK, marginBottom: "10px" }}>{isAr ? "لسنا مجرد مدرسة لغة" : "We Are Not Just a Language School"}</h2>
-            <p style={{ fontSize: "16px", color: MID, marginBottom: "32px", lineHeight: 1.7 }}>{isAr ? "نحن نبيع الثقة والتوجيه والدعم والفرصة وحياة أفضل في كندا. اللغة الإنجليزية هي الأداة — الهدف هو تغيير حياتك." : "We sell confidence, direction, support, opportunity, and a better life in Canada. English is the tool — the goal is to change your life."}</p>
+            <div style={stag}>💡 WHAT WE REALLY SELL / ما الذي نبيعه حقاً</div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,40px)", fontWeight: 800, color: TDK, marginBottom: "10px" }}>We Are Not Just a Language School / لسنا مجرد مدرسة لغة</h2>
+            <p style={{ fontSize: "16px", color: MID, marginBottom: "32px", lineHeight: 1.7 }}>We sell confidence, direction, support, opportunity, and a better life in Canada. English is the tool — the goal is to change your life.<br />نحن نبيع الثقة والتوجيه والدعم والفرصة وحياة أفضل في كندا. اللغة الإنجليزية هي الأداة — الهدف هو تغيير حياتك.</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "14px" }}>
               {whyUs.map((item) => (
                 <div key={item.icon} style={{ background: "#fff", borderRadius: "14px", padding: "16px 18px", display: "flex", alignItems: "flex-start", gap: "12px", border: "1px solid rgba(10,186,181,0.12)" }}>
                   <span style={{ fontSize: "22px", flexShrink: 0 }}>{item.icon}</span>
-                  <span style={{ fontSize: "14px", color: MID, fontWeight: 500, lineHeight: 1.5 }}>{isAr ? item.ar : item.en}</span>
+                  <span style={{ fontSize: "14px", color: MID, fontWeight: 500, lineHeight: 1.5 }}>{item.en} / {item.ar}</span>
                 </div>
               ))}
             </div>
@@ -251,25 +249,25 @@ export default function Home() {
       <section style={{ padding: "72px 5%", background: BG }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "30px" }}>
-            <div style={stag}>📚 {isAr ? "برامجنا" : "OUR PROGRAMS"}</div>
-            <div style={sTitle}>{isAr ? "اختر خطتك" : "Choose Your Plan"}</div>
+            <div style={stag}>📚 OUR PROGRAMS / برامجنا</div>
+            <div style={sTitle}>Choose Your Plan / اختر خطتك</div>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "18px" }}>
             {programs.map((plan, idx) => (
               <div key={plan.name_en} style={{ background: idx === 1 ? TDK : "#fff", border: idx === 1 ? `2px solid ${GOLD}` : "1px solid rgba(129,216,208,0.18)", borderRadius: "18px", padding: "28px 22px", position: "relative", display: "flex", flexDirection: "column", direction: isAr ? "rtl" : "ltr" }}>
-                {idx === 1 && <div style={{ position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)", background: GOLD, color: TDK, fontSize: "10px", fontWeight: 800, padding: "4px 13px", borderRadius: "11px", letterSpacing: "0.8px", textTransform: "uppercase", whiteSpace: "nowrap" }}>⭐ {isAr ? "الأكثر شعبية" : "MOST POPULAR"}</div>}
-                <div style={{ fontSize: "10px", fontWeight: 800, letterSpacing: "1.8px", textTransform: "uppercase", color: idx === 1 ? "rgba(255,255,255,0.5)" : "#8896AB", marginBottom: "9px" }}>{isAr ? plan.name_ar : plan.name_en}</div>
+                {idx === 1 && <div style={{ position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)", background: GOLD, color: TDK, fontSize: "10px", fontWeight: 800, padding: "4px 13px", borderRadius: "11px", letterSpacing: "0.8px", textTransform: "uppercase", whiteSpace: "nowrap" }}>⭐ MOST POPULAR / الأكثر شعبية</div>}
+                <div style={{ fontSize: "10px", fontWeight: 800, letterSpacing: "1.8px", textTransform: "uppercase", color: idx === 1 ? "rgba(255,255,255,0.5)" : "#8896AB", marginBottom: "9px" }}>{plan.name_en} / {plan.name_ar}</div>
                 <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "44px", fontWeight: 700, color: idx === 1 ? "#fff" : TDK, lineHeight: 1 }}>{plan.price}</div>
-                <div style={{ background: idx === 1 ? "rgba(201,144,58,0.18)" : "rgba(129,216,208,0.08)", borderRadius: "10px", padding: "9px 12px", fontSize: "12px", color: idx === 1 ? GOLD_LT : TDK, fontWeight: 600, margin: "13px 0", lineHeight: 1.5 }}>{isAr ? plan.best_ar : plan.best_en}</div>
+                <div style={{ background: idx === 1 ? "rgba(201,144,58,0.18)" : "rgba(129,216,208,0.08)", borderRadius: "10px", padding: "9px 12px", fontSize: "12px", color: idx === 1 ? GOLD_LT : TDK, fontWeight: 600, margin: "13px 0", lineHeight: 1.5 }}>{plan.best_en}<br />{plan.best_ar}</div>
                 <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px", flex: 1, marginBottom: "20px", padding: 0 }}>
-                  {(isAr ? plan.features_ar : plan.features_en).map((feat, i) => (
+                  {plan.features_en.map((feat, i) => (
                     <li key={i} style={{ fontSize: "13px", color: idx === 1 ? "rgba(255,255,255,0.85)" : MID, display: "flex", alignItems: "flex-start", gap: "7px", lineHeight: 1.5 }}>
                       <span style={{ color: GOLD, fontWeight: 800, flexShrink: 0, marginTop: "1px" }}>✓</span>
-                      <span>{feat}</span>
+                      <span>{feat} / {plan.features_ar[i]}</span>
                     </li>
                   ))}
                 </ul>
-                <Link href="/assessment" style={{ display: "block", width: "100%", padding: "13px", borderRadius: "24px", border: idx === 1 ? `1.5px solid ${GOLD}` : "1.5px solid rgba(129,216,208,0.3)", background: idx === 1 ? GOLD : "transparent", color: TDK, fontSize: "13.5px", fontWeight: 700, textDecoration: "none", textAlign: "center" }}>📋 {isAr ? "احجز تقييماً مجانياً" : "Book Free Assessment"}</Link>
+                <Link href="/assessment" style={{ display: "block", width: "100%", padding: "13px", borderRadius: "24px", border: idx === 1 ? `1.5px solid ${GOLD}` : "1.5px solid rgba(129,216,208,0.3)", background: idx === 1 ? GOLD : "transparent", color: TDK, fontSize: "13.5px", fontWeight: 700, textDecoration: "none", textAlign: "center" }}>📋 Book Free Assessment / احجز تقييماً مجانياً</Link>
               </div>
             ))}
           </div>
@@ -278,8 +276,8 @@ export default function Home() {
       <section style={{ padding: "72px 5%", background: "#fff" }}>
         <div style={{ maxWidth: "700px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "40px" }}>
-            <div style={stag}>🔄 {isAr ? "كيف يعمل" : "HOW IT WORKS"}</div>
-            <div style={sTitle}>{isAr ? "مسارك من وافد جديد إلى كندي واثق" : "Your Path From Newcomer to Confident Canadian"}</div>
+            <div style={stag}>🔄 HOW IT WORKS / كيف يعمل</div>
+            <div style={sTitle}>Your Path From Newcomer to Confident Canadian / مسارك من وافد جديد إلى كندي واثق</div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {hiwSteps.map((step) => (
@@ -289,8 +287,8 @@ export default function Home() {
                   <div style={{ fontSize: "28px" }}>{step.icon}</div>
                 </div>
                 <div>
-                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: step.num === "5" ? "#fff" : TDK, marginBottom: "8px" }}>{isAr ? step.ar : step.en}</h3>
-                  <p style={{ fontSize: "15px", color: step.num === "5" ? "rgba(255,255,255,0.85)" : MID, lineHeight: 1.7, marginBottom: "14px" }}>{isAr ? step.desc_ar : step.desc_en}</p>
+                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 700, color: step.num === "5" ? "#fff" : TDK, marginBottom: "8px" }}>{step.en} / {step.ar}</h3>
+                  <p style={{ fontSize: "15px", color: step.num === "5" ? "rgba(255,255,255,0.85)" : MID, lineHeight: 1.7, marginBottom: "14px" }}>{step.desc_en}<br />{step.desc_ar}</p>
                 </div>
               </div>
             ))}
@@ -300,19 +298,19 @@ export default function Home() {
       <section style={{ padding: "72px 5%", background: BG }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "30px" }}>
-            <div style={stag}>🧾 {isAr ? "كل الخدمات" : "ALL SERVICES"}</div>
-            <div style={sTitle}>{isAr ? "كل الدعم الذي تحتاجه للنجاح في كندا" : "All the Support You Need to Succeed in Canada"}</div>
+            <div style={stag}>🧾 ALL SERVICES / كل الخدمات</div>
+            <div style={sTitle}>All the Support You Need to Succeed in Canada / كل الدعم الذي تحتاجه للنجاح في كندا</div>
           </div>
           {services.map((section) => (
             <div key={section.title_en} style={{ marginBottom: "28px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
                 <div style={{ width: "4px", height: "28px", background: T, borderRadius: "999px" }} />
-                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "28px", fontWeight: 800, color: TDK, margin: 0 }}>{isAr ? section.title_ar : section.title_en}</h2>
+                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "28px", fontWeight: 800, color: TDK, margin: 0 }}>{section.title_en} / {section.title_ar}</h2>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: "10px" }}>
-                {(isAr ? section.items_ar : section.items_en).map((item) => (
+                {section.items_en.map((item, index) => (
                   <div key={item} style={{ background: "#EEFDFC", border: "1px solid rgba(102,230,222,0.55)", color: MID, padding: "12px 14px", borderRadius: "12px", fontSize: "13px", lineHeight: 1.45 }}>
-                    {item}
+                    {item} / {section.items_ar[index]}
                   </div>
                 ))}
               </div>
@@ -325,13 +323,13 @@ export default function Home() {
           {testimonials.map((s) => (
             <div key={s.name} style={{ background: "#fff", borderRadius: "18px", padding: "28px", border: "1px solid rgba(129,216,208,0.15)", display: "flex", flexDirection: "column" }}>
               <div style={{ color: GOLD, fontSize: "17px", marginBottom: "11px" }}>★★★★★</div>
-              <p style={{ fontSize: "14px", color: MID, lineHeight: 1.75, marginBottom: "18px", fontStyle: "italic", flex: 1 }}>"{isAr ? s.text_ar : s.text_en}"</p>
+              <p style={{ fontSize: "14px", color: MID, lineHeight: 1.75, marginBottom: "18px", fontStyle: "italic", flex: 1 }}>"{s.text_en}"<br />"{s.text_ar}"</p>
               <div style={{ borderTop: "1px solid rgba(129,216,208,0.1)", paddingTop: "16px", display: "flex", alignItems: "center", gap: "12px" }}>
                 <div style={{ width: "46px", height: "46px", borderRadius: "50%", background: TDK, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", flexShrink: 0 }}>{s.emoji}</div>
                 <div>
                   <div style={{ fontWeight: 700, fontSize: "15px", color: TDK }}>{s.name}</div>
-                  <div style={{ fontSize: "12px", color: "#8896AB", marginBottom: "3px" }}>{isAr ? s.origin_ar : s.origin_en}</div>
-                  <div style={{ display: "inline-block", background: "rgba(129,216,208,0.1)", color: TDK, fontSize: "11px", fontWeight: 700, padding: "2px 8px", borderRadius: "8px" }}>{isAr ? s.plan_ar : s.plan_en}</div>
+                  <div style={{ fontSize: "12px", color: "#8896AB", marginBottom: "3px" }}>{s.origin_en} / {s.origin_ar}</div>
+                  <div style={{ display: "inline-block", background: "rgba(129,216,208,0.1)", color: TDK, fontSize: "11px", fontWeight: 700, padding: "2px 8px", borderRadius: "8px" }}>{s.plan_en} / {s.plan_ar}</div>
                 </div>
               </div>
             </div>
@@ -340,9 +338,9 @@ export default function Home() {
       </section>
       <section style={{ background: TDK, padding: "70px 5%", textAlign: "center" }}>
         <div style={{ maxWidth: "700px", margin: "0 auto" }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,38px)", fontWeight: 800, color: "#fff", marginBottom: "14px" }}>{isAr ? "قصة نجاحك تبدأ هنا" : "Your Success Story Starts Here"}</h2>
-          <p style={{ color: "rgba(255,255,255,0.82)", fontSize: "17px", marginBottom: "26px", lineHeight: 1.7 }}>{isAr ? "انضم إلى مئات الوافدين الذين غيّروا حياتهم مع أكاديمية كندا ريدي." : "Join hundreds of newcomers who have already changed their lives with Canada Ready Academy."}</p>
-          <Link href="/assessment" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: GOLD, color: TDK, padding: "16px 38px", borderRadius: "32px", fontSize: "16px", fontWeight: 900, textDecoration: "none" }}>{isAr ? "احجز تقييمك المجاني" : "Book Your Free Assessment"}</Link>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,38px)", fontWeight: 800, color: "#fff", marginBottom: "14px" }}>Your Success Story Starts Here / قصة نجاحك تبدأ هنا</h2>
+          <p style={{ color: "rgba(255,255,255,0.82)", fontSize: "17px", marginBottom: "26px", lineHeight: 1.7 }}>Join hundreds of newcomers who have already changed their lives with Canada Ready Academy.<br />انضم إلى مئات الوافدين الذين غيّروا حياتهم مع أكاديمية كندا ريدي.</p>
+          <Link href="/assessment" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: GOLD, color: TDK, padding: "16px 38px", borderRadius: "32px", fontSize: "16px", fontWeight: 900, textDecoration: "none" }}>Book Your Free Assessment / احجز تقييمك المجاني</Link>
         </div>
       </section>
     </div>
