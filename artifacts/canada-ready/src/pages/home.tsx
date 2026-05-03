@@ -405,14 +405,6 @@ export default function Home() {
       <section style={{ background: OFF, padding: "80px 32px" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }} className="max-lg:grid-cols-1">
           <div style={{ background: "#fff", borderRadius: "20px", padding: "28px", border: `1.5px solid ${BORDER}` }}>
-            <h3 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>Contact / تواصل</h3>
-            <div style={{ display: "grid", gap: "12px" }}>
-              <div>WhatsApp: +1 587 000 0000</div>
-              <div>Email: hello@canadareadyacademy.com</div>
-              <div style={{ fontFamily: "'Tajawal', sans-serif", direction: "rtl" }}>دعم أونلاين داخل كندا</div>
-            </div>
-          </div>
-          <div style={{ background: "#fff", borderRadius: "20px", padding: "28px", border: `1.5px solid ${BORDER}` }}>
             <h3 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "16px" }}>Message / رسالة</h3>
             <div style={{ display: "grid", gap: "12px" }}>
               <input style={{ padding: "12px 14px", border: `1px solid ${BORDER}`, borderRadius: "12px" }} placeholder="Name" />
