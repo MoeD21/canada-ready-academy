@@ -55,6 +55,9 @@ export function Navbar() {
 
         {/* Right: language switch + CTA + hamburger */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <Link href="/assessment" style={{ background: "linear-gradient(135deg, var(--gold) 0%, #E8B84B 100%)", color: "var(--tiffany-dk)", textDecoration: "none", fontSize: "13px", fontWeight: 800, padding: "10px 16px", borderRadius: "999px", boxShadow: "0 10px 22px rgba(201,144,58,0.28)", whiteSpace: "nowrap" }}>
+            {language === "en" ? "Book Appointment" : "احجز موعداً"}
+          </Link>
           <div style={{ background: "var(--tiffany-dk)", borderRadius: "22px", padding: "3px", display: "flex", flexShrink: 0 }}>
             <button onClick={() => setLanguage("en")} style={{ border: "none", background: language === "en" ? "var(--gold)" : "transparent", color: language === "en" ? "var(--tiffany-dk)" : "rgba(255,255,255,0.5)", fontSize: "13px", fontWeight: 700, padding: "5px 13px", borderRadius: "18px", cursor: "pointer", transition: "0.22s", fontFamily: "inherit" }} data-testid="btn-en">EN</button>
             <button onClick={() => setLanguage("ar")} style={{ border: "none", background: language === "ar" ? "var(--gold)" : "transparent", color: language === "ar" ? "var(--tiffany-dk)" : "rgba(255,255,255,0.5)", fontSize: "13px", fontWeight: 700, padding: "5px 13px", borderRadius: "18px", cursor: "pointer", transition: "0.22s", fontFamily: "inherit" }} data-testid="btn-ar">عربي</button>
