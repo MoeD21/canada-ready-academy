@@ -43,7 +43,6 @@ export default function Home() {
     <div className="home-page hp">
       {/* WHATSAPP FLOAT */}
       <a href="https://wa.me/15870000000" className="wa-float" target="_blank" rel="noopener noreferrer">💬</a>
-
       {/* ════════════════ STRIP ════════════════ */}
       <div className="strip">
         <div className="bi-txt">
@@ -52,7 +51,6 @@ export default function Home() {
           <span className="strip-ar">🍁 أماكن محدودة — الأسبوع الأول مجاني تماماً</span>
         </div>
       </div>
-
       {/* ════════════════ NAV ════════════════ */}
       <nav className="hp-nav">
         <div className="nav-inner">
@@ -72,7 +70,6 @@ export default function Home() {
           </div>
         </div>
       </nav>
-
       {/* ════════════════ HERO ════════════════ */}
       <section className="hero" id="home">
         <div className="hero-inner">
@@ -109,7 +106,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ════════════════ ABOUT / 4 PILLARS ════════════════ */}
       <div className="sec-divider"><div className="sd-line"></div>ABOUT | عن الأكاديمية<div className="sd-line"></div></div>
       <section className="sec pillars-bg" id="about">
@@ -163,7 +159,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ════════════════ FREE TRIAL ════════════════ */}
       <div className="sec-divider"><div className="sd-line"></div>FREE TRIAL | حصة مجانية<div className="sd-line"></div></div>
       <section className="trial-sec">
@@ -195,7 +190,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ════════════════ ALL SERVICES ════════════════ */}
       <div className="sec-divider"><div className="sd-line"></div>150+ SERVICES | ١٥٠+ خدمة<div className="sd-line"></div></div>
       <section className="sec services-bg" id="services">
@@ -274,7 +268,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ════════════════ PROGRAMS ════════════════ */}
       <div className="sec-divider"><div className="sd-line"></div>PROGRAMS &amp; PRICING | البرامج والأسعار<div className="sd-line"></div></div>
       <section className="sec pricing-bg" id="programs">
@@ -426,7 +419,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ════════════════ HOW IT WORKS ════════════════ */}
       <div className="sec-divider"><div className="sd-line"></div>HOW IT WORKS | كيف يعمل<div className="sd-line"></div></div>
       <section className="sec how-bg" id="how">
@@ -501,7 +493,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ════════════════ TESTIMONIALS ════════════════ */}
       <div className="sec-divider"><div className="sd-line"></div>SUCCESS STORIES | قصص النجاح<div className="sd-line"></div></div>
       <section className="sec" id="testimonials" style={{background:"#F7FAFA"}}>
@@ -558,7 +549,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ════════════════ CONTACT ════════════════ */}
       <div className="sec-divider"><div className="sd-line"></div>CONTACT | تواصل<div className="sd-line"></div></div>
       <section className="sec" id="contact" style={{background:"white"}}>
@@ -605,7 +595,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ════════════════ ASSESSMENT BOOKING ════════════════ */}
       <div className="sec-divider"><div className="sd-line"></div>FREE APPOINTMENT | موعد مجاني<div className="sd-line"></div></div>
       <section id="assessment" style={{background:"#F0FAFA",padding:"80px 32px"}}>
@@ -652,7 +641,9 @@ export default function Home() {
                       <span style={{minWidth:"28px",height:"28px",background:"#C9903A",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Playfair Display',serif",fontSize:"13px",fontWeight:800,color:"white",flexShrink:0,marginTop:"1px"}}>{i+1}</span>
                       <div>
                         <div style={{fontSize:"14px",color:"rgba(255,255,255,.85)",lineHeight:1.5}}>{en}</div>
-                        <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"12px",color:"rgba(255,255,255,.45)",direction:"rtl",marginTop:"2px"}}>{ar}</div>
+                        <div
+                          style={{fontFamily:"'Tajawal',sans-serif",fontSize:"12px",color:"rgba(255,255,255,.45)",direction:"rtl",marginTop:"2px"}}
+                          className="text-[#05050573]">{ar}</div>
                       </div>
                     </li>
                   ))}
@@ -736,7 +727,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ════════════════ FOOTER ════════════════ */}
       <footer className="hp-footer">
         <div className="footer-inner">
