@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
-const T = "#0ABAB5"; const TDK = "#007A77"; const GOLD = "#C9903A"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+const T = "#81D8D0"; const TDK = "#007A77"; const GOLD = "#C9903A"; const BG = "#F5FFFE"; const MID = "#4A6B69";
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -47,7 +47,7 @@ export default function Contact() {
     { icon: "📸", color: "#E1306C", label_en: "Instagram", label_ar: "إنستغرام", val_en: "@canadareadyacademy", val_ar: "@canadareadyacademy", href: "https://instagram.com/canadareadyacademy", desc_en: "Daily tips for newcomers", desc_ar: "نصائح يومية للوافدين الجدد" },
   ];
 
-  const stag = { display: "inline-flex" as const, alignItems: "center", gap: "6px", background: "rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" };
+  const stag = { display: "inline-flex" as const, alignItems: "center", gap: "6px", background: "rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" };
 
   return (
     <div style={{ width: "100%" }}>
@@ -90,9 +90,9 @@ export default function Contact() {
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
               {channels.map((ch) => (
-                <a key={ch.label_en} href={ch.href} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "13px", background: "#fff", borderRadius: "18px", padding: "17px 20px", border: "1px solid rgba(10,186,181,0.15)", textDecoration: "none", transition: "0.3s" }}
+                <a key={ch.label_en} href={ch.href} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "13px", background: "#fff", borderRadius: "18px", padding: "17px 20px", border: "1px solid rgba(129,216,208,0.15)", textDecoration: "none", transition: "0.3s" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = ch.color; (e.currentTarget as HTMLAnchorElement).style.boxShadow = `0 8px 32px ${ch.color}22`; (e.currentTarget as HTMLAnchorElement).style.transform = "translateX(4px)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(10,186,181,0.15)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = ""; (e.currentTarget as HTMLAnchorElement).style.transform = ""; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(129,216,208,0.15)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = ""; (e.currentTarget as HTMLAnchorElement).style.transform = ""; }}
                   data-testid={`ch-${ch.label_en}`}
                 >
                   <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: `${ch.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", flexShrink: 0 }}>{ch.icon}</div>
@@ -105,7 +105,7 @@ export default function Contact() {
                 </a>
               ))}
             </div>
-            <div style={{ marginTop: "24px", background: BG, border: "1px solid rgba(10,186,181,0.15)", borderRadius: "16px", padding: "20px" }}>
+            <div style={{ marginTop: "24px", background: BG, border: "1px solid rgba(129,216,208,0.15)", borderRadius: "16px", padding: "20px" }}>
               <div style={{ fontWeight: 700, fontSize: "15px", color: TDK, marginBottom: "4px" }}>🌐 {isAr ? "الموقع" : "Location"}</div>
               <div style={{ fontSize: "14px", color: MID }}>{isAr ? "عبر الإنترنت — نخدم جميع أنحاء كندا" : "Online — Serving all of Canada"}</div>
               <div style={{ fontSize: "13px", color: "#8896AB", marginTop: "4px" }}>{isAr ? "ألبرتا · أونتاريو · كولومبيا البريطانية · وأكثر" : "Alberta · Ontario · British Columbia · and more"}</div>
@@ -113,7 +113,7 @@ export default function Contact() {
           </div>
 
           {/* Form */}
-          <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.12)" }}>
+          <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>{isAr ? "أرسل لنا رسالة" : "Send Us a Message"}</h3>
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>{isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours."}</p>
             <Form {...form}>
@@ -122,14 +122,14 @@ export default function Contact() {
                   <FormField control={form.control} name="name" render={({ field }) => (
                     <FormItem>
                       <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel>
-                      <FormControl><Input {...field} style={{ border: "1.5px solid rgba(10,186,181,0.25)", borderRadius: "10px" }} data-testid="input-name" /></FormControl>
+                      <FormControl><Input {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-name" /></FormControl>
                       <FormMessage />
                     </FormItem>
                   )} />
                   <FormField control={form.control} name="email" render={({ field }) => (
                     <FormItem>
                       <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel>
-                      <FormControl><Input type="email" {...field} style={{ border: "1.5px solid rgba(10,186,181,0.25)", borderRadius: "10px" }} data-testid="input-email" /></FormControl>
+                      <FormControl><Input type="email" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-email" /></FormControl>
                       <FormMessage />
                     </FormItem>
                   )} />
@@ -137,14 +137,14 @@ export default function Contact() {
                 <FormField control={form.control} name="whatsapp" render={({ field }) => (
                   <FormItem>
                     <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رقم الواتساب (اختياري)" : "WhatsApp Number (Optional)"}</FormLabel>
-                    <FormControl><Input placeholder="+1 587 000 0000" {...field} style={{ border: "1.5px solid rgba(10,186,181,0.25)", borderRadius: "10px" }} data-testid="input-whatsapp" /></FormControl>
+                    <FormControl><Input placeholder="+1 587 000 0000" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-whatsapp" /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
                 <FormField control={form.control} name="message" render={({ field }) => (
                   <FormItem>
                     <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رسالتك" : "Your Message"}</FormLabel>
-                    <FormControl><Textarea placeholder={isAr ? "أخبرنا كيف يمكننا مساعدتك..." : "Tell us how we can help you..."} className="min-h-[100px]" {...field} style={{ border: "1.5px solid rgba(10,186,181,0.25)", borderRadius: "10px" }} data-testid="input-message" /></FormControl>
+                    <FormControl><Textarea placeholder={isAr ? "أخبرنا كيف يمكننا مساعدتك..." : "Tell us how we can help you..."} className="min-h-[100px]" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-message" /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />

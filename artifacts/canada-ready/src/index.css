@@ -71,11 +71,11 @@
   --wa: #25D366;
   --fb: #1877F2;
 
-  --button-outline: rgba(10,186,181,.15);
-  --badge-outline: rgba(10,186,181,.08);
+  --button-outline: rgba(129,216,208,.15);
+  --badge-outline: rgba(129,216,208,.08);
   --opaque-button-border-intensity: -8;
-  --elevate-1: rgba(10,186,181,.04);
-  --elevate-2: rgba(10,186,181,.09);
+  --elevate-1: rgba(129,216,208,.04);
+  --elevate-2: rgba(129,216,208,.09);
 
   /* Tiffany Blue theme */
   --background: 178 60% 98%;

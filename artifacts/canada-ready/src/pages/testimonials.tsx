@@ -1,7 +1,7 @@
 import { useLanguage } from "@/lib/language-context";
 import { Link } from "wouter";
 
-const T = "#0ABAB5"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+const T = "#81D8D0"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
 
 export default function Testimonials() {
   const { language } = useLanguage();
@@ -34,7 +34,7 @@ export default function Testimonials() {
     },
   ];
 
-  const stag = { display: "inline-flex" as const, alignItems: "center", gap: "6px", background: "rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" };
+  const stag = { display: "inline-flex" as const, alignItems: "center", gap: "6px", background: "rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" };
 
   return (
     <div style={{ width: "100%" }}>
@@ -53,18 +53,18 @@ export default function Testimonials() {
       <section style={{ padding: "72px 5%", background: "#fff" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: "22px" }}>
           {stories.map((s) => (
-            <div key={s.name} style={{ background: "#fff", borderRadius: "18px", padding: "28px", border: "1px solid rgba(10,186,181,0.15)", transition: "0.3s", display: "flex", flexDirection: "column" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 32px rgba(10,186,181,0.15)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)"; }}
+            <div key={s.name} style={{ background: "#fff", borderRadius: "18px", padding: "28px", border: "1px solid rgba(129,216,208,0.15)", transition: "0.3s", display: "flex", flexDirection: "column" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 32px rgba(129,216,208,0.15)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = ""; (e.currentTarget as HTMLDivElement).style.transform = ""; }}
             >
               <div style={{ color: GOLD, fontSize: "17px", marginBottom: "11px" }}>★★★★★</div>
               <p style={{ fontSize: "14px", color: MID, lineHeight: 1.75, marginBottom: "18px", fontStyle: "italic", flex: 1 }}>"{isAr ? s.text_ar : s.text_en}"</p>
-              <div style={{ borderTop: "1px solid rgba(10,186,181,0.1)", paddingTop: "16px", display: "flex", alignItems: "center", gap: "12px" }}>
+              <div style={{ borderTop: "1px solid rgba(129,216,208,0.1)", paddingTop: "16px", display: "flex", alignItems: "center", gap: "12px" }}>
                 <div style={{ width: "46px", height: "46px", borderRadius: "50%", background: TDK, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", flexShrink: 0 }}>{s.emoji}</div>
                 <div>
                   <div style={{ fontWeight: 700, fontSize: "15px", color: TDK }}>{s.name}</div>
                   <div style={{ fontSize: "12px", color: "#8896AB", marginBottom: "3px" }}>{isAr ? s.origin_ar : s.origin_en}</div>
-                  <div style={{ display: "inline-block", background: "rgba(10,186,181,0.1)", color: TDK, fontSize: "11px", fontWeight: 700, padding: "2px 8px", borderRadius: "8px" }}>{isAr ? s.plan_ar : s.plan_en}</div>
+                  <div style={{ display: "inline-block", background: "rgba(129,216,208,0.1)", color: TDK, fontSize: "11px", fontWeight: 700, padding: "2px 8px", borderRadius: "8px" }}>{isAr ? s.plan_ar : s.plan_en}</div>
                 </div>
               </div>
             </div>

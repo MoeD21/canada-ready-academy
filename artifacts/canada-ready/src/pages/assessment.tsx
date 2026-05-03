@@ -11,7 +11,7 @@ import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
 
-const T = "#0ABAB5"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+const T = "#81D8D0"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -45,7 +45,7 @@ export default function Assessment() {
   if (submitted) {
     return (
       <div style={{ padding: "80px 5%", textAlign: "center", maxWidth: "600px", margin: "0 auto" }}>
-        <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: `rgba(10,186,181,0.12)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "36px", margin: "0 auto 24px" }}>✅</div>
+        <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: `rgba(129,216,208,0.12)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "36px", margin: "0 auto 24px" }}>✅</div>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "32px", fontWeight: 800, color: TDK, marginBottom: "12px" }}>
           {isAr ? "تم تقديم طلبك!" : "Assessment Submitted!"}
         </h2>
@@ -68,14 +68,14 @@ export default function Assessment() {
     { en: "You get your WhatsApp group & Zoom links", ar: "تحصل على مجموعة واتساب وروابط زووم" },
   ];
 
-  const inputStyle = { border: `1.5px solid rgba(10,186,181,0.25)`, borderRadius: "10px", padding: "12px 14px", fontSize: "14px", fontFamily: "inherit", color: "#1A2E2D", background: "#fff", outline: "none", width: "100%" };
+  const inputStyle = { border: `1.5px solid rgba(129,216,208,0.25)`, borderRadius: "10px", padding: "12px 14px", fontSize: "14px", fontFamily: "inherit", color: "#1A2E2D", background: "#fff", outline: "none", width: "100%" };
   const labelStyle = { display: "block" as const, fontSize: "12px", fontWeight: 700, color: TDK, marginBottom: "5px" };
 
   return (
     <div style={{ width: "100%" }}>
       {/* Header */}
       <section style={{ padding: "60px 5% 50px", background: `linear-gradient(135deg,${BG},#e8fffe)`, textAlign: "center" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" }}>
           📋 {isAr ? "تقييم مجاني" : "FREE ASSESSMENT"}
         </div>
         <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 800, color: TDK, marginBottom: "12px" }}>
@@ -102,7 +102,7 @@ export default function Assessment() {
                 </div>
               ))}
             </div>
-            <div style={{ background: BG, border: "1px solid rgba(10,186,181,0.15)", borderRadius: "16px", padding: "22px" }}>
+            <div style={{ background: BG, border: "1px solid rgba(129,216,208,0.15)", borderRadius: "16px", padding: "22px" }}>
               <div style={{ fontWeight: 700, fontSize: "15px", color: TDK, marginBottom: "10px" }}>🎁 {isAr ? "مجاني تماماً" : "100% Free"}</div>
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "7px" }}>
                 {[
@@ -120,7 +120,7 @@ export default function Assessment() {
           </div>
 
           {/* Right: Form */}
-          <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(10,186,181,0.1)", border: "1px solid rgba(10,186,181,0.12)" }}>
+          <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>
               {isAr ? "أكمل استمارة التقييم" : "Complete the Assessment Form"}
             </h3>
