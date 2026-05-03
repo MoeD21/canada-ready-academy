@@ -39,7 +39,7 @@ export default function Home() {
       <section style={{ minHeight: "calc(100vh - 68px)", padding: "60px 5%", display: "flex", alignItems: "center", background: BG }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "48px", alignItems: "center", width: "100%" }}>
           <div>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "7px", background: "rgba(102,230,222,0.12)", border: "1px solid rgba(102,230,222,0.35)", color: TDK, padding: "7px 16px", borderRadius: "22px", fontSize: "12px", fontWeight: 700, marginBottom: "18px", whiteSpace: "nowrap", flexWrap: "nowrap" as const, maxWidth: "100%" }}>🍁 {isAr ? "نظام دعم الوافدين الجدد في كندا" : "Canada's Newcomer Support System"}</div>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "7px", background: "rgba(102,230,222,0.12)", border: "1px solid rgba(102,230,222,0.35)", color: TDK, padding: "7px 16px", borderRadius: "22px", fontSize: "12px", fontWeight: 700, marginBottom: "18px", whiteSpace: "nowrap", flexWrap: "nowrap" as const, maxWidth: "100%" }}>🍁 {isAr ? "نظام دعم الوافدين الجدد رقم 1 في كندا" : "Canada's #1 Newcomer Support System"}</div>
             <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(36px,5.2vw,62px)", fontWeight: 800, color: TDK, lineHeight: 1.08, marginBottom: "16px", whiteSpace: "normal" }}>
               {isAr ? (
                 <>دعم الإنجليزية والمهنة<br />والحياة للوافدين الجدد في <span style={{ color: GOLD }}>كندا</span></>
