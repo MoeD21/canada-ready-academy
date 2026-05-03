@@ -53,8 +53,8 @@ export default function Home() {
               <Link href="/services" style={{ background: "#fff", color: TDK, border: "1px solid rgba(102,230,222,0.45)", padding: "15px 24px", borderRadius: "30px", fontSize: "15px", fontWeight: 800, textDecoration: "none", boxShadow: "0 8px 18px rgba(102,230,222,0.10)", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", justifyContent: "center", lineHeight: 1, minWidth: "fit-content" }}>{isAr ? "عرض الخدمات" : "View Services"}</Link>
             </div>
           </div>
-          <div style={{ background: "linear-gradient(180deg, #F2FFFE 0%, #FFFFFF 100%)", border: "1px solid rgba(102,230,222,0.28)", borderRadius: "24px", padding: "28px", color: TDK, boxShadow: "0 18px 40px rgba(102,230,222,0.12)", overflow: "hidden" }}>
-            <div style={{ fontSize: "11px", color: TDK, fontWeight: 800, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "16px" }}>{isAr ? "ما ستحصل عليه" : "WHAT YOU GET"}</div>
+          <div style={{ background: "#007a77", border: "1px solid rgba(255,255,255,0.16)", borderRadius: "24px", padding: "28px", color: "#fff", boxShadow: "0 18px 40px rgba(0,122,119,0.18)", overflow: "hidden", direction: isAr ? "rtl" : "ltr" }}>
+            <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.88)", fontWeight: 800, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "16px" }}>{isAr ? "ما ستحصل عليه" : "WHAT YOU GET"}</div>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", minWidth: 0 }}>
               {[
                 { icon: "🗣️", text: isAr ? "حصص إنجليزية لجميع المستويات" : "English classes for all levels" },
@@ -63,7 +63,7 @@ export default function Home() {
                 { icon: "🤝", text: isAr ? "مجتمع عربي ودعم واتساب" : "Arabic community and WhatsApp support" },
                 { icon: "📞", text: isAr ? "مكالمات توجيه فردية" : "1-on-1 coaching calls" },
               ].map((item) => (
-                <div key={item.text} style={{ background: "#fff", borderRadius: "14px", padding: "12px 14px", fontSize: "14px", display: "flex", alignItems: "center", gap: "10px", color: MID, minWidth: 0 }}>
+                <div key={item.text} style={{ background: "rgba(255,255,255,0.12)", borderRadius: "14px", padding: "12px 14px", fontSize: "14px", display: "flex", alignItems: "center", gap: "10px", color: "#fff", minWidth: 0 }}>
                   <span>{item.icon}</span>
                   <span style={{ lineHeight: 1.45, wordBreak: "break-word" }}>{item.text}</span>
                 </div>
