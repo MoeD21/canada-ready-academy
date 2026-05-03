@@ -1,7 +1,7 @@
 import { useLanguage } from "@/lib/language-context";
 import { Link } from "wouter";
 
-const T = "#0ABAB5"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+const T = "#66E6DE"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
 
 export default function About() {
   const { language } = useLanguage();
@@ -43,6 +43,7 @@ export default function About() {
     <div style={{ width: "100%" }}>
       {/* Header */}
       <section style={{ padding: "60px 5% 50px", background: `linear-gradient(135deg,${BG},#e8fffe)`, textAlign: "center" }}>
+        <div style={{ fontSize: "34px", marginBottom: "8px" }}>🍁</div>
         <div style={stag}>ℹ️ {isAr ? "عنّا" : "ABOUT US"}</div>
         <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px,4vw,52px)", fontWeight: 800, color: TDK, marginBottom: "10px" }}>
           {isAr ? "عن أكاديمية كندا ريدي" : "About Canada Ready Academy"}

@@ -1,7 +1,7 @@
 import { useLanguage } from "@/lib/language-context";
 import { Link } from "wouter";
 
-const T = "#81D8D0"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+const T = "#66E6DE"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
 
 export default function HowItWorks() {
   const { language } = useLanguage();
@@ -64,6 +64,9 @@ export default function HowItWorks() {
         <p style={{ fontSize: "17px", color: MID, maxWidth: "560px", margin: "0 auto" }}>
           {isAr ? "5 خطوات بسيطة تبدأ بمكالمة مجانية لمدة 15 دقيقة." : "5 simple steps starting with a free 15-minute call."}
         </p>
+        <Link href="/assessment" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: GOLD, color: TDK, padding: "14px 32px", borderRadius: "30px", fontSize: "15px", fontWeight: 800, textDecoration: "none", marginTop: "20px" }} data-testid="hiw-book-btn">
+          📋 {isAr ? "احجز موعدك المجاني" : "Book Appointment"}
+        </Link>
       </section>
 
       {/* Steps */}
@@ -120,7 +123,7 @@ export default function HowItWorks() {
               {isAr ? "جدول الصفوف الأسبوعي" : "Weekly Class Schedule"}
             </div>
             {[
-              { color: "#81D8D0", day_en: "Monday", day_ar: "الاثنين", title_en: "English Foundations", title_ar: "أسس الإنجليزية", desc_en: "Grammar, vocabulary, reading & writing", desc_ar: "القواعد، المفردات، القراءة والكتابة" },
+              { color: "#66E6DE", day_en: "Monday", day_ar: "الاثنين", title_en: "English Foundations", title_ar: "أسس الإنجليزية", desc_en: "Grammar, vocabulary, reading & writing", desc_ar: "القواعد، المفردات، القراءة والكتابة" },
               { color: GOLD_LT, day_en: "Wednesday", day_ar: "الأربعاء", title_en: "Conversation & Pronunciation", title_ar: "المحادثة والنطق", desc_en: "Speaking confidence & pronunciation drills", desc_ar: "ثقة الكلام وتدريبات النطق" },
               { color: "#6EDA8E", day_en: "Friday", day_ar: "الجمعة", title_en: "Career & Canada Life Workshop", title_ar: "ورشة المهنة والحياة الكندية", desc_en: "Jobs, interviews, Canadian life topics", desc_ar: "الوظائف، المقابلات، الحياة الكندية" },
             ].map((d) => (

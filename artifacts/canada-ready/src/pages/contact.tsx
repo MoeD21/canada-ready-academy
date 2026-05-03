@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
-const T = "#81D8D0"; const TDK = "#007A77"; const GOLD = "#C9903A"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+const T = "#66E6DE"; const TDK = "#007A77"; const GOLD = "#C9903A"; const BG = "#F5FFFE"; const MID = "#4A6B69";
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
