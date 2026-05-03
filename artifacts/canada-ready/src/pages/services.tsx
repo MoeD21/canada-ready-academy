@@ -1,24 +1,24 @@
 import { useLanguage } from "@/lib/language-context";
 import { Link } from "wouter";
 
-const T = "#81D8D0";
+const BRIGHT = "#66E6DE";
 const TDK = "#007A77";
 const GOLD = "#C9903A";
 const MID = "#4A6B69";
-const BG = "#F5FFFE";
+const BG = "#F7FFFE";
 
 const sections = [
   {
     title_en: "English Support",
     title_ar: "دعم الإنجليزية",
-    items_en: ["Beginner survival English", "Conversation practice", "Grammar and vocabulary", "Pronunciation training", "Reading and writing", "Workplace English", "Email writing", "Phone call practice", "IELTS / CELPIP prep", "Confidence building"],
-    items_ar: ["إنجليزية أساسية للحياة اليومية", "تدريب المحادثة", "القواعد والمفردات", "تحسين النطق", "القراءة والكتابة", "إنجليزية العمل", "كتابة البريد الإلكتروني", "التحدث عبر الهاتف", "التحضير لـ IELTS / CELPIP", "بناء الثقة"],
+    items_en: ["Beginner English", "Intermediate English", "Conversation practice", "Pronunciation training", "Speaking confidence", "Listening practice", "Reading practice", "Writing correction", "Grammar lessons", "Vocabulary lessons", "Customer service English", "Construction English", "Healthcare English", "Warehouse English", "Office English", "Phone conversation English", "Email writing", "English homework help", "Weekly quizzes", "Daily vocabulary", "English speaking clubs", "Public speaking practice", "Accent improvement", "Real-life conversation simulation", "Roleplay interviews", "Group speaking practice", "Beginner survival English", "English for parents/schools", "Canadian slang lessons", "Workplace English"],
+    items_ar: ["الإنجليزية للمبتدئين", "الإنجليزية للمتوسطين", "تدريب المحادثة", "تحسين النطق", "بناء الثقة في الكلام", "تدريب الاستماع", "تدريب القراءة", "تصحيح الكتابة", "دروس القواعد", "دروس المفردات", "إنجليزية خدمة العملاء", "إنجليزية البناء", "إنجليزية الرعاية الصحية", "إنجليزية المستودعات", "إنجليزية المكتب", "إنجليزية المكالمات الهاتفية", "كتابة البريد الإلكتروني", "مساعدة في الواجبات", "اختبارات أسبوعية", "مفردات يومية", "نوادي التحدث بالإنجليزية", "ممارسة التحدث أمام الناس", "تحسين اللهجة", "محاكاة محادثات حقيقية", "تمثيل المقابلات", "ممارسة جماعية", "إنجليزية الحياة اليومية", "إنجليزية للأهل والمدارس", "دروس العامية الكندية", "إنجليزية العمل"],
   },
   {
     title_en: "Job & Career Support",
     title_ar: "دعم الوظائف والمهنة",
-    items_en: ["Canadian resume", "Cover letter writing", "LinkedIn setup", "Job search strategy", "Application review", "Mock interviews", "Interview feedback", "Workplace culture", "Career planning", "Promotion readiness"],
-    items_ar: ["سيرة ذاتية كندية", "كتابة خطاب التغطية", "إعداد لينكدإن", "استراتيجية البحث عن عمل", "مراجعة الطلبات", "مقابلات تجريبية", "ملاحظات على المقابلة", "ثقافة العمل", "التخطيط المهني", "الاستعداد للترقية"],
+    items_en: ["Canadian resume", "Cover letter writing", "LinkedIn setup", "Job search strategy", "Application review", "Mock interviews", "Interview feedback", "Career planning", "Promotion readiness", "Workplace culture", "Professional communication", "Interview preparation", "Job application support", "Career coaching"],
+    items_ar: ["سيرة ذاتية كندية", "كتابة خطاب التغطية", "إعداد لينكدإن", "استراتيجية البحث عن عمل", "مراجعة الطلبات", "مقابلات تجريبية", "ملاحظات على المقابلة", "التخطيط المهني", "الاستعداد للترقية", "ثقافة العمل", "التواصل المهني", "التحضير للمقابلات", "دعم التقديم على الوظائف", "توجيه مهني"],
   },
   {
     title_en: "Newcomer Life Support",
@@ -61,31 +61,47 @@ const sections = [
 export default function Services() {
   const { language } = useLanguage();
   const isAr = language === "ar";
+
   return (
-    <div style={{ width: "100%" }}>
-      <section style={{ padding: "78px 5% 46px", background: `linear-gradient(180deg, #fff 0%, ${BG} 100%)`, textAlign: "center" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(129,216,208,0.12)", border: "1px solid rgba(129,216,208,0.25)", color: TDK, padding: "6px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", marginBottom: "14px" }}>🧾 {isAr ? "كل الخدمات" : "ALL SERVICES"}</div>
-        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px,4vw,56px)", fontWeight: 800, color: TDK, marginBottom: "12px", lineHeight: 1.08 }}>{isAr ? <>كل الدعم الذي تحتاجه للنجاح في <span style={{ color: GOLD }}>كندا</span></> : <>All the Support You Need to Succeed in <span style={{ color: GOLD }}>Canada</span></>}</h1>
-        <p style={{ fontSize: "17px", color: MID, maxWidth: "760px", margin: "0 auto", lineHeight: 1.75 }}>{isAr ? "هذه الصفحة تجمع الخدمات بشكل واضح ومنظم — سهلة القراءة، مريحة على الجوال، ومناسبة للعرض السريع." : "This page presents the services clearly and professionally — easy to read, mobile-friendly, and quick to scan."}</p>
-      </section>
-      <section style={{ padding: "58px 5%", background: "#fff" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "18px" }}>
-            {sections.map((section) => (
-              <div key={section.title_en} style={{ background: "#fff", border: "1px solid rgba(129,216,208,0.2)", borderRadius: "20px", padding: "24px", boxShadow: "0 8px 28px rgba(129,216,208,0.08)" }}>
-                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: TDK, marginBottom: "12px" }}>{isAr ? section.title_ar : section.title_en}</h2>
-                <p style={{ color: MID, fontSize: "14px", lineHeight: 1.7, marginBottom: "16px" }}>{isAr ? "خدمات دعم منظمة وواضحة." : "A clear, organized support area."}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                  {(isAr ? section.items_ar : section.items_en).map((item) => (
-                    <span key={item} style={{ background: BG, border: "1px solid rgba(129,216,208,0.16)", color: MID, padding: "9px 12px", borderRadius: "999px", fontSize: "12px", fontWeight: 600, lineHeight: 1.4 }}>{item}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
+    <div style={{ width: "100%", background: "#fff" }}>
+      <section style={{ padding: "76px 5% 34px", background: `linear-gradient(180deg, #fff 0%, ${BG} 100%)` }}>
+        <div style={{ maxWidth: "1180px", margin: "0 auto" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: TDK, fontWeight: 800, letterSpacing: "1.1px", textTransform: "uppercase", fontSize: "11px", marginBottom: "10px" }}>
+            <span style={{ width: "4px", height: "22px", background: BRIGHT, borderRadius: "999px" }} />
+            {isAr ? "كل الخدمات" : "ALL SERVICES"}
           </div>
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px,4vw,52px)", fontWeight: 800, color: TDK, lineHeight: 1.1, marginBottom: "12px" }}>
+            {isAr ? <>كل الدعم الذي تحتاجه للنجاح في <span style={{ color: GOLD }}>كندا</span></> : <>All the Support You Need to Succeed in <span style={{ color: GOLD }}>Canada</span></>}
+          </h1>
+          <p style={{ maxWidth: "720px", color: MID, fontSize: "17px", lineHeight: 1.7 }}>
+            {isAr ? "هذا التصميم يشبه المثال: منظم، بسيط، ومريح للعين — مع لون أزرق Tiffany أوضح وأكثر إشراقاً." : "This layout follows the example: clean, simple, and easy to scan — with a brighter Tiffany Blue."}
+          </p>
         </div>
       </section>
-      <section style={{ background: TDK, padding: "72px 5%", textAlign: "center" }}>
+
+      <section style={{ padding: "18px 5% 62px" }}>
+        <div style={{ maxWidth: "1180px", margin: "0 auto" }}>
+          {sections.map((section) => (
+            <div key={section.title_en} style={{ marginBottom: "28px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+                <div style={{ width: "4px", height: "28px", background: BRIGHT, borderRadius: "999px" }} />
+                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "28px", fontWeight: 800, color: TDK, margin: 0 }}>
+                  {isAr ? section.title_ar : section.title_en}
+                </h2>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: "10px" }}>
+                {(isAr ? section.items_ar : section.items_en).map((item) => (
+                  <div key={item} style={{ background: "#EEFDFC", border: "1px solid rgba(102,230,222,0.55)", color: MID, padding: "12px 14px", borderRadius: "12px", fontSize: "13px", lineHeight: 1.45, boxShadow: "0 1px 0 rgba(0,0,0,0.02)" }}>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={{ padding: "70px 5%", background: TDK, textAlign: "center" }}>
         <div style={{ maxWidth: "680px", margin: "0 auto" }}>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px,3vw,38px)", fontWeight: 800, color: "#fff", marginBottom: "14px" }}>{isAr ? "جاهز لتبدأ؟" : "Ready to Get Started?"}</h2>
           <p style={{ color: "rgba(255,255,255,0.82)", fontSize: "17px", marginBottom: "26px", lineHeight: 1.7 }}>{isAr ? "احجز تقييمك المجاني وسنحدد لك أفضل مسار من خدماتنا." : "Book your free assessment and we'll map the best service path for you."}</p>
