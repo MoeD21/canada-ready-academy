@@ -46,8 +46,8 @@ export function Footer() {
             English, Career & Life Support / دعم الإنجليزية والمهنة والحياة
           </div>
           <div style={{ display: "flex", gap: "8px" }}>
-            <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "7px", background: "#25D366", color: "#fff", textDecoration: "none", padding: "9px 13px", borderRadius: "9px", fontWeight: 700, fontSize: "13px" }}>💬 WhatsApp</a>
-            <a href="https://facebook.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "7px", background: "#1877F2", color: "#fff", textDecoration: "none", padding: "9px 13px", borderRadius: "9px", fontWeight: 700, fontSize: "13px" }}>📘 Facebook</a>
+            <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "7px", background: "#25D366", color: "#fff", textDecoration: "none", padding: "9px 13px", borderRadius: "9px", fontWeight: 700, fontSize: "13px" }}>💬 WhatsApp</a>
+            <a href="https://facebook.com/groups/1338122224799157" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "7px", background: "#1877F2", color: "#fff", textDecoration: "none", padding: "9px 13px", borderRadius: "9px", fontWeight: 700, fontSize: "13px" }}>📘 Facebook</a>
           </div>
         </div>
 
@@ -55,8 +55,8 @@ export function Footer() {
         <div>
           <h4 style={{ color: "#fff", fontSize: "11.5px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", marginBottom: "13px", fontFamily: "'Outfit', sans-serif" }}>Contact Us / اتصل بنا</h4>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px", fontSize: "13px" }}>
-            <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>💬 +1 (587) 000-0000</a>
-            <a href="mailto:hello@canadareadyacademy.com" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>✉️ hello@canadareadyacademy.com</a>
+            <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>💬 +1 (403) 434-0027</a>
+            <a href="mailto:canadareadyacademy@gmail.com" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>✉️ canadareadyacademy@gmail.com</a>
             <a href="https://instagram.com/canadareadyacademy" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>📸 @canadareadyacademy</a>
             <span style={{ color: "rgba(255,255,255,0.45)" }}>🌐 Online — All of Canada / عبر الإنترنت — جميع أنحاء كندا</span>
           </div>
@@ -72,7 +72,7 @@ export function Footer() {
 
 export function WhatsAppButton() {
   return (
-    <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer"
+    <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer"
       style={{ position: "fixed", bottom: "26px", right: "26px", zIndex: 950, width: "56px", height: "56px", background: "#25D366", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "25px", textDecoration: "none" }}
       className="animate-pulse-wa"
       aria-label="WhatsApp"
