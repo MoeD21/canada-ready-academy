@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>CanadaReady Academy | Full Support for Newcomers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --tiffany: #0ABAB5;
+      --tiffany-dark: #0A9C98;
+      --tiffany-light: #E0F4F3;
+      --navy: #1E2A3E;
+      --gray-bg: #F8F9FA;
+      --white: #FFFFFF;
+      --text: #1E2A3E;
+      --text-light: #4A5568;
+      --border: #E2E8F0;
+      --radius: 16px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--gray-bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    body.ar {
+      font-family: 'Tajawal', sans-serif;
+    }
+    /* Language visibility – ONLY ONE shows at a time */
+    .lang-en {
+      display: block;
+    }
+    .lang-ar {
+      display: none;
+    }
+    body.ar .lang-en {
+      display: none;
+    }
+    body.ar .lang-ar {
+      display: block;
+    }
+    /* For inline elements like spans */
+    span.lang-en, span.lang-ar, div.lang-en, div.lang-ar, p.lang-en, p.lang-ar, li.lang-en, li.lang-ar {
+      display: inline;
+    }
+    body.ar span.lang-en, body.ar div.lang-en, body.ar p.lang-en, body.ar li.lang-en {
+      display: none;
+    }
+    body.ar span.lang-ar, body.ar div.lang-ar, body.ar p.lang-ar, body.ar li.lang-ar {
+      display: inline;
+    }
+    /* Ensure block level language containers */
+    .lang-en-block, .lang-ar-block {
+      display: block;
+    }
+    body.ar .lang-en-block {
+      display: none;
+    }
+    body.ar .lang-ar-block {
+      display: block;
+    }
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 12px 0;
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .logo-icon {
+      background: var(--tiffany);
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .logo-text {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--navy);
+    }
+    .logo-text span {
+      color: var(--tiffany);
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .nav-links a:hover {
+      color: var(--tiffany);
+    }
+    .lang-switch {
+      display: flex;
+      gap: 5px;
+      background: var(--tiffany-light);
+      border-radius: 40px;
+      padding: 4px;
+    }
+    .lang-switch button {
+      background: none;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .lang-switch button.active {
+      background: var(--tiffany);
+      color: white;
+    }
+    .btn-primary {
+      background: var(--tiffany);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 40px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover {
+      background: var(--tiffany-dark);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--tiffany);
+      color: var(--tiffany-dark);
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .section {
+      padding: 80px 0;
+    }
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: var(--navy);
+    }
+    .badge {
+      display: inline-block;
+      background: var(--tiffany-light);
+      color: var(--tiffany-dark);
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 30px;
+    }
+    .grid-2 { grid-template-columns: repeat(2,1fr); }
+    .grid-3 { grid-template-columns: repeat(3,1fr); }
+    .grid-4 { grid-template-columns: repeat(4,1fr); }
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .service-category {
+      margin-bottom: 40px;
+    }
+    .service-category h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: var(--tiffany-dark);
+      border-left: 4px solid var(--tiffany);
+      padding-left: 15px;
+    }
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+      gap: 10px;
+      list-style: none;
+    }
+    .service-list li {
+      background: var(--tiffany-light);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    .pricing-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .pricing-card.popular {
+      border-top: 4px solid var(--tiffany);
+    }
+    .price {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--tiffany-dark);
+    }
+    .feature-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .feature-list li {
+      margin-bottom: 10px;
+      display: flex;
+      gap: 8px;
+    }
+    .feature-list li::before {
+      content: "✓";
+      color: var(--tiffany);
+      font-weight: bold;
+    }
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.7);
+      padding: 40px 0;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 999;
+      text-decoration: none;
+    }
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .section-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#" id="whatsappFloat" class="whatsapp-float" target="_blank">💬</a>
+
+<nav>
+  <div class="container nav-flex">
+    <div class="logo" onclick="navigate('home')">
+      <div class="logo-icon">🍁</div>
+      <div class="logo-text">CanadaReady <span>Academy</span></div>
+    </div>
+    <div class="nav-links">
+      <a onclick="navigate('home')"><span class="lang-en">Home</span><span class="lang-ar">الرئيسية</span></a>
+      <a onclick="navigate('services')"><span class="lang-en">150+ Services</span><span class="lang-ar">١٥٠+ خدمة</span></a>
+      <a onclick="navigate('programs')"><span class="lang-en">Programs</span><span class="lang-ar">البرامج</span></a>
+      <a onclick="navigate('howitworks')"><span class="lang-en">How it works</span><span class="lang-ar">كيف يعمل</span></a>
+      <a onclick="navigate('assessment')"><span class="lang-en">Free Assessment</span><span class="lang-ar">تقييم مجاني</span></a>
+      <a onclick="navigate('testimonials')"><span class="lang-en">Testimonials</span><span class="lang-ar">آراء</span></a>
+      <a onclick="navigate('contact')"><span class="lang-en">Contact</span><span class="lang-ar">تواصل</span></a>
+    </div>
+    <div class="lang-switch">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnAr" onclick="setLang('ar')">عربي</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HOME PAGE ========== -->
+<div id="page-home" class="page active">
+  <div style="padding-top: 80px;"></div>
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <div class="badge">🍁 <span class="lang-en">Canada's Newcomer Support System</span><span class="lang-ar">نظام دعم الوافدين الجدد</span></div>
+          <h1 class="section-title"><span class="lang-en">English, Career & Life Support for Newcomers in <span style="color:var(--tiffany);">Canada</span></span><span class="lang-ar">دعم الإنجليزية والمهنة والحياة للوافدين الجدد في <span style="color:var(--tiffany);">كندا</span></span></h1>
+          <p style="font-size: 18px; color: var(--text-light); margin-bottom: 30px;"><span class="lang-en">Live online classes, job preparation, and settlement support — designed for Arabic‑speaking immigrants. Start with a FREE 15‑min assessment.</span><span class="lang-ar">دروس مباشرة، تحضير للعمل، ودعم التوطين — مصمم للمهاجرين الناطقين بالعربية. ابدأ بتقييم مجاني 15 دقيقة.</span></p>
+          <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="navigate('assessment')">📋 <span class="lang-en">Book Free Assessment</span><span class="lang-ar">احجز تقييماً مجانياً</span></button>
+            <a href="#" id="heroWhatsappBtn" class="btn-outline">💬 <span class="lang-en">Join Free Class</span><span class="lang-ar">انضم لصف مجاني</span></a>
+          </div>
+          <div style="display: flex; gap: 30px; margin-top: 40px;">
+            <div><div style="font-size: 32px; font-weight: 800;">500+</div><span class="lang-en">Newcomers helped</span><span class="lang-ar">وافد استفاد</span></div>
+            <div><div style="font-size: 32px; font-weight: 800;">3x</div><span class="lang-en">Live classes/week</span><span class="lang-ar">صفوف أسبوعياً</span></div>
+            <div><div style="font-size: 32px; font-weight: 800;">150+</div><span class="lang-en">Support services</span><span class="lang-ar">خدمة دعم</span></div>
+          </div>
+        </div>
+        <div class="card" style="background: var(--navy); color: white; border: none;">
+          <div style="font-size: 12px; opacity: 0.7;"><span class="lang-en">WHAT YOU GET</span><span class="lang-ar">ما ستحصل عليه</span></div>
+          <ul style="margin: 20px 0; list-style: none;">
+            <li>📚 <span class="lang-en">English Classes — All Levels</span><span class="lang-ar">دروس إنجليزية — جميع المستويات</span></li>
+            <li>💼 <span class="lang-en">Resume + Job Preparation</span><span class="lang-ar">سيرة ذاتية + تحضير للعمل</span></li>
+            <li>🏠 <span class="lang-en">Settlement & Life Guidance</span><span class="lang-ar">إرشادات التوطين والحياة</span></li>
+            <li>🤝 <span class="lang-en">Arabic Community Support</span><span class="lang-ar">مجتمع دعم عربي</span></li>
+            <li>📋 <span class="lang-en">1-on-1 Coaching Calls</span><span class="lang-ar">جلسات تدريب فردية</span></li>
+          </ul>
+          <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;"><span class="lang-en">Starting from</span><span class="lang-ar">يبدأ من</span> <strong style="font-size: 32px;">$79</strong> <span class="lang-en">/month CAD</span><span class="lang-ar">/شهر كندي</span></div>
+          <div style="margin-top: 15px; background: var(--tiffany); padding: 10px; border-radius: 12px; text-align: center; color: var(--navy);"><span class="lang-en">🎁 First week FREE — No credit card</span><span class="lang-ar">🎁 الأسبوع الأول مجاني — بدون بطاقة</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--white);">
+    <div class="container">
+      <div class="badge"><span class="lang-en">WE HELP YOU WITH</span><span class="lang-ar">نساعدك في</span></div>
+      <div class="grid-3">
+        <div class="card"><div style="font-size: 32px;">🗣️</div><h3><span class="lang-en">Improve English</span><span class="lang-ar">تطوير الإنجليزية</span></h3><p><span class="lang-en">All levels, conversation, pronunciation, workplace English.</span><span class="lang-ar">جميع المستويات، محادثة، نطق، إنجليزي العمل.</span></p></div>
+        <div class="card"><div style="font-size: 32px;">💼</div><h3><span class="lang-en">Find Better Jobs</span><span class="lang-ar">إيجاد وظيفة أفضل</span></h3><p><span class="lang-en">Resume, LinkedIn, mock interviews, job search.</span><span class="lang-ar">سيرة ذاتية، لينكدإن، مقابلات تجريبية، بحث عن عمل.</span></p></div>
+        <div class="card"><div style="font-size: 32px;">🏠</div><h3><span class="lang-en">Settle in Canada</span><span class="lang-ar">التأقلم في كندا</span></h3><p><span class="lang-en">Banking, taxes, housing, healthcare, driving, schools.</span><span class="lang-ar">البنوك، الضرائب، السكن، الصحة، القيادة، المدارس.</span></p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========== 150+ SERVICES PAGE ========== -->
+<div id="page-services" class="page">
+  <div style="padding-top: 80px;"></div>
+  <section class="section">
+    <div class="container">
+      <div class="badge"><span class="lang-en">COMPLETE SUPPORT SYSTEM</span><span class="lang-ar">نظام دعم متكامل</span></div>
+      <h1 class="section-title"><span class="lang-en">150+ Ways We Help You Succeed in Canada</span><span class="lang-ar">١٥٠+ طريقة لنساعدك على النجاح في كندا</span></h1>
+      <div class="lang-en" style="margin-bottom: 40px;">We don't just teach English. We provide every possible support a newcomer needs – from beginner English to starting a business. All services are available in Arabic and English.</div>
+      <div class="lang-ar" style="margin-bottom: 40px;">لا نعلم الإنجليزية فقط. نقدم كل دعم ممكن يحتاجه الوافد الجديد – من الإنجليزية للمبتدئين إلى بدء عمل تجاري. جميع الخدمات متوفرة بالعربية والإنجليزية.</div>
+
+      <!-- 1. ENGLISH SUPPORT -->
+      <div class="service-category">
+        <h3>📚 <span class="lang-en">English Support</span><span class="lang-ar">دعم الإنجليزية</span></h3>
+        <ul class="service-list">
+          <li><span class="lang-en">Beginner English classes</span><span class="lang-ar">دروس إنجليزية للمبتدئين</span></li>
+          <li><span class="lang-en">Intermediate English classes</span><span class="lang-ar">دروس إنجليزية للمتوسطين</span></li>
+          <li><span class="lang-en">Conversation practice</span><span class="lang-ar">تدريب المحادثة</span></li>
+          <li><span class="lang-en">Pronunciation training</span><span class="lang-ar">تدريب النطق</span></li>
+          <li><span class="lang-en">Speaking confidence training</span><span class="lang-ar">تدريب الثقة في التحدث</span></li>
+          <li><span class="lang-en">Listening practice</span><span class="lang-ar">تدريب الاستماع</span></li>
+          <li><span class="lang-en">Reading practice</span><span class="lang-ar">تدريب القراءة</span></li>
+          <li><span class="lang-en">Writing correction</span><span class="lang-ar">تصحيح الكتابة</span></li>
+          <li><span class="lang-en">Grammar lessons</span><span class="lang-ar">دروس القواعد</span></li>
+          <li><span class="lang-en">Vocabulary lessons</span><span class="lang-ar">دروس المفردات</span></li>
+          <li><span class="lang-en">Canadian slang lessons</span><span class="lang-ar">دروس العامية الكندية</span></li>
+          <li><span class="lang-en">Workplace English</span><span class="lang-ar">إنجليزي مكان العمل</span></li>
+          <li><span class="lang-en">Customer service English</span><span class="lang-ar">إنجليزي خدمة العملاء</span></li>
+          <li><span class="lang-en">Construction English</span><span class="lang-ar">إنجليزي قطاع البناء</span></li>
+          <li><span class="lang-en">Healthcare English</span><span class="lang-ar">إنجليزي القطاع الصحي</span></li>
+          <li><span class="lang-en">Warehouse English</span><span class="lang-ar">إنجليزي المستودعات</span></li>
+          <li><span class="lang-en">Office English</span><span class="lang-ar">إنجليزي المكاتب</span></li>
+          <li><span class="lang-en">Phone conversation English</span><span class="lang-ar">إنجليزي المحادثات الهاتفية</span></li>
+          <li><span class="lang-en">Email writing</span><span class="lang-ar">كتابة الإيميلات</span></li>
+          <li><span class="lang-en">English homework help</span><span class="lang-ar">مساعدة في واجبات الإنجليزية</span></li>
+          <li><span class="lang-en">Weekly quizzes</span><span class="lang-ar">اختبارات أسبوعية</span></li>
+          <li><span class="lang-en">Daily vocabulary</span><span class="lang-ar">مفردات يومية</span></li>
+          <li><span class="lang-en">English speaking clubs</span><span class="lang-ar">نوادي المحادثة بالإنجليزية</span></li>
+          <li><span class="lang-en">Public speaking practice</span><span class="lang-ar">تدريب التحدث أمام الجمهور</span></li>
+          <li><span class="lang-en">Accent improvement</span><span class="lang-ar">تحسين اللهجة</span></li>
+          <li><span class="lang-en">Real-life conversation simulation</span><span class="lang-ar">محاكاة محادثات واقعية</span></li>
+          <li><span class="lang-en">Roleplay interviews</span><span class="lang-ar">تمثيل أدوار المقابلات</span></li>
+          <li><span class="lang-en">Group speaking practice</span><span class="lang-ar">تدريب جماعي على التحدث</span></li>
+          <li><span class="lang-en">Beginner survival English</span><span class="lang-ar">إنجليزي البقاء للمبتدئين</span></li>
+          <li><span class="lang-en">English for parents/schools</span><span class="lang-ar">إنجليزي للآباء والمدارس</span></li>
+        </ul>
+      </div>
+
+      <!-- 2. JOB & CAREER SUPPORT -->
+      <div class="service-category">
+        <h3>💼 <span class="lang-en">Job & Career Support</span><span class="lang-ar">الدعم المهني والوظيفي</span></h3>
+        <ul class="service-list">
+          <li><span class="lang-en">Resume building</span><span class="lang-ar">بناء السيرة الذاتية</span></li>
+          <li><span class="lang-en">Resume correction</span><span class="lang-ar">تصحيح السيرة الذاتية</span></li>
+          <li><span class="lang-en">Cover letter help</span><span class="lang-ar">مساعدة في خطاب التقديم</span></li>
+          <li><span class="lang-en">LinkedIn setup</span><span class="lang-ar">إعداد لينكدإن</span></li>
+          <li><span class="lang-en">Job search help</span><span class="lang-ar">مساعدة في البحث عن عمل</span></li>
+          <li><span class="lang-en">Job application help</span><span class="lang-ar">مساعدة في تقديم الوظائف</span></li>
+          <li><span class="lang-en">Interview preparation</span><span class="lang-ar">تحضير المقابلات</span></li>
+          <li><span class="lang-en">Mock interviews</span><span class="lang-ar">مقابلات تجريبية</span></li>
+          <li><span class="lang-en">Canadian workplace culture</span><span class="lang-ar">ثقافة العمل الكندية</span></li>
+          <li><span class="lang-en">Job vocabulary</span><span class="lang-ar">مفردات العمل</span></li>
+          <li><span class="lang-en">Professional communication</span><span class="lang-ar">التواصل المهني</span></li>
+          <li><span class="lang-en">Reference request help</span><span class="lang-ar">مساعدة في طلب المراجع</span></li>
+          <li><span class="lang-en">Interview confidence coaching</span><span class="lang-ar">تدريب الثقة في المقابلات</span></li>
+          <li><span class="lang-en">Career planning</span><span class="lang-ar">التخطيط المهني</span></li>
+          <li><span class="lang-en">Skilled trades guidance</span><span class="lang-ar">إرشادات الحرف الماهرة</span></li>
+          <li><span class="lang-en">Remote work guidance</span><span class="lang-ar">إرشادات العمل عن بعد</span></li>
+          <li><span class="lang-en">Part-time job guidance</span><span class="lang-ar">إرشادات العمل الجزئي</span></li>
+          <li><span class="lang-en">First job in Canada support</span><span class="lang-ar">دعم أول وظيفة في كندا</span></li>
+          <li><span class="lang-en">Job search accountability</span><span class="lang-ar">مساءلة البحث عن عمل</span></li>
+          <li><span class="lang-en">Employer communication help</span><span class="lang-ar">مساعدة التواصل مع أصحاب العمل</span></li>
+          <li><span class="lang-en">Follow-up email templates</span><span class="lang-ar">قوالب إيميلات المتابعة</span></li>
+          <li><span class="lang-en">Resume translation</span><span class="lang-ar">ترجمة السيرة الذاتية</span></li>
+          <li><span class="lang-en">Networking guidance</span><span class="lang-ar">إرشادات التواصل المهني</span></li>
+          <li><span class="lang-en">Work schedule understanding</span><span class="lang-ar">فهم جدول العمل</span></li>
+          <li><span class="lang-en">Salary negotiation basics</span><span class="lang-ar">أساسيات التفاوض على الراتب</span></li>
+        </ul>
+      </div>
+
+      <!-- 3. NEWCOMER LIFE SUPPORT -->
+      <div class="service-category">
+        <h3>🏠 <span class="lang-en">Newcomer Life Support</span><span class="lang-ar">دعم الحياة للوافدين الجدد</span></h3>
+        <ul class="service-list">
+          <li><span class="lang-en">How banking works</span><span class="lang-ar">كيف تعمل البنوك</span></li>
+          <li><span class="lang-en">Opening bank accounts</span><span class="lang-ar">فتح حسابات بنكية</span></li>
+          <li><span class="lang-en">Understanding credit scores</span><span class="lang-ar">فهم درجة الائتمان</span></li>
+          <li><span class="lang-en">Debit vs credit cards</span><span class="lang-ar">الخصم المباشر مقابل بطاقات الائتمان</span></li>
+          <li><span class="lang-en">CRA basics</span><span class="lang-ar">أساسيات CRA (الضرائب)</span></li>
+          <li><span class="lang-en">Tax basics</span><span class="lang-ar">أساسيات الضرائب</span></li>
+          <li><span class="lang-en">SIN number guidance</span><span class="lang-ar">إرشادات رقم الضمان الاجتماعي</span></li>
+          <li><span class="lang-en">Alberta ID guidance</span><span class="lang-ar">إرشادات هوية ألبرتا</span></li>
+          <li><span class="lang-en">Driver's license guidance</span><span class="lang-ar">إرشادات رخصة القيادة</span></li>
+          <li><span class="lang-en">Renting apartments</span><span class="lang-ar">استئجار شقق</span></li>
+          <li><span class="lang-en">Lease understanding</span><span class="lang-ar">فهم عقد الإيجار</span></li>
+          <li><span class="lang-en">Utility setup help</span><span class="lang-ar">مساعدة في إعداد المرافق</span></li>
+          <li><span class="lang-en">Internet/phone setup</span><span class="lang-ar">إعداد الإنترنت والهاتف</span></li>
+          <li><span class="lang-en">Grocery shopping guidance</span><span class="lang-ar">إرشادات التسوق من البقالة</span></li>
+          <li><span class="lang-en">Public transportation guidance</span><span class="lang-ar">إرشادات النقل العام</span></li>
+          <li><span class="lang-en">Healthcare system guidance</span><span class="lang-ar">إرشادات النظام الصحي</span></li>
+          <li><span class="lang-en">Walk-in clinic understanding</span><span class="lang-ar">فهم العيادات المفتوحة</span></li>
+          <li><span class="lang-en">Emergency services education</span><span class="lang-ar">التوعية بخدمات الطوارئ</span></li>
+          <li><span class="lang-en">School registration guidance</span><span class="lang-ar">إرشادات التسجيل في المدارس</span></li>
+          <li><span class="lang-en">Childcare guidance</span><span class="lang-ar">إرشادات رعاية الأطفال</span></li>
+          <li><span class="lang-en">Winter preparation help</span><span class="lang-ar">مساعدة في التحضير للشتاء</span></li>
+          <li><span class="lang-en">Canadian laws basics</span><span class="lang-ar">أساسيات القوانين الكندية</span></li>
+          <li><span class="lang-en">Tenant rights basics</span><span class="lang-ar">أساسيات حقوق المستأجر</span></li>
+          <li><span class="lang-en">Workplace rights basics</span><span class="lang-ar">أساسيات حقوق مكان العمل</span></li>
+          <li><span class="lang-en">How to avoid scams</span><span class="lang-ar">كيفية تجنب الاحتيال</span></li>
+          <li><span class="lang-en">Insurance basics</span><span class="lang-ar">أساسيات التأمين</span></li>
+          <li><span class="lang-en">Budgeting help</span><span class="lang-ar">مساعدة في إعداد الميزانية</span></li>
+          <li><span class="lang-en">Cost-of-living guidance</span><span class="lang-ar">إرشادات تكلفة المعيشة</span></li>
+          <li><span class="lang-en">Canadian culture lessons</span><span class="lang-ar">دروس الثقافة الكندية</span></li>
+          <li><span class="lang-en">Communication etiquette</span><span class="lang-ar">آداب التواصل</span></li>
+          <li><span class="lang-en">Time management help</span><span class="lang-ar">مساعدة في إدارة الوقت</span></li>
+          <li><span class="lang-en">Appointment booking help</span><span class="lang-ar">مساعدة في حجز المواعيد</span></li>
+          <li><span class="lang-en">Mental wellness support</span><span class="lang-ar">دعم الصحة النفسية</span></li>
+          <li><span class="lang-en">Community connection groups</span><span class="lang-ar">مجموعات التواصل المجتمعي</span></li>
+          <li><span class="lang-en">Local resources lists</span><span class="lang-ar">قوائم الموارد المحلية</span></li>
+        </ul>
+      </div>
+
+      <!-- 4. IMMIGRATION SUPPORT (SAFE) -->
+      <div class="service-category">
+        <h3>📄 <span class="lang-en">Immigration Support (Document & Navigation)</span><span class="lang-ar">دعم الهجرة (تنظيم الوثائق والتنقل)</span></h3>
+        <ul class="service-list">
+          <li><span class="lang-en">Document organization help</span><span class="lang-ar">مساعدة في تنظيم الوثائق</span></li>
+          <li><span class="lang-en">Translation guidance</span><span class="lang-ar">إرشادات الترجمة</span></li>
+          <li><span class="lang-en">Form reading help</span><span class="lang-ar">مساعدة في قراءة النماذج</span></li>
+          <li><span class="lang-en">IRCC website navigation</span><span class="lang-ar">التنقل في موقع IRCC</span></li>
+          <li><span class="lang-en">Appointment reminders</span><span class="lang-ar">تذكيرات المواعيد</span></li>
+          <li><span class="lang-en">Checklist preparation</span><span class="lang-ar">إعداد قوائم المراجعة</span></li>
+          <li><span class="lang-en">Resource referrals</span><span class="lang-ar">إحالات الموارد</span></li>
+          <li><span class="lang-en">Settlement agency referrals</span><span class="lang-ar">إحالات وكالات التوطين</span></li>
+          <li><span class="lang-en">Immigration vocabulary lessons</span><span class="lang-ar">دروس مفردات الهجرة</span></li>
+          <li><span class="lang-en">PR/citizenship English prep</span><span class="lang-ar">تحضير الإنجليزية للإقامة والجنسية</span></li>
+        </ul>
+      </div>
+
+      <!-- 5. DIGITAL & TECH SUPPORT -->
+      <div class="service-category">
+        <h3>💻 <span class="lang-en">Digital & Tech Support</span><span class="lang-ar">الدعم الرقمي والتقني</span></h3>
+        <ul class="service-list">
+          <li><span class="lang-en">Email setup help</span><span class="lang-ar">مساعدة في إعداد الإيميل</span></li>
+          <li><span class="lang-en">Zoom training</span><span class="lang-ar">تدريب Zoom</span></li>
+          <li><span class="lang-en">Computer basics</span><span class="lang-ar">أساسيات الكمبيوتر</span></li>
+          <li><span class="lang-en">Smartphone basics</span><span class="lang-ar">أساسيات الهواتف الذكية</span></li>
+          <li><span class="lang-en">Google Docs help</span><span class="lang-ar">مساعدة في Google Docs</span></li>
+          <li><span class="lang-en">Online application help</span><span class="lang-ar">مساعدة في التقديم عبر الإنترنت</span></li>
+          <li><span class="lang-en">Job website navigation</span><span class="lang-ar">التنقل في مواقع العمل</span></li>
+          <li><span class="lang-en">LinkedIn tutorials</span><span class="lang-ar">دروس لينكدإن</span></li>
+          <li><span class="lang-en">Canva basics</span><span class="lang-ar">أساسيات Canva</span></li>
+          <li><span class="lang-en">Facebook marketplace safety</span><span class="lang-ar">سلامة سوق فيسبوك</span></li>
+          <li><span class="lang-en">Kijiji guidance</span><span class="lang-ar">إرشادات Kijiji</span></li>
+          <li><span class="lang-en">Online scam awareness</span><span class="lang-ar">التوعية بالاحتيال عبر الإنترنت</span></li>
+          <li><span class="lang-en">Password/security basics</span><span class="lang-ar">أساسيات كلمات المرور والأمان</span></li>
+          <li><span class="lang-en">PDF/document help</span><span class="lang-ar">مساعدة في PDF والوثائق</span></li>
+          <li><span class="lang-en">Printing/scanning help</span><span class="lang-ar">مساعدة في الطباعة والمسح</span></li>
+        </ul>
+      </div>
+
+      <!-- 6. COMMUNITY & ACCOUNTABILITY -->
+      <div class="service-category">
+        <h3>🤝 <span class="lang-en">Community & Accountability</span><span class="lang-ar">المجتمع والمساءلة</span></h3>
+        <ul class="service-list">
+          <li><span class="lang-en">WhatsApp community</span><span class="lang-ar">مجتمع واتساب</span></li>
+          <li><span class="lang-en">Accountability groups</span><span class="lang-ar">مجموعات المساءلة</span></li>
+          <li><span class="lang-en">Daily check-ins</span><span class="lang-ar">متابعات يومية</span></li>
+          <li><span class="lang-en">Weekly motivation calls</span><span class="lang-ar">مكالمات تحفيز أسبوعية</span></li>
+          <li><span class="lang-en">Student networking</span><span class="lang-ar">تواصل الطلاب</span></li>
+          <li><span class="lang-en">Referral rewards</span><span class="lang-ar">مكافآت الإحالة</span></li>
+          <li><span class="lang-en">Study partner matching</span><span class="lang-ar">مطابقة شريك الدراسة</span></li>
+          <li><span class="lang-en">Women-only classes</span><span class="lang-ar">دروس للنساء فقط</span></li>
+          <li><span class="lang-en">Men-only classes</span><span class="lang-ar">دروس للرجال فقط</span></li>
+          <li><span class="lang-en">Parent support groups</span><span class="lang-ar">مجموعات دعم الآباء</span></li>
+          <li><span class="lang-en">Newcomer events</span><span class="lang-ar">فعاليات للوافدين الجدد</span></li>
+          <li><span class="lang-en">Online social nights</span><span class="lang-ar">ليالي اجتماعية عبر الإنترنت</span></li>
+          <li><span class="lang-en">English challenges</span><span class="lang-ar">تحديات الإنجليزية</span></li>
+          <li><span class="lang-en">Speaking competitions</span><span class="lang-ar">مسابقات التحدث</span></li>
+          <li><span class="lang-en">Student success celebrations</span><span class="lang-ar">احتفالات نجاح الطلاب</span></li>
+        </ul>
+      </div>
+
+      <!-- 7. MONEY & BUSINESS HELP -->
+      <div class="service-category">
+        <h3>💰 <span class="lang-en">Money & Business Help</span><span class="lang-ar">المساعدة المالية والتجارية</span></h3>
+        <ul class="service-list">
+          <li><span class="lang-en">How taxes work</span><span class="lang-ar">كيف تعمل الضرائب</span></li>
+          <li><span class="lang-en">Side hustle ideas</span><span class="lang-ar">أفكار عمل جانبي</span></li>
+          <li><span class="lang-en">Small business basics</span><span class="lang-ar">أساسيات الأعمال الصغيرة</span></li>
+          <li><span class="lang-en">Canadian invoicing basics</span><span class="lang-ar">أساسيات الفواتير الكندية</span></li>
+          <li><span class="lang-en">Self-employment basics</span><span class="lang-ar">أساسيات العمل الحر</span></li>
+          <li><span class="lang-en">Freelancing guidance</span><span class="lang-ar">إرشادات العمل الحر</span></li>
+          <li><span class="lang-en">Marketplace selling help</span><span class="lang-ar">مساعدة في البيع عبر الأسواق</span></li>
+          <li><span class="lang-en">Facebook business setup</span><span class="lang-ar">إعداد صفحة أعمال فيسبوك</span></li>
+          <li><span class="lang-en">Etsy basics</span><span class="lang-ar">أساسيات Etsy</span></li>
+          <li><span class="lang-en">Gig work guidance</span><span class="lang-ar">إرشادات العمل المؤقت</span></li>
+          <li><span class="lang-en">Uber/DoorDash onboarding</span><span class="lang-ar">التسجيل في أوبر/دورداش</span></li>
+          <li><span class="lang-en">Budget planning</span><span class="lang-ar">تخطيط الميزانية</span></li>
+          <li><span class="lang-en">Saving money tips</span><span class="lang-ar">نصائح لتوفير المال</span></li>
+          <li><span class="lang-en">Cheap shopping guidance</span><span class="lang-ar">إرشادات التسوق الرخيص</span></li>
+          <li><span class="lang-en">Coupon apps guidance</span><span class="lang-ar">إرشادات تطبيقات الكوبونات</span></li>
+        </ul>
+      </div>
+
+      <!-- 8. ADVANCED/FUTURE SERVICES -->
+      <div class="service-category">
+        <h3>🎓 <span class="lang-en">Advanced & Future Services</span><span class="lang-ar">خدمات متقدمة ومستقبلية</span></h3>
+        <ul class="service-list">
+          <li><span class="lang-en">IELTS preparation</span><span class="lang-ar">تحضير IELTS</span></li>
+          <li><span class="lang-en">CELPIP preparation</span><span class="lang-ar">تحضير CELPIP</span></li>
+          <li><span class="lang-en">Citizenship test prep</span><span class="lang-ar">تحضير اختبار الجنسية</span></li>
+          <li><span class="lang-en">Private tutoring</span><span class="lang-ar">دروس خصوصية</span></li>
+          <li><span class="lang-en">Group coaching</span><span class="lang-ar">تدريب جماعي</span></li>
+          <li><span class="lang-en">Corporate English training</span><span class="lang-ar">تدريب إنجليزي للشركات</span></li>
+          <li><span class="lang-en">Employer partnerships</span><span class="lang-ar">شراكات مع أصحاب العمل</span></li>
+          <li><span class="lang-en">Recruiting partnerships</span><span class="lang-ar">شراكات توظيف</span></li>
+          <li><span class="lang-en">Job placement assistance</span><span class="lang-ar">مساعدة في التوظيف</span></li>
+          <li><span class="lang-en">Internship matching</span><span class="lang-ar">مطابقة التدريب الداخلي</span></li>
+          <li><span class="lang-en">Online course library</span><span class="lang-ar">مكتبة دورات عبر الإنترنت</span></li>
+          <li><span class="lang-en">Recorded lessons</span><span class="lang-ar">دروس مسجلة</span></li>
+          <li><span class="lang-en">Mobile app (coming)</span><span class="lang-ar">تطبيق جوال (قريباً)</span></li>
+          <li><span class="lang-en">AI speaking practice</span><span class="lang-ar">تدريب نطق بالذكاء الاصطناعي</span></li>
+          <li><span class="lang-en">Community mentorship program</span><span class="lang-ar">برنامج إرشاد مجتمعي</span></li>
+        </ul>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <button class="btn-primary" onclick="navigate('assessment')">📋 <span class="lang-en">Start with Free Assessment</span><span class="lang-ar">ابدأ بتقييم مجاني</span></button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========== PROGRAMS PAGE ========== -->
+<div id="page-programs" class="page">
+  <div style="padding-top: 80px;"></div>
+  <section class="section">
+    <div class="container">
+      <div class="badge"><span class="lang-en">OUR PROGRAMS</span><span class="lang-ar">برامجنا</span></div>
+      <div class="grid-4">
+        <div class="pricing-card"><div class="price">$79</div><div><span class="lang-en">/month CAD</span><span class="lang-ar">/شهر</span></div><h3><span class="lang-en">Starter</span><span class="lang-ar">المبتدئ</span></h3><ul class="feature-list"><li><span class="lang-en">3 live weekly classes</span><span class="lang-ar">٣ صفوف مباشرة أسبوعياً</span></li><li><span class="lang-en">WhatsApp group</span><span class="lang-ar">مجموعة واتساب</span></li><li><span class="lang-en">Daily English tips</span><span class="lang-ar">نصائح إنجليزية يومية</span></li></ul><button class="btn-primary" onclick="navigate('assessment')"><span class="lang-en">Free Week</span><span class="lang-ar">أسبوع مجاني</span></button></div>
+        <div class="pricing-card"><div class="price">$129</div><div><span class="lang-en">/month CAD</span><span class="lang-ar">/شهر</span></div><h3><span class="lang-en">Premium</span><span class="lang-ar">المميز</span></h3><ul class="feature-list"><li><span class="lang-en">Everything in Starter</span><span class="lang-ar">كل ما في المبتدئ</span></li><li><span class="lang-en">1 coaching call/month</span><span class="lang-ar">جلسة تدريب واحدة شهرياً</span></li><li><span class="lang-en">Resume + LinkedIn</span><span class="lang-ar">سيرة ذاتية + لينكدإن</span></li></ul><button class="btn-primary" onclick="navigate('assessment')"><span class="lang-en">Free Week</span><span class="lang-ar">أسبوع مجاني</span></button></div>
+        <div class="pricing-card popular"><div class="price">$179</div><div><span class="lang-en">/month CAD</span><span class="lang-ar">/شهر</span></div><h3><span class="lang-en">Career Boost</span><span class="lang-ar">دفعة المهنة</span></h3><ul class="feature-list"><li><span class="lang-en">Everything in Premium</span><span class="lang-ar">كل ما في المميز</span></li><li><span class="lang-en">2 coaching calls/month</span><span class="lang-ar">جلستان تدريبيتان شهرياً</span></li><li><span class="lang-en">Banking + tax guidance</span><span class="lang-ar">إرشادات بنكية وضريبية</span></li></ul><button class="btn-primary" onclick="navigate('assessment')"><span class="lang-en">Best Value</span><span class="lang-ar">أفضل قيمة</span></button></div>
+        <div class="pricing-card"><div class="price">$249</div><div><span class="lang-en">/month CAD</span><span class="lang-ar">/شهر</span></div><h3><span class="lang-en">Canada Ready VIP</span><span class="lang-ar">كندا ريدي VIP</span></h3><ul class="feature-list"><li><span class="lang-en">Everything in Career Boost</span><span class="lang-ar">كل ما في دفعة المهنة</span></li><li><span class="lang-en">3 coaching calls/month</span><span class="lang-ar">٣ جلسات تدريب شهرياً</span></li><li><span class="lang-en">Business startup guidance</span><span class="lang-ar">إرشادات بدء الأعمال</span></li></ul><button class="btn-primary" onclick="navigate('assessment')"><span class="lang-en">Apply VIP</span><span class="lang-ar">قدّم VIP</span></button></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========== HOW IT WORKS PAGE ========== -->
+<div id="page-howitworks" class="page">
+  <div style="padding-top: 80px;"></div>
+  <section class="section">
+    <div class="container">
+      <div class="badge"><span class="lang-en">THE FULL PROCESS</span><span class="lang-ar">العملية الكاملة</span></div>
+      <div class="grid-2">
+        <div class="card"><strong>1. <span class="lang-en">Book Free Assessment</span><span class="lang-ar">احجز تقييماً مجانياً</span></strong><br><span class="lang-en">Fill the form, we contact you within 24h via WhatsApp in Arabic.</span><span class="lang-ar">املأ الاستمارة، نتواصل معك خلال 24 ساعة على واتساب بالعربي.</span></div>
+        <div class="card"><strong>2. <span class="lang-en">Complete Assessment Call</span><span class="lang-ar">أكمل مكالمة التقييم</span></strong><br><span class="lang-en">15‑20 min Zoom (Arabic). We check English level, career goals.</span><span class="lang-ar">مكالمة Zoom 15‑20 دقيقة بالعربي. نقيّم المستوى، الأهداف.</span></div>
+        <div class="card"><strong>3. <span class="lang-en">Choose Your Program</span><span class="lang-ar">اختر برنامجك</span></strong><br><span class="lang-en">We recommend the best plan. First week FREE.</span><span class="lang-ar">نوصي بالخطة المناسبة. الأسبوع الأول مجاني.</span></div>
+        <div class="card"><strong>4. <span class="lang-en">Join Classes & Community</span><span class="lang-ar">انضم للصفوف والمجتمع</span></strong><br><span class="lang-en">Zoom links, WhatsApp group, schedule, welcome booklet.</span><span class="lang-ar">روابط Zoom، مجموعة واتساب، جدول، كتيب ترحيب.</span></div>
+        <div class="card"><strong>5. <span class="lang-en">Weekly Support & Coaching</span><span class="lang-ar">الدعم والتدريب الأسبوعي</span></strong><br><span class="lang-en">3 live classes + coaching calls + 150+ support services.</span><span class="lang-ar">٣ صفوف مباشرة + جلسات تدريب + ١٥٠+ خدمة دعم.</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========== FREE ASSESSMENT PAGE ========== -->
+<div id="page-assessment" class="page">
+  <div style="padding-top: 80px;"></div>
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <div class="badge"><span class="lang-en">FREE – NO COMMITMENT</span><span class="lang-ar">مجاني – بدون التزام</span></div>
+          <h2 class="section-title"><span class="lang-en">Book Your Free English & Career Assessment</span><span class="lang-ar">احجز تقييمك المجاني للإنجليزية والمهنة</span></h2>
+          <p><span class="lang-en">15‑20 min Zoom call in Arabic. We'll check your level, understand your goals, and recommend the perfect plan. First week FREE.</span><span class="lang-ar">مكالمة Zoom 15‑20 دقيقة بالعربي. نحدد مستواك وأهدافك ونوصي بالخطة المناسبة. أسبوعك الأول مجاني.</span></p>
+          <ul><li>✓ <span class="lang-en">Determine your English level</span><span class="lang-ar">تحديد مستواك في الإنجليزية</span></li><li>✓ <span class="lang-en">Discuss career goals & struggles</span><span class="lang-ar">مناقشة الأهداف المهنية والتحديات</span></li><li>✓ <span class="lang-en">Explain our 150+ services in Arabic</span><span class="lang-ar">شرح خدماتنا ١٥٠+ بالعربي</span></li><li>✓ <span class="lang-en">Recommend best plan – no pressure</span><span class="lang-ar">نوصي بأفضل خطة – لا ضغط</span></li></ul>
+        </div>
+        <div class="card">
+          <form id="assessmentForm">
+            <input type="text" id="assessName" placeholder="Full Name / الاسم الكامل" required style="width:100%; padding:12px; margin-bottom:12px; border-radius:10px; border:1px solid #ddd;">
+            <input type="tel" id="assessWhatsapp" placeholder="WhatsApp Number / رقم واتساب" required style="width:100%; padding:12px; margin-bottom:12px;">
+            <input type="email" id="assessEmail" placeholder="Email (optional)" style="width:100%; padding:12px; margin-bottom:12px;">
+            <select id="assessLevel" required style="width:100%; padding:12px; margin-bottom:12px;">
+              <option value=""><span class="lang-en">English Level</span><span class="lang-ar">مستوى الإنجليزية</span></option>
+              <option><span class="lang-en">Beginner</span><span class="lang-ar">مبتدئ</span></option>
+              <option><span class="lang-en">Elementary</span><span class="lang-ar">أساسي</span></option>
+              <option><span class="lang-en">Intermediate</span><span class="lang-ar">متوسط</span></option>
+            </select>
+            <input type="text" id="assessCity" placeholder="City in Canada / مدينتك في كندا" style="width:100%; padding:12px; margin-bottom:12px;">
+            <textarea id="assessGoals" placeholder="Career goals & biggest challenge / أهدافك المهنية وأكبر تحدٍ" rows="3" style="width:100%; padding:12px; margin-bottom:12px;"></textarea>
+            <button type="submit" class="btn-primary" style="width:100%;">📋 <span class="lang-en">Book My Free Assessment</span><span class="lang-ar">احجز تقييمي المجاني</span></button>
+          </form>
+          <div id="formSuccess" style="display:none; text-align:center; margin-top:20px; padding:20px; background: var(--tiffany-light); border-radius: 12px;">
+            🎉 <span class="lang-en">Request sent! We'll contact you on WhatsApp within 24h.</span><span class="lang-ar">تم إرسال الطلب! سنتواصل معك على واتساب خلال 24 ساعة.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========== TESTIMONIALS PAGE ========== -->
+<div id="page-testimonials" class="page">
+  <div style="padding-top: 80px;"></div>
+  <section class="section">
+    <div class="container">
+      <div class="badge"><span class="lang-en">SUCCESS STORIES</span><span class="lang-ar">قصص النجاح</span></div>
+      <div class="grid-3">
+        <div class="card">⭐⭐⭐⭐⭐<br><span class="lang-en">"Before CanadaReady I was afraid to speak English. After 2 months I got promoted." – Ahmed K.</span><span class="lang-ar">"قبل كندا ريدي كنت خائفاً من الإنجليزية. بعد شهرين حصلت على ترقية." – أحمد ك.</span></div>
+        <div class="card">⭐⭐⭐⭐⭐<br><span class="lang-en">"They built my resume and I got a job offer in 3 weeks. Now I work in accounting." – Sara M.</span><span class="lang-ar">"بنوا سيرتي وحصلت على عرض عمل في ٣ أسابيع." – سارة م.</span></div>
+        <div class="card">⭐⭐⭐⭐⭐<br><span class="lang-en">"The banking & tax workshop was worth the whole membership. I finally feel prepared." – Omar T.</span><span class="lang-ar">"ورشة البنوك والضرائب وحدها استحقت العضوية." – عمر ت.</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========== CONTACT PAGE ========== -->
+<div id="page-contact" class="page">
+  <div style="padding-top: 80px;"></div>
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <div class="badge"><span class="lang-en">GET IN TOUCH</span><span class="lang-ar">تواصل معنا</span></div>
+          <h2 class="section-title"><span class="lang-en">We Are Here to Help – In Arabic!</span><span class="lang-ar">نحن هنا للمساعدة – بالعربي!</span></h2>
+          <p><span class="lang-en">Reach us on any platform. We respond within 24h.</span><span class="lang-ar">تواصل معنا عبر أي منصة. نرد خلال 24 ساعة.</span></p>
+          <div style="margin-top: 20px;">
+            <a href="#" id="contactWhatsappLink" style="display:flex; align-items:center; gap:10px; padding:12px; background: var(--tiffany-light); border-radius: 16px; margin-bottom: 10px;">💬 WhatsApp: <strong id="contactNumberDisplay">+1 (587) 000-0000</strong></a>
+            <a href="mailto:info@canadaready.ca" style="display:flex; align-items:center; gap:10px; padding:12px; background: var(--tiffany-light); border-radius: 16px;">✉️ info@canadaready.ca</a>
+          </div>
+        </div>
+        <div class="card">
+          <form id="contactForm">
+            <input type="text" id="contactName" placeholder="Your name / اسمك" required style="width:100%; padding:12px; margin-bottom:12px;">
+            <input type="tel" id="contactPhone" placeholder="WhatsApp / Phone" required style="width:100%; padding:12px; margin-bottom:12px;">
+            <textarea id="contactMsg" placeholder="Your message / رسالتك" rows="4" required style="width:100%; padding:12px; margin-bottom:12px;"></textarea>
+            <button type="submit" class="btn-primary" style="width:100%;">✉️ <span class="lang-en">Send Message</span><span class="lang-ar">أرسل الرسالة</span></button>
+          </form>
+          <div id="contactSuccess" style="display:none; text-align:center; margin-top:20px;">✅ <span class="lang-en">Message sent! We'll reply soon.</span><span class="lang-ar">تم إرسال الرسالة! سترد قريباً.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
+    <div><strong>CanadaReady Academy</strong><br><span class="lang-en">150+ services for newcomers. Built by immigrants.</span><span class="lang-ar">١٥٠+ خدمة للوافدين. بُني من مهاجرين.</span></div>
+    <div><span class="lang-en">Quick Links</span><span class="lang-ar">روابط سريعة</span><br><a style="color:white; text-decoration:none;" onclick="navigate('home')">Home</a><br><a style="color:white; text-decoration:none;" onclick="navigate('services')">150+ Services</a></div>
+    <div><span class="lang-en">Contact</span><span class="lang-ar">اتصال</span><br><span id="footerNumber">+1 (587) 000-0000</span><br>Alberta, Canada</div>
+  </div>
+  <div class="container" style="text-align: center; margin-top: 30px; font-size: 12px;">© 2025 CanadaReady Academy. 🍁 <span class="lang-en">Your success starts here.</span><span class="lang-ar">نجاحك يبدأ من هنا.</span></div>
+</footer>
+
+<script>
+  // ========== CONFIGURATION ==========
+  // 🔴 CHANGE THIS TO YOUR REAL WHATSAPP NUMBER (e.g., "+15871234567")
+  const OWNER_WHATSAPP = "+15871234567";
+
+  // 🔴 EMAILJS (optional – get free keys from emailjs.com)
+  // If you don't set these, forms will show success but won't send emails.
+  const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+  const EMAILJS_SERVICE_ID = "service_xxxx";
+  const EMAILJS_TEMPLATE_ASSESS = "template_xxx";
+  const EMAILJS_TEMPLATE_CONTACT = "template_yyy";
+
+  let emailjsReady = false;
+  if (EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    emailjsReady = true;
+  }
+
+  function updateWhatsAppLinks() {
+    const cleanNumber = OWNER_WHATSAPP.replace(/\D/g, '');
+    const waUrl = `https://wa.me/${cleanNumber}?text=${encodeURIComponent("Hello CanadaReady! I need help.")}`;
+    const ids = ['whatsappFloat', 'heroWhatsappBtn', 'contactWhatsappLink'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = waUrl;
+    });
+    ['contactNumberDisplay', 'footerNumber'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerText = OWNER_WHATSAPP;
+    });
+  }
+  updateWhatsAppLinks();
+
+  function setLang(lang) {
+    document.body.classList.remove('ar');
+    if (lang === 'ar') document.body.classList.add('ar');
+    localStorage.setItem('lang', lang);
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    document.getElementById('btnAr').classList.toggle('active', lang === 'ar');
+  }
+
+  function navigate(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(`page-${pageId}`).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  const savedLang = localStorage.getItem('lang');
+  if (savedLang) setLang(savedLang);
+
+  // Assessment form submission
+  document.getElementById('assessmentForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = {
+      name: document.getElementById('assessName').value,
+      whatsapp: document.getElementById('assessWhatsapp').value,
+      email: document.getElementById('assessEmail').value,
+      level: document.getElementById('assessLevel').value,
+      city: document.getElementById('assessCity').value,
+      goals: document.getElementById('assessGoals').value
+    };
+    if (emailjsReady && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ASSESS) {
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ASSESS, formData);
+      } catch(err) { console.warn('EmailJS error:', err); }
+    }
+    document.getElementById('assessmentForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+
+  // Contact form submission
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = {
+      name: document.getElementById('contactName').value,
+      phone: document.getElementById('contactPhone').value,
+      message: document.getElementById('contactMsg').value
+    };
+    if (emailjsReady && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_CONTACT) {
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CONTACT, formData);
+      } catch(err) { console.warn('EmailJS error:', err); }
+    }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('contactSuccess').style.display = 'block';
+  });
+</script>
+</body>
+</html>

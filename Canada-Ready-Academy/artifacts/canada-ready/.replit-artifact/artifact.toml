@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Canada Ready Academy"
+version = "1.0.0"
+id = "artifacts/canada-ready"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24360
+
+[services.development]
+run = "pnpm --filter @workspace/canada-ready run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/canada-ready", "run", "build" ]
+publicDir = "artifacts/canada-ready/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24360"
+BASE_PATH = "/"
