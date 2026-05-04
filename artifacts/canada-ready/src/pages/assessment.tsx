@@ -5,8 +5,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useCreateAssessment } from "@workspace/api-client-react";
-import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
@@ -23,23 +21,38 @@ const schema = z.object({
   biggestChallenge: z.string().min(5),
 });
 
+const FORMPREE_URL = "https://formspree.io/f/mwvylrkn";
+
 export default function Assessment() {
   const { language } = useLanguage();
   const isAr = language === "ar";
-  const { toast } = useToast();
-  const createAssessment = useCreateAssessment();
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: { name: "", whatsapp: "", englishLevel: "", country: "", careerGoals: "", timeInCanada: "", biggestChallenge: "" },
   });
 
-  const onSubmit = (data: z.infer<typeof schema>) => {
-    createAssessment.mutate({ data }, {
-      onSuccess: () => setSubmitted(true),
-      onError: () => toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "حاول مرة أخرى." : "Please try again." }),
-    });
+  const onSubmit = async (data: z.infer<typeof schema>) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(FORMPREE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert(isAr ? "حدث خطأ. حاول مرة أخرى." : "Error. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert(isAr ? "تعذر الاتصال بالخادم." : "Could not reach server.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -52,7 +65,7 @@ export default function Assessment() {
         <p style={{ fontSize: "17px", color: MID, lineHeight: 1.7, marginBottom: "28px" }}>
           {isAr ? "سنتواصل معك على واتساب خلال 24 ساعة لتأكيد موعدك المجاني. ابق قريباً!" : "We will contact you on WhatsApp within 24 hours to confirm your free appointment. Stay close!"}
         </p>
-        <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 36px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }} data-testid="success-whatsapp">
+        <a href="https://wa.me/+14034340027" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 36px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }}>
           💬 {isAr ? "تحدث معنا الآن على واتساب" : "Chat With Us Now on WhatsApp"}
         </a>
       </div>
@@ -73,7 +86,6 @@ export default function Assessment() {
 
   return (
     <div style={{ width: "100%" }}>
-      {/* Header */}
       <section style={{ padding: "60px 5% 50px", background: `linear-gradient(135deg,${BG},#e8fffe)`, textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" }}>
           📋 {isAr ? "موعد مجاني" : "FREE APPOINTMENT"}
@@ -88,8 +100,6 @@ export default function Assessment() {
 
       <section style={{ padding: "60px 5% 80px", background: "#fff" }}>
         <div style={{ maxWidth: "1060px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: "52px", alignItems: "start" }}>
-
-          {/* Left: What happens */}
           <div>
             <div style={{ background: TDK, borderRadius: "22px", padding: "34px", color: "#fff", marginBottom: "20px" }}>
               <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: 700, color: GOLD_LT, marginBottom: "18px" }}>
@@ -119,7 +129,6 @@ export default function Assessment() {
             </div>
           </div>
 
-          {/* Right: Form */}
           <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>
               {isAr ? "أكمل استمارة الموعد" : "Complete the Appointment Form"}
@@ -185,8 +194,8 @@ export default function Assessment() {
                     <FormMessage />
                   </FormItem>
                 )} />
-                <button type="submit" disabled={createAssessment.isPending} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: createAssessment.isPending ? "not-allowed" : "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: createAssessment.isPending ? 0.65 : 1, marginTop: "6px" }} data-testid="submit-assessment">
-                  {createAssessment.isPending && <Loader2 className="w-5 h-5 animate-spin" />}
+                <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.65 : 1, marginTop: "6px" }} data-testid="submit-assessment">
+                  {isSubmitting && <Loader2 className="w-5 h-5 animate-spin" />}
                   📋 {isAr ? "احجز موعدي المجاني" : "Book My Free Appointment"}
                 </button>
               </form>

@@ -1,14 +1,13 @@
 import { useLanguage } from "@/lib/language-context";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useCreateContact } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useState } from "react";
 
 const T = "#66E6DE"; const TDK = "#007A77"; const GOLD = "#C9903A"; const BG = "#F5FFFE"; const MID = "#4A6B69";
 
@@ -19,25 +18,39 @@ const schema = z.object({
   message: z.string().min(10, "Message too short"),
 });
 
+const FORMPREE_URL = "https://formspree.io/f/mwvylrkn";
+
 export default function Contact() {
   const { language } = useLanguage();
   const isAr = language === "ar";
   const { toast } = useToast();
-  const createContact = useCreateContact();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: { name: "", email: "", whatsapp: "", message: "" },
   });
 
-  const onSubmit = (data: z.infer<typeof schema>) => {
-    createContact.mutate({ data }, {
-      onSuccess: () => {
+  const onSubmit = async (data: z.infer<typeof schema>) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(FORMPREE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
         toast({ title: isAr ? "تم الإرسال!" : "Message Sent!", description: isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours." });
         form.reset();
-      },
-      onError: () => toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "حاول مرة أخرى." : "Please try again." }),
-    });
+      } else {
+        toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "حاول مرة أخرى." : "Please try again." });
+      }
+    } catch (error) {
+      console.error(error);
+      toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "تعذر الاتصال بالخادم." : "Could not reach server." });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const channels = [
@@ -51,7 +64,6 @@ export default function Contact() {
 
   return (
     <div style={{ width: "100%" }}>
-      {/* Header */}
       <section style={{ padding: "60px 5% 50px", background: `linear-gradient(135deg,${BG},#e8fffe)`, textAlign: "center" }}>
         <div style={stag}>📞 {isAr ? "تواصل" : "CONTACT US"}</div>
         <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px,4vw,52px)", fontWeight: 800, color: TDK, marginBottom: "12px" }}>
@@ -62,7 +74,6 @@ export default function Contact() {
         </p>
       </section>
 
-      {/* WhatsApp Banner */}
       <section style={{ background: "#075E54", padding: "50px 5%", textAlign: "center" }}>
         <div style={{ maxWidth: "640px", margin: "0 auto" }}>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(22px,3vw,34px)", fontWeight: 800, color: "#fff", marginBottom: "10px" }}>
@@ -77,10 +88,8 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Channels + Form */}
       <section style={{ padding: "72px 5%", background: "#fff" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "52px", alignItems: "start" }}>
-          {/* Channels */}
           <div>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(22px,2.5vw,32px)", fontWeight: 800, color: TDK, marginBottom: "8px" }}>
               {isAr ? "تفاصيل التواصل" : "Our Contact Details"}
@@ -112,7 +121,6 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Form */}
           <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>{isAr ? "أرسل لنا رسالة" : "Send Us a Message"}</h3>
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>{isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours."}</p>
@@ -148,8 +156,8 @@ export default function Contact() {
                     <FormMessage />
                   </FormItem>
                 )} />
-                <button type="submit" disabled={createContact.isPending} style={{ width: "100%", padding: "15px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "15px", fontWeight: 700, cursor: createContact.isPending ? "not-allowed" : "pointer", fontFamily: "inherit", transition: "0.28s", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: createContact.isPending ? 0.6 : 1 }} data-testid="submit-contact">
-                  {createContact.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+                <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "15px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "15px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "inherit", transition: "0.28s", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.6 : 1 }} data-testid="submit-contact">
+                  {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
                   {isAr ? "إرسال الرسالة" : "Send Message"}
                 </button>
               </form>
