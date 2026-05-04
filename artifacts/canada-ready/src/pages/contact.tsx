@@ -41,9 +41,9 @@ export default function Contact() {
   };
 
   const channels = [
-    { icon: "💬", color: "#25D366", label_en: "WhatsApp", label_ar: "واتساب", val_en: "+1 (587) 000-0000", val_ar: "+1 (587) 000-0000", href: "https://wa.me/15870000000", desc_en: "Chat with us — we reply within hours", desc_ar: "تحدث معنا — نرد خلال ساعات" },
-    { icon: "✉️", color: T, label_en: "Email", label_ar: "البريد الإلكتروني", val_en: "hello@canadareadyacademy.com", val_ar: "hello@canadareadyacademy.com", href: "mailto:hello@canadareadyacademy.com", desc_en: "We reply within 24 hours", desc_ar: "نرد خلال 24 ساعة" },
-    { icon: "📘", color: "#1877F2", label_en: "Facebook", label_ar: "فيسبوك", val_en: "@CanadaReadyAcademy", val_ar: "@CanadaReadyAcademy", href: "https://facebook.com/canadareadyacademy", desc_en: "Follow us & message us on Facebook", desc_ar: "تابعنا وراسلنا على فيسبوك" },
+    { icon: "💬", color: "#25D366", label_en: "WhatsApp", label_ar: "واتساب", val_en: "+1 (403) 434-0027", val_ar: "+1 (403) 434-0027", href: "https://wa.me/14034340027", desc_en: "Chat with us — we reply within hours", desc_ar: "تحدث معنا — نرد خلال ساعات" },
+    { icon: "✉️", color: T, label_en: "Email", label_ar: "البريد الإلكتروني", val_en: "canadareadyacademy@gmail.com", val_ar: "canadareadyacademy@gmail.com", href: "mailto:canadareadyacademy@gmail.com", desc_en: "We reply within 24 hours", desc_ar: "نرد خلال 24 ساعة" },
+    { icon: "📘", color: "#1877F2", label_en: "Facebook", label_ar: "فيسبوك", val_en: "@CanadaReadyAcademy", val_ar: "@CanadaReadyAcademy", href: "https://facebook.com/groups/1338122224799157", desc_en: "Follow us & message us on Facebook", desc_ar: "تابعنا وراسلنا على فيسبوك" },
     { icon: "📸", color: "#E1306C", label_en: "Instagram", label_ar: "إنستغرام", val_en: "@canadareadyacademy", val_ar: "@canadareadyacademy", href: "https://instagram.com/canadareadyacademy", desc_en: "Daily tips for newcomers", desc_ar: "نصائح يومية للوافدين الجدد" },
   ];
 
@@ -71,7 +71,7 @@ export default function Contact() {
           <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "17px", marginBottom: "22px" }}>
             {isAr ? "راسلنا مباشرة على واتساب وسنجيب على أي سؤال لديك خلال ساعات قليلة." : "Message us directly on WhatsApp and we will answer any question within a few hours."}
           </p>
-          <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 40px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }} data-testid="contact-whatsapp">
+          <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 40px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }} data-testid="contact-whatsapp">
             💬 {isAr ? "راسلنا على واتساب" : "Message Us on WhatsApp"}
           </a>
         </div>
@@ -137,7 +137,7 @@ export default function Contact() {
                 <FormField control={form.control} name="whatsapp" render={({ field }) => (
                   <FormItem>
                     <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رقم الواتساب (اختياري)" : "WhatsApp Number (Optional)"}</FormLabel>
-                    <FormControl><Input placeholder="+1 587 000 0000" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-whatsapp" /></FormControl>
+                    <FormControl><Input placeholder="+1 403 434 0027" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-whatsapp" /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />

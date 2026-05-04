@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <div className="home-page hp">
       {/* WHATSAPP FLOAT */}
-      <a href="https://wa.me/15870000000" className="wa-float" target="_blank" rel="noopener noreferrer">💬</a>
+      <a href="https://wa.me/14034340027" className="wa-float" target="_blank" rel="noopener noreferrer">💬</a>
       {/* ════════════════ STRIP ════════════════ */}
       <div className="strip">
         <div className="bi-txt">
@@ -578,20 +578,20 @@ export default function Home() {
               <div className="h4-ar">راسلنا على واتساب</div>
               <p>Questions about programs, pricing, or your English level? We reply within hours.</p>
               <div className="p-ar">أسئلة عن البرامج أو مستواك؟ نرد خلال ساعات.</div>
-              <a href="https://wa.me/15870000000" className="btn-wa" target="_blank" rel="noopener noreferrer">💬 Message Us on WhatsApp | راسلنا على الواتساب</a>
+              <a href="https://wa.me/14034340027" className="btn-wa" target="_blank" rel="noopener noreferrer">💬 Message Us on WhatsApp | راسلنا على الواتساب</a>
             </div>
 
             {/* Contact methods grid */}
             <div className="contact-methods-grid reveal">
-              <a href="https://wa.me/15870000000" className="contact-method" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/14034340027" className="contact-method" target="_blank" rel="noopener noreferrer">
                 <div className="cm-icon">💬</div>
-                <div><div className="cm-en">WhatsApp</div><div className="cm-ar">واتساب</div><div className="cm-detail">+1 (587) 000-0000</div></div>
+                <div><div className="cm-en">WhatsApp</div><div className="cm-ar">واتساب</div><div className="cm-detail">+1 (403) 434-0027</div></div>
               </a>
-              <a href="mailto:hello@canadareadyacademy.com" className="contact-method">
+              <a href="mailto:canadareadyacademy@gmail.com" className="contact-method">
                 <div className="cm-icon">✉️</div>
-                <div><div className="cm-en">Email</div><div className="cm-ar">البريد الإلكتروني</div><div className="cm-detail">hello@canadareadyacademy.com</div></div>
+                <div><div className="cm-en">Email</div><div className="cm-ar">البريد الإلكتروني</div><div className="cm-detail">canadareadyacademy@gmail.com</div></div>
               </a>
-              <a href="https://facebook.com/canadareadyacademy" className="contact-method" target="_blank" rel="noopener noreferrer">
+              <a href="https://facebook.com/groups/1338122224799157" className="contact-method" target="_blank" rel="noopener noreferrer">
                 <div className="cm-icon">📘</div>
                 <div><div className="cm-en">Facebook</div><div className="cm-ar">فيسبوك</div><div className="cm-detail">@CanadaReadyAcademy</div></div>
               </a>
@@ -695,7 +695,7 @@ export default function Home() {
                   </div>
                   <div>
                     <label style={{fontSize:"12px",fontWeight:600,color:"#0E1E33",display:"block",marginBottom:"6px"}}>WhatsApp Number <span style={{fontFamily:"'Tajawal',sans-serif",color:"#64748B",fontWeight:400}}>/ واتساب</span></label>
-                    <input className="inp" type="tel" placeholder="+1 587 000 0000" required style={{marginBottom:0}} />
+                    <input className="inp" type="tel" placeholder="+1 403 434 0027" required style={{marginBottom:0}} />
                   </div>
                 </div>
                 <div style={{height:"14px"}}></div>
@@ -750,8 +750,8 @@ export default function Home() {
               <p className="p-ar">١٥٠+ خدمة للوافدين الجدد. إنجليزية، مهنة، وحياة.</p>
               <p style={{fontSize:"12px",color:"rgba(255,255,255,.3)",marginTop:"6px"}}>Built by immigrants — for immigrants. 🍁</p>
               <div className="footer-socials">
-                <a href="https://wa.me/15870000000" className="social-btn" target="_blank" rel="noopener noreferrer">💬</a>
-                <a href="https://facebook.com/canadareadyacademy" className="social-btn" target="_blank" rel="noopener noreferrer">📘</a>
+                <a href="https://wa.me/14034340027" className="social-btn" target="_blank" rel="noopener noreferrer">💬</a>
+                <a href="https://facebook.com/groups/1338122224799157" className="social-btn" target="_blank" rel="noopener noreferrer">📘</a>
                 <a href="https://instagram.com/canadareadyacademy" className="social-btn" target="_blank" rel="noopener noreferrer">📸</a>
               </div>
             </div>
@@ -780,9 +780,9 @@ export default function Home() {
             <div className="footer-col">
               <h5>Contact</h5>
               <div className="h5-ar">تواصل</div>
-              <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer">💬 +1 (587) 000-0000</a>
+              <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer">💬 +1 (403) 434-0027</a>
               <span className="ar">واتساب — رد خلال ساعات</span>
-              <a href="mailto:hello@canadareadyacademy.com">✉️ hello@canadareadyacademy.com</a>
+              <a href="mailto:canadareadyacademy@gmail.com">✉️ canadareadyacademy@gmail.com</a>
               <span className="ar">البريد — رد خلال 24 ساعة</span>
               <span style={{marginTop:"8px"}}>🌍 Online — All of Canada</span>
               <span className="ar">عبر الإنترنت — كل كندا</span>

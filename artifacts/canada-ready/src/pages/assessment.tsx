@@ -52,7 +52,7 @@ export default function Assessment() {
         <p style={{ fontSize: "17px", color: MID, lineHeight: 1.7, marginBottom: "28px" }}>
           {isAr ? "سنتواصل معك على واتساب خلال 24 ساعة لتأكيد موعدك المجاني. ابق قريباً!" : "We will contact you on WhatsApp within 24 hours to confirm your free appointment. Stay close!"}
         </p>
-        <a href="https://wa.me/15870000000" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 36px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }} data-testid="success-whatsapp">
+        <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 36px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }} data-testid="success-whatsapp">
           💬 {isAr ? "تحدث معنا الآن على واتساب" : "Chat With Us Now on WhatsApp"}
         </a>
       </div>
@@ -134,7 +134,7 @@ export default function Assessment() {
                     <FormItem><FormLabel style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel><FormControl><Input {...field} style={inputStyle} data-testid="input-name" /></FormControl><FormMessage /></FormItem>
                   )} />
                   <FormField control={form.control} name="whatsapp" render={({ field }) => (
-                    <FormItem><FormLabel style={labelStyle}>{isAr ? "رقم الواتساب" : "WhatsApp Number"}</FormLabel><FormControl><Input placeholder="+1 587 000 0000" {...field} style={inputStyle} data-testid="input-whatsapp" /></FormControl><FormMessage /></FormItem>
+                    <FormItem><FormLabel style={labelStyle}>{isAr ? "رقم الواتساب" : "WhatsApp Number"}</FormLabel><FormControl><Input placeholder="+1 403 434 0027" {...field} style={inputStyle} data-testid="input-whatsapp" /></FormControl><FormMessage /></FormItem>
                   )} />
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
