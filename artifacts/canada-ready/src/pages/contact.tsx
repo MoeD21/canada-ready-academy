@@ -1,4 +1,4 @@
-import { useLanguage } from "@/lib/language-context";
+\import { useLanguage } from "@/lib/language-context";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
@@ -9,7 +9,11 @@ import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
 
-const T = "#66E6DE"; const TDK = "#007A77"; const GOLD = "#C9903A"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+const T = "#66E6DE";
+const TDK = "#007A77";
+const GOLD = "#C9903A";
+const BG = "#F5FFFE";
+const MID = "#4A6B69";
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -17,8 +21,6 @@ const schema = z.object({
   whatsapp: z.string().optional(),
   message: z.string().min(10, "Message too short"),
 });
-
-const FORMPREE_URL = "https://formspree.io/f/mwvylrkn";
 
 export default function Contact() {
   const { language } = useLanguage();
@@ -31,23 +33,37 @@ export default function Contact() {
     defaultValues: { name: "", email: "", whatsapp: "", message: "" },
   });
 
+  // ========== NETLIFY FORMS SUBMISSION ==========
   const onSubmit = async (data: z.infer<typeof schema>) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(FORMPREE_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+      const formData = new FormData();
+      formData.append("form-name", "contact");
+      Object.entries(data).forEach(([key, value]) => {
+        if (value) formData.append(key, value);
       });
+
+      const response = await fetch("/", {
+        method: "POST",
+        body: formData,
+      });
+
       if (response.ok) {
-        toast({ title: isAr ? "تم الإرسال!" : "Message Sent!", description: isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours." });
+        toast({
+          title: isAr ? "تم الإرسال!" : "Message Sent!",
+          description: isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours.",
+        });
         form.reset();
       } else {
-        toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "حاول مرة أخرى." : "Please try again." });
+        throw new Error("Submission failed");
       }
     } catch (error) {
       console.error(error);
-      toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "تعذر الاتصال بالخادم." : "Could not reach server." });
+      toast({
+        variant: "destructive",
+        title: isAr ? "حدث خطأ" : "Error",
+        description: isAr ? "حاول مرة أخرى." : "Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -125,7 +141,15 @@ export default function Contact() {
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>{isAr ? "أرسل لنا رسالة" : "Send Us a Message"}</h3>
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>{isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours."}</p>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                data-netlify="true"
+                name="contact"
+                method="POST"
+                style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+              >
+                <input type="hidden" name="form-name" value="contact" />
+
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
                   <FormField control={form.control} name="name" render={({ field }) => (
                     <FormItem>
