@@ -8,20 +8,30 @@ import * as z from "zod";
 import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
 
-const T = "#66E6DE"; const TDK = "#007A77"; const GOLD = "#C9903A"; const GOLD_LT = "#E8B84B"; const BG = "#F5FFFE"; const MID = "#4A6B69";
+const TDK = "#007A77";
+const GOLD = "#C9903A";
+const GOLD_LT = "#E8B84B";
+const BG = "#F5FFFE";
+const MID = "#4A6B69";
 
+// ========== YOUR EMAILJS CREDENTIALS ==========
+const EMAILJS_PUBLIC_KEY = "Sk2WVel6rtbgqWM1X";
+const EMAILJS_SERVICE_ID = "service_bubtud7";
+const EMAILJS_TEMPLATE_ID = "template_c3qml4p";  // <-- Replace with actual ID (looks like template_xxxxx)
+
+// ========== SCHEMA (includes email now) ==========
 const schema = z.object({
   name: z.string().min(2),
   whatsapp: z.string().min(5),
+  email: z.string().email().optional(),
   englishLevel: z.string().min(1),
   country: z.string().min(2),
   careerGoals: z.string().min(5),
   timeInCanada: z.string().min(1),
   biggestChallenge: z.string().min(5),
 });
-
-const FORMPREE_URL = "https://formspree.io/f/mwvylrkn";
 
 export default function Assessment() {
   const { language } = useLanguage();
@@ -31,25 +41,36 @@ export default function Assessment() {
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", whatsapp: "", englishLevel: "", country: "", careerGoals: "", timeInCanada: "", biggestChallenge: "" },
+    defaultValues: {
+      name: "",
+      whatsapp: "",
+      email: "",
+      englishLevel: "",
+      country: "",
+      careerGoals: "",
+      timeInCanada: "",
+      biggestChallenge: "",
+    },
   });
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(FORMPREE_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name: data.name,
+        whatsapp: data.whatsapp,
+        email: data.email || "Not provided",
+        englishLevel: data.englishLevel,
+        country: data.country,
+        timeInCanada: data.timeInCanada,
+        careerGoals: data.careerGoals,
+        biggestChallenge: data.biggestChallenge,
       });
-      if (response.ok) {
-        setSubmitted(true);
-      } else {
-        alert(isAr ? "حدث خطأ. حاول مرة أخرى." : "Error. Please try again.");
-      }
+      setSubmitted(true);
     } catch (error) {
-      console.error(error);
-      alert(isAr ? "تعذر الاتصال بالخادم." : "Could not reach server.");
+      console.error("EmailJS error:", error);
+      alert(isAr ? "فشل الإرسال. حاول مرة أخرى." : "Failed to send. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -146,6 +167,16 @@ export default function Assessment() {
                     <FormItem><FormLabel style={labelStyle}>{isAr ? "رقم الواتساب" : "WhatsApp Number"}</FormLabel><FormControl><Input placeholder="+1 403 434 0027" {...field} style={inputStyle} data-testid="input-whatsapp" /></FormControl><FormMessage /></FormItem>
                   )} />
                 </div>
+                {/* NEW EMAIL FIELD */}
+                <FormField control={form.control} name="email" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel style={labelStyle}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder={isAr ? "بريدك الإلكتروني" : "your@email.com"} {...field} style={inputStyle} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
                   <FormField control={form.control} name="englishLevel" render={({ field }) => (
                     <FormItem>
