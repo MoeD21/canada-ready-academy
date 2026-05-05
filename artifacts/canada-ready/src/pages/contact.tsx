@@ -1,76 +1,70 @@
 import { useLanguage } from "@/lib/language-context";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
-const T = "#66E6DE";
 const TDK = "#007A77";
-const GOLD = "#C9903A";
 const BG = "#F5FFFE";
 const MID = "#4A6B69";
 
-const schema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Invalid email"),
-  whatsapp: z.string().optional(),
-  message: z.string().min(10, "Message too short"),
-});
-
-const FORMSPREE_URL = "https://formspree.io/f/mwvylrkn";
+const ACCESS_KEY = "95fb604f-3678-4783-a916-ca5991e42627";
 
 export default function Contact() {
   const { language } = useLanguage();
   const isAr = language === "ar";
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "", whatsapp: "", message: "" },
-  });
-
-  const onSubmit = async (data: z.infer<typeof schema>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsSubmitting(true);
+    setError("");
+    const formData = new FormData(e.currentTarget);
+    if (!formData.has("access_key")) formData.append("access_key", ACCESS_KEY);
+
     try {
-      const formData = new URLSearchParams();
-      Object.entries(data).forEach(([key, value]) => {
-        if (value) formData.append(key, value);
-      });
-
-      const response = await fetch(FORMSPREE_URL, {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formData.toString(),
+        body: formData,
       });
-
-      if (response.ok) {
-        toast({ title: isAr ? "تم الإرسال!" : "Message Sent!", description: isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours." });
-        form.reset();
+      const result = await response.json();
+      if (result.success) {
+        setSuccess(true);
+        e.currentTarget.reset();
       } else {
-        throw new Error("Submission failed");
+        setError(result.message || "Submission failed");
       }
-    } catch (error) {
-      console.error(error);
-      toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "حاول مرة أخرى." : "Please try again." });
+    } catch (err) {
+      setError("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  if (success) {
+    return (
+      <div style={{ padding: "80px 5%", textAlign: "center" }}>
+        <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: `rgba(129,216,208,0.12)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "36px", margin: "0 auto 24px" }}>✅</div>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "32px", fontWeight: 800, color: TDK }}>
+          {isAr ? "تم إرسال رسالتك!" : "Message Sent!"}
+        </h2>
+        <p style={{ fontSize: "17px", color: MID, marginTop: "12px" }}>
+          {isAr ? "سنرد عليك خلال 24 ساعة." : "We will reply within 24 hours."}
+        </p>
+      </div>
+    );
+  }
+
   const channels = [
     { icon: "💬", color: "#25D366", label_en: "WhatsApp", label_ar: "واتساب", val_en: "+1 (403) 434-0027", val_ar: "+1 (403) 434-0027", href: "https://wa.me/14034340027", desc_en: "Chat with us — we reply within hours", desc_ar: "تحدث معنا — نرد خلال ساعات" },
-    { icon: "✉️", color: T, label_en: "Email", label_ar: "البريد الإلكتروني", val_en: "canadareadyacademy@gmail.com", val_ar: "canadareadyacademy@gmail.com", href: "mailto:canadareadyacademy@gmail.com", desc_en: "We reply within 24 hours", desc_ar: "نرد خلال 24 ساعة" },
+    { icon: "✉️", color: "#66E6DE", label_en: "Email", label_ar: "البريد الإلكتروني", val_en: "canadareadyacademy@gmail.com", val_ar: "canadareadyacademy@gmail.com", href: "mailto:canadareadyacademy@gmail.com", desc_en: "We reply within 24 hours", desc_ar: "نرد خلال 24 ساعة" },
     { icon: "📘", color: "#1877F2", label_en: "Facebook", label_ar: "فيسبوك", val_en: "@CanadaReadyAcademy", val_ar: "@CanadaReadyAcademy", href: "https://facebook.com/groups/1338122224799157", desc_en: "Follow us & message us on Facebook", desc_ar: "تابعنا وراسلنا على فيسبوك" },
     { icon: "📸", color: "#E1306C", label_en: "Instagram", label_ar: "إنستغرام", val_en: "@canadareadyacademy", val_ar: "@canadareadyacademy", href: "https://instagram.com/canadareadyacademy", desc_en: "Daily tips for newcomers", desc_ar: "نصائح يومية للوافدين الجدد" },
   ];
 
   const stag = { display: "inline-flex" as const, alignItems: "center", gap: "6px", background: "rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" };
+  const inputStyle = { border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px", padding: "12px 14px", fontSize: "14px", fontFamily: "inherit", width: "100%" };
+  const labelStyle = { display: "block" as const, fontSize: "12px", fontWeight: 700, color: TDK, marginBottom: "5px" };
 
   return (
     <div style={{ width: "100%" }}>
@@ -132,28 +126,32 @@ export default function Contact() {
           <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>{isAr ? "أرسل لنا رسالة" : "Send Us a Message"}</h3>
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>{isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours."}</p>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
-                  <FormField control={form.control} name="name" render={({ field }) => (
-                    <FormItem><FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel><FormControl><Input {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} /></FormControl><FormMessage /></FormItem>
-                  )} />
-                  <FormField control={form.control} name="email" render={({ field }) => (
-                    <FormItem><FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel><FormControl><Input type="email" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} /></FormControl><FormMessage /></FormItem>
-                  )} />
+            {error && <div style={{ color: "red", marginBottom: "16px" }}>{error}</div>}
+            <form onSubmit={handleSubmit}>
+              <input type="hidden" name="access_key" value={ACCESS_KEY} />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px", marginBottom: "14px" }}>
+                <div>
+                  <label style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</label>
+                  <input type="text" name="name" required style={inputStyle} />
                 </div>
-                <FormField control={form.control} name="whatsapp" render={({ field }) => (
-                  <FormItem><FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رقم الواتساب (اختياري)" : "WhatsApp Number (Optional)"}</FormLabel><FormControl><Input placeholder="+1 403 434 0027" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} /></FormControl><FormMessage /></FormItem>
-                )} />
-                <FormField control={form.control} name="message" render={({ field }) => (
-                  <FormItem><FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رسالتك" : "Your Message"}</FormLabel><FormControl><Textarea {...field} rows={4} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px", resize: "vertical" }} /></FormControl><FormMessage /></FormItem>
-                )} />
-                <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "15px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "15px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.6 : 1 }}>
-                  {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
-                  {isAr ? "إرسال الرسالة" : "Send Message"}
-                </button>
-              </form>
-            </Form>
+                <div>
+                  <label style={labelStyle}>{isAr ? "البريد الإلكتروني" : "Email"}</label>
+                  <input type="email" name="email" required style={inputStyle} />
+                </div>
+              </div>
+              <div style={{ marginBottom: "14px" }}>
+                <label style={labelStyle}>{isAr ? "رقم الواتساب (اختياري)" : "WhatsApp Number (Optional)"}</label>
+                <input type="tel" name="whatsapp" placeholder="+1 403 434 0027" style={inputStyle} />
+              </div>
+              <div style={{ marginBottom: "14px" }}>
+                <label style={labelStyle}>{isAr ? "رسالتك" : "Your Message"}</label>
+                <textarea name="message" rows={4} required style={{ ...inputStyle, resize: "vertical" }} />
+              </div>
+              <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "15px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "15px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.6 : 1 }}>
+                {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                {isAr ? "إرسال الرسالة" : "Send Message"}
+              </button>
+            </form>
           </div>
         </div>
       </section>

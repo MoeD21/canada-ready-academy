@@ -1,12 +1,4 @@
 import { useLanguage } from "@/lib/language-context";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Loader2 } from "lucide-react";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
 
 const TDK = "#007A77";
@@ -15,65 +7,40 @@ const GOLD_LT = "#E8B84B";
 const BG = "#F5FFFE";
 const MID = "#4A6B69";
 
-const schema = z.object({
-  name: z.string().min(2),
-  whatsapp: z.string().min(5),
-  email: z.string().email().optional(),
-  englishLevel: z.string().min(1),
-  country: z.string().min(2),
-  careerGoals: z.string().min(5),
-  timeInCanada: z.string().min(1),
-  biggestChallenge: z.string().min(5),
-});
-
-// ✅ YOUR FORMSPREE ENDPOINT
-const FORMSPREE_URL = "https://formspree.io/f/mwvylrkn";
+// YOUR WEB3FORMS KEY
+const ACCESS_KEY = "95fb604f-3678-4783-a916-ca5991e42627";
 
 export default function Assessment() {
   const { language } = useLanguage();
   const isAr = language === "ar";
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      name: "",
-      whatsapp: "",
-      email: "",
-      englishLevel: "",
-      country: "",
-      careerGoals: "",
-      timeInCanada: "",
-      biggestChallenge: "",
-    },
-  });
-
-  const onSubmit = async (data: z.infer<typeof schema>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsSubmitting(true);
+    setError("");
+
+    const formData = new FormData(e.currentTarget);
+    // Add the access key (if not already in a hidden field)
+    if (!formData.has("access_key")) {
+      formData.append("access_key", ACCESS_KEY);
+    }
+
     try {
-      // Formspree expects form-urlencoded, not JSON
-      const formData = new URLSearchParams();
-      Object.entries(data).forEach(([key, value]) => {
-        if (value) formData.append(key, value);
-      });
-
-      const response = await fetch(FORMSPREE_URL, {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formData.toString(),
+        body: formData,
       });
-
-      if (response.ok) {
+      const result = await response.json();
+      if (result.success) {
         setSubmitted(true);
       } else {
-        const errorText = await response.text();
-        console.error("Formspree error:", errorText);
-        alert(isAr ? "حدث خطأ. حاول مرة أخرى." : "Error. Please try again.");
+        setError(result.message || "Submission failed");
       }
-    } catch (error) {
-      console.error(error);
-      alert(isAr ? "تعذر الاتصال بالخادم." : "Could not reach server.");
+    } catch (err) {
+      setError("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -152,7 +119,7 @@ export default function Assessment() {
             </div>
           </div>
 
-          {/* Right column – Form */}
+          {/* Right column – Web3Forms */}
           <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>
               {isAr ? "أكمل استمارة الموعد" : "Complete the Appointment Form"}
@@ -160,65 +127,61 @@ export default function Assessment() {
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>
               {isAr ? "سنتصل بك خلال 24 ساعة." : "We'll contact you within 24 hours."}
             </p>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
-                  <FormField control={form.control} name="name" render={({ field }) => (
-                    <FormItem><FormLabel style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel><FormControl><Input {...field} style={inputStyle} /></FormControl><FormMessage /></FormItem>
-                  )} />
-                  <FormField control={form.control} name="whatsapp" render={({ field }) => (
-                    <FormItem><FormLabel style={labelStyle}>{isAr ? "رقم الواتساب" : "WhatsApp Number"}</FormLabel><FormControl><Input placeholder="+1 403 434 0027" {...field} style={inputStyle} /></FormControl><FormMessage /></FormItem>
-                  )} />
+
+            {error && <div style={{ color: "red", marginBottom: "16px" }}>{error}</div>}
+
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <input type="hidden" name="access_key" value={ACCESS_KEY} />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
+                <div>
+                  <label style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</label>
+                  <input type="text" name="name" required style={inputStyle} />
                 </div>
-                <FormField control={form.control} name="email" render={({ field }) => (
-                  <FormItem><FormLabel style={labelStyle}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel><FormControl><Input type="email" {...field} style={inputStyle} /></FormControl><FormMessage /></FormItem>
-                )} />
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
-                  <FormField control={form.control} name="englishLevel" render={({ field }) => (
-                    <FormItem>
-                      <FormLabel style={labelStyle}>{isAr ? "مستوى الإنجليزية" : "English Level"}</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl><SelectTrigger style={inputStyle}><SelectValue placeholder={isAr ? "اختر المستوى" : "Select level"} /></SelectTrigger></FormControl>
-                        <SelectContent>
-                          <SelectItem value="beginner">{isAr ? "مبتدئ" : "Beginner"}</SelectItem>
-                          <SelectItem value="intermediate">{isAr ? "متوسط" : "Intermediate"}</SelectItem>
-                          <SelectItem value="advanced">{isAr ? "متقدم" : "Advanced"}</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )} />
-                  <FormField control={form.control} name="country" render={({ field }) => (
-                    <FormItem><FormLabel style={labelStyle}>{isAr ? "بلد الأصل" : "Country of Origin"}</FormLabel><FormControl><Input placeholder={isAr ? "مصر، سوريا، العراق..." : "Egypt, Syria, Iraq..."} {...field} style={inputStyle} /></FormControl><FormMessage /></FormItem>
-                  )} />
+                <div>
+                  <label style={labelStyle}>{isAr ? "رقم الواتساب" : "WhatsApp Number"}</label>
+                  <input type="tel" name="whatsapp" placeholder="+1 403 434 0027" required style={inputStyle} />
                 </div>
-                <FormField control={form.control} name="timeInCanada" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel style={labelStyle}>{isAr ? "منذ متى وأنت في كندا؟" : "How Long in Canada?"}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl><SelectTrigger style={inputStyle}><SelectValue placeholder={isAr ? "اختر المدة" : "Select time"} /></SelectTrigger></FormControl>
-                      <SelectContent>
-                        <SelectItem value="justArrived">{isAr ? "وصلت للتو (أقل من شهر)" : "Just arrived (less than 1 month)"}</SelectItem>
-                        <SelectItem value="lessThan1">{isAr ? "أقل من سنة" : "Less than 1 year"}</SelectItem>
-                        <SelectItem value="oneToTwo">{isAr ? "1–2 سنوات" : "1–2 years"}</SelectItem>
-                        <SelectItem value="moreThan2">{isAr ? "أكثر من سنتين" : "More than 2 years"}</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-                <FormField control={form.control} name="careerGoals" render={({ field }) => (
-                  <FormItem><FormLabel style={labelStyle}>{isAr ? "أهدافك المهنية" : "Career Goals"}</FormLabel><FormControl><Textarea {...field} style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }} /></FormControl><FormMessage /></FormItem>
-                )} />
-                <FormField control={form.control} name="biggestChallenge" render={({ field }) => (
-                  <FormItem><FormLabel style={labelStyle}>{isAr ? "أكبر تحدٍّ تواجهه الآن" : "Biggest Challenge Right Now"}</FormLabel><FormControl><Textarea {...field} style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }} /></FormControl><FormMessage /></FormItem>
-                )} />
-                <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.65 : 1, marginTop: "6px" }}>
-                  {isSubmitting && <Loader2 className="w-5 h-5 animate-spin" />}
-                  📋 {isAr ? "احجز موعدي المجاني" : "Book My Free Appointment"}
-                </button>
-              </form>
-            </Form>
+              </div>
+              <div>
+                <label style={labelStyle}>{isAr ? "البريد الإلكتروني" : "Email"}</label>
+                <input type="email" name="email" style={inputStyle} />
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
+                <div>
+                  <label style={labelStyle}>{isAr ? "مستوى الإنجليزية" : "English Level"}</label>
+                  <select name="englishLevel" style={inputStyle} required>
+                    <option value="beginner">{isAr ? "مبتدئ" : "Beginner"}</option>
+                    <option value="intermediate">{isAr ? "متوسط" : "Intermediate"}</option>
+                    <option value="advanced">{isAr ? "متقدم" : "Advanced"}</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={labelStyle}>{isAr ? "بلد الأصل" : "Country of Origin"}</label>
+                  <input type="text" name="country" placeholder={isAr ? "مصر، سوريا، العراق..." : "Egypt, Syria, Iraq..."} style={inputStyle} />
+                </div>
+              </div>
+              <div>
+                <label style={labelStyle}>{isAr ? "منذ متى وأنت في كندا؟" : "How Long in Canada?"}</label>
+                <select name="timeInCanada" style={inputStyle} required>
+                  <option value="justArrived">{isAr ? "وصلت للتو (أقل من شهر)" : "Just arrived (less than 1 month)"}</option>
+                  <option value="lessThan1">{isAr ? "أقل من سنة" : "Less than 1 year"}</option>
+                  <option value="oneToTwo">{isAr ? "1–2 سنوات" : "1–2 years"}</option>
+                  <option value="moreThan2">{isAr ? "أكثر من سنتين" : "More than 2 years"}</option>
+                </select>
+              </div>
+              <div>
+                <label style={labelStyle}>{isAr ? "أهدافك المهنية" : "Career Goals"}</label>
+                <textarea name="careerGoals" rows={3} style={{ ...inputStyle, resize: "vertical" }} required></textarea>
+              </div>
+              <div>
+                <label style={labelStyle}>{isAr ? "أكبر تحدٍّ تواجهه الآن" : "Biggest Challenge Right Now"}</label>
+                <textarea name="biggestChallenge" rows={3} style={{ ...inputStyle, resize: "vertical" }} required></textarea>
+              </div>
+              <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.65 : 1, marginTop: "6px" }}>
+                {isSubmitting && <Loader2 className="w-5 h-5 animate-spin" />}
+                📋 {isAr ? "احجز موعدي المجاني" : "Book My Free Appointment"}
+              </button>
+            </form>
           </div>
         </div>
       </section>
