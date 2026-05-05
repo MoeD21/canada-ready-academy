@@ -1,47 +1,16 @@
 import { useLanguage } from "@/lib/language-context";
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
 
 const TDK = "#007A77";
 const BG = "#F5FFFE";
 const MID = "#4A6B69";
 
-const ACCESS_KEY = "95fb604f-3678-4783-a916-ca5991e42627";
-
 export default function Contact() {
   const { language } = useLanguage();
   const isAr = language === "ar";
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError("");
-    const formData = new FormData(e.currentTarget);
-    if (!formData.has("access_key")) formData.append("access_key", ACCESS_KEY);
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const result = await response.json();
-      if (result.success) {
-        setSuccess(true);
-        e.currentTarget.reset();
-      } else {
-        setError(result.message || "Submission failed");
-      }
-    } catch (err) {
-      setError("Network error. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  if (success) {
+  if (submitted) {
     return (
       <div style={{ padding: "80px 5%", textAlign: "center" }}>
         <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: `rgba(129,216,208,0.12)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "36px", margin: "0 auto 24px" }}>✅</div>
@@ -126,9 +95,17 @@ export default function Contact() {
           <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>{isAr ? "أرسل لنا رسالة" : "Send Us a Message"}</h3>
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>{isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours."}</p>
-            {error && <div style={{ color: "red", marginBottom: "16px" }}>{error}</div>}
-            <form onSubmit={handleSubmit}>
-              <input type="hidden" name="access_key" value={ACCESS_KEY} />
+
+            <form
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              target="_blank"
+              onSubmit={() => setSubmitted(true)}
+            >
+              <input type="hidden" name="access_key" value="95fb604f-3678-4783-a916-ca5991e42627" />
+              <input type="hidden" name="subject" value="New Contact Message" />
+              <input type="hidden" name="from_name" value="CanadaReady Contact" />
+
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px", marginBottom: "14px" }}>
                 <div>
                   <label style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</label>
@@ -147,8 +124,7 @@ export default function Contact() {
                 <label style={labelStyle}>{isAr ? "رسالتك" : "Your Message"}</label>
                 <textarea name="message" rows={4} required style={{ ...inputStyle, resize: "vertical" }} />
               </div>
-              <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "15px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "15px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.6 : 1 }}>
-                {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
+              <button type="submit" style={{ width: "100%", padding: "15px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "15px", fontWeight: 700, cursor: "pointer" }}>
                 {isAr ? "إرسال الرسالة" : "Send Message"}
               </button>
             </form>

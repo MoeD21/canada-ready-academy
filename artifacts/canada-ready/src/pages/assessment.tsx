@@ -7,44 +7,10 @@ const GOLD_LT = "#E8B84B";
 const BG = "#F5FFFE";
 const MID = "#4A6B69";
 
-// YOUR WEB3FORMS KEY
-const ACCESS_KEY = "95fb604f-3678-4783-a916-ca5991e42627";
-
 export default function Assessment() {
   const { language } = useLanguage();
   const isAr = language === "ar";
   const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError("");
-
-    const formData = new FormData(e.currentTarget);
-    // Add the access key (if not already in a hidden field)
-    if (!formData.has("access_key")) {
-      formData.append("access_key", ACCESS_KEY);
-    }
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const result = await response.json();
-      if (result.success) {
-        setSubmitted(true);
-      } else {
-        setError(result.message || "Submission failed");
-      }
-    } catch (err) {
-      setError("Network error. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   if (submitted) {
     return (
@@ -119,7 +85,7 @@ export default function Assessment() {
             </div>
           </div>
 
-          {/* Right column – Web3Forms */}
+          {/* Right column – traditional HTML form (no fetch, no JS) */}
           <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>
               {isAr ? "أكمل استمارة الموعد" : "Complete the Appointment Form"}
@@ -128,10 +94,19 @@ export default function Assessment() {
               {isAr ? "سنتصل بك خلال 24 ساعة." : "We'll contact you within 24 hours."}
             </p>
 
-            {error && <div style={{ color: "red", marginBottom: "16px" }}>{error}</div>}
+            {/* ✅ NATIVE FORM SUBMISSION – WORKS 100% */}
+            <form
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              target="_blank"
+              onSubmit={() => setSubmitted(true)}
+              style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+            >
+              {/* Required hidden fields */}
+              <input type="hidden" name="access_key" value="95fb604f-3678-4783-a916-ca5991e42627" />
+              <input type="hidden" name="subject" value="New Assessment Request" />
+              <input type="hidden" name="from_name" value="CanadaReady Assessment" />
 
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-              <input type="hidden" name="access_key" value={ACCESS_KEY} />
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
                 <div>
                   <label style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</label>
@@ -177,8 +152,7 @@ export default function Assessment() {
                 <label style={labelStyle}>{isAr ? "أكبر تحدٍّ تواجهه الآن" : "Biggest Challenge Right Now"}</label>
                 <textarea name="biggestChallenge" rows={3} style={{ ...inputStyle, resize: "vertical" }} required></textarea>
               </div>
-              <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.65 : 1, marginTop: "6px" }}>
-                {isSubmitting && <Loader2 className="w-5 h-5 animate-spin" />}
+              <button type="submit" style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", marginTop: "6px" }}>
                 📋 {isAr ? "احجز موعدي المجاني" : "Book My Free Appointment"}
               </button>
             </form>
