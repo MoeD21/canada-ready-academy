@@ -1,4 +1,4 @@
-\import { useLanguage } from "@/lib/language-context";
+import { useLanguage } from "@/lib/language-context";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
