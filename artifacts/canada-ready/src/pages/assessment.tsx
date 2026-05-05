@@ -15,7 +15,6 @@ const GOLD_LT = "#E8B84B";
 const BG = "#F5FFFE";
 const MID = "#4A6B69";
 
-// ========== SCHEMA ==========
 const schema = z.object({
   name: z.string().min(2),
   whatsapp: z.string().min(5),
@@ -26,6 +25,9 @@ const schema = z.object({
   timeInCanada: z.string().min(1),
   biggestChallenge: z.string().min(5),
 });
+
+// ✅ YOUR FORMSPREE ENDPOINT
+const FORMSPREE_URL = "https://formspree.io/f/mwvylrkn";
 
 export default function Assessment() {
   const { language } = useLanguage();
@@ -47,36 +49,36 @@ export default function Assessment() {
     },
   });
 
-  // ========== NETLIFY FORMS SUBMISSION ==========
   const onSubmit = async (data: z.infer<typeof schema>) => {
     setIsSubmitting(true);
     try {
-      const formData = new FormData();
-      formData.append("form-name", "assessment");
-      // Append all fields from data
+      // Formspree expects form-urlencoded, not JSON
+      const formData = new URLSearchParams();
       Object.entries(data).forEach(([key, value]) => {
         if (value) formData.append(key, value);
       });
 
-      const response = await fetch("/", {
+      const response = await fetch(FORMSPREE_URL, {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formData.toString(),
       });
 
       if (response.ok) {
         setSubmitted(true);
       } else {
-        throw new Error("Submission failed");
+        const errorText = await response.text();
+        console.error("Formspree error:", errorText);
+        alert(isAr ? "حدث خطأ. حاول مرة أخرى." : "Error. Please try again.");
       }
     } catch (error) {
-      console.error("Form submission error:", error);
-      alert(isAr ? "حدث خطأ. حاول مرة أخرى." : "Error. Please try again.");
+      console.error(error);
+      alert(isAr ? "تعذر الاتصال بالخادم." : "Could not reach server.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Success screen after submission
   if (submitted) {
     return (
       <div style={{ padding: "80px 5%", textAlign: "center", maxWidth: "600px", margin: "0 auto" }}>
@@ -85,16 +87,15 @@ export default function Assessment() {
           {isAr ? "تم حجز موعدك!" : "Appointment Submitted!"}
         </h2>
         <p style={{ fontSize: "17px", color: MID, lineHeight: 1.7, marginBottom: "28px" }}>
-          {isAr ? "سنتواصل معك على واتساب خلال 24 ساعة لتأكيد موعدك المجاني. ابق قريباً!" : "We will contact you on WhatsApp within 24 hours to confirm your free appointment. Stay close!"}
+          {isAr ? "سنتواصل معك على واتساب خلال 24 ساعة لتأكيد موعدك المجاني." : "We will contact you on WhatsApp within 24 hours to confirm your free appointment."}
         </p>
-        <a href="https://wa.me/+14034340027" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 36px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }}>
+        <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 36px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }}>
           💬 {isAr ? "تحدث معنا الآن على واتساب" : "Chat With Us Now on WhatsApp"}
         </a>
       </div>
     );
   }
 
-  // Left column content (same as before)
   const whatHappens = [
     { en: "We check your English level (Beginner or Intermediate)", ar: "نتحقق من مستوى إنجليزيتك (مبتدئ أو متوسط)" },
     { en: "We ask about your career goals and work history", ar: "نسأل عن أهدافك المهنية وتاريخك الوظيفي" },
@@ -109,7 +110,6 @@ export default function Assessment() {
 
   return (
     <div style={{ width: "100%" }}>
-      {/* Header */}
       <section style={{ padding: "60px 5% 50px", background: `linear-gradient(135deg,${BG},#e8fffe)`, textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" }}>
           📋 {isAr ? "موعد مجاني" : "FREE APPOINTMENT"}
@@ -118,14 +118,13 @@ export default function Assessment() {
           {isAr ? "احجز موعدك المجاني للإنجليزية والمهنة" : "Book Your Free English & Career Appointment"}
         </h1>
         <p style={{ fontSize: "17px", color: MID, maxWidth: "600px", margin: "0 auto", lineHeight: 1.7 }}>
-          {isAr ? "15–20 دقيقة مع فريقنا. مجانية تماماً. سنتحقق من مستواك، ونفهم أهدافك، ونوصيك بأفضل خطة لك." : "15–20 minutes with our team. Completely free. We'll check your level, understand your goals, and recommend the best plan for you."}
+          {isAr ? "15–20 دقيقة مع فريقنا. مجانية تماماً." : "15–20 minutes with our team. Completely free."}
         </p>
       </section>
 
-      {/* Main 2‑column layout */}
       <section style={{ padding: "60px 5% 80px", background: "#fff" }}>
         <div style={{ maxWidth: "1060px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: "52px", alignItems: "start" }}>
-          {/* Left column: info */}
+          {/* Left column */}
           <div>
             <div style={{ background: TDK, borderRadius: "22px", padding: "34px", color: "#fff", marginBottom: "20px" }}>
               <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: 700, color: GOLD_LT, marginBottom: "18px" }}>
@@ -140,22 +139,20 @@ export default function Assessment() {
             </div>
             <div style={{ background: BG, border: "1px solid rgba(129,216,208,0.15)", borderRadius: "16px", padding: "22px" }}>
               <div style={{ fontWeight: 700, fontSize: "15px", color: TDK, marginBottom: "10px" }}>🎁 {isAr ? "مجاني تماماً" : "100% Free"}</div>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "7px" }}>
+              <ul>
                 {[
                   { en: "No credit card required", ar: "لا بطاقة ائتمان مطلوبة" },
                   { en: "No commitment or obligation", ar: "لا التزام أو ضغط" },
                   { en: "Call is in Arabic — no pressure", ar: "المكالمة بالعربية — لا ضغط" },
                   { en: "First week is FREE when you join", ar: "الأسبوع الأول مجاني عند الانضمام" },
                 ].map((item, i) => (
-                  <li key={i} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13.5px", color: MID }}>
-                    <span style={{ color: GOLD, fontWeight: 800 }}>✓</span>{isAr ? item.ar : item.en}
-                  </li>
+                  <li key={i} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13.5px", color: MID }}><span style={{ color: GOLD, fontWeight: 800 }}>✓</span>{isAr ? item.ar : item.en}</li>
                 ))}
               </ul>
             </div>
           </div>
 
-          {/* Right column: Netlify form */}
+          {/* Right column – Form */}
           <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>
               {isAr ? "أكمل استمارة الموعد" : "Complete the Appointment Form"}
@@ -163,44 +160,25 @@ export default function Assessment() {
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>
               {isAr ? "سنتصل بك خلال 24 ساعة." : "We'll contact you within 24 hours."}
             </p>
-
-            {/* ✅ NETLIFY FORM – with data-netlify and hidden input */}
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                data-netlify="true"
-                name="assessment"
-                method="POST"
-                style={{ display: "flex", flexDirection: "column", gap: "14px" }}
-              >
-                <input type="hidden" name="form-name" value="assessment" />
-
+              <form onSubmit={form.handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
                   <FormField control={form.control} name="name" render={({ field }) => (
-                    <FormItem><FormLabel style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel><FormControl><Input {...field} style={inputStyle} data-testid="input-name" /></FormControl><FormMessage /></FormItem>
+                    <FormItem><FormLabel style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel><FormControl><Input {...field} style={inputStyle} /></FormControl><FormMessage /></FormItem>
                   )} />
                   <FormField control={form.control} name="whatsapp" render={({ field }) => (
-                    <FormItem><FormLabel style={labelStyle}>{isAr ? "رقم الواتساب" : "WhatsApp Number"}</FormLabel><FormControl><Input placeholder="+1 403 434 0027" {...field} style={inputStyle} data-testid="input-whatsapp" /></FormControl><FormMessage /></FormItem>
+                    <FormItem><FormLabel style={labelStyle}>{isAr ? "رقم الواتساب" : "WhatsApp Number"}</FormLabel><FormControl><Input placeholder="+1 403 434 0027" {...field} style={inputStyle} /></FormControl><FormMessage /></FormItem>
                   )} />
                 </div>
-
-                {/* Email field */}
                 <FormField control={form.control} name="email" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel style={labelStyle}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder={isAr ? "بريدك الإلكتروني" : "your@email.com"} {...field} style={inputStyle} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+                  <FormItem><FormLabel style={labelStyle}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel><FormControl><Input type="email" {...field} style={inputStyle} /></FormControl><FormMessage /></FormItem>
                 )} />
-
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
                   <FormField control={form.control} name="englishLevel" render={({ field }) => (
                     <FormItem>
                       <FormLabel style={labelStyle}>{isAr ? "مستوى الإنجليزية" : "English Level"}</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl><SelectTrigger style={inputStyle} data-testid="sel-english"><SelectValue placeholder={isAr ? "اختر المستوى" : "Select level"} /></SelectTrigger></FormControl>
+                        <FormControl><SelectTrigger style={inputStyle}><SelectValue placeholder={isAr ? "اختر المستوى" : "Select level"} /></SelectTrigger></FormControl>
                         <SelectContent>
                           <SelectItem value="beginner">{isAr ? "مبتدئ" : "Beginner"}</SelectItem>
                           <SelectItem value="intermediate">{isAr ? "متوسط" : "Intermediate"}</SelectItem>
@@ -211,15 +189,14 @@ export default function Assessment() {
                     </FormItem>
                   )} />
                   <FormField control={form.control} name="country" render={({ field }) => (
-                    <FormItem><FormLabel style={labelStyle}>{isAr ? "بلد الأصل" : "Country of Origin"}</FormLabel><FormControl><Input placeholder={isAr ? "مصر، سوريا، العراق..." : "Egypt, Syria, Iraq..."} {...field} style={inputStyle} data-testid="input-country" /></FormControl><FormMessage /></FormItem>
+                    <FormItem><FormLabel style={labelStyle}>{isAr ? "بلد الأصل" : "Country of Origin"}</FormLabel><FormControl><Input placeholder={isAr ? "مصر، سوريا، العراق..." : "Egypt, Syria, Iraq..."} {...field} style={inputStyle} /></FormControl><FormMessage /></FormItem>
                   )} />
                 </div>
-
                 <FormField control={form.control} name="timeInCanada" render={({ field }) => (
                   <FormItem>
                     <FormLabel style={labelStyle}>{isAr ? "منذ متى وأنت في كندا؟" : "How Long in Canada?"}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl><SelectTrigger style={inputStyle} data-testid="sel-time"><SelectValue placeholder={isAr ? "اختر المدة" : "Select time"} /></SelectTrigger></FormControl>
+                      <FormControl><SelectTrigger style={inputStyle}><SelectValue placeholder={isAr ? "اختر المدة" : "Select time"} /></SelectTrigger></FormControl>
                       <SelectContent>
                         <SelectItem value="justArrived">{isAr ? "وصلت للتو (أقل من شهر)" : "Just arrived (less than 1 month)"}</SelectItem>
                         <SelectItem value="lessThan1">{isAr ? "أقل من سنة" : "Less than 1 year"}</SelectItem>
@@ -230,24 +207,13 @@ export default function Assessment() {
                     <FormMessage />
                   </FormItem>
                 )} />
-
                 <FormField control={form.control} name="careerGoals" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel style={labelStyle}>{isAr ? "أهدافك المهنية" : "Career Goals"}</FormLabel>
-                    <FormControl><Textarea placeholder={isAr ? "ما نوع العمل الذي تبحث عنه؟ ما هي أهدافك في كندا؟" : "What kind of work are you looking for? What are your goals in Canada?"} {...field} style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }} data-testid="input-goals" /></FormControl>
-                    <FormMessage />
-                  </FormItem>
+                  <FormItem><FormLabel style={labelStyle}>{isAr ? "أهدافك المهنية" : "Career Goals"}</FormLabel><FormControl><Textarea {...field} style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }} /></FormControl><FormMessage /></FormItem>
                 )} />
-
                 <FormField control={form.control} name="biggestChallenge" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel style={labelStyle}>{isAr ? "أكبر تحدٍّ تواجهه الآن" : "Biggest Challenge Right Now"}</FormLabel>
-                    <FormControl><Textarea placeholder={isAr ? "أخبرنا عن أكبر صعوبة — اللغة، العمل، فهم الحياة الكندية..." : "Tell us your main difficulty — language, jobs, understanding Canadian life..."} {...field} style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }} data-testid="input-challenge" /></FormControl>
-                    <FormMessage />
-                  </FormItem>
+                  <FormItem><FormLabel style={labelStyle}>{isAr ? "أكبر تحدٍّ تواجهه الآن" : "Biggest Challenge Right Now"}</FormLabel><FormControl><Textarea {...field} style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }} /></FormControl><FormMessage /></FormItem>
                 )} />
-
-                <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.65 : 1, marginTop: "6px" }} data-testid="submit-assessment">
+                <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.65 : 1, marginTop: "6px" }}>
                   {isSubmitting && <Loader2 className="w-5 h-5 animate-spin" />}
                   📋 {isAr ? "احجز موعدي المجاني" : "Book My Free Appointment"}
                 </button>

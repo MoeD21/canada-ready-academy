@@ -22,6 +22,8 @@ const schema = z.object({
   message: z.string().min(10, "Message too short"),
 });
 
+const FORMSPREE_URL = "https://formspree.io/f/mwvylrkn";
+
 export default function Contact() {
   const { language } = useLanguage();
   const isAr = language === "ar";
@@ -33,37 +35,29 @@ export default function Contact() {
     defaultValues: { name: "", email: "", whatsapp: "", message: "" },
   });
 
-  // ========== NETLIFY FORMS SUBMISSION ==========
   const onSubmit = async (data: z.infer<typeof schema>) => {
     setIsSubmitting(true);
     try {
-      const formData = new FormData();
-      formData.append("form-name", "contact");
+      const formData = new URLSearchParams();
       Object.entries(data).forEach(([key, value]) => {
         if (value) formData.append(key, value);
       });
 
-      const response = await fetch("/", {
+      const response = await fetch(FORMSPREE_URL, {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formData.toString(),
       });
 
       if (response.ok) {
-        toast({
-          title: isAr ? "تم الإرسال!" : "Message Sent!",
-          description: isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours.",
-        });
+        toast({ title: isAr ? "تم الإرسال!" : "Message Sent!", description: isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours." });
         form.reset();
       } else {
         throw new Error("Submission failed");
       }
     } catch (error) {
       console.error(error);
-      toast({
-        variant: "destructive",
-        title: isAr ? "حدث خطأ" : "Error",
-        description: isAr ? "حاول مرة أخرى." : "Please try again.",
-      });
+      toast({ variant: "destructive", title: isAr ? "حدث خطأ" : "Error", description: isAr ? "حاول مرة أخرى." : "Please try again." });
     } finally {
       setIsSubmitting(false);
     }
@@ -98,7 +92,7 @@ export default function Contact() {
           <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "17px", marginBottom: "22px" }}>
             {isAr ? "راسلنا مباشرة على واتساب وسنجيب على أي سؤال لديك خلال ساعات قليلة." : "Message us directly on WhatsApp and we will answer any question within a few hours."}
           </p>
-          <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 40px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }} data-testid="contact-whatsapp">
+          <a href="https://wa.me/14034340027" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "16px 40px", borderRadius: "32px", fontSize: "16px", fontWeight: 700, textDecoration: "none" }}>
             💬 {isAr ? "راسلنا على واتساب" : "Message Us on WhatsApp"}
           </a>
         </div>
@@ -117,9 +111,7 @@ export default function Contact() {
               {channels.map((ch) => (
                 <a key={ch.label_en} href={ch.href} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "13px", background: "#fff", borderRadius: "18px", padding: "17px 20px", border: "1px solid rgba(129,216,208,0.15)", textDecoration: "none", transition: "0.3s" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = ch.color; (e.currentTarget as HTMLAnchorElement).style.boxShadow = `0 8px 32px ${ch.color}22`; (e.currentTarget as HTMLAnchorElement).style.transform = "translateX(4px)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(129,216,208,0.15)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = ""; (e.currentTarget as HTMLAnchorElement).style.transform = ""; }}
-                  data-testid={`ch-${ch.label_en}`}
-                >
+                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(129,216,208,0.15)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = ""; (e.currentTarget as HTMLAnchorElement).style.transform = ""; }}>
                   <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: `${ch.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", flexShrink: 0 }}>{ch.icon}</div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 700, fontSize: "15px", color: TDK }}>{isAr ? ch.label_ar : ch.label_en}</div>
@@ -141,46 +133,22 @@ export default function Contact() {
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>{isAr ? "أرسل لنا رسالة" : "Send Us a Message"}</h3>
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>{isAr ? "سنرد عليك خلال 24 ساعة." : "We'll get back to you within 24 hours."}</p>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                data-netlify="true"
-                name="contact"
-                method="POST"
-                style={{ display: "flex", flexDirection: "column", gap: "14px" }}
-              >
-                <input type="hidden" name="form-name" value="contact" />
-
+              <form onSubmit={form.handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
                   <FormField control={form.control} name="name" render={({ field }) => (
-                    <FormItem>
-                      <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel>
-                      <FormControl><Input {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-name" /></FormControl>
-                      <FormMessage />
-                    </FormItem>
+                    <FormItem><FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel><FormControl><Input {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} /></FormControl><FormMessage /></FormItem>
                   )} />
                   <FormField control={form.control} name="email" render={({ field }) => (
-                    <FormItem>
-                      <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel>
-                      <FormControl><Input type="email" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-email" /></FormControl>
-                      <FormMessage />
-                    </FormItem>
+                    <FormItem><FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel><FormControl><Input type="email" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} /></FormControl><FormMessage /></FormItem>
                   )} />
                 </div>
                 <FormField control={form.control} name="whatsapp" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رقم الواتساب (اختياري)" : "WhatsApp Number (Optional)"}</FormLabel>
-                    <FormControl><Input placeholder="+1 403 434 0027" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-whatsapp" /></FormControl>
-                    <FormMessage />
-                  </FormItem>
+                  <FormItem><FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رقم الواتساب (اختياري)" : "WhatsApp Number (Optional)"}</FormLabel><FormControl><Input placeholder="+1 403 434 0027" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} /></FormControl><FormMessage /></FormItem>
                 )} />
                 <FormField control={form.control} name="message" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رسالتك" : "Your Message"}</FormLabel>
-                    <FormControl><Textarea placeholder={isAr ? "أخبرنا كيف يمكننا مساعدتك..." : "Tell us how we can help you..."} className="min-h-[100px]" {...field} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px" }} data-testid="input-message" /></FormControl>
-                    <FormMessage />
-                  </FormItem>
+                  <FormItem><FormLabel style={{ fontSize: "12px", fontWeight: 700, color: TDK }}>{isAr ? "رسالتك" : "Your Message"}</FormLabel><FormControl><Textarea {...field} rows={4} style={{ border: "1.5px solid rgba(129,216,208,0.25)", borderRadius: "10px", resize: "vertical" }} /></FormControl><FormMessage /></FormItem>
                 )} />
-                <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "15px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "15px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "inherit", transition: "0.28s", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.6 : 1 }} data-testid="submit-contact">
+                <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "15px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "15px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.6 : 1 }}>
                   {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
                   {isAr ? "إرسال الرسالة" : "Send Message"}
                 </button>
