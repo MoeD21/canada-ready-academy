@@ -8,7 +8,6 @@ import * as z from "zod";
 import { Loader2 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
-import emailjs from '@emailjs/browser';
 
 const TDK = "#007A77";
 const GOLD = "#C9903A";
@@ -16,12 +15,7 @@ const GOLD_LT = "#E8B84B";
 const BG = "#F5FFFE";
 const MID = "#4A6B69";
 
-// ========== YOUR EMAILJS CREDENTIALS ==========
-const EMAILJS_PUBLIC_KEY = "Sk2WVel6rtbgqWM1X";
-const EMAILJS_SERVICE_ID = "service_bubtud7";
-const EMAILJS_TEMPLATE_ID = "template_c3qml4p";  // <-- Replace with actual ID (looks like template_xxxxx)
-
-// ========== SCHEMA (includes email now) ==========
+// ========== SCHEMA ==========
 const schema = z.object({
   name: z.string().min(2),
   whatsapp: z.string().min(5),
@@ -53,29 +47,36 @@ export default function Assessment() {
     },
   });
 
+  // ========== NETLIFY FORMS SUBMISSION ==========
   const onSubmit = async (data: z.infer<typeof schema>) => {
     setIsSubmitting(true);
     try {
-      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        name: data.name,
-        whatsapp: data.whatsapp,
-        email: data.email || "Not provided",
-        englishLevel: data.englishLevel,
-        country: data.country,
-        timeInCanada: data.timeInCanada,
-        careerGoals: data.careerGoals,
-        biggestChallenge: data.biggestChallenge,
+      const formData = new FormData();
+      formData.append("form-name", "assessment");
+      // Append all fields from data
+      Object.entries(data).forEach(([key, value]) => {
+        if (value) formData.append(key, value);
       });
-      setSubmitted(true);
+
+      const response = await fetch("/", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        throw new Error("Submission failed");
+      }
     } catch (error) {
-      console.error("EmailJS error:", error);
-      alert(isAr ? "فشل الإرسال. حاول مرة أخرى." : "Failed to send. Please try again.");
+      console.error("Form submission error:", error);
+      alert(isAr ? "حدث خطأ. حاول مرة أخرى." : "Error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  // Success screen after submission
   if (submitted) {
     return (
       <div style={{ padding: "80px 5%", textAlign: "center", maxWidth: "600px", margin: "0 auto" }}>
@@ -93,6 +94,7 @@ export default function Assessment() {
     );
   }
 
+  // Left column content (same as before)
   const whatHappens = [
     { en: "We check your English level (Beginner or Intermediate)", ar: "نتحقق من مستوى إنجليزيتك (مبتدئ أو متوسط)" },
     { en: "We ask about your career goals and work history", ar: "نسأل عن أهدافك المهنية وتاريخك الوظيفي" },
@@ -107,6 +109,7 @@ export default function Assessment() {
 
   return (
     <div style={{ width: "100%" }}>
+      {/* Header */}
       <section style={{ padding: "60px 5% 50px", background: `linear-gradient(135deg,${BG},#e8fffe)`, textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.28)", color: TDK, padding: "6px 14px", borderRadius: "14px", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase" as const, marginBottom: "12px" }}>
           📋 {isAr ? "موعد مجاني" : "FREE APPOINTMENT"}
@@ -119,8 +122,10 @@ export default function Assessment() {
         </p>
       </section>
 
+      {/* Main 2‑column layout */}
       <section style={{ padding: "60px 5% 80px", background: "#fff" }}>
         <div style={{ maxWidth: "1060px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: "52px", alignItems: "start" }}>
+          {/* Left column: info */}
           <div>
             <div style={{ background: TDK, borderRadius: "22px", padding: "34px", color: "#fff", marginBottom: "20px" }}>
               <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: 700, color: GOLD_LT, marginBottom: "18px" }}>
@@ -150,6 +155,7 @@ export default function Assessment() {
             </div>
           </div>
 
+          {/* Right column: Netlify form */}
           <div style={{ background: BG, borderRadius: "22px", padding: "38px", boxShadow: "0 24px 60px rgba(129,216,208,0.1)", border: "1px solid rgba(129,216,208,0.12)" }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 800, color: TDK, marginBottom: "4px" }}>
               {isAr ? "أكمل استمارة الموعد" : "Complete the Appointment Form"}
@@ -157,8 +163,18 @@ export default function Assessment() {
             <p style={{ fontSize: "13px", color: "#8896AB", marginBottom: "24px" }}>
               {isAr ? "سنتصل بك خلال 24 ساعة." : "We'll contact you within 24 hours."}
             </p>
+
+            {/* ✅ NETLIFY FORM – with data-netlify and hidden input */}
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                data-netlify="true"
+                name="assessment"
+                method="POST"
+                style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+              >
+                <input type="hidden" name="form-name" value="assessment" />
+
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
                   <FormField control={form.control} name="name" render={({ field }) => (
                     <FormItem><FormLabel style={labelStyle}>{isAr ? "الاسم الكامل" : "Full Name"}</FormLabel><FormControl><Input {...field} style={inputStyle} data-testid="input-name" /></FormControl><FormMessage /></FormItem>
@@ -167,7 +183,8 @@ export default function Assessment() {
                     <FormItem><FormLabel style={labelStyle}>{isAr ? "رقم الواتساب" : "WhatsApp Number"}</FormLabel><FormControl><Input placeholder="+1 403 434 0027" {...field} style={inputStyle} data-testid="input-whatsapp" /></FormControl><FormMessage /></FormItem>
                   )} />
                 </div>
-                {/* NEW EMAIL FIELD */}
+
+                {/* Email field */}
                 <FormField control={form.control} name="email" render={({ field }) => (
                   <FormItem>
                     <FormLabel style={labelStyle}>{isAr ? "البريد الإلكتروني" : "Email"}</FormLabel>
@@ -177,6 +194,7 @@ export default function Assessment() {
                     <FormMessage />
                   </FormItem>
                 )} />
+
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "13px" }}>
                   <FormField control={form.control} name="englishLevel" render={({ field }) => (
                     <FormItem>
@@ -196,6 +214,7 @@ export default function Assessment() {
                     <FormItem><FormLabel style={labelStyle}>{isAr ? "بلد الأصل" : "Country of Origin"}</FormLabel><FormControl><Input placeholder={isAr ? "مصر، سوريا، العراق..." : "Egypt, Syria, Iraq..."} {...field} style={inputStyle} data-testid="input-country" /></FormControl><FormMessage /></FormItem>
                   )} />
                 </div>
+
                 <FormField control={form.control} name="timeInCanada" render={({ field }) => (
                   <FormItem>
                     <FormLabel style={labelStyle}>{isAr ? "منذ متى وأنت في كندا؟" : "How Long in Canada?"}</FormLabel>
@@ -211,6 +230,7 @@ export default function Assessment() {
                     <FormMessage />
                   </FormItem>
                 )} />
+
                 <FormField control={form.control} name="careerGoals" render={({ field }) => (
                   <FormItem>
                     <FormLabel style={labelStyle}>{isAr ? "أهدافك المهنية" : "Career Goals"}</FormLabel>
@@ -218,6 +238,7 @@ export default function Assessment() {
                     <FormMessage />
                   </FormItem>
                 )} />
+
                 <FormField control={form.control} name="biggestChallenge" render={({ field }) => (
                   <FormItem>
                     <FormLabel style={labelStyle}>{isAr ? "أكبر تحدٍّ تواجهه الآن" : "Biggest Challenge Right Now"}</FormLabel>
@@ -225,6 +246,7 @@ export default function Assessment() {
                     <FormMessage />
                   </FormItem>
                 )} />
+
                 <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: TDK, color: "#fff", border: "none", borderRadius: "26px", fontSize: "16px", fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: isSubmitting ? 0.65 : 1, marginTop: "6px" }} data-testid="submit-assessment">
                   {isSubmitting && <Loader2 className="w-5 h-5 animate-spin" />}
                   📋 {isAr ? "احجز موعدي المجاني" : "Book My Free Appointment"}
